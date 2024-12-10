@@ -71,7 +71,7 @@ Cross Compile Helper for CMake ToolChain selection
 
 `cmake_configure.sh`
 
-### Keyboard shortcuts giving conformity to this project ⌨️
+### Keyboard shortcuts giving the comfort to this project ⌨️
 
 - Ctrl+Alt+  C  configure Lib
 - Ctrl+Alt+  S  configure S
