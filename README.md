@@ -117,6 +117,8 @@ https://github.com/cpm-cmake/CPM.cmake
 
 ## About me 👨‍💻
 
+"The result of hundreds of hours (two weeks straight) of incredible fun. Time seemed to stand still. The outcome is a template that takes C++ development to a whole new level.
+    
 "Buy me a coffee ☕🍵 or spare some time. 🙂"
 
 ```
