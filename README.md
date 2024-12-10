@@ -1,10 +1,10 @@
-# M.W.V.C. 😎
+# MarkWare VCMake 😎
 
-Mark Ware VSCode CMake Modern C/C++ Template 🚀
+VSCode CMake Modern C/C++ Template 🚀
 
-# Whatsapp 💬
+# Whatsapp
 
-A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language. 🌍
+A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language.
 
 # This template consists of two projects
 
@@ -36,44 +36,42 @@ Currently, only Linux is supported. "As soon as I get to Windows or Mac, or some
 - clang-format for whole project 
 - cmake-format for whole project
 
-## ToDo 📝
+## ToDo
 
 - tests
 
-## Rules 📜
+## Rules
 
 - FileNamesAndFoldersWithCapitalsIsGoodPractice
     no rules, only freedom
 
 ## Configuration ⚙️
 
-### Properties 🏗️
-
-`.vscode/c_cpp_properties.json`
+### Properties
 
 Cache for CPM headers required in project
 
-### Implemented Tasks 🛠️
+`.vscode/c_cpp_properties.json`
 
-`.vscode/tasks.json`
+### Implemented Tasks 🛠️
 
 A major part of a lightweight yet robust CMake toolchain mechanism
 
-### Debugger configuration 🐞
+`.vscode/tasks.json`
 
-`.vscode/launch.json`
+### Debugger configuration 🐞
 
 Debug Targets. You should to edit path to your Standalone target
 
-### ToolChain helper 🔧
+`.vscode/launch.json`
 
-`cmake_configure.sh`
+### ToolChain helper 🔧
 
 Cross Compile Helper for CMake ToolChain selection
 
-### Keyboard shortcuts giving conformity to this project ⌨️
+`cmake_configure.sh`
 
-`~/.config/Code/User/keybindings.json`
+### Keyboard shortcuts giving conformity to this project ⌨️
 
 - Ctrl+Alt+  C  configure Lib
 - Ctrl+Alt+  S  configure S
@@ -93,6 +91,8 @@ Cross Compile Helper for CMake ToolChain selection
 - Ctrl+Alt+  R  lint
 - Ctrl+Alt+  F  format
 - Ctrl+Alt+  M  cmake-format
+
+`~/.config/Code/User/keybindings.json`
 
 ## Thanks 🙏
 
