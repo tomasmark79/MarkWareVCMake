@@ -4,9 +4,9 @@ VSCode CMake Modern C/C++ Template 🚀
 
 # Whatsapp
 
-A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language.
+A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++.
 
-# This template consists of two projects
+# This C++ template consists of two projects
 
 One project is a C++ library.
 The other project is a C++ application that links with the library.
