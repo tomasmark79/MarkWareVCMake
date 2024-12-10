@@ -259,7 +259,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "for arch in native aarch64; do for build in debug release relwithdebinfo minsizerel; do ${workspaceFolder}/cmake_configure.sh $arch $build . Library && cmake --build ${workspaceFolder}/Build/$arch/Library/$build -j $(nproc); ${workspaceFolder}/cmake_configure.sh $arch $build Standalone Standalone && cmake --build ${workspaceFolder}/Build/$arch/Standalone/$build -j $(nproc); done; done"
+                "for arch in Native Aarch64; do for Build in Debug Release RelWithDebInfo MinSizeRel; do ${workspaceFolder}/cmake_configure.sh $arch $build . Library && cmake --build ${workspaceFolder}/Build/$arch/Library/$build -j $(nproc); ${workspaceFolder}/cmake_configure.sh $arch $build Standalone Standalone && cmake --build ${workspaceFolder}/Build/$arch/Standalone/$build -j $(nproc); done; done"
             ],
             "group": {
                 "kind": "build",
@@ -278,7 +278,7 @@
                 "Debug",
                 "Release",
                 "RelWithDebInfo",
-                "MinDizeRel"
+                "MinSizeRel"
             ],
             "default": "Debug"
         },
