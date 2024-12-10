@@ -16,6 +16,8 @@ code .
 
 A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++.
 
+https://github.com/user-attachments/assets/a412207c-3a05-4584-99da-01b71bba0918
+
 # This C++ template consists of two projects
 
 One project is a C++ library.
