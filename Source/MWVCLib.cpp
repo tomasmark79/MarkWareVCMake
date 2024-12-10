@@ -3,7 +3,8 @@
 #include <iostream>
 #include <mwvclib/version.h>
 
-/* Start configure 📚 with CTRL + SHIFT + C */
+/* Start configure 📚 with CTRL + ALT + C */
+/* Start build 🔨 with CTRL + ALT + B */
 
 MWVCLib::MWVCLib()
 {

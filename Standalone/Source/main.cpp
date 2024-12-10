@@ -1,6 +1,8 @@
 #include "MWVCLib/MWVCLib.hpp"
 
-/* Start configure 🎆 with CTRL + SHIFT + C */
+/* Start configure 📚 with CTRL + ALT + S */
+/* Start build 🔨 with CTRL + ALT + N */
+
 
 auto main(int argc, char **argv) -> int
 {
