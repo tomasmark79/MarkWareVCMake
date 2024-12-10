@@ -74,19 +74,19 @@ Cross Compile Helper for CMake ToolChain selection
 ### Keyboard shortcuts giving the comfort to this project ⌨️
 
 - Ctrl+Alt+  C  configure Lib
-- Ctrl+Alt+  S  configure S
+- Ctrl+Alt+  S  configure Standalone
 
 - Ctrl+Alt+  B  **build** Lib
-- Ctrl+Alt+  N  **build** S
+- Ctrl+Alt+  N  **build** Standalone
 
 - Ctrl+Alt+  L  clean Lib
-- Ctrl+Alt+  K  clean S
+- Ctrl+Alt+  K  clean Standalone
 
 - Ctrl+Alt+  I  install Lib
-- Ctrl+Alt+  J  install S
+- Ctrl+Alt+  J  install Standalone
 
 - Ctrl+Alt+  T  test Lib
-- Ctrl+Alt+  U  test S
+- Ctrl+Alt+  U  test Standalone
 
 - Ctrl+Alt+  R  lint
 - Ctrl+Alt+  F  format
