@@ -1,12 +1,12 @@
-# M.W.V.C.
+# M.W.V.C. 😎
 
-Mark Ware VSCode CMake Modern C/C++ Template
+Mark Ware VSCode CMake Modern C/C++ Template 🚀
 
-# Whatsapp
+# Whatsapp 💬
 
-A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language.
+A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language. 🌍
 
-## Implemented
+## Implemented ✅
 
 - native compilation
 - cross compilation 
@@ -18,42 +18,42 @@ A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernA
 - clang-format for whole project 
 - cmake-format for whole project
 
-## ToDo
+## ToDo 📝
 
 - tests
 
-## Rules
+## Rules 📜
 
 - FileNamesAndFoldersWithCapitalsIsGoodPractice
     no rules, only freedom
 
-## Configuration
+## Configuration ⚙️
 
-### Properties
+### Properties 🏗️
 
 `.vscode/c_cpp_properties.json`
 
 Cache for CPM headers required in project
 
-### Implemented Tasks
+### Implemented Tasks 🛠️
 
 `.vscode/tasks.json`
 
 A major part of a lightweight yet robust CMake toolchain mechanism
 
-### Debugger configuration 
+### Debugger configuration 🐞
 
 `.vscode/launch.json`
 
 Debug Targets. You should to edit path to your Standalone target
 
-### ToolChain helper
+### ToolChain helper 🔧
 
 `cmake_configure.sh`
 
 Cross Compile Helper for CMake ToolChain selection
 
-### Keyboard shortcuts giving conformity to this project
+### Keyboard shortcuts giving conformity to this project ⌨️
 
 `~/.config/Code/User/keybindings.json`
 
@@ -76,11 +76,11 @@ Cross Compile Helper for CMake ToolChain selection
 - Ctrl+Alt+  F  format
 - Ctrl+Alt+  M  cmake-format
 
-## Thanks
+## Thanks 🙏
 
 *to all the awesome people who share the same mindset as me*
 
-## and thanks to those
+## and thanks to those 🌟
 
 GitHub CoPilot
 https://github.com
@@ -97,15 +97,20 @@ https://github.com/TheLartians/ModernCppStarter
 Copyright (c) 2019-2022 Lars Melchior and contributors
 https://github.com/cpm-cmake/CPM.cmake
 
-## About me
+## About me 👨‍💻
 
-"Buy me a coffee ☕🍵 or spare some time.
+"Buy me a coffee ☕🍵 or spare some time. 🙂"
 
+```
 paypal.me/TomasMark
 Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
+```
 
 Thank you,
+
 Tomáš Mark
+
 https://tomas.digitalspace.name
+
 tomas@digitalspace.name
