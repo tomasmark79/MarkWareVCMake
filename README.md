@@ -2,6 +2,16 @@
 
 VSCode CMake Modern C/C++ Template 🚀
 
+# The impatient ones can start right away.
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential manpages-dev
+git clone https://github.com/tomasmark79/MarkWareVCMake
+cd MarkWareVCMake/
+code .
+```
+
 # Whatsapp
 
 A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++.
