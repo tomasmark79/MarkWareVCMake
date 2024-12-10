@@ -6,6 +6,24 @@ Mark Ware VSCode CMake Modern C/C++ Template 🚀
 
 A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter and C++ Language. 🌍
 
+# This template consists of two projects
+
+One project is a C++ library.
+The other project is a C++ application that links with the library.
+
+Briefly about the template:
+It is a project structure that offers extreme capabilities and flexibility. New parts, additional libraries, etc., can be easily added. I have combined the best from multiple worlds.
+
+It is a modern C++ project with a CMake configurator. The template is configured with CMake and wrapped with CPM, allowing us to leverage new modern project management capabilities in C/C++.
+
+One of the other very important features of this template is its preparation for cross-compilation with support for Raspberry Pi 4. For cross-compilation, you need to build your own toolchain.
+
+Another equally important feature of this template is that it includes its own build system and control for CMake, which is integrated into VSCode. The instructions are included in the template and are very simple. Just clone the repository from GitHub into a folder, open it in VSCode, and compile with the native compiler immediately. Everything happens within minutes.
+
+I look forward to seeing you there!
+
+Currently, only Linux is supported. "As soon as I get to Windows or Mac, or someone contributes, we will create extensions for these OS as well."
+
 ## Implemented ✅
 
 - native compilation
