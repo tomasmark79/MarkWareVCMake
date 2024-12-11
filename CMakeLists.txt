@@ -9,8 +9,9 @@ project(
 
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(FATAL_ERROR
-        "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+    message(
+        FATAL_ERROR
+            "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
     )
 endif()
 
@@ -19,24 +20,20 @@ include(cmake/CPM.cmake)
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 
 # ---- Create library ----
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.hpp
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.h
+     ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.hpp
 )
 
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
+     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
 )
 
 add_library(VCMLib ${headers} ${sources})
 
-set_target_properties(VCMLib PROPERTIES
-    CXX_STANDARD 17
-)
+set_target_properties(VCMLib PROPERTIES CXX_STANDARD 17)
 
-target_compile_options(VCMLib PUBLIC
-    "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
+target_compile_options(
+    VCMLib PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
 )
 
 # EmojiTools
@@ -48,15 +45,14 @@ CPMAddPackage(
 )
 
 if(EmojiTools_ADDED)
-    #target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
+    # target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
     target_link_libraries(VCMLib PRIVATE EmojiTools::EmojiTools)
 endif()
 
 # self headers
 target_include_directories(
-    VCMLib PUBLIC
-    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-    $<INSTALL_INTERFACE:Include/VCMLib-${PROJECT_VERSION}>
+    VCMLib PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
+                  $<INSTALL_INTERFACE:Include/VCMLib-${PROJECT_VERSION}>
 )
 
 string(TOLOWER "VCMLib/version.h" VERSION_HEADER_LOCATION)
