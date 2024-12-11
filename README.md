@@ -38,6 +38,7 @@ Currently, only Linux is supported. "As soon as I get to Windows or Mac, or some
 
 ## Implemented ✅
 
+- native VSCode debug 🐞
 - native compilation
 - cross compilation 
 - configuration (Library, Standalone)
