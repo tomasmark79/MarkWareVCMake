@@ -44,6 +44,7 @@ A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernA
 ### This C++ template consists of two projects:
 - A C++ library
 - A C++ application that links with the library
+  
 **Together, they form one solution.**
 
 ### Briefly about the template
