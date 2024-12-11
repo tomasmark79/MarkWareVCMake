@@ -4,7 +4,7 @@
         {
             "label": "CMake: configure (Library)",
             "type": "shell",
-            "command": "${workspaceFolder}/cmake_configure.sh",
+            "command": "${workspaceFolder}/CMakeConfigure.sh",
             "args": [
                 "${input:architecture}",
                 "${input:buildType}",
@@ -21,7 +21,7 @@
         {
             "label": "CMake: configure (Standalone)",
             "type": "shell",
-            "command": "${workspaceFolder}/cmake_configure.sh",
+            "command": "${workspaceFolder}/CMakeConfigure.sh",
             "args": [
                 "${input:architecture}",
                 "${input:buildType}",
@@ -259,7 +259,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "for arch in Native Aarch64; do for Build in Debug Release RelWithDebInfo MinSizeRel; do ${workspaceFolder}/cmake_configure.sh $arch $build . Library && cmake --build ${workspaceFolder}/Build/$arch/Library/$build -j $(nproc); ${workspaceFolder}/cmake_configure.sh $arch $build Standalone Standalone && cmake --build ${workspaceFolder}/Build/$arch/Standalone/$build -j $(nproc); done; done"
+                "for arch in Native Aarch64; do for Build in Debug Release RelWithDebInfo MinSizeRel; do ${workspaceFolder}/CMakeConfigure.sh $arch $build . Library && cmake --build ${workspaceFolder}/Build/$arch/Library/$build -j $(nproc); ${workspaceFolder}/CMakeConfigure.sh $arch $build Standalone Standalone && cmake --build ${workspaceFolder}/Build/$arch/Standalone/$build -j $(nproc); done; done"
             ],
             "group": {
                 "kind": "build",
