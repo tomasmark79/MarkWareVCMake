@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.14...3.22)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 # ---- Project ----
 project(
-    MWVCLib
+    VCMLib
     VERSION 0.0.1
     LANGUAGES C CXX ASM
 )
@@ -29,13 +29,13 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
 )
 
-add_library(MWVCLib ${headers} ${sources})
+add_library(VCMLib ${headers} ${sources})
 
-set_target_properties(MWVCLib PROPERTIES
+set_target_properties(VCMLib PROPERTIES
     CXX_STANDARD 17
 )
 
-target_compile_options(MWVCLib PUBLIC
+target_compile_options(VCMLib PUBLIC
     "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
 )
 
@@ -49,25 +49,25 @@ CPMAddPackage(
 
 if(EmojiTools_ADDED)
     #target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
-    target_link_libraries(MWVCLib PRIVATE EmojiTools::EmojiTools)
+    target_link_libraries(VCMLib PRIVATE EmojiTools::EmojiTools)
 endif()
 
 # self headers
 target_include_directories(
-    MWVCLib PUBLIC
+    VCMLib PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-    $<INSTALL_INTERFACE:Include/MWVCLib-${PROJECT_VERSION}>
+    $<INSTALL_INTERFACE:Include/VCMLib-${PROJECT_VERSION}>
 )
 
-string(TOLOWER "MWVCLib/version.h" VERSION_HEADER_LOCATION)
+string(TOLOWER "VCMLib/version.h" VERSION_HEADER_LOCATION)
 
 packageProject(
-    NAME MWVCLib
+    NAME VCMLib
     VERSION ${PROJECT_VERSION}
-    NAMESPACE MWVCLib
+    NAMESPACE VCMLib
     BINARY_DIR ${PROJECT_BINARY_DIR}
     INCLUDE_DIR ${PROJECT_SOURCE_DIR}/Include
-    INCLUDE_DESTINATION Include/MWVCLib-${PROJECT_VERSION}
+    INCLUDE_DESTINATION Include/VCMLib-${PROJECT_VERSION}
     VERSION_HEADER "${VERSION_HEADER_LOCATION}"
     COMPATIBILITY SameMajorVersion
 )

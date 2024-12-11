@@ -1,12 +1,10 @@
-#include "MWVCLib/MWVCLib.hpp"
+#include "VCMLib/VCMLib.hpp"
 
-/* Start configure 📚 with CTRL + ALT + S */
 /* Start build 🔨 with CTRL + ALT + N */
-
 
 auto main(int argc, char **argv) -> int
 {
-    MWVCLib lib;
+    VCMLib vcmLib;
     return 0;
 }
 
