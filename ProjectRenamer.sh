@@ -32,27 +32,18 @@ files=(
 # Replace the old library name with the new one in each file
 for file in "${files[@]}"; do
     if [ -f "$file" ]; then
+
         sed -i "s/$old_lib_name/$new_lib_name/g" "$file"
         sed -i "s/$old_standalone_name/$new_standalone_name/g" "$file"
+
+        sed -i "s/$old_lib_name_lower/$new_lib_name_lower/g" "$file"
+        sed -i "s/$old_lib_name_upper/$new_lib_name_upper/g" "$file"
+
         echo "Renamed project names in file: $file"
     else
         echo "File $file does not exist!"
     fi
 done
-
-# Replace the old library name in lowercase and uppercase with the new one in lowercase and uppercase in the source file
-if [ -f "Source/$old_lib_name.cpp" ]; then
-    sed -i "s/$old_lib_name_lower/$new_lib_name_lower/g" "Source/$old_lib_name.cpp"
-    sed -i "s/$old_lib_name_upper/$new_lib_name_upper/g" "Source/$old_lib_name.cpp"
-    echo "aaaRenamed content in file: Source/$old_lib_name.cpp"
-fi
-
-# Replace the old library name in lowercase with the new one in lowercase in the header file
-if [ -f "Include/$old_lib_name/$old_lib_name.hpp" ]; then
-    sed -i "s/$old_lib_name_lower/$new_lib_name_lower/g" "Include/$old_lib_name/$old_lib_name.hpp"
-    sed -i "s/$old_lib_name_upper/$new_lib_name_upper/g" "Include/$old_lib_name/$old_lib_name.hpp"
-    echo "Renamed lowercase project name in file: Include/$old_lib_name/$old_lib_name.hpp"
-fi
 
 # Rename files
 if [ -f "Source/$old_lib_name.cpp" ]; then
