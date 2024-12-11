@@ -7,7 +7,6 @@
 
 VCMLib::VCMLib()
 {
-
     std::cout << "MarkWare VCMake Library version: " << std::endl;
     std::cout << "Version: " << VCMLIB_VERSION << std::endl;
 }
