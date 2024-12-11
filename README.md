@@ -38,13 +38,16 @@ Currently, only Linux is supported. "As soon as I get to Windows or Mac, or some
 
 ## Implemented ✅
 
+(Library, Standalone)
+
+- project renamer
 - native code debug 🐞
 - native compilation
-- cross compilation 
-- configuration (Library, Standalone)
-- build (Library, Standalone)
-- install (Library, Standalone)
-- test (Library, Standalone)
+- cross compilation
+- configuration
+- build
+- install
+- test
 - lint for whole project 
 - clang-format for whole project 
 - cmake-format for whole project

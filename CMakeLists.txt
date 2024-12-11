@@ -17,21 +17,27 @@ endif()
 
 # ---- Dependencies ----
 include(cmake/CPM.cmake)
+# PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
+CPMAddPackage("gh:fmtlib/fmt#11.0.2")
 
-# ---- Create library ----
+# Note: globbing sources is considered bad practice as CMake's generators may not detect new files
+# automatically. Keep that in mind when changing files, or explicitly mention them here.
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.hpp
 )
-
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
      ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
 )
 
-add_library(VCMLib ${headers} ${sources})
+# ---- Create library ----
 
+# Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
+# target: add_library(${VCMLib>} INTERFACE)
+add_library(VCMLib ${headers} ${sources})
 set_target_properties(VCMLib PROPERTIES CXX_STANDARD 17)
 
+# being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(
     VCMLib PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
 )
@@ -66,4 +72,5 @@ packageProject(
     INCLUDE_DESTINATION Include/VCMLib-${PROJECT_VERSION}
     VERSION_HEADER "${VERSION_HEADER_LOCATION}"
     COMPATIBILITY SameMajorVersion
+    DEPENDENCIES "fmt 11.0.2"
 )

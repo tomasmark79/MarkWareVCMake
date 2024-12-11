@@ -1,4 +1,7 @@
-#include "VCMLib/VCMLib.hpp"
+#include <VCMLib/VCMLib.hpp>
+#include <vcmlib/version.h>
+
+#include <iostream>
 
 // Start here
 // 👉 ./ProjectRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>
@@ -12,6 +15,8 @@
 auto main(int argc, char **argv) -> int
 {
     VCMLib Lib;
+    std::cout << "Version: " << VCMLIB_VERSION << std::endl;
+
     return 0;
 }
 
