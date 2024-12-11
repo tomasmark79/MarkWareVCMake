@@ -45,13 +45,11 @@ A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernA
 
 # This C++ template consists of two projects
 
-One project is a C++ library.
-The other project is a C++ application that links with the library.
+One project is a C++ library. The other project is a C++ application that links with the library. Together it is one solution.
 
-Briefly about the template:
-It is a project structure that offers extreme capabilities and flexibility. New parts, additional libraries, etc., can be easily added. I have combined the best from multiple worlds.
+# Briefly about the template
 
-It is a modern C++ project with a CMake configurator. The template is configured with CMake and wrapped with CPM, allowing us to leverage new modern project management capabilities in C/C++.
+It is a project structure that offers extreme capabilities and flexibility. I have combined the best from multiple worlds. New parts, additional libraries, etc., can be easily added. It is a modern C++ project with a CMake configurator, but it keep compatibility to link C if necessary. The template is configured with CMake which is obohacen o CPM Packaging System, allowing us to leverage new modern project management capabilities in C/C++.
 
 One of the other very important features of this template is its preparation for cross-compilation with support for Raspberry Pi 4. For cross-compilation, you need to build your own toolchain.
 
