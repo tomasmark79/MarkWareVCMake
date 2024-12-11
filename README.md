@@ -41,7 +41,7 @@ auto main(int argc, char **argv) -> int
 ### Project Overview
 A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter, and C++.
 
-##s This C++ template consists of two projects:
+### This C++ template consists of two projects:
 - A C++ library
 - A C++ application that links with the library
 **Together, they form one solution.**
