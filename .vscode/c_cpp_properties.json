@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/tomas/.cache/CPM/**"
+                "/home/tomas/.cache/CPM/**" /* fix with your home folder */
             ],
             "defines": [],
             "compilerPath": null,
