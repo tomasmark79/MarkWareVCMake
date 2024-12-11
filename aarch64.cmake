@@ -1,7 +1,7 @@
 # Set system name and processor
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
-set(CROSS_HOST "arm-linux-gnu") # Upravte dle cílové platformy
+set(CROSS_HOST "arm-linux-gnu") # This is the host system
 
 # Define sysroot
 set(CMAKE_SYSROOT /home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot)
