@@ -4,11 +4,7 @@ VSCode CMake Modern C/C++ Template 🚀
 
 ### Quick Start
 
-
-
-https://github.com/user-attachments/assets/f0ca562f-349f-451e-9356-54fe8941388e
-
-
+https://github.com/user-attachments/assets/a4ea71f7-7e01-4d77-a4cb-1dbc4ab33088
 
 ```bash
 sudo apt-get update
