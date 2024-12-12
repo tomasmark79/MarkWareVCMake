@@ -62,6 +62,7 @@ Currently, only Linux is supported. As soon as I get to Windows or Mac, or someo
 
 ### Implemented Features ✅Project renamer
 
+- CMake modules
 - Native code debug 🐞
 - Native compilation
 - Cro- ss compilation
@@ -69,7 +70,6 @@ Currently, only Linux is supported. As soon as I get to Windows or Mac, or someo
 - Build
 - Install
 - Test
-- CMake module examples
 - Lint whole project
 - Clang-format for the whole project
 - CMake-format for the whole project
