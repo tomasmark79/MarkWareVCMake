@@ -19,6 +19,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # ---- Modules ----
+# more cmake modules - https://cmake.org/cmake/help/v3.28/manual/cmake-modules.7.html
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
 # find_package(Threads REQUIRED) # Required to use std threads find_package(LIBUDEV REQUIRED)
 # find_package(LIBINPUT REQUIRED) find_package(PUGIXML REQUIRED) find_package(CAIRO REQUIRED)
