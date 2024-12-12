@@ -4,6 +4,8 @@ VSCode CMake Modern C/C++ Template 🚀
 
 ### Quick Start
 
+https://github.com/user-attachments/assets/a4ea71f7-7e01-4d77-a4cb-1dbc4ab33088
+
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential manpages-dev
@@ -41,9 +43,10 @@ auto main(int argc, char **argv) -> int
 ### Project Overview
 A project that takes the best ideas from worlds like VSCode, CMake, CPM, ModernAppStarter, and C++.
 
-##s This C++ template consists of two projects:
+### This C++ template consists of two projects:
 - A C++ library
 - A C++ application that links with the library
+  
 **Together, they form one solution.**
 
 ### Briefly about the template
