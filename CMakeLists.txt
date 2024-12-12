@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
+# ---- Project attributes ----
+set(PROJECT_NAMESPACE name.digitalspace.www)
+set(PROJECT_NAME VCMLib)
+
 # ---- Project ----
 project(
-    VCMLib
+    ${PROJECT_NAME}
     VERSION 0.0.1
     LANGUAGES C CXX ASM
 )
@@ -45,13 +49,13 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target: add_library(${VCMLib>} INTERFACE)
-add_library(VCMLib ${headers} ${sources})
-set_target_properties(VCMLib PROPERTIES CXX_STANDARD 17)
+# target: add_library(${PROJECT_NAME} INTERFACE)
+add_library(${PROJECT_NAME} ${headers} ${sources})
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(
-    VCMLib PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
+    ${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
 )
 
 # EmojiTools
@@ -64,34 +68,34 @@ CPMAddPackage(
 
 if(EmojiTools_ADDED)
     # target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
-    target_link_libraries(VCMLib PRIVATE EmojiTools::EmojiTools)
+    target_link_libraries(${PROJECT_NAME} PRIVATE EmojiTools::EmojiTools)
 endif()
 
 # self headers
 target_include_directories(
-    VCMLib PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-                  $<INSTALL_INTERFACE:Include/VCMLib-${PROJECT_VERSION}>
+    ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
+                  $<INSTALL_INTERFACE:Include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 
 # ---- Modules ----
-# target_link_libraries( VCMLib PRIVATE stdc++fs Threads::Threads ${LIBUDEV_LIBRARIES}
+# target_link_libraries( ${PROJECT_NAME} PRIVATE stdc++fs Threads::Threads ${LIBUDEV_LIBRARIES}
 # ${LIBINPUT_LIBRARIES} ${PUGIXML_LIBRARIES} ${CAIRO_LIBRARIES} ${X11_LIBRARIES} ${XTEST_LIBRARIES}
 # ${XRANDR_LIBRARIES} ${XINPUT_LIBRARIES} ${GLIB_LIBRARIES} ${GIO_LIBRARIES} )
 
-# target_include_directories( VCMLib PUBLIC ${LIBUDEV_INCLUDE_DIRS} ${LIBINPUT_INCLUDE_DIRS}
+# target_include_directories( ${PROJECT_NAME} PUBLIC ${LIBUDEV_INCLUDE_DIRS} ${LIBINPUT_INCLUDE_DIRS}
 # ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS} ${XTEST_INCLUDE_DIRS}
 # ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS} ${GIO_INCLUDE_DIRS} )
 
 # ---- Package ----
-string(TOLOWER "VCMLib/version.h" VERSION_HEADER_LOCATION)
+string(TOLOWER "${PROJECT_NAME}/version.h" VERSION_HEADER_LOCATION)
 
 packageProject(
-    NAME VCMLib
+    NAME ${PROJECT_NAME}
     VERSION ${PROJECT_VERSION}
-    NAMESPACE VCMLib
+    NAMESPACE ${PROJECT_NAME}
     BINARY_DIR ${PROJECT_BINARY_DIR}
     INCLUDE_DIR ${PROJECT_SOURCE_DIR}/Include
-    INCLUDE_DESTINATION Include/VCMLib-${PROJECT_VERSION}
+    INCLUDE_DESTINATION Include/${PROJECT_NAME}-${PROJECT_VERSION}
     VERSION_HEADER "${VERSION_HEADER_LOCATION}"
     COMPATIBILITY SameMajorVersion
     DEPENDENCIES "fmt 11.0.2"
