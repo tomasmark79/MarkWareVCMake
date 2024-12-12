@@ -81,8 +81,7 @@ target_include_directories(
 # ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS} ${XTEST_INCLUDE_DIRS}
 # ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS} ${GIO_INCLUDE_DIRS} )
 
-target_include_directories(VCMLib PUBLIC ${X11_INCLUDE_DIRS})
-
+# ---- Package ----
 string(TOLOWER "VCMLib/version.h" VERSION_HEADER_LOCATION)
 
 packageProject(
