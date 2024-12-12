@@ -1,4 +1,4 @@
-# MarkWare VCMake 😎
+# MarkWare VCMake Template 😎
 
 VSCode CMake Modern C/C++ Template 🚀
 v1.0.0
