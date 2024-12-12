@@ -61,6 +61,7 @@ I look forward to seeing your contributions!
 Currently, only Linux is supported. As soon as I get to Windows or Mac, or someone contributes, we will create extensions for these OS as well.
 
 ### Implemented Features ✅Project renamer
+
 - Native code debug 🐞
 - Native compilation
 - Cro- ss compilation
@@ -68,7 +69,8 @@ Currently, only Linux is supported. As soon as I get to Windows or Mac, or someo
 - Build
 - Install
 - Test
-- Lint for the whole project
+- CMake module examples
+- Lint whole project
 - Clang-format for the whole project
 - CMake-format for the whole project
 
