@@ -2,4 +2,4 @@ find_package(PkgConfig)
 pkg_check_modules(XRANDR REQUIRED xrandr)
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(XRANDR DEFAULT_MSG XRANDR_FOUND)
+find_package_handle_standard_args(XRANDR DEFAULT_MSG XRANDR_FOUND)

@@ -15,8 +15,19 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# ---- Modules ----
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
+# find_package(Threads REQUIRED) # Required to use std threads find_package(LIBUDEV REQUIRED)
+# find_package(LIBINPUT REQUIRED) find_package(PUGIXML REQUIRED) find_package(CAIRO REQUIRED)
+# find_package(X11 REQUIRED) find_package(XTEST REQUIRED) find_package(XRANDR REQUIRED)
+# find_package(XINPUT REQUIRED) find_package(GLIB REQUIRED) find_package(GIO REQUIRED)
+
 # ---- Dependencies ----
 include(cmake/CPM.cmake)
+
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 CPMAddPackage("gh:fmtlib/fmt#11.0.2")
@@ -60,6 +71,17 @@ target_include_directories(
     VCMLib PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
                   $<INSTALL_INTERFACE:Include/VCMLib-${PROJECT_VERSION}>
 )
+
+# ---- Modules ----
+# target_link_libraries( VCMLib PRIVATE stdc++fs Threads::Threads ${LIBUDEV_LIBRARIES}
+# ${LIBINPUT_LIBRARIES} ${PUGIXML_LIBRARIES} ${CAIRO_LIBRARIES} ${X11_LIBRARIES} ${XTEST_LIBRARIES}
+# ${XRANDR_LIBRARIES} ${XINPUT_LIBRARIES} ${GLIB_LIBRARIES} ${GIO_LIBRARIES} )
+
+# target_include_directories( VCMLib PUBLIC ${LIBUDEV_INCLUDE_DIRS} ${LIBINPUT_INCLUDE_DIRS}
+# ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS} ${XTEST_INCLUDE_DIRS}
+# ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS} ${GIO_INCLUDE_DIRS} )
+
+target_include_directories(VCMLib PUBLIC ${X11_INCLUDE_DIRS})
 
 string(TOLOWER "VCMLib/version.h" VERSION_HEADER_LOCATION)
 
