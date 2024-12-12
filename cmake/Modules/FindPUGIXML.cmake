@@ -2,4 +2,4 @@ find_package(PkgConfig)
 pkg_check_modules(PUGIXML REQUIRED pugixml)
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(PUGIXML DEFAULT_MSG PUGIXML_FOUND)
+find_package_handle_standard_args(PUGIXML DEFAULT_MSG PUGIXML_FOUND)
