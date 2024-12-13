@@ -4,7 +4,7 @@
         {
             "label": "CMake Tasks",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeConfigure.sh",
+            "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
                 "${input:taskName}",
                 "${input:archBuildType}",
