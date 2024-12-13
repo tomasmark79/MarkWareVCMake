@@ -61,20 +61,20 @@ I look forward to seeing your contributions!
 
 Currently, only Linux is supported. As soon as I get to Windows or Mac, or someone contributes, we will create extensions for these OS as well.
 
-### Implemented Features ✅Project renamer
-
-- CMake modules
+### Implemented Features ✅
+- project renamer
+- cmake modules
 - Native code debug 🐞
 - Native compilation
-- Cross compilation
-- Configuration
-- Build
-- Clean
-- Install
-- Test
-- C/C++ Lint
+- cross compilation
+- configuration
+- build
+- clean
+- install
+- test
+- C/C++ lint
 - C/C++ format (clang)
-- CMake format
+- cmake format
 
 ### ToDo
 - Tests
