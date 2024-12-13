@@ -1,7 +1,6 @@
 
 # MarkWare VCMake Template 🎁
 v1.1.0rc2 
-(c) Tomáš Mark 2024 
 
 ---
 
@@ -96,19 +95,8 @@ My own keybindings. If you want to use them, you need to copy/paste the content 
 
 Use those links to get more documentation to used technologies in my template.
 
-Copyright (c) 2019-2022 Lars Melchior and contributors  
 https://github.com/cpm-cmake/CPM.cmake
-
-GitHub Copilot  
-https://github.com
-
-Kitware - CMake  
 https://cmake.org
-
-VSCode IDE  
-https://code.visualstudio.com/license
-
-Modern Cpp Starter  
 https://github.com/TheLartians/ModernCppStarter
 
 
@@ -116,7 +104,7 @@ https://github.com/TheLartians/ModernCppStarter
 
 ### About Me 👨‍💻
 
-"The result of a lot of hours of incredible fun. Time seemed to stand still. The outcome is a template that takes C++ development to a whole new level.
+"The result of a lot of hours of incredible fun. Time seemed to stand still. The outcome is a template that takes C++ development to a whole new level. 
     
 "Buy me a coffee ☕🍵 or spare some time. 🙂"
 
@@ -127,4 +115,14 @@ Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
 
 I look forward to seeing your contributions!
+
+### License
+I built the project primarily for myself and for my future projects. If someone is interested in using the project for any purpose, they should, according to the license, mention my name in their project and also all the names of the projects that this project contains. For simplicity, I have listed the licenses that are related to the project and should be visibly mentioned in each project. Thank you for following the license terms!
+
+Included MIT Licence
+Copyright (c) Tomáš Mark 2024 
+Copyright (c) 2019-2022 Lars Melchior and contributors
+Copyright (c) 2020 Lars Melchior
+
+
 
