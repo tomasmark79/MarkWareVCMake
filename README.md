@@ -49,8 +49,6 @@ One exception: No capital letter in the "include" folder is intentional!
 
 ### Quick Start
 
-https://github.com/user-attachments/assets/a4ea71f7-7e01-4d77-a4cb-1dbc4ab33088
-
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential cmake -y
@@ -96,7 +94,9 @@ My own keybindings. If you want to use them, you need to copy/paste the content 
 Use those links to get more documentation to used technologies in my template.
 
 https://github.com/cpm-cmake/CPM.cmake
+
 https://cmake.org
+
 https://github.com/TheLartians/ModernCppStarter
 
 
