@@ -120,9 +120,13 @@ I look forward to seeing your contributions!
 I built the project primarily for myself and for my future projects. If someone is interested in using the project for any purpose, they should, according to the license, mention my name in their project and also all the names of the projects that this project contains. For simplicity, I have listed the licenses that are related to the project and should be visibly mentioned in each project. Thank you for following the license terms!
 
 Included MIT Licence
+
 Copyright (c) Tomáš Mark 2024 
+
 Copyright (c) 2019-2022 Lars Melchior and contributors
+
 Copyright (c) 2020 Lars Melchior
+
 
 
 
