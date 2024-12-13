@@ -1,7 +1,7 @@
 # MarkWare VCMake Template 😎
 
 VSCode CMake Modern C/C++ Template 🚀
-v1.0.2
+v1.1.0rc1
 
 ### Quick Start
 
@@ -25,7 +25,7 @@ In workspace ./Standalone/Source/Main.cpp:
 
 // Start here
 // 👉 ./ProjectRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>
-// 👉 build 🔨 your new standalone app CTRL + ALT + N
+// 👉 build 🔨 your new standalone app CTRL + ALT + C
 
 // Description
 // It is the first file that gets compiled and linked into the final executable.
@@ -66,14 +66,15 @@ Currently, only Linux is supported. As soon as I get to Windows or Mac, or someo
 - CMake modules
 - Native code debug 🐞
 - Native compilation
-- Cro- ss compilation
+- Cross compilation
 - Configuration
 - Build
+- Clean
 - Install
 - Test
-- Lint whole project
-- Clang-format for the whole project
-- CMake-format for the whole project
+- C/C++ Lint
+- C/C++ format (clang)
+- CMake format
 
 ### ToDo
 - Tests
@@ -92,44 +93,27 @@ Cache for CPM headers required in project
 
 #### Implemented Tasks 🛠️
 
-A major part of a lightweight yet robust CMake toolchain mechanism
-
-`.vscode/tasks.json`
+A major part of a lightweight yet robust CMake toolchain mechanism is in `.vscode/tasks.json`
 
 #### Debugger configuration 🐞
 
-Debug Targets. You should to edit path to your Standalone target
-
-`.vscode/launch.json`
+Debug Targets. In standard VSCode settings it is key F5. You may to want to edit path to your Standalone target in the `.vscode/launch.json`.
 
 #### ToolChain helper 🔧
 
-Cross Compile Helper for CMake ToolChain selection
-
-`cmake_configure.sh`
+CMake configurer is a shell script in `CMakeConfigure.sh`
 
 #### Keyboard shortcuts giving the comfort to this project ⌨️
 
-- Ctrl+Alt+  C  configure Lib
-- Ctrl+Alt+  S  configure Standalone
+If you want to use my shortkeys settings, then Copy/Paste content of
 
-- Ctrl+Alt+  B  **build** Lib
-- Ctrl+Alt+  N  **build** Standalone
+`.vscode/keybindings.json` to
 
-- Ctrl+Alt+  L  clean Lib
-- Ctrl+Alt+  K  clean Standalone
-
-- Ctrl+Alt+  I  install Lib
-- Ctrl+Alt+  J  install Standalone
-
-- Ctrl+Alt+  T  test Lib
-- Ctrl+Alt+  U  test Standalone
-
-- Ctrl+Alt+  R  lint
-- Ctrl+Alt+  F  format
-- Ctrl+Alt+  M  cmake-format
-
-`~/.config/Code/User/keybindings.json`
+```
+Linux: ~/.config/Code/User/keybindings.json
+Windows: %APPDATA%\Code\User\keybindings.json
+macOS: ~/Library/Application Support/Code/User/keybindings.json
+```
 
 ### Thanks 🙏
 

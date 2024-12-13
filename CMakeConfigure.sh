@@ -1,29 +1,54 @@
 #!/bin/bash
+taskName=$1
+archBuildType=$2
+buildType=$3
 
-set -e
+workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ "$#" -ne 4 ]; then
-    echo "Usage: $0 <ARCHITECTURE> <BUILD_TYPE> <SOURCE_DIR> <DESTINATION_DIR>"
+toolchainFile=""
+if [[ $archBuildType == "Aarch64" ]]; then
+    toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+fi
+
+case $taskName in
+"CMake: configure (Library)")
+    cmake -S . -B Build/$archBuildType/$buildType/Library $toolchainFile
+    ;;
+"CMake: configure (Standalone)")
+    cmake -S Standalone -B Build/$archBuildType/$buildType/Standalone $toolchainFile
+    ;;
+"CMake: build (Library)")
+    cmake -S . -B Build/$archBuildType/$buildType/Library $toolchainFile
+    cmake --build Build/$archBuildType/$buildType/Library -j $(nproc)
+    ;;
+"CMake: build (Standalone)")
+    cmake -S Standalone -B Build/$archBuildType/$buildType/Standalone $toolchainFile
+    cmake --build Build/$archBuildType/$buildType/Standalone -j $(nproc)
+    ;;
+"CMake: clean (Library)")
+    rm -rf Build/$archBuildType/$buildType/Library
+    ;;
+"CMake: clean (Standalone)")
+    rm -rf Build/$archBuildType/$buildType/Standalone
+    ;;
+"CMake: install (Library)")
+    cmake -S . -B Build/$archBuildType/$buildType/Library $toolchainFile
+    cmake --build Build/$archBuildType/$buildType/Library --target install
+    ;;
+"CMake: install (Standalone)")
+    cmake -S Standalone -B Build/$archBuildType/$buildType/Standalone $toolchainFile
+    cmake --build Build/$archBuildType/$buildType/Standalone --target install
+    ;;
+"CMake: test (Library)")
+    cmake --build Build/$archBuildType/$buildType/Library --target install
+    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/$archBuildType/$buildType/Library
+    ;;
+"CMake: test (Standalone)")
+    cmake -S Standalone -B Build/$archBuildType/$buildType/Standalone $toolchainFile
+    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/$archBuildType/$buildType/Standalone
+    ;;
+*)
+    echo "Unknown task: $taskName"
     exit 1
-fi
-
-ARCHITECTURE="$1"
-BUILD_TYPE="$2"
-SOURCE_DIR="$3"
-DESTINATION_DIR="$4"
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-if [ "$(echo "$ARCHITECTURE" | tr '[:upper:]' '[:lower:]')" = "aarch64" ]; then
-    TOOLCHAIN_ARG="-DCMAKE_TOOLCHAIN_FILE=$SCRIPT_DIR/aarch64.cmake"
-else
-    TOOLCHAIN_ARG=""
-fi
-
-BUILD_DIR="Build/$ARCHITECTURE/$DESTINATION_DIR/$BUILD_TYPE"
-mkdir -p "$BUILD_DIR"
-
-cmake -S "$SOURCE_DIR" \
-    -B "$BUILD_DIR" \
-    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
-    $TOOLCHAIN_ARG
+    ;;
+esac
