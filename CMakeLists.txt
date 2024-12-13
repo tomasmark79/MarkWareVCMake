@@ -70,8 +70,11 @@ endif()
 
 # self headers
 target_include_directories(
-    ${PROJECT_LIBRARY_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-                  $<INSTALL_INTERFACE:Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
+    ${PROJECT_LIBRARY_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
+        $<INSTALL_INTERFACE:Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
+    PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
 # ---- Modules ----
