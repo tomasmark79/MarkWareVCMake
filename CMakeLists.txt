@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 # ---- Project attributes ----
 set(PROJECT_LIBRARY_NAMESPACE name.digitalspace.www)
-set(PROJECT_LIBRARY_NAME VCMLib) # for change use ./ProjectRenamer.sh
+set(PROJECT_LIBRARY_NAME VCMLib)
 
 # ---- Project ----
 project(
@@ -19,13 +19,10 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
-# ---- Modules ----
-# more cmake modules - https://cmake.org/cmake/help/v3.28/manual/cmake-modules.7.html
+# ---- Modules finding example ---- https://cmake.org/cmake/help/v3.28/manual/cmake-modules.7.html
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
-# find_package(Threads REQUIRED) # Required to use std threads find_package(LIBUDEV REQUIRED)
-# find_package(LIBINPUT REQUIRED) find_package(PUGIXML REQUIRED) find_package(CAIRO REQUIRED)
-# find_package(X11 REQUIRED) find_package(XTEST REQUIRED) find_package(XRANDR REQUIRED)
-# find_package(XINPUT REQUIRED) find_package(GLIB REQUIRED) find_package(GIO REQUIRED)
+find_package(Threads REQUIRED) # std::threads
+find_package(X11 REQUIRED)
 
 # ---- Dependencies ----
 include(cmake/CPM.cmake)
@@ -78,16 +75,9 @@ target_include_directories(
     PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
-# ---- Modules ----
-# target_link_libraries( ${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads
-# ${LIBUDEV_LIBRARIES} ${LIBINPUT_LIBRARIES} ${PUGIXML_LIBRARIES} ${CAIRO_LIBRARIES}
-# ${X11_LIBRARIES} ${XTEST_LIBRARIES} ${XRANDR_LIBRARIES} ${XINPUT_LIBRARIES} ${GLIB_LIBRARIES}
-# ${GIO_LIBRARIES} )
-
-# target_include_directories( ${PROJECT_LIBRARY_NAME} PUBLIC ${LIBUDEV_INCLUDE_DIRS}
-# ${LIBINPUT_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS}
-# ${XTEST_INCLUDE_DIRS} ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS}
-# ${GIO_INCLUDE_DIRS} )
+# ---- Modules headers & link libraries example ----
+target_link_libraries( ${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads)
+target_include_directories( ${PROJECT_LIBRARY_NAME} PUBLIC %{X11_INCLUDE_DIR})
 
 # ---- Package ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}/version.h" VERSION_HEADER_LOCATION)
