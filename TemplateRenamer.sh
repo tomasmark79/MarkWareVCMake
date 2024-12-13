@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script rename the Standalone and Library names in the template 
+# (c) Tomáš Mark 2024
+
 # Check if four arguments are provided
 if [ "$#" -ne 4 ]; then
     echo "Usage: $0 <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>"

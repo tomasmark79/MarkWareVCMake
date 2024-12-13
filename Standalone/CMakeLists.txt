@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
+# (c) Tomáš Mark 2024
+
 # ---- Project attributes ----
 set(PROJECT_STANDALONE_NAMESPACE name.digitalspace.www)
 set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./ProjectRenamer.sh

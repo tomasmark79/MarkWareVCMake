@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
+# (c) Tomáš Mark 2024
+
 # ---- Project attributes ----
 set(PROJECT_LIBRARY_NAMESPACE name.digitalspace.www)
 set(PROJECT_LIBRARY_NAME VCMLib)
