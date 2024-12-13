@@ -52,8 +52,10 @@ set_target_properties(${PROJECT_LIBRARY_NAME} PROPERTIES CXX_STANDARD 17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(
-    ${PROJECT_LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict conformance
+    ${PROJECT_LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict
+                                                                                     # conformance
 )
+# target_compile_options(${PROJECT_LIBRARY_NAME} PRIVATE "-Werror")
 
 # EmojiTools
 CPMAddPackage(
@@ -68,23 +70,24 @@ if(EmojiTools_ADDED)
     target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE EmojiTools::EmojiTools)
 endif()
 
-# self headers
+# headers
 target_include_directories(
     ${PROJECT_LIBRARY_NAME}
-    PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-        $<INSTALL_INTERFACE:Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
+    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
+           $<INSTALL_INTERFACE:Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
     PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
 # ---- Modules ----
-# target_link_libraries( ${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads ${LIBUDEV_LIBRARIES}
-# ${LIBINPUT_LIBRARIES} ${PUGIXML_LIBRARIES} ${CAIRO_LIBRARIES} ${X11_LIBRARIES} ${XTEST_LIBRARIES}
-# ${XRANDR_LIBRARIES} ${XINPUT_LIBRARIES} ${GLIB_LIBRARIES} ${GIO_LIBRARIES} )
+# target_link_libraries( ${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads
+# ${LIBUDEV_LIBRARIES} ${LIBINPUT_LIBRARIES} ${PUGIXML_LIBRARIES} ${CAIRO_LIBRARIES}
+# ${X11_LIBRARIES} ${XTEST_LIBRARIES} ${XRANDR_LIBRARIES} ${XINPUT_LIBRARIES} ${GLIB_LIBRARIES}
+# ${GIO_LIBRARIES} )
 
-# target_include_directories( ${PROJECT_LIBRARY_NAME} PUBLIC ${LIBUDEV_INCLUDE_DIRS} ${LIBINPUT_INCLUDE_DIRS}
-# ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS} ${XTEST_INCLUDE_DIRS}
-# ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS} ${GIO_INCLUDE_DIRS} )
+# target_include_directories( ${PROJECT_LIBRARY_NAME} PUBLIC ${LIBUDEV_INCLUDE_DIRS}
+# ${LIBINPUT_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS} ${CAIRO_INCLUDE_DIRS} ${X11_INCLUDE_DIRS}
+# ${XTEST_INCLUDE_DIRS} ${XRANDR_INCLUDE_DIRS} ${XINPUT_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS}
+# ${GIO_INCLUDE_DIRS} )
 
 # ---- Package ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}/version.h" VERSION_HEADER_LOCATION)
