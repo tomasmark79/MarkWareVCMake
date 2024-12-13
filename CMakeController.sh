@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# This script is a controller for CMake tasks
+# (c) Tomáš Mark 2024
+
 taskName=$1
 archBuildType=$2
 buildType=$3
