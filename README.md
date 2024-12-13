@@ -1,6 +1,8 @@
 
 # MarkWare VCMake Template 🎁
-v1.1.0rc2
+v1.1.0rc2 
+(c) Tomáš Mark 2024 
+
 ---
 
 ### Project Overview
@@ -124,6 +126,5 @@ Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
 
-Thank you, Tomáš Mark.  
 I look forward to seeing your contributions!
 
