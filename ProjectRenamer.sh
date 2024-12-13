@@ -22,7 +22,7 @@ new_lib_name_upper=$(echo "$new_lib_name" | tr '[:lower:]' '[:upper:]')
 files=(
     ".vscode/launch.json"
     "CMakeLists.txt"
-    "Include/$old_lib_name/$old_lib_name.hpp"
+    "include/$old_lib_name/$old_lib_name.hpp"
     "Source/$old_lib_name.cpp"
     "Standalone/CMakeLists.txt"
     "Standalone/Source/Main.cpp"
@@ -51,15 +51,15 @@ if [ -f "Source/$old_lib_name.cpp" ]; then
     echo "Renamed file: Source/$old_lib_name.cpp to Source/$new_lib_name.cpp"
 fi
 
-if [ -f "Include/$old_lib_name/$old_lib_name.hpp" ]; then
-    mv "Include/$old_lib_name/$old_lib_name.hpp" "Include/$old_lib_name/$new_lib_name.hpp"
-    echo "Renamed file: Include/$old_lib_name/$old_lib_name.hpp to Include/$old_lib_name/$new_lib_name.hpp"
+if [ -f "include/$old_lib_name/$old_lib_name.hpp" ]; then
+    mv "include/$old_lib_name/$old_lib_name.hpp" "include/$old_lib_name/$new_lib_name.hpp"
+    echo "Renamed file: include/$old_lib_name/$old_lib_name.hpp to include/$old_lib_name/$new_lib_name.hpp"
 fi
 
 # Rename directories
-if [ -d "Include/$old_lib_name" ]; then
-    mv "Include/$old_lib_name" "Include/$new_lib_name"
-    echo "Renamed directory: Include/$old_lib_name to Include/$new_lib_name"
+if [ -d "include/$old_lib_name" ]; then
+    mv "include/$old_lib_name" "include/$new_lib_name"
+    echo "Renamed directory: include/$old_lib_name to include/$new_lib_name"
 fi
 
 echo "Project renaming completed."

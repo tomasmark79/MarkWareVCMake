@@ -78,10 +78,10 @@ Currently, only Linux is supported. As soon as I get to Windows or Mac, or someo
 ### ToDo
 - Tests
 
-### Rules
-- FileNamesAndFoldersWithCapitalsIsGoodPractice
-- No rules, only freedom
-
+### Code Codex
+- FileNamesAndFoldersWithCapitalsIsGoodPractice 🐫
+- Only the "include" folder starts without a capital letter due linux compatibility
+    
 ### Configuration ⚙️
 
 #### Properties

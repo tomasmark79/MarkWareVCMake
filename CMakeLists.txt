@@ -36,8 +36,8 @@ CPMAddPackage("gh:fmtlib/fmt#11.0.2")
 
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.h
-     ${CMAKE_CURRENT_SOURCE_DIR}/Include/*.hpp
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
+     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
 )
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
      ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
@@ -73,8 +73,8 @@ endif()
 # headers
 target_include_directories(
     ${PROJECT_LIBRARY_NAME}
-    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-           $<INSTALL_INTERFACE:Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
+    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+           $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
     PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
@@ -97,8 +97,8 @@ packageProject(
     VERSION ${PROJECT_VERSION}
     NAMESPACE ${PROJECT_LIBRARY_NAMESPACE}
     BINARY_DIR ${PROJECT_BINARY_DIR}
-    INCLUDE_DIR ${PROJECT_SOURCE_DIR}/Include
-    INCLUDE_DESTINATION Include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}
+    INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+    INCLUDE_DESTINATION include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}
     VERSION_HEADER "${VERSION_HEADER_LOCATION}"
     COMPATIBILITY SameMajorVersion
     DEPENDENCIES "fmt 11.0.2"
