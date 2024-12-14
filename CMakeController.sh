@@ -3,6 +3,9 @@
 # This script is a controller for CMake tasks
 # (c) Tomáš Mark 2024
 
+generateThirdParty=true
+
+
 taskName=$1
 archBuildType=$2
 buildType=$3
@@ -23,11 +26,11 @@ case $taskName in
     ;;
 "CMake: build (Library)")
     cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Library/$buildType -j $(nproc)
+    cmake --build Build/$archBuildType/Library/$buildType --target all -j $(nproc)
     ;;
 "CMake: build (Standalone)")
     cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Standalone/$buildType -j $(nproc)
+    cmake --build Build/$archBuildType/Standalone/$buildType --target all -j $(nproc)
     ;;
 "CMake: clean (Library)")
     rm -rf Build/$archBuildType/Library/$buildType
@@ -42,6 +45,16 @@ case $taskName in
 "CMake: install (Standalone)")
     cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
     cmake --build Build/$archBuildType/Standalone/$buildType --target install
+    ;;
+"CMake: collect licenses (Library)")
+    cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
+    cmake --build Build/$archBuildType/Library/$buildType --target all -j $(nproc)
+    cmake --build Build/$archBuildType/Library/$buildType --target write-licenses -j $(nproc)
+    ;;
+"CMake: collect licenses (Standalone)")
+    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
+    cmake --build Build/$archBuildType/Standalone/$buildType --target all -j $(nproc)
+    cmake --build Build/$archBuildType/Standalone/$buildType --target write-licenses -j $(nproc)
     ;;
 "CMake: test (Library)")
     cmake --build Build/$archBuildType/Library/$buildType --target install || exit 1
