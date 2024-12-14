@@ -24,6 +24,7 @@ new_lib_name_upper=$(echo "$new_lib_name" | tr '[:lower:]' '[:upper:]')
 # List of files where the project names should be changed
 files=(
     ".vscode/launch.json"
+    "LICENSE"
     "CMakeLists.txt"
     "include/$old_lib_name/$old_lib_name.hpp"
     "Source/$old_lib_name.cpp"

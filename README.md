@@ -116,16 +116,10 @@ Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 I look forward to seeing your contributions!
 
 ### License
-I built the project primarily for myself and for my future projects. If someone is interested in using the project for any purpose, they should, according to the license, mention my name in their project and also all the names of the projects that this project contains. For simplicity, I have listed the licenses that are related to the project and should be visibly mentioned in each project. Thank you for following the license terms!
+I built the project primarily for myself and for my future projects. Nevertheless, if we use the project, we should adhere to the licensing policy. Therefore, I have implemented the package `CPMLicenses.cmake`, which automatically scans all source directories of your CPM.cmake dependencies and finds any file that starts with LICENSE or LICENCE, appending the content to an output file that you can use as a license disclaimer. If no license is found for a package, a warning will be issued in the output during license collection.
 
-Included MIT Licence
 
 Copyright (c) Tomáš Mark 2024 
-
-Copyright (c) 2019-2022 Lars Melchior and contributors
-
-Copyright (c) 2020 Lars Melchior
-
 
 
 
