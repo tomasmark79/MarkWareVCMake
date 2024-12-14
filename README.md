@@ -95,9 +95,13 @@ My own keybindings. If you want to use them, you need to copy/paste the content 
 Use those links to get more documentation to used technologies in my template.
 
 https://cmake.org
+
 https://github.com/TheLartians/ModernCppStarter
+
 https://github.com/cpm-cmake/CPM.cmake
+
 https://github.com/cpm-cmake/CPMLicenses.cmake.git
+
 
 ---
 
