@@ -63,25 +63,26 @@ CPMAddPackage(
     VERSION 0.0.7
 )
 cpm_licenses_create_disclaimer_target(
-    write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}"
+    write-licenses-${PROJECT_LIBRARY_NAME} "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}"
 )
 
 # EmojiTools
 CPMAddPackage(
-    NAME EmojiTools
+    NAME EmojiToolsLib
     GIT_TAG main
     GITHUB_REPOSITORY tomasmark79/EmojiTools
     OPTIONS "EMOJI_INSTALL NO" # create an installable target
 )
-if(EmojiTools_ADDED)
+if(EmojiToolsLib_ADDED)
     # target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
-    target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE EmojiTools::EmojiTools)
+    target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE name.digitalspace.www::EmojiToolsLib)
 endif()
 
 # headers
 target_include_directories(
     ${PROJECT_LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+
            $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
     PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
@@ -108,7 +109,7 @@ packageProject(
 # ---- Install ----
 include(GNUInstallDirs)
 install(
-    TARGETS EmojiTools
+    TARGETS EmojiToolsLib
     EXPORT ${PROJECT_LIBRARY_NAME}Targets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
