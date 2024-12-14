@@ -31,6 +31,7 @@ With this project and its settings, you can start developing in C++ within a few
 ✅ - Cross Compile  
 ✅ - Clean  
 ✅ - Install  
+✅ - Collect licenses **generating third_party.txt**  
 ✅ - C/C++ Lint - **ctrl+alt+l**  
 ✅ - C/C++ format (clang) - **ctrl+alt+m**  
 ✅ - CMake format - **ctrl+alt+f**
@@ -93,12 +94,10 @@ My own keybindings. If you want to use them, you need to copy/paste the content 
 
 Use those links to get more documentation to used technologies in my template.
 
-https://github.com/cpm-cmake/CPM.cmake
-
 https://cmake.org
-
 https://github.com/TheLartians/ModernCppStarter
-
+https://github.com/cpm-cmake/CPM.cmake
+https://github.com/cpm-cmake/CPMLicenses.cmake.git
 
 ---
 

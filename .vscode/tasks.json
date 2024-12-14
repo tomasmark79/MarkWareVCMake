@@ -129,11 +129,13 @@
                 "CMake: clean (Standalone)",
                 "CMake: install (Standalone)",
                 "CMake: test (Standalone)",
+                "CMake: collect licenses (Standalone)",
                 "CMake: configure (Library)",
                 "CMake: build (Library)",
                 "CMake: clean (Library)",
                 "CMake: install (Library)",
                 "CMake: test (Library)",
+                "CMake: collect licenses (Library)",
                 "CMake: lint",
                 "CMake: clang-format"
             ],
