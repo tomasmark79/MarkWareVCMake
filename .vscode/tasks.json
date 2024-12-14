@@ -3,6 +3,7 @@
     "version": "2.0.0",
     "tasks": [
         {
+            /* CMAKE TASKS */
             "label": "CMake Tasks",
             "type": "shell",
             "command": "${workspaceFolder}/CMakeController.sh",
@@ -15,12 +16,12 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "CMake1",
+            "detail": "CMake Tasks",
             "problemMatcher": []
         },
         {
             /* LINT */
-            "label": "CMake: lint",
+            "label": "lint",
             "type": "shell",
             "command": "find",
             "args": [
@@ -51,11 +52,10 @@
                 "$gcc"
             ],
             "detail": "Generated task for linting C++ files with clang-tidy.",
-            "dependsOn": "Notify: CMake: lint"
         },
         {
             /* CLANG FORMAT */
-            "label": "CMake: clang-format",
+            "label": "clang-format",
             "type": "shell",
             "command": "find",
             "args": [
@@ -88,10 +88,10 @@
             "group": "build",
             "problemMatcher": [],
             "detail": "Generated task for formatting C++ files with clang-format.",
-            "dependsOn": "Notify: CMake: clang-format"
         },
         {
-            "label": "CMake: cmake-format",
+            /* CMAKE FORMAT */
+            "label": "cmake-format",
             "type": "shell",
             "command": "find",
             "args": [
@@ -115,7 +115,6 @@
             "group": "build",
             "problemMatcher": [],
             "detail": "Generated task for formatting CMake files with cmake-format.",
-            "dependsOn": "Notify: CMake: cmake-format"
         }
     ],
     "inputs": [
@@ -136,8 +135,6 @@
                 "CMake: install (Library)",
                 "CMake: test (Library)",
                 "CMake: collect licenses (Library)",
-                "CMake: lint",
-                "CMake: clang-format"
             ],
             "default": "CMake: build (Standalone)"
         },
