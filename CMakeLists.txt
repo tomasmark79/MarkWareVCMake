@@ -58,24 +58,21 @@ target_compile_options(
 
 # ---- Third Party ----
 CPMAddPackage(
-  NAME CPMLicenses.cmake 
-  GITHUB_REPOSITORY cpm-cmake/CPMLicenses.cmake
-  VERSION 0.0.7
+    NAME CPMLicenses.cmake
+    GITHUB_REPOSITORY cpm-cmake/CPMLicenses.cmake
+    VERSION 0.0.7
 )
 cpm_licenses_create_disclaimer_target(
-  write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}"
+    write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}"
 )
-
 
 # EmojiTools
 CPMAddPackage(
     NAME EmojiTools
     GIT_TAG main
     GITHUB_REPOSITORY tomasmark79/EmojiTools
-    OPTIONS "EMOJI_INSTALL YES" # create an installable target
+    OPTIONS "EMOJI_INSTALL NO" # create an installable target
 )
-
-
 if(EmojiTools_ADDED)
     # target_include_directories(MarkWareVCMakeLibrary PRIVATE ${EmojiTools_SOURCE_DIR}/include)
     target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE EmojiTools::EmojiTools)
@@ -90,8 +87,8 @@ target_include_directories(
 )
 
 # ---- Modules headers & link libraries example ----
-target_link_libraries( ${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads)
-target_include_directories( ${PROJECT_LIBRARY_NAME} PUBLIC ${X11_INCLUDE_DIR})
+target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads)
+target_include_directories(${PROJECT_LIBRARY_NAME} PUBLIC ${X11_INCLUDE_DIR})
 
 # ---- Package ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}/version.h" VERSION_HEADER_LOCATION)
