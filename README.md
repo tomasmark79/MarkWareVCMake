@@ -66,6 +66,17 @@ code .
 
 ---
 
+#### How to update the template to the latest version in my project?
+
+Just copy and replace the core of the template:
+- `./vscode/` folder
+- `TemplateRenamer.sh` file
+- `CMakeController.sh` file
+
+Carefully inspect and check the differences in `CMakeLists.txt` for any updates.  
+Carefully inspect and check the differences in `Standalone/CMakeLists.txt` for any updates.  
+That's all.
+
 ### Template Parts Explanation
 
 #### `.vscode/c_cpp_properties.json`
