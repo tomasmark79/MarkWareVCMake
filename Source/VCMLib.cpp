@@ -1,5 +1,6 @@
 #include "VCMLib/VCMLib.hpp"
 
+#include <EmojiToolsLib/EmojiToolsLib.hpp>
 #include <iostream>
 
 // Those are the implementations of the class VCMLib
