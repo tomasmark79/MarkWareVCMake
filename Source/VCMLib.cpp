@@ -2,23 +2,26 @@
 
 #include <EmojiToolsLib/EmojiToolsLib.hpp>
 #include <iostream>
+#include <vcmlib/version.h>
 
 #ifdef ENABLE_OPENSSL
-#    include <openssl/crypto.h>
-#    include <openssl/ssl.h>
+#include <openssl/crypto.h>
+#include <openssl/ssl.h>
 #endif
 
-// Those are the implementations of the class VCMLib
-// (c) Tomáš Mark 2024
+// Library implementation
 
 VCMLib::VCMLib()
 {
-
-    std::cout << "-- MarkWare VCMake Library Linked --" << std::endl;
+    std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
+              << std::endl;
 
 #ifdef OPENSSL_VERSION
-    std::cout << OPENSSL_VERSION << std::endl;
+    std::cout << "--- " << OPENSSL_VERSION_TEXT << " linked ---" << std::endl;
 #endif
 }
 
-VCMLib::~VCMLib() { std::cout << "-- MarkWare VCMake Library Unlinked --" << std::endl; }
+VCMLib::~VCMLib()
+{
+    std::cout << "--- VCMLib uninstantiated ---" << std::endl;
+}

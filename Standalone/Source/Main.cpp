@@ -1,14 +1,22 @@
 #include <VCMLib/VCMLib.hpp>
+#include <chrono>
 #include <iostream>
+#include <memory>
+#include <thread>
 #include <vcmlib/version.h>
 
-// Standalone applications are the ones that are not part of a library
-// (c) Tomáš Mark 2024
+// Standalone main entry point
 
-auto main(int argc, char **argv) -> int
+auto main(int argc, char *argv[], char *env[]) -> int
 {
-    VCMLib Lib;
-    std::cout << "Version: " << VCMLIB_VERSION << std::endl;
+    // init VCMLib instance
+    std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>();
+
+    // five seconds delay
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+
+    // bye bye
+    std::cout << "Bye bye!" << std::endl;
 
     return 0;
 }

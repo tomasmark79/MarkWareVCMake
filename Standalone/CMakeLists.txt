@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 set(PROJECT_STANDALONE_NAMESPACE dsdotname)
 set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./ProjectRenamer.sh
 
-project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX)
+project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX ASM)
 
 # --- Import tools ----
 include(../cmake/tools.cmake)
