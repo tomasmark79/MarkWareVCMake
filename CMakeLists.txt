@@ -1,14 +1,19 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# (c) Tomáš Mark 2024
+# ---- (c) Tomáš Mark 2024 ----
 
-# ---- Project attributes ----
-set(PROJECT_LIBRARY_NAMESPACE name.digitalspace.www)
+# ---- Project namespace::name  ----
+set(PROJECT_LIBRARY_NAMESPACE dsdotname)
 set(PROJECT_LIBRARY_NAME VCMLib)
 
-# ---- Static | Shared ----
-# TODO
+# ---- Global Options ----
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+option(ENABLE_OPENSSL "Enable OpenSSL support" OFF)
+
+message(STATUS "ENABLE_OPENSSL is set to: ${ENABLE_OPENSSL}")
+
+
+
 
 # ---- Project ----
 project(
@@ -25,77 +30,63 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
-# ---- Modules finding example ---- https://cmake.org/cmake/help/v3.28/manual/cmake-modules.7.html
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
-find_package(Threads REQUIRED) # std::threads
-find_package(X11 REQUIRED)
+# Check if CMAKE_MAKE_PROGRAM supports parallel builds
+if(NOT CMAKE_MAKE_PROGRAM MATCHES ".*make.*")
+    message(WARNING "CMAKE_MAKE_PROGRAM does not support parallel builds, using -j1")
+    set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM} -j1")
+endif()
 
-# ---- Dependencies ----
-include(cmake/CPM.cmake)
-
-# PackageProject.cmake will be used to make our target installable
-CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
-CPMAddPackage("gh:fmtlib/fmt#11.0.2")
-
-# Note: globbing sources is considered bad practice as CMake's generators may not detect new files
-# automatically. Keep that in mind when changing files, or explicitly mention them here.
+# Glob not recommended, but the simplest way for this template
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
 )
+
+# Glob not recommended, but the simplest way for this template
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
      ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
 )
 
 # ---- Create library ----
-
-# Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target: add_library(${PROJECT_LIBRARY_NAME} INTERFACE)
 add_library(${PROJECT_LIBRARY_NAME} ${headers} ${sources})
 
-# 
+# ---- Library features ----
 target_compile_features(${PROJECT_LIBRARY_NAME} PUBLIC cxx_std_17)
 
+# ---- Library options
+target_compile_options(${PROJECT_LIBRARY_NAME} PRIVATE "-Wall" "-Wextra" "-Wpedantic")
 
-# being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(
-    ${PROJECT_LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict
-                                                                                     # conformance
-)
-# target_compile_options(${PROJECT_LIBRARY_NAME} PRIVATE "-Werror")
-
-# ---- Third Party ----
-CPMAddPackage(
-    NAME CPMLicenses.cmake
-    GITHUB_REPOSITORY cpm-cmake/CPMLicenses.cmake
-    VERSION 0.0.7
-)
-cpm_licenses_create_disclaimer_target(
-    write-licenses-${PROJECT_LIBRARY_NAME} "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}"
-)
-
-# EmojiTools
-CPMAddPackage(
-    NAME EmojiToolsLib
-    GIT_TAG main
-    GITHUB_REPOSITORY tomasmark79/EmojiTools
-    OPTIONS "EMOJI_INSTALL NO" # create an installable target
-)
-if(EmojiToolsLib_ADDED)
-    target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE name.digitalspace.www::EmojiToolsLib)
-endif()
-
-# headers
+# header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
+# <add_library(${PROJECT_LIBRARY_NAME} INTERFACE)>
 target_include_directories(
     ${PROJECT_LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-
            $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
     PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
-# ---- Modules headers & link libraries example ----
-target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE stdc++fs Threads::Threads)
-target_include_directories(${PROJECT_LIBRARY_NAME} PUBLIC ${X11_INCLUDE_DIR})
+# being a cross-platform target, we enforce standards conformance on MSVC
+target_compile_options(
+    ${PROJECT_LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->" # Strict
+    # conformance
+)
+
+# ---- Init dependencies ----
+include(cmake/CPM.cmake)
+include(cmake/Dependencies.cmake)
+
+# ---- CMake Modules ----
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
+
+find_package(Threads REQUIRED)
+find_package(X11 REQUIRED)
+
+# ---- OpenSSL Configuration ----
+if(ENABLE_OPENSSL)
+    message(STATUS "OpenSSL support enabled")
+    include(cmake/OpenSSLConfig.cmake)
+else()
+    message(STATUS "OpenSSL support disabled")
+endif()
 
 # ---- Package ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}/version.h" VERSION_HEADER_LOCATION)
@@ -110,16 +101,4 @@ packageProject(
     VERSION_HEADER "${VERSION_HEADER_LOCATION}"
     COMPATIBILITY SameMajorVersion
     DEPENDENCIES "fmt 11.0.2"
-)
-
-# ---- Install ----
-include(GNUInstallDirs)
-install(
-    TARGETS EmojiToolsLib
-    EXPORT ${PROJECT_LIBRARY_NAME}Targets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}
 )
