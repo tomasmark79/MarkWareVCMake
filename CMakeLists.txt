@@ -6,6 +6,10 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 set(PROJECT_LIBRARY_NAMESPACE name.digitalspace.www)
 set(PROJECT_LIBRARY_NAME VCMLib)
 
+# ---- Static | Shared ----
+# TODO
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
 # ---- Project ----
 project(
     ${PROJECT_LIBRARY_NAME}
