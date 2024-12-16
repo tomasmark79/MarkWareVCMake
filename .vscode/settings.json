@@ -85,6 +85,8 @@
         "valarray": "cpp",
         "variant": "cpp",
         "text_encoding": "cpp",
-        "expected": "cpp"
+        "expected": "cpp",
+        "err.h": "c",
+        "e_os.h": "c"
     }
 }
