@@ -51,7 +51,10 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target: add_library(${PROJECT_LIBRARY_NAME} INTERFACE)
 add_library(${PROJECT_LIBRARY_NAME} ${headers} ${sources})
-set_target_properties(${PROJECT_LIBRARY_NAME} PROPERTIES CXX_STANDARD 17)
+
+# 
+target_compile_features(${PROJECT_LIBRARY_NAME} PUBLIC cxx_std_17)
+
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(
