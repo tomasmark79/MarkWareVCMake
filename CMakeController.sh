@@ -3,66 +3,99 @@
 # This script is a controller for CMake tasks
 # (c) Tomáš Mark 2024
 
-generateThirdParty=true
-
-
+# Arguments and defaults
 taskName=$1
 archBuildType=$2
-buildType=$3
+buildType=${3:-"Release"} # Default to "Release" if not specified
 
+GREEN='\033[0;32m' NC='\033[0m'
+echo -e "${GREEN}CMakeController.sh: args: [" $taskName $archBuildType $buildType "]${NC}"
+
+# Determine workspace and toolchain file
 workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 toolchainFile=""
-if [[ $archBuildType == "Aarch64" ]]; then
-    toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
-fi
+[[ $archBuildType == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
 
+# Helper function for cmake commands
+function cmake_configure() {
+    local sourceDir=$1
+    local buildDir=$2
+    cmake -S "$sourceDir" -B "$buildDir" $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+}
+
+function cmake_build() {
+    local buildDir=$1
+    cmake --build "$buildDir" --target all -j $(nproc)
+}
+
+function cmake_clean() {
+    local buildDir=$1
+    rm -rf "$buildDir"
+}
+
+function cmake_test() {
+    local buildDir=$1
+    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir "$buildDir"
+}
+
+# Directory structure helper
+function get_build_dir() {
+    local type=$1
+    echo "Build/${type}/${archBuildType}/${buildType}"
+}
+
+# Task dispatcher
 case $taskName in
-"CMake: configure (Library)")
-    cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
+"Configure (Standalone)")
+    cmake_configure "Standalone" "$(get_build_dir Standalone)"
     ;;
-"CMake: configure (Standalone)")
-    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
+"Configure (Library)")
+    cmake_configure "." "$(get_build_dir Library)"
     ;;
-"CMake: build (Library)")
-    cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Library/$buildType --target all -j $(nproc)
+"Build (Standalone)")
+    cmake_configure "Standalone" "$(get_build_dir Standalone)"
+    cmake_build "$(get_build_dir Standalone)"
     ;;
-"CMake: build (Standalone)")
-    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Standalone/$buildType --target all -j $(nproc)
+"Build (Library)")
+    cmake_configure "." "$(get_build_dir Library)"
+    cmake_build "$(get_build_dir Library)"
     ;;
-"CMake: clean (Library)")
-    rm -rf Build/$archBuildType/Library/$buildType
+"Clean (Standalone)")
+    cmake_clean "$(get_build_dir Standalone)"
     ;;
-"CMake: clean (Standalone)")
-    rm -rf Build/$archBuildType/Standalone/$buildType
+"Clean (Library)")
+    cmake_clean "$(get_build_dir Library)"
     ;;
-"CMake: install (Library)")
-    cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Library/$buildType --target install
+"Clean All")
+    rm -rf Build/
     ;;
-"CMake: install (Standalone)")
-    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Standalone/$buildType --target install
+"Install (Standalone)")
+    cmake_configure "Standalone" "$(get_build_dir Standalone)"
+    cmake_build "$(get_build_dir Standalone)"
+    cmake --build "$(get_build_dir Standalone)" --target install
     ;;
-"CMake: collect licenses (Library)")
-    cmake -S . -B Build/$archBuildType/Library/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Library/$buildType --target all -j $(nproc)
-    cmake --build Build/$archBuildType/Library/$buildType --target write-licenses -j $(nproc)
+"Install (Library)")
+    cmake_configure "." "$(get_build_dir Library)"
+    cmake_build "$(get_build_dir Library)"
+    cmake --build "$(get_build_dir Library)" --target install
     ;;
-"CMake: collect licenses (Standalone)")
-    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
-    cmake --build Build/$archBuildType/Standalone/$buildType --target all -j $(nproc)
-    cmake --build Build/$archBuildType/Standalone/$buildType --target write-licenses -j $(nproc)
+"Test (Standalone)")
+    cmake_configure "Standalone" "$(get_build_dir Standalone)"
+    cmake_test "$(get_build_dir Standalone)"
     ;;
-"CMake: test (Library)")
-    cmake --build Build/$archBuildType/Library/$buildType --target install || exit 1
-    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/$archBuildType/Library/$buildType
+"Test (Library)")
+    cmake_build "$(get_build_dir Library)"
+    cmake_test "$(get_build_dir Library)"
     ;;
-"CMake: test (Standalone)")
-    cmake -S Standalone -B Build/$archBuildType/Standalone/$buildType $toolchainFile || exit 1
-    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/$archBuildType/Standalone/$buildType
+"Collect licenses (Standalone)")
+    cmake_configure "Standalone" "$(get_build_dir Standalone)"
+    cmake_build "$(get_build_dir Standalone)"
+    cmake --build "$(get_build_dir Standalone)" --target write-licenses -j $(nproc)
+    ;;
+"Collect licenses (Library)")
+    cmake_configure "." "$(get_build_dir Library)"
+    cmake_build "$(get_build_dir Library)"
+    cmake --build "$(get_build_dir Library)" --target write-licenses -j $(nproc)
     ;;
 *)
     echo "Unknown task: $taskName"

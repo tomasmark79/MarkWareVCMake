@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# This script is a controller for CMake tasks
+# (c) Tomáš Mark 2024
+
+function title() {
+    RED='\033[0;31m' ORANGE='\033[0;33m' YELLOW='\033[1;33m' GREEN='\033[0;32m' BLUE='\033[0;34m' INDIGO='\033[0;35m' VIOLET='\033[0;35m' NC='\033[0m'
+    echo -e "${RED}M${ORANGE}A${YELLOW}R${GREEN}K${BLUE}W${INDIGO}A${VIOLET}R${RED}E${NC} ${RED}C${ORANGE}M${YELLOW}a${GREEN}k${BLUE}e${INDIGO}C${VIOLET}o${RED}n${ORANGE}t${YELLOW}r${GREEN}o${BLUE}l${INDIGO}l${VIOLET}e${RED}r${NC}"
+}
+title
+
+taskName=$1
+archBuildType=$2
+buildType=$3
+
+echo -e "${GREEN}CMakeController.sh: args: [" $taskName $archBuildType $buildType "]${NC}"
+
+# Set default build type if not provided
+if [ -z "$buildType" ]; then
+    buildType="Release"
+fi
+
+workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+toolchainFile=""
+if [[ $archBuildType == "Aarch64" ]]; then
+    toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+fi
+
+case $taskName in
+"Configure (Standalone)")
+    cmake -S Standalone -B Build/Standalone/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    ;;
+"Configure (Library)")
+    cmake -S . -B Build/Library/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    ;;
+"Build (Standalone)")
+    cmake -S Standalone -B Build/Standalone/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Standalone/$archBuildType/$buildType --target all -j $(nproc)
+    ;;
+"Build (Library)")
+    cmake -S . -B Build/Library/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Library/$archBuildType/$buildType --target all -j $(nproc)
+    ;;
+"Clean (Standalone)")
+    rm -rf Build/Standalone/$archBuildType/
+    ;;
+"Clean (Library)")
+    rm -rf Build/Library/$archBuildType/
+    ;;
+"Clean All")
+    rm -rf Build/Standalone/ Build/Library/
+    ;;
+"Install (Standalone)")
+    cmake -S Standalone -B Build/Standalone/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Standalone/$archBuildType/$buildType --target install
+    ;;
+"Install (Library)")
+    cmake -S . -B Build/Library/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Library/$archBuildType/$buildType --target install
+    ;;
+"Test (Standalone)")
+    cmake -S Standalone -B Build/Standalone/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/Standalone/$archBuildType/$buildType
+    ;;
+"Test (Library)")
+    cmake --build Build/Library/$archBuildType/$buildType --target install || exit 1
+    ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir Build/Library/$archBuildType/$buildType
+    ;;
+"Collect licenses (Standalone)")
+    cmake -S Standalone -B Build/Standalone/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Standalone/$archBuildType/$buildType --target all -j $(nproc)
+    cmake --build Build/Standalone/$archBuildType/$buildType --target write-licenses -j $(nproc)
+    ;;
+"Collect licenses (Library)")
+    cmake -S . -B Build/Library/$archBuildType/$buildType $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
+    cmake --build Build/Library/$archBuildType/$buildType --target all -j $(nproc)
+    cmake --build Build/Library/$archBuildType/$buildType --target write-licenses -j $(nproc)
+    ;;
+*)
+    echo "Unknown task: $taskName"
+    exit 1
+    ;;
+esac
