@@ -8,12 +8,7 @@ set(PROJECT_LIBRARY_NAME VCMLib)
 
 # ---- Global Options ----
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-option(ENABLE_OPENSSL "Enable OpenSSL support" OFF)
-
-message(STATUS "ENABLE_OPENSSL is set to: ${ENABLE_OPENSSL}")
-
-
-
+option(ENABLE_OPENSSL "Enable OpenSSL support" ON)
 
 # ---- Project ----
 project(
@@ -82,10 +77,12 @@ find_package(X11 REQUIRED)
 
 # ---- OpenSSL Configuration ----
 if(ENABLE_OPENSSL)
-    message(STATUS "OpenSSL support enabled")
+    message(STATUS "OpenSSL support is enabled")
     include(cmake/OpenSSLConfig.cmake)
-else()
-    message(STATUS "OpenSSL support disabled")
+    add_dependencies(${PROJECT_LIBRARY_NAME} build-openssl)
+    target_compile_definitions(
+        ${PROJECT_LIBRARY_NAME} PUBLIC ENABLE_OPENSSL
+    ) # C++ preprocesor # Define ENABLE_OPENSSL
 endif()
 
 # ---- Package ----
