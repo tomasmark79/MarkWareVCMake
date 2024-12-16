@@ -6,7 +6,7 @@
             "name": "Debug CMake Target",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Build/Native/Standalone/Debug/VCMStandalone", /* 🪲 */
+            "program": "${workspaceFolder}/Build/Standalone/Native/Debug/VCMStandalone", /* 🪲 */
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
