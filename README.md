@@ -1,6 +1,6 @@
 
 # MarkWare VCMake Template 🎁
-v1.1.0rc2 
+v0.0.2
 
 ---
 
@@ -19,7 +19,7 @@ With this project and its settings, you can start developing in C++ within a few
 - A C++ library
 - A C++ standalone application that links with the library
   
-### Implemented Features 
+### Implemented Controll
 
 ✅ - VSCode tasks for comfort  
 ✅ - VSCode key bindings template  
@@ -35,6 +35,11 @@ With this project and its settings, you can start developing in C++ within a few
 ✅ - C/C++ Lint - **ctrl+alt+l**  
 ✅ - C/C++ format (clang) - **ctrl+alt+m**  
 ✅ - CMake format - **ctrl+alt+f**
+
+### Implemented Software Modules
+
+✅ - OpenSSL 3.4.0
+
 
 ### TODO
 
