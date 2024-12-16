@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # (c) Tomáš Mark 2024
 
 # ---- Project attributes ----
-set(PROJECT_STANDALONE_NAMESPACE name.digitalspace.www)
+set(PROJECT_STANDALONE_NAMESPACE dsdotname)
 set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./ProjectRenamer.sh
 
 project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX)
@@ -27,4 +27,4 @@ set_target_properties(
     ${PROJECT_STANDALONE_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
 )
 
-target_link_libraries(${PROJECT_STANDALONE_NAME} name.digitalspace.www::VCMLib)
+target_link_libraries(${PROJECT_STANDALONE_NAME} dsdotname::VCMLib)
