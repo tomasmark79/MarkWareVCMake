@@ -87,6 +87,7 @@
         "text_encoding": "cpp",
         "expected": "cpp",
         "err.h": "c",
-        "e_os.h": "c"
+        "e_os.h": "c",
+        "*.in": "cpp"
     }
 }
