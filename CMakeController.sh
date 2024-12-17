@@ -13,13 +13,32 @@ echo -e "${GREEN}CMakeController.sh: args: [" $taskName $archBuildType $buildTyp
 
 # Determine workspace and toolchain file
 workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-toolchainFile=""
-[[ $archBuildType == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
 
-# Helper function for cmake commands
+# Helper function for Conan install
+function conan_install() {
+    source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate
+    local buildDir=$1
+
+    echo "Run: conan install $workSpaceDir --output-folder="$buildDir" --build missing"
+    conan install $workSpaceDir --output-folder="$buildDir" --build missing || exit 1
+}
+
+# Helper function for CMake configure and build
 function cmake_configure() {
     local sourceDir=$1
     local buildDir=$2
+
+    # Tool chain selection
+    if [ -f "$buildDir/conan_toolchain.cmake" ]; then
+        # Conan
+        toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$buildDir/conan_toolchain.cmake"
+    else
+        # Default manual selection
+        toolchainFile=""
+        [[ $archBuildType == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+    fi
+
+    echo "Run: cmake -S $sourceDir -B $buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType"
     cmake -S "$sourceDir" -B "$buildDir" $toolchainFile -DCMAKE_BUILD_TYPE=$buildType || exit 1
 }
 
@@ -46,6 +65,9 @@ function get_build_dir() {
 
 # Task dispatcher
 case $taskName in
+"Conan Install (Library)")
+    conan_install "$(get_build_dir Library)"
+    ;;
 "Configure (Standalone)")
     cmake_configure "Standalone" "$(get_build_dir Standalone)"
     ;;

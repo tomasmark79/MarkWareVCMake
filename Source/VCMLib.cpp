@@ -9,6 +9,8 @@
 #include <openssl/ssl.h>
 #endif
 
+#include <curl/curl.h>
+
 // Library implementation
 
 VCMLib::VCMLib()
@@ -19,6 +21,9 @@ VCMLib::VCMLib()
 #ifdef OPENSSL_VERSION
     std::cout << "--- " << OPENSSL_VERSION_TEXT << " linked ---" << std::endl;
 #endif
+
+    std::cout << "--- " << curl_version() << " linked ---" << std::endl;
+    
 }
 
 VCMLib::~VCMLib()

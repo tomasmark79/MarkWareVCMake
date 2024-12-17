@@ -1,0 +1,8 @@
+# Conan file starting template
+
+[requires]
+libcurl/8.10.1
+
+[generators]
+CMakeDeps
+CMakeToolchain
