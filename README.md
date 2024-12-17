@@ -38,8 +38,12 @@ With this project and its settings, you can start developing in C++ within a few
 
 ### Implemented Software Modules
 
-✅ - OpenSSL 3.4.0
+✅ - OpenSSL 3.4.0 via manual CMake
 
+
+### HOT TODO
+
+🛠️ - Conan 2.0 implementation 🚀🚀🚀
 
 ### TODO
 
