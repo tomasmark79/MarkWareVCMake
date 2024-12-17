@@ -19,11 +19,9 @@ With this project and its settings, you can start developing in C++ within a few
 - A C++ library
 - A C++ standalone application that links with the library
   
-### Implemented Controll
-
-✅ - VSCode tasks for comfort  
-✅ - VSCode key bindings template  
-✅ - VSCode C/C++ debugger launcher  
+### Implemented features
+✅ - Conan2 🚀🚀🚀 for library yet
+✅ - CMake support
 ✅ - Project renamer is awesome  
 ✅ - Debug - **F5**  
 ✅ - Interactive menu selection for all CMake tasks - **F7**  
@@ -32,6 +30,9 @@ With this project and its settings, you can start developing in C++ within a few
 ✅ - Clean  
 ✅ - Install  
 ✅ - Collect licenses **generating third_party.txt**  
+✅ - VSCode tasks for comfort  
+✅ - VSCode key bindings template  
+✅ - VSCode C/C++ debugger launcher  
 ✅ - C/C++ Lint - **ctrl+alt+l**  
 ✅ - C/C++ format (clang) - **ctrl+alt+m**  
 ✅ - CMake format - **ctrl+alt+f**
