@@ -37,4 +37,3 @@ if(NOT EmojiToolsLib_ADDED)
 else()
     target_link_libraries(${PROJECT_LIBRARY_NAME} PUBLIC EmojiToolsLib)
 endif()
-
