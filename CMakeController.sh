@@ -24,17 +24,6 @@ function conan_install() {
     echo $conanCommand
     $conanCommand || exit 1
 
-    # Raw Library command template runned from $workSpaceDir
-    # conan install . --output-folder=Build/Library/Native/Debug --profile=default
-    # conan install /home/tomas/dev/cpp/projects/MarkWareVCMake --output-folder="Build/Library/Native/Debug" --build=missing --profile=default
-    # cmake -S . -B ./Build/Library/Native/Debug -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
-    # cmake --build ./Build/Library/Native/Debug
-
-    # Raw Standalone command template runned from $workSpaceDir
-    # conan install ./Standalone --output-folder=Build/Standalone/Native/Debug --profile=default
-    # conan install /home/tomas/dev/cpp/projects/MarkWareVCMake/Standalone --output-folder="Build/Standalone/Native/Debug" --build=missing --profile=default
-    # cmake -S ./Standalone -B ./Build/Standalone/Native/Debug -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
-    # cmake --build ./Build/Standalone/Native/Debug
 }
 
 # Helper function for CMake configure and build
@@ -54,7 +43,6 @@ function cmake_configure() {
     fi
 
     local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType"
-    #cmake -S ./Standalone -B ./Build/Standalone/Native/Debug -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
     echo $configureCommand
     $configureCommand || exit 1
 
@@ -65,7 +53,7 @@ function cmake_build() {
     cmake --build "$buildDir" --target all -j $(nproc)
 }
 
-function cmake_clean() {
+function clean_build() {
     local buildDir=$1
     rm -rf "$buildDir"
 }
@@ -75,128 +63,181 @@ function cmake_test() {
     ctest --output-on-failure -C $buildType -T test --build-config $buildType --test-dir "$buildDir"
 }
 
+function cmake_install() {
+    local buildDir=$1
+    cmake --build "$buildDir" --target install
+}
+
+function cmake_write_licenses() {
+    local buildDir=$1
+    cmake --build "$buildDir" --target write-licenses -j
+}
+
 # Directory structure helper
 function get_build_dir() {
     local type=$1
     echo "Build/${type}/${archBuildType}/${buildType}"
 }
 
+#
+# --- 2in1 functions ---
+#
+#  library=$1
+#  standalone=$2
+
+# Install Conan dependencies and configure CMake
 function ConanInstall() {
-    conan_install "$(get_build_dir Standalone)"
-    conan_install "$(get_build_dir Library)"
+    if [ "$1" == "true" ]; then
+        conan_install "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        conan_install "$(get_build_dir Standalone)"
+    fi
 }
 
+# Configure by CMake
 function Configure() {
-    cmake_configure "." "$(get_build_dir Library)"
-    cmake_configure "./Standalone" "$(get_build_dir Standalone)"
+    if [ "$1" == "true" ]; then
+        cmake_configure "." "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_configure "./Standalone" "$(get_build_dir Standalone)"
+    fi
 }
 
-function ReBuild() {
-    ConanInstall
-    Configure
-    cmake_build "$(get_build_dir Library)"
-    cmake_build "$(get_build_dir Standalone)"
-}
-
+# Build by CMake
 function Build() {
-    cmake_build "$(get_build_dir Library)"
-    cmake_build "$(get_build_dir Standalone)"
+    if [ "$1" == "true" ]; then
+        cmake_build "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_build "$(get_build_dir Standalone)"
+    fi
 }
 
+# Clean build directory
 function Clean() {
-    cmake_clean "$(get_build_dir Library)"
-    cmake_clean "$(get_build_dir Standalone)"
+    if [ "$1" == "true" ]; then
+        clean_build "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        clean_build "$(get_build_dir Standalone)"
+    fi
 }
 
-# Task dispatcher
+# Install by CMake
+function Install() {
+    if [ "$1" == "true" ]; then
+        cmake_install "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_install "$(get_build_dir Standalone)"
+    fi
+}
+
+# Write licenses by CMake
+function WriteLicenses() {
+    if [ "$1" == "true" ]; then
+        cmake_write_licenses "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_write_licenses "$(get_build_dir Standalone)"
+    fi
+}
+
+#
+# --- Task dispatcher ---
+#
+#  pass arguments
+#  library=$1
+#  standalone=$2
+
 case $taskName in
 
-"Conan Install All")
-    ConanInstall
-    exit 0
-    ;;
-
-"Configure All")
-    Configure
-    exit 0
-    ;;
-
-"Build All")
-    Build
-    exit 0
-    ;;
-
-"ReBuild All")
-    ReBuild
-    exit 0
-    ;;
-
-"Clean All")
-    Clean
-    exit 0
-    ;;
-
-"Conan Install (Standalone)")
-    conan_install "$(get_build_dir Standalone)"
-    ;;
+# --- Conan Install ---
 "Conan Install (Library)")
-    conan_install "$(get_build_dir Library)"
+    ConanInstall true false
+    exit 0
+    ;;
+"Conan Install (Standalone)")
+    ConanInstall false true
+    exit 0
+    ;;
+"Conan Install All")
+    ConanInstall true true
+    exit 0
     ;;
 
-"Configure (Standalone)")
-    cmake_configure "./Standalone" "$(get_build_dir Standalone)"
-    ;;
-
+# --- Configure ---
 "Configure (Library)")
-    cmake_configure "." "$(get_build_dir Library)"
+    Configure true false
+    exit 0
+    ;;
+"Configure (Standalone)")
+    Configure false true
+    exit 0
+    ;;
+"Configure All")
+    Configure true true
+    exit 0
     ;;
 
-"Build (Standalone)")
-    cmake_configure "./Standalone" "$(get_build_dir Standalone)"
-    cmake_build "$(get_build_dir Standalone)"
-    ;;
+# --- Build ---
 "Build (Library)")
-    cmake_configure "." "$(get_build_dir Library)"
-    cmake_build "$(get_build_dir Library)"
+    Build true false
+    exit 0
+    ;;
+"Build (Standalone)")
+    Build false true
+    exit 0
+    ;;
+"Build All")
+    Build true true
+    exit 0
     ;;
 
-"Clean (Standalone)")
-    cmake_clean "$(get_build_dir Standalone)"
-    ;;
+# --- Clean ---
 "Clean (Library)")
-    cmake_clean "$(get_build_dir Library)"
+    Clean true false
+    exit 0
+    ;;
+"Clean (Standalone)")
+    Clean false true
+    exit 0
     ;;
 "Clean All")
-    rm -rf Build/
+    Clean true true
+    exit 0
+    ;;
+
+# --- Install ---
+"Install (Library)")
+    Install true false
+    exit 0
     ;;
 "Install (Standalone)")
-    cmake_configure "Standalone" "$(get_build_dir Standalone)"
-    cmake_build "$(get_build_dir Standalone)"
-    cmake --build "$(get_build_dir Standalone)" --target install
+    Install false true
+    exit 0
     ;;
-"Install (Library)")
-    cmake_configure "." "$(get_build_dir Library)"
-    cmake_build "$(get_build_dir Library)"
-    cmake --build "$(get_build_dir Library)" --target install
+"Install All")
+    Install true true
+    exit 0
     ;;
-"Test (Standalone)")
-    cmake_configure ".tandalone" "$(get_build_dir Standalone)"
-    cmake_test "$(get_build_dir Standalone)"
+
+# --- Write licenses ---
+"Write Licenses (Library)")
+    WriteLicenses true false
+    exit 0
     ;;
-"Test (Library)")
-    cmake_build "$(get_build_dir Library)"
-    cmake_test "$(get_build_dir Library)"
+"Write Licenses (Standalone)")
+    WriteLicenses false true
+    exit 0
     ;;
-"Collect licenses (Standalone)")
-    cmake_configure "Standalone" "$(get_build_dir Standalone)"
-    cmake_build "$(get_build_dir Standalone)"
-    cmake --build "$(get_build_dir Standalone)" --target write-licenses -j $(nproc)
+"Write Licenses All")
+    WriteLicenses true true
+    exit 0
     ;;
-"Collect licenses (Library)")
-    cmake_configure "." "$(get_build_dir Library)"
-    cmake_build "$(get_build_dir Library)"
-    cmake --build "$(get_build_dir Library)" --target write-licenses -j $(nproc)
-    ;;
+
 *)
     echo "Unknown task: $taskName"
     exit 1

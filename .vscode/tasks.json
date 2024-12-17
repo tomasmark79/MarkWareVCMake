@@ -133,25 +133,26 @@
             "type": "pickString",
             "description": "Select CMake task",
             "options": [
-                "Build All",
-                "ReBuild All",
-                "Configure All",
-                "Conan Install All",
-                "Conan Install (Standalone)",
-                "Conan Install (Library)",
-                "Build (Standalone)",
+                
                 "Build (Library)",
-                "Configure (Standalone)",
+                "Build (Standalone)",
+                "Build All",
+                "--------------------------",
                 "Configure (Library)",
+                "Configure (Standalone)",
+                "Configure All",
+                "Conan Install (Library)",
+                "Conan Install (Standalone)",
+                "Conan Install All",
                 "Clean (Standalone)",
                 "Clean (Library)",
                 "Clean All",
                 "Install (Standalone)",
                 "Install (Library)",
-                "Test (Standalone)",
-                "Test (Library)",
-                "Collect licenses (Standalone)",
-                "Collect licenses (Library)"
+                "Write Licenses (Library)",
+                "Write Licenses (Standalone)",
+                "Write Licenses All"
+
             ],
             "default": "Build All"
         },
