@@ -1,9 +1,10 @@
 #include <VCMLib/VCMLib.hpp>
+#include <vcmlib/version.h>
+
 #include <chrono>
 #include <iostream>
 #include <memory>
 #include <thread>
-#include <vcmlib/version.h>
 
 // Standalone main entry point
 

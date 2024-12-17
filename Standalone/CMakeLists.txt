@@ -14,6 +14,11 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 include(../cmake/CPM.cmake)
 
+# ---- Conan dependencies ----
+# Replace 'CURL' and 'OpenSSL' with actual dependencies specified in your conanfile
+find_package(CURL REQUIRED)
+find_package(OpenSSL REQUIRED)
+
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Create standalone executable ----
@@ -27,4 +32,6 @@ set_target_properties(
     ${PROJECT_STANDALONE_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
 )
 
-target_link_libraries(${PROJECT_STANDALONE_NAME} dsdotname::VCMLib)
+target_link_libraries(
+    ${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib CURL::libcurl OpenSSL::SSL OpenSSL::Crypto
+)
