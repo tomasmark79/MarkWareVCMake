@@ -133,12 +133,16 @@
             "type": "pickString",
             "description": "Select CMake task",
             "options": [
+                "Build All",
+                "ReBuild All",
+                "Configure All",
+                "Conan Install All",
+                "Conan Install (Standalone)",
+                "Conan Install (Library)",
                 "Build (Standalone)",
                 "Build (Library)",
                 "Configure (Standalone)",
                 "Configure (Library)",
-                "Conan Install (Standalone)",
-                "Conan Install (Library)",
                 "Clean (Standalone)",
                 "Clean (Library)",
                 "Clean All",
@@ -149,7 +153,7 @@
                 "Collect licenses (Standalone)",
                 "Collect licenses (Library)"
             ],
-            "default": "Build (Standalone)"
+            "default": "Build All"
         },
         {
             "id": "archBuildType",
