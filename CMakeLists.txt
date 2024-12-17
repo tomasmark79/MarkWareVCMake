@@ -8,7 +8,7 @@ set(PROJECT_LIBRARY_NAME VCMLib)
 
 # ---- Global Options ----
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-option(ENABLE_OPENSSL "Enable OpenSSL support" ON)
+option(ENABLE_OPENSSL "Enable OpenSSL support" OFF) # replaced by Conan2
 
 # ---- Project ----
 project(
@@ -68,6 +68,10 @@ target_compile_options(
 # ---- Init dependencies ----
 include(cmake/CPM.cmake)
 include(cmake/Dependencies.cmake)
+
+# ---- Conan dependencies ----
+find_package(CURL REQUIRED)
+target_link_libraries(${PROJECT_LIBRARY_NAME} PUBLIC CURL::libcurl)
 
 # ---- CMake Modules ----
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
