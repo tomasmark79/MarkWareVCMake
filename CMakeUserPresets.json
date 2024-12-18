@@ -5,12 +5,12 @@
     },
     "include": [
         "Build/Library/Native/Release/CMakePresets.json",
-        "Build/Standalone/Native/Release/CMakePresets.json",
         "Build/Library/Native/Debug/CMakePresets.json",
-        "Build/Standalone/Native/Debug/CMakePresets.json",
         "Build/Library/Native/MinSizeRel/CMakePresets.json",
         "Build/Standalone/Native/MinSizeRel/CMakePresets.json",
         "Build/Library/Native/RelWithDebInfo/CMakePresets.json",
-        "Build/Standalone/Native/RelWithDebInfo/CMakePresets.json"
+        "Build/Standalone/Native/RelWithDebInfo/CMakePresets.json",
+        "Build/Standalone/Native/Release/CMakePresets.json",
+        "Build/Standalone/Native/Debug/CMakePresets.json"
     ]
 }
