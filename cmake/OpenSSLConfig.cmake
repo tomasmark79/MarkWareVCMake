@@ -1,3 +1,5 @@
+# deprecated - we are using Conan from now on
+# It is only an example, you can modify it according to your needs
 # ---- Add OpenSSL ----
 if(ENABLE_OPENSSL)
     CPMAddPackage(
