@@ -15,7 +15,7 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 
 # ---- Conan dependencies ----
-# Replace 'CURL' and 'OpenSSL' with actual dependencies specified in your conanfile
+# Replace 'CURL' and 'OpenSSL' with actual dependencies specified in your conanfile.txt
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
