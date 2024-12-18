@@ -14,6 +14,7 @@ auto main(int argc, char *argv[], char *env[]) -> int
     std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>();
 
     // five seconds delay
+    std::cout << "Wait for 5 seconds please ..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(5));
 
     // bye bye
