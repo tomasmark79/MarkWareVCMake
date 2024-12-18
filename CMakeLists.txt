@@ -6,9 +6,8 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 set(PROJECT_LIBRARY_NAMESPACE dsdotname)
 set(PROJECT_LIBRARY_NAME VCMLib)
 
-# ---- Global Options ----
+# ---- Generate Static/Shared targets (taken by Conan too) ----
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-option(ENABLE_OPENSSL "Enable OpenSSL support" OFF) # replaced by Conan2
 
 # ---- Project ----
 project(
@@ -70,8 +69,8 @@ include(cmake/CPM.cmake)
 include(cmake/Dependencies.cmake)
 
 # ---- Conan dependencies ----
-find_package(CURL REQUIRED)
 find_package(BZip2 REQUIRED)
+find_package(CURL REQUIRED)
 target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE CURL::libcurl BZip2::BZip2)
 
 # ---- CMake Modules ----
@@ -79,16 +78,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules"
 
 find_package(Threads REQUIRED)
 find_package(X11 REQUIRED)
-
-# ---- OpenSSL Configuration ----
-if(ENABLE_OPENSSL)
-    message(STATUS "OpenSSL support is enabled")
-    include(cmake/OpenSSLConfig.cmake)
-    add_dependencies(${PROJECT_LIBRARY_NAME} build-openssl)
-    target_compile_definitions(
-        ${PROJECT_LIBRARY_NAME} PUBLIC ENABLE_OPENSSL
-    ) # C++ preprocesor # Define ENABLE_OPENSSL
-endif()
 
 # ---- Package ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}/version.h" VERSION_HEADER_LOCATION)
