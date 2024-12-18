@@ -2,6 +2,7 @@
 
 [requires]
 libcurl/8.10.1
+bzip2/1.0.8
 
 [generators]
 CMakeDeps
