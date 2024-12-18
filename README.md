@@ -21,24 +21,26 @@ With this project and its settings, you can start developing in C++ within a few
   
 ### Implemented features 
 
-✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management
-✅ - Modern CMake project architecture for OOP configuration
-✅ - Cross compile supported via manually or via Conan 2
-✅ - Template renamer 💣 
+✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management  
+✅ - Modern CMake project architecture for OOP configuration  
+✅ - Cross compile supported via manually or via Conan 2  
+✅ - Template renamer 💣  
 ✅ - VS Code native C++ Debugger 🪲 via Launch.json **F5**  
-✅ - Interactive menu selection for tasks **F7**
-✅ - Conan Install
-✅ - CMake Build
-✅ - CMake Configure
+✅ - Interactive menu selection for tasks **F7**  
+✅ - Conan Install  
+✅ - CMake Build  
+✅ - CMake Configure  
 ✅ - CMake Install  
-✅ - Clean (simple removing folders)
+✅ - Clean (simple removing folders)  
 ✅ - Write Licenses **generating third_party.txt by CPM.licenses**  
 ✅ - VSCode tasks for comfort  
 ✅ - VSCode key bindings template  
 ✅ - VSCode C/C++ debugger launcher  
 ✅ - C/C++ Lint - **ctrl+alt+l**  
 ✅ - C/C++ formatting (clang-format) - **ctrl+alt+m**  
-✅ - CMake formatting (cmake-format) - **ctrl+alt+f**
+✅ - CMake formatting (cmake-format) - **ctrl+alt+f**  
+
+<img width="448" alt="image" src="https://github.com/user-attachments/assets/d1758340-6fd6-4fc4-9309-60c9590e10ae" />
 
 ### TODO in order
 
