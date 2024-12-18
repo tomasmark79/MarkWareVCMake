@@ -71,7 +71,8 @@ include(cmake/Dependencies.cmake)
 
 # ---- Conan dependencies ----
 find_package(CURL REQUIRED)
-target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE CURL::libcurl)
+find_package(BZip2 REQUIRED)
+target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE CURL::libcurl BZip2::BZip2)
 
 # ---- CMake Modules ----
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")

@@ -10,6 +10,7 @@
 #endif
 
 #include <curl/curl.h>
+#include "bzlib.h"
 
 // Library implementation
 
@@ -23,6 +24,7 @@ VCMLib::VCMLib()
 #endif
 
     std::cout << "--- " << curl_version() << " linked ---" << std::endl;
+    std::cout << "--- " << BZ2_bzlibVersion() << " linked ---" << std::endl;
     
 }
 
