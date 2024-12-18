@@ -22,8 +22,14 @@ echo -e "${GREEN}workSpaceDir: $workSpaceDir${NC}"
 function conan_install() {
     local buildDir=$1
 
+    # Generate Static/Shared targets at complex level
+    # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
+    # default is "-o *:shared=False"
+    local buildSharedLibs=$(grep -oP 'BUILD_SHARED_LIBS\s+\KON' CMakeLists.txt)
+    [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
+
     # compose Conan command
-    local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType"
+    local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType $buildSharedLibs" 
     echo $conanCommand
 
     # Activate Python environment
