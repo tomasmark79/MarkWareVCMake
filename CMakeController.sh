@@ -94,27 +94,6 @@ function get_build_dir() {
     echo "Build/${type}/${buildArch}/${buildType}"
 }
 
-# Install Conan dependencies and configure CMake
-function ConanInstall() {
-    if [ "$1" == "true" ]; then
-        conan_install "$(get_build_dir Library)"
-    fi
-    if [ "$2" == "true" ]; then
-        conan_install "$(get_build_dir Standalone)"
-    fi
-}
-
-# Configure by CMake
-function Configure() {
-    if [ "$1" == "true" ]; then
-        cmake_configure "." "$(get_build_dir Library)"
-    fi
-    if [ "$2" == "true" ]; then
-        cmake_configure "./Standalone" "$(get_build_dir Standalone)"
-    fi
-}
-
-# Build by CMake
 function Build() {
     if [ "$1" == "true" ]; then
         cmake_build "$(get_build_dir Library)"
@@ -124,7 +103,24 @@ function Build() {
     fi
 }
 
-# Clean build directory
+function Configure() {
+    if [ "$1" == "true" ]; then
+        cmake_configure "." "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_configure "./Standalone" "$(get_build_dir Standalone)"
+    fi
+}
+
+function ConanInstall() {
+    if [ "$1" == "true" ]; then
+        conan_install "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        conan_install "$(get_build_dir Standalone)"
+    fi
+}
+
 function Clean() {
     if [ "$1" == "true" ]; then
         clean_build "$(get_build_dir Library)"
@@ -134,7 +130,6 @@ function Clean() {
     fi
 }
 
-# Install by CMake
 function Install() {
     if [ "$1" == "true" ]; then
         cmake_install "$(get_build_dir Library)"
@@ -144,7 +139,6 @@ function Install() {
     fi
 }
 
-# Write licenses by CMake
 function WriteLicenses() {
     if [ "$1" == "true" ]; then
         cmake_write_licenses "$(get_build_dir Library)"
@@ -154,95 +148,95 @@ function WriteLicenses() {
     fi
 }
 
-# ---------------------------------------------------------------------------------
+# ---------------------------
 #   Task controller
-# ---------------------------------------------------------------------------------
+# ---------------------------
 #   library=$1      bool
 #   standalone=$2   bool
-# ---------------------------------------------------------------------------------
+# ---------------------------
 
 case $taskName in
 
-# --- Conan Install ---
-"Conan Install (Library)")
-    ConanInstall true false
-    exit 0
-    ;;
-"Conan Install (Standalone)")
-    ConanInstall false true
-    exit 0
-    ;;
-"Conan Install All")
-    ConanInstall true true
-    exit 0
-    ;;
-
-# --- Configure ---
-"Configure (Library)")
-    Configure true false
-    exit 0
-    ;;
-"Configure (Standalone)")
-    Configure false true
-    exit 0
-    ;;
-"Configure All")
-    Configure true true
-    exit 0
-    ;;
-
 # --- Build ---
-"Build (Library)")
+"🔨 Build Library")
     Build true false
     exit 0
     ;;
-"Build (Standalone)")
+"🔨 Build Standalone")
     Build false true
     exit 0
     ;;
-"Build All")
+"🔨 Build All")
     Build true true
     exit 0
     ;;
 
+# --- Configure ---
+"⚙️ Configure Library")
+    Configure true false
+    exit 0
+    ;;
+"⚙️ Configure Standalone")
+    Configure false true
+    exit 0
+    ;;
+"⚙️ Configure All")
+    Configure true true
+    exit 0
+    ;;
+
+# --- Conan Install ---
+"⚔️ Conan Install Library")
+    ConanInstall true false
+    exit 0
+    ;;
+"⚔️ Conan Install Standalone)")
+    ConanInstall false true
+    exit 0
+    ;;
+"⚔️ Conan Install All")
+    ConanInstall true true
+    exit 0
+    ;;
+
 # --- Clean ---
-"Clean (Library)")
+"🧹 Clean Library")
     Clean true false
     exit 0
     ;;
-"Clean (Standalone)")
+"🧹 Clean Standalone")
     Clean false true
     exit 0
     ;;
-"Clean All")
+"🧹 Clean All")
     Clean true true
     exit 0
     ;;
 
 # --- Install ---
-"Install (Library)")
+"📌 Install Standalone")
     Install true false
     exit 0
     ;;
-"Install (Standalone)")
+"📌 Install Library")
     Install false true
     exit 0
     ;;
-"Install All")
+"📌 Install All")
     Install true true
     exit 0
     ;;
 
 # --- Write licenses ---
-"Write Licenses (Library)")
+"📜 Write Licenses Library")
     WriteLicenses true false
     exit 0
     ;;
-"Write Licenses (Standalone)")
+"📜 Write Licenses Standalone")
     WriteLicenses false true
     exit 0
     ;;
-"Write Licenses All")
+"📜 Write Licenses All")
     WriteLicenses true true
     exit 0
     ;;

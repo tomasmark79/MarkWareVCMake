@@ -19,37 +19,32 @@ With this project and its settings, you can start developing in C++ within a few
 - A C++ library
 - A C++ standalone application that links with the library
   
-### Implemented features
-✅ - Conan2 🚀🚀🚀 for library yet
-✅ - CMake support
-✅ - Project renamer is awesome  
-✅ - Debug - **F5**  
-✅ - Interactive menu selection for all CMake tasks - **F7**  
-✅ - Configure  
-✅ - Cross Compile  
-✅ - Clean  
-✅ - Install  
-✅ - Collect licenses **generating third_party.txt**  
+### Implemented features 
+
+✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management
+✅ - Modern CMake project architecture for OOP configuration
+✅ - Cross compile supported via manually or via Conan 2
+✅ - Template renamer 💣 
+✅ - VS Code native C++ Debugger 🪲 via Launch.json **F5**  
+✅ - Interactive menu selection for tasks **F7**
+✅ - Conan Install
+✅ - CMake Build
+✅ - CMake Configure
+✅ - CMake Install  
+✅ - Clean (simple removing folders)
+✅ - Write Licenses **generating third_party.txt by CPM.licenses**  
 ✅ - VSCode tasks for comfort  
 ✅ - VSCode key bindings template  
 ✅ - VSCode C/C++ debugger launcher  
 ✅ - C/C++ Lint - **ctrl+alt+l**  
-✅ - C/C++ format (clang) - **ctrl+alt+m**  
-✅ - CMake format - **ctrl+alt+f**
+✅ - C/C++ formatting (clang-format) - **ctrl+alt+m**  
+✅ - CMake formatting (cmake-format) - **ctrl+alt+f**
 
-### Implemented Software Modules
+### TODO in order
 
-✅ - OpenSSL 3.4.0 via manual CMake
-
-
-### HOT TODO
-
-🛠️ - Conan 2.0 implementation 🚀🚀🚀
-
-### TODO
-
-- port to Windows, Mac
-- some tests, sanitizing, ...
+- port to Windows
+- port to Mac
+- some tests, sanitizing, etc.
 
 ---
 
@@ -94,7 +89,9 @@ That's all.
 
 #### `.vscode/c_cpp_properties.json`
 
-CPM is able to use cache. The path to the cache folder is stored here.
+- CPM is able to use the cache. The path to the cache folder is stored here.
+- Conan2 contains header files inside its packages, and the path is stored here.
+
 
 #### `.vscode/tasks.json` and `CMakeConfigure.sh`
 
