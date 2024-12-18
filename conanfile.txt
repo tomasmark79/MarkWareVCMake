@@ -7,3 +7,6 @@ bzip2/1.0.8
 [generators]
 CMakeDeps
 CMakeToolchain
+
+[options]
+bzip2/*:shared=True
