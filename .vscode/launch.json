@@ -7,6 +7,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Build/Standalone/Native/Debug/VCMStandalone", /* 🪲 */
+            /* "program": "${workspaceFolder}/Build/Standalone/Native/RelWithDebInfo/VCMStandalone", */ /* 🪲 */
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

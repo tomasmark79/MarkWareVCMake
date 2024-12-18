@@ -3,6 +3,6 @@
 
 /CMakeFiles*
 /CMakeCache.txt
-*/cpm_modules
 
+*/cpm_modules
 */.DS_Store
