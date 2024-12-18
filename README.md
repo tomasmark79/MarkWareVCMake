@@ -21,7 +21,7 @@ With this project and its settings, you can start developing in C++ within a few
   
 ### Implemented features 
 
-✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management
+✅ - Conan ⚔️ 2.10.2 🚀🚀🚀 for advanced package management
 ✅ - Individual or complex Static/Shared linking
 ✅ - Modern CMake project architecture for OOP configuration  
 ✅ - Cross compile supported via manually or via Conan 2  
@@ -45,8 +45,8 @@ With this project and its settings, you can start developing in C++ within a few
 
 ### TODO in order
 
+- 🚧 prediction and workflow processing if Build and no Config is existing, etc. 🚧
 - extract raw commands for complex only CLI configuration and share them with public
-- prediction and workflow processing if Build and no Config is existing, etc.
 - port to Windows
 - port to Mac
 - some tests, sanitizing, etc.
