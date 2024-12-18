@@ -16,7 +16,7 @@
             "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
                 "${input:taskName}",
-                "${input:archBuildType}",
+                "${input:buildArch}",
                 "${input:buildType}"
             ],
             "group": {
@@ -133,22 +133,25 @@
             "type": "pickString",
             "description": "Select CMake task",
             "options": [
-                
                 "Build (Library)",
                 "Build (Standalone)",
                 "Build All",
-                "--------------------------",
+                /* separator*/
                 "Configure (Library)",
                 "Configure (Standalone)",
                 "Configure All",
+                /* separator*/
                 "Conan Install (Library)",
                 "Conan Install (Standalone)",
                 "Conan Install All",
+                /* separator*/
                 "Clean (Standalone)",
                 "Clean (Library)",
                 "Clean All",
+                /* separator*/
                 "Install (Standalone)",
                 "Install (Library)",
+                /* separator*/
                 "Write Licenses (Library)",
                 "Write Licenses (Standalone)",
                 "Write Licenses All"
@@ -157,7 +160,7 @@
             "default": "Build All"
         },
         {
-            "id": "archBuildType",
+            "id": "buildArch",
             "type": "pickString",
             "description": "Select architecture",
             "options": [
