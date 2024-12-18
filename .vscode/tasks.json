@@ -157,7 +157,7 @@
                 "📜 Write Licenses Standalone",
                 "📜 Write Licenses All"
             ],
-            "default": "Build All"
+            "default": "🔨 Build All"
         },
         {
             "id": "buildArch",
