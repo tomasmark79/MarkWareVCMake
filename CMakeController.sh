@@ -190,7 +190,7 @@ case $taskName in
     ConanInstall true false
     exit 0
     ;;
-"⚔️ Conan Install Standalone)")
+"⚔️ Conan Install Standalone")
     ConanInstall false true
     exit 0
     ;;
