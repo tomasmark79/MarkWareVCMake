@@ -44,6 +44,7 @@ With this project and its settings, you can start developing in C++ within a few
 
 ### TODO in order
 
+- extract raw commands for complex only CLI configuration and share them with public
 - prediction and workflow processing if Build and no Config is existing, etc.
 - port to Windows
 - port to Mac
