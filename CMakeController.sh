@@ -1,49 +1,57 @@
 #!/bin/bash
-
 # This script is a controller for CMake tasks
 # (c) Tomáš Mark 2024
 
+GREEN='\033[0;32m' NC='\033[0m' YELLOW='\033[1;33m'
 workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Arguments and defaults
 taskName=$1
-archBuildType=$2
+buildArch=$2
 buildType=${3:-"Release"} # Default to "Release" if not specified
 
-GREEN='\033[0;32m' NC='\033[0m' YELLOW='\033[1;33m'
-echo -e "${GREEN}CMakeController.sh: args: [" $taskName $archBuildType $buildType "]${NC}"
+echo -e "${GREEN}CMakeController.sh: args:"
+echo -e "${GREEN}taskName : $taskName"
+echo -e "${GREEN}buildArch: $buildArch"
+echo -e "${GREEN}buildType: $buildType"
+echo -e "${GREEN}workSpaceDir: $workSpaceDir${NC}"
 
-# Helper function for Conan install
+# ---------------------------------------------------------------------------------
+
+# Install Conan dependencies
 function conan_install() {
-
-    # Activate Python environment where Conan is installed
-    source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate
-
     local buildDir=$1
-    local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default"
-    echo $conanCommand
-    $conanCommand || exit 1
 
+    # compose Conan command
+    local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType"
+    echo $conanCommand
+
+    # Activate Python environment
+    source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate # user should change this to their own Python environment
+
+    # Run Conan in env
+    $conanCommand || exit 1
 }
 
-# Helper function for CMake configure and build
+# Confirure by CMake
 function cmake_configure() {
     local sourceDir=$1
     local buildDir=$2
 
-    # If conan_toolchain.cmake exists, use it, otherwise use own CMake default toolchain
+    # Check for Conan toolchain - is supposed to be in the build directory always
     if [ -f "$buildDir/conan_toolchain.cmake" ]; then
-        # Conan
         toolchainFile="-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
     else
-        # Default manual selection
-        echo -e "${YELLOW}No conan_toolchain.cmake found, using manual selection${NC}"
-        toolchainFile=""
-        [[ $archBuildType == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+        # Kept for manual selection via existing CMake toolchain aarh64.cmake within the workspace
+        toolchainFile="" # default
+        [[ $buildArch == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
     fi
 
+    # Compose CMake configure command
     local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType"
     echo $configureCommand
+
+    # Run CMake configure
     $configureCommand || exit 1
 
 }
@@ -73,17 +81,18 @@ function cmake_write_licenses() {
     cmake --build "$buildDir" --target write-licenses -j
 }
 
+# ---------------------------------------------------------------------------------
+#   Folder splitter
+# ---------------------------------------------------------------------------------
+#   library=$1      bool
+#   standalone=$2   bool
+# ---------------------------------------------------------------------------------
+
 # Directory structure helper
 function get_build_dir() {
     local type=$1
-    echo "Build/${type}/${archBuildType}/${buildType}"
+    echo "Build/${type}/${buildArch}/${buildType}"
 }
-
-#
-# --- 2in1 functions ---
-#
-#  library=$1
-#  standalone=$2
 
 # Install Conan dependencies and configure CMake
 function ConanInstall() {
@@ -145,12 +154,12 @@ function WriteLicenses() {
     fi
 }
 
-#
-# --- Task dispatcher ---
-#
-#  pass arguments
-#  library=$1
-#  standalone=$2
+# ---------------------------------------------------------------------------------
+#   Task controller
+# ---------------------------------------------------------------------------------
+#   library=$1      bool
+#   standalone=$2   bool
+# ---------------------------------------------------------------------------------
 
 case $taskName in
 
