@@ -21,7 +21,8 @@ With this project and its settings, you can start developing in C++ within a few
   
 ### Implemented features 
 
-✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management  
+✅ - Conan 2.10.2 🚀🚀🚀 for advanced package management
+✅ - Individual or complex Static/Shared linking
 ✅ - Modern CMake project architecture for OOP configuration  
 ✅ - Cross compile supported via manually or via Conan 2  
 ✅ - Template renamer 💣  
