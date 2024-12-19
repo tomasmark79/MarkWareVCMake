@@ -11,6 +11,12 @@
         "Build/Library/Native/RelWithDebInfo/CMakePresets.json",
         "Build/Standalone/Native/RelWithDebInfo/CMakePresets.json",
         "Build/Standalone/Native/Release/CMakePresets.json",
-        "Build/Standalone/Native/Debug/CMakePresets.json"
+        "Build/Standalone/Native/Debug/CMakePresets.json",
+        "Build/Library/Aarch64/Debug/CMakePresets.json",
+        "Build/Standalone/Aarch64/Debug/CMakePresets.json",
+        "Build/Library/Aarch64/Release/CMakePresets.json",
+        "Build/Standalone/Aarch64/Release/CMakePresets.json",
+        "Build/Library/Aarch64/RelWithDebInfo/CMakePresets.json",
+        "Build/Standalone/Aarch64/RelWithDebInfo/CMakePresets.json"
     ]
 }

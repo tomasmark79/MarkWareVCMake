@@ -22,27 +22,58 @@ echo -e "${GREEN}workSpaceDir: $workSpaceDir${NC}"
 function conan_install() {
     local buildDir=$1
 
-    # Generate Static/Shared targets at complex level
-    # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
-    # default is "-o *:shared=False"
-    local buildSharedLibs=$(grep -oP 'BUILD_SHARED_LIBS\s+\KON' CMakeLists.txt)
-    [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
+    # Native
+    if [ "$buildArch" == "Native" ]; then
+        # Generate Static/Shared targets at simple level
+        # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
+        # default is "-o *:shared=False"
+        local buildSharedLibs=$(grep -oP 'BUILD_SHARED_LIBS\s+\KON' CMakeLists.txt)
+        [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
 
-    # compose Conan command
-    local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType $buildSharedLibs" 
-    echo $conanCommand
+        # compose Conan command
+        local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType $buildSharedLibs"
+        echo $conanCommand
 
-    # Activate Python environment
-    source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate # user should change this to their own Python environment
+        # Activate Python environment
+        source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate # user should change this to their own Python environment
 
-    # Run Conan in env
-    $conanCommand || exit 1
+        # Run Conan in env
+        $conanCommand || exit 1
+        return
+    fi
+
+    # Cross-compilation
+    if [ "$buildArch" == "Aarch64" ]; then
+        # Generate Static/Shared targets at simple level
+        # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
+        # default is "-o *:shared=False"
+        local buildSharedLibs=$(grep -oP 'BUILD_SHARED_LIBS\s+\KON' CMakeLists.txt)
+        [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
+
+        # compose Conan command
+        local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=aarch64 --settings=build_type=$buildType $buildSharedLibs"
+        echo $conanCommand
+
+        # Activate Python environment
+        source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate # user should change this to their own Python environment
+
+        # Run Conan in env
+        $conanCommand || exit 1
+
+        return
+    fi
 }
 
-# Confirure by CMake
+# Configure by CMake
 function cmake_configure() {
     local sourceDir=$1
     local buildDir=$2
+
+    # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for Aarch64
+    if [ "$buildArch" == "Aarch64" ]; then
+        echo "source $workSpaceDir/$buildDir/conanbuild.sh"
+        source $workSpaceDir/$buildDir/conanbuild.sh
+    fi
 
     # Check for Conan toolchain - is supposed to be in the build directory always
     if [ -f "$buildDir/conan_toolchain.cmake" ]; then
