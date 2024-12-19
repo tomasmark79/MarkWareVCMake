@@ -76,19 +76,20 @@ Is a modular and intelligently designed project structure that gives me enormous
 
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y build-essential curl wget git ninja-build python3 python3-pip
+sudo apt install -y build-essential cmake curl wget git ninja-build python3 python3-pip gcc g++ clang clang-format autoconf bison flex gperf texinfo help2man gawk libtool-bin
 
+# VSCode
 wget -qO- https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64 -O vscode.deb
 sudo apt install ./vscode.deb
 rm vscode.deb
 
-sudo apt install -y cmake 
-sudo apt install -y python3 python3-pip
+# Conan
 pip3 install conan
-sudo apt install -y gcc g++ clang
+
+# CMake formatting script
 pip3 install cmake-format
-sudo apt install -y clang-format
-sudo apt install -y autoconf bison flex gperf texinfo help2man gawk libtool-bin
+
+# Crosstool-NG
 git clone https://github.com/crosstool-ng/crosstool-ng.git
 cd crosstool-ng
 ./bootstrap
@@ -106,7 +107,8 @@ gcc --version
 clang-format --version
 cmake-format --version
 ```
-### clone the repository of MarkWare VCMake Template
+
+### Finally, clone the MarkWare VCMake Template 💣
 
 ```bash
 # clone 
