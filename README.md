@@ -236,7 +236,7 @@ The entire Standalone folder is a separate project. It is an application. An app
 
 `└── TemplateRenamer.sh`
 
-This shell script is a very powerful renamer of the entire project. After cloning the repository into your folder, you can use this script to create your own name for both the library and the application. Usage is simple.
+This shell script is a very powerful renamer of the entire project. After cloning the repository into your folder, you can use this script to create your own name for both the library and the application. The names must not be same.
 
 ```bash
 Usage: ./TemplateRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>
