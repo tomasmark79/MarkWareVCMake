@@ -194,19 +194,25 @@ function WriteLicenses() {
 
 case $taskName in
 
+# --- Rebuild ---
+"🧹⚔️⚙️🔨Rebuild All")
+    Clean true true
+    ConanInstall true true
+    Configure true true
+    Build true true
+    exit 0
+    ;;
+
 # --- Build ---
 "🔨 Build Library")
-    Configure true false    # autoconfigure when building, you cam comment out this line if you want to configure manually separately
     Build true false
     exit 0
     ;;
 "🔨 Build Standalone")
-    Configure false true    # autoconfigure when building, you cam comment out this line if you want to configure manually separately
     Build false true
     exit 0
     ;;
 "🔨 Build All")
-    Configure true true     # autoconfigure when building, you cam comment out this line if you want to configure manually separately
     Build true true
     exit 0
     ;;
