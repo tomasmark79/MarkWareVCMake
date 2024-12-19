@@ -86,7 +86,7 @@ code .
 │   ├── CMakeLists.txt
 │   ├── LICENSE
 │   └── Source
-���       └── Main.cpp
+│       └── Main.cpp
 └── TemplateRenamer.sh
 ```
 
