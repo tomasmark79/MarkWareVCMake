@@ -65,10 +65,10 @@ Is a modular and intelligently designed project structure that gives me enormous
  - CMake - https://cmake.org/download/
  - Python3 - https://www.python.org/downloads/
  - Conan2 - https://docs.conan.io/2/installation.html
- - Compilers - https://gcc.gnu.org, https://clang.llvm.org, etc. 
+ - Compilers - https://gcc.gnu.org, https://clang.llvm.org, ...
  - cmake-formatter - https://cmake-format.readthedocs.io/en/latest/
  - clang-formatter - https://clang.llvm.org/docs/ClangFormat.html
- - cross-compiler toolchain and a sysroot - https://crosstool-ng.github.io.
+ - cross-compiler toolchain and a sysroot - https://crosstool-ng.github.io
 
 ### Quick Start for Debian-based Linux
 
