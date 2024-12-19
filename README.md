@@ -1,7 +1,7 @@
 # MarkWare VCMake Template 🎁
 v0.0.4
 
-## Brief Description 😊
+### Brief Description 😊
 
 This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more into a single functional unit. It allows you to create a **Standalone Application** and a **library** *immediately*. 🎉
 
@@ -60,7 +60,62 @@ Is a modular and intelligently designed project structure that gives me enormous
 
 ### Project Requirements 🛠️
 
-Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-formatter. To create a cross-compilation toolchain and a sysroot, you may use crosstool-ng from https://crosstool-ng.github.io.
+ - Linux OS - Any - I'm Dev on Kubuntu 24.04.1
+ - VSCode - https://code.visualstudio.com
+ - CMake - https://cmake.org/download/
+ - Python3 - https://www.python.org/downloads/
+ - Conan2 - https://docs.conan.io/2/installation.html
+ - Compilers - https://gcc.gnu.org
+ - cmake-formatter - https://cmake-format.readthedocs.io/en/latest/
+ - clang-formatter - https://clang.llvm.org/docs/ClangFormat.html
+ - cross-compiler toolchain and a sysroot - https://crosstool-ng.github.io.
+
+### Quick Start for Debian-based Linux
+
+#### Make changes to your Linux OS environment only if you know what you are doing!
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential curl wget git ninja-build python3 python3-pip
+
+wget -qO- https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64 -O vscode.deb
+sudo apt install ./vscode.deb
+rm vscode.deb
+
+sudo apt install -y cmake 
+sudo apt install -y python3 python3-pip
+pip3 install conan
+sudo apt install -y gcc g++ clang
+pip3 install cmake-format
+sudo apt install -y clang-format
+sudo apt install -y autoconf bison flex gperf texinfo help2man gawk libtool-bin
+git clone https://github.com/crosstool-ng/crosstool-ng.git
+cd crosstool-ng
+./bootstrap
+./configure --prefix=/usr/local
+make
+sudo make install
+cd ..
+
+# Validate installations
+echo "Validate of installations:"
+cmake --version
+python3 --version
+conan --version
+gcc --version
+clang-format --version
+cmake-format --version
+```
+### clone the repository of MarkWare VCMake Template
+
+```bash
+# clone 
+git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
+cd MarkWareVCMake/
+
+# Start VSCode
+code .
+```
 
 ### TODO by Priority ✅
 
@@ -74,18 +129,6 @@ Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-form
 ### Project Documentation
 
 I thought about how best to guide a newcomer to try this project. The simplest way is to explain everything at the level of individual parts of the project.
-
-### Download
-
-First, clone the entire repository to the location where you want to store the project. Typically, you will do something like the following, where you install the basic software for development under Linux and launch VSCode directly from the repository location. To install VSCode, I recommend visiting the editor's official website: <https://code.visualstudio.com>.
-
-```bash
-sudo apt-get update && sudo apt-get install build-essential cmake -y
-
-git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
-cd MarkWareVCMake/
-code .
-```
 
 ### Project Structure
 
