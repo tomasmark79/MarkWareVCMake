@@ -3,9 +3,7 @@ v0.0.4
 
 ## Brief Description
 
-- This solution represents a **complete development environment** for **modern** C/C++ software development.
-- It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more.
-- The solution allows you to create a **Standalone Application** and a **library** immediately after cloning from the repository.
+This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. Allows you to create a **Standalone Application** and a **library** *immediately*.
 
 ### Integrated Technologies
 
@@ -41,7 +39,7 @@ cd MarkWareVCMake/
 code .
 ```
 
-#### Project Structure
+### Project Structure
 
 ```txt
 .
