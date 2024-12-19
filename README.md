@@ -30,7 +30,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Install 📌",           - CMake: --build --target install
     "Licenses 📜",          - CMake: --build --target write-licenses
 
-                            [ the same as above but splited for ony St. or Lib.]
+                            [ the same as above but splited for only St. or Lib.]
     "Build Standalone",     
     "Rebuild Standalone",
     "Configure Standalone",
