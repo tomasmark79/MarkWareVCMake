@@ -133,9 +133,10 @@
             "type": "pickString",
             "description": "Select CMake task",
             "options": [
+                "🔨 Build All",
+                "🧹⚔️⚙️🔨Rebuild All", /* steps: Clean, Conan, Configure, Build in one step*/
                 "🔨 Build Library",
                 "🔨 Build Standalone",
-                "🔨 Build All",
                 /* separator*/
                 "⚙️ Configure Library",
                 "⚙️ Configure Standalone",
