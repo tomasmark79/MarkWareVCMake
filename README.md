@@ -1,32 +1,40 @@
 # MarkWare VCMake Template 🎁
 v0.0.4
 
-## Brief Description
+## Brief Description 😊
 
-This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. Allows you to create a **Standalone Application** and a **library** *immediately*.
+This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. Allows you to create a **Standalone Application** and a **library** *immediately*. 🎉
 
-### Integrated Configurations
+### Integrated Configurations 🔧
 
 - **VSCode** is an indispensable editor, ranking first due to its flexibility and configurability.
 - **Tasks** are jobs that build a robust system using **Conan** and **CMake**.
 - **CMake**, as a modern configurator with object-oriented elements, provides enormous flexibility.
 - **CPM.cmake** adds simplified support for fetching packages from GitHub, ensuring an easier way to obtain such packages.
-- **Conan 2**, which manages dependencies, is the cherry on top, allowing you to easily add libraries that your project may need.
+- **Conan 2**, which manages dependencies, is the cherry on top 🍒, allowing you to easily add libraries that your project may need.
 - **ModernCppStarter** is a project structure proven over many years and projects for developing programs and libraries. The essence of this structure is also embedded in this project.
 - **Formatters** are simple scripts that quickly reformat C/C++ and CMake files.
 
-### My Goal
+### My Goal 🎯
 
 To create a project template for myself that is flexible, works out of the box, and saves me a lot of time.
 
-### The Result of My Efforts
+### The Result of My Efforts 🚀
 
-Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is.
+Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is. 😄
 
-### Project Requirements
+### Project Requirements 🛠️
 
 Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-formatter. To create a cross-compilation toolchain and a sysroot, you may use crosstool-ng from https://crosstool-ng.github.io.
 
+### TODO by Priority ✅
+
+- 🚧 Workflow processing if Build and no Config is existing, etc. 🚧
+- Extract the commands currently generated to allow working only in CLI if needed
+- Port to Windows (it will likely be necessary to convert the shell script to PowerShell)
+- Port to Mac (I am currently completely lost here and looking for a contributor to help me with this) 🍎
+- Later, when I find that I need it, we will add testing options
+- There are other possibilities like sanitizers implemented by CMake, but that will come later
 
 ### Project Documentation
 
@@ -78,7 +86,7 @@ code .
 │   ├── CMakeLists.txt
 │   ├── LICENSE
 │   └── Source
-│       └── Main.cpp
+���       └── Main.cpp
 └── TemplateRenamer.sh
 ```
 
