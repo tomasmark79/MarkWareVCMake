@@ -81,7 +81,6 @@ sudo apt install -y build-essential cmake curl wget git ninja-build python3 pyth
 # VSCode
 wget -qO- https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64 -O vscode.deb
 sudo apt install ./vscode.deb
-rm vscode.deb
 
 # Conan
 pip3 install conan
