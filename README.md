@@ -30,7 +30,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Install 📌",           - CMake: --build --target install
     "Licenses 📜",          - CMake: --build --target write-licenses
 
-                            [ the same as above but splited for only St. or Lib.]
+                            [ the same as above but splited for only Standalone        ]
     "Build Standalone",     
     "Rebuild Standalone",
     "Configure Standalone",
@@ -38,7 +38,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Clean Standalone",
     "Install Standalone",
     "Licenses Standalone",
-    " ",
+                            [                                               ... or Lib.]
     "Build Library",
     "Rebuild Library",
     "Configure Library",
