@@ -25,7 +25,7 @@ Is a modular and intelligently designed project structure that gives me enormous
 
 ### Project Requirements
 
-Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-formatter.
+Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-formatter. To create a cross-compilation toolchain and a sysroot, you may use crosstool-ng from https://crosstool-ng.github.io.
 
 
 ### Project Documentation
