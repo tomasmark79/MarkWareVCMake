@@ -24,12 +24,6 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
-# Check if CMAKE_MAKE_PROGRAM supports parallel builds
-if(NOT CMAKE_MAKE_PROGRAM MATCHES ".*make.*")
-    message(WARNING "CMAKE_MAKE_PROGRAM does not support parallel builds, using -j1")
-    set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM} -j1")
-endif()
-
 # Glob not recommended, but the simplest way for this template
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
