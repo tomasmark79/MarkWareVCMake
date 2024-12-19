@@ -15,6 +15,41 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
 - **ModernCppStarter** is a project structure proven over many years and projects for developing programs and libraries. The essence of this structure is also embedded in this project.
 - **Formatters** are simple scripts that quickly reformat C/C++ and CMake files.
 
+### Integrated tasks
+
+#### Hit F7 to show list of those tasks in VSCode
+
+```json
+                            [ for Library and Standalone at once]
+    "Build 🔨",             - CMake: --build --target all
+    "Rebuild 🧹⚔️⚙️🔨",       - Clean Folder, Conan: Install, CMake: Configure, CMake: Build
+    
+    "Configure ⚙️",          - CMake: Configure
+    "Conan ⚔️",              - Conan: install
+    "Clean 🧹",             - rm -rf respective folder
+    "Install 📌",           - CMake: --build --target install
+    "Licenses 📜",          - CMake: --build --target write-licenses
+
+                            [ the same as above but splited for ony St. or Lib.]
+    "Build Standalone",     
+    "Rebuild Standalone",
+    "Configure Standalone",
+    "Conan Standalone",
+    "Clean Standalone",
+    "Install Standalone",
+    "Licenses Standalone",
+    " ",
+    "Build Library",
+    "Rebuild Library",
+    "Configure Library",
+    "Conan Library",
+    "Clean Library",
+    "Install Library",
+    "Licenses Library",
+```                
+
+*Note on tasks: These tasks are my own replacement for the official CMake VSCode extension. To make the F7 shortcut work, you need to set the content of `keybindings.json` as described in another part of this README.md.*
+
 ### My Goal 🎯
 
 To create a project template for myself that is flexible, works out of the box, and saves me a lot of time.
