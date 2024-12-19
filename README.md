@@ -17,20 +17,18 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
 
 ### Integrated tasks
 
-#### Hit F7 to show list of those tasks in VSCode
-
 ```txt
                             [ for Library and Standalone at once]
     "Build 🔨",             - CMake: --build --target all
-    "Rebuild 🧹⚔️⚙️🔨",       - Clean Folder, Conan: Install, CMake: Configure, CMake: Build
+    "Rebuild 🧹⚔️⚙️🔨",       - all steps at once (clean, conan, configure, buil)
     
-    "Configure ⚙️",          - CMake: Configure
+    "Configure ⚙️",          - CMake: -S -B
     "Conan ⚔️",              - Conan: install
     "Clean 🧹",             - rm -rf respective folder
     "Install 📌",           - CMake: --build --target install
     "Licenses 📜",          - CMake: --build --target write-licenses
 
-                            [ the same as above but splited for only Standalone        ]
+                            [ the same as above but splited for only Standalone or Lib ]
     "Build Standalone",     
     "Rebuild Standalone",
     "Configure Standalone",
@@ -38,7 +36,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Clean Standalone",
     "Install Standalone",
     "Licenses Standalone",
-                            [                                               ... or Lib.]
+                            
     "Build Library",
     "Rebuild Library",
     "Configure Library",
@@ -48,7 +46,10 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Licenses Library",
 ```                
 
-*Note on tasks: These tasks are my own replacement for the official CMake VSCode extension. To make the F7 shortcut work, you need to set the content of `keybindings.json` as described in another part of this README.md.*
+<div style="text-align:center">
+  <img width="773" alt="image" src="https://github.com/user-attachments/assets/edfaab22-feb2-4c69-89bc-908501e9252e" />
+</div>
+
 
 ### My Goal 🎯
 
