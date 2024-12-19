@@ -20,7 +20,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
 ```txt
                             [ for Library and Standalone at once]
     "Build 🔨",             - CMake: --build --target all
-    "Rebuild 🧹⚔️⚙️🔨",       - all steps at once (clean, conan, configure, buil)
+    "Rebuild 🧹⚔️⚙️🔨",       - all steps at once (clean, conan, configure, build)
     
     "Configure ⚙️",          - CMake: -S -B
     "Conan ⚔️",              - Conan: install
