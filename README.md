@@ -5,7 +5,7 @@ v0.0.4
 
 This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. Allows you to create a **Standalone Application** and a **library** *immediately*.
 
-### Integrated Technologies
+### Integrated Configurations
 
 - **VSCode** is an indispensable editor, ranking first due to its flexibility and configurability.
 - **Tasks** are jobs that build a robust system using **Conan** and **CMake**.
@@ -23,6 +23,11 @@ To create a project template for myself that is flexible, works out of the box, 
 
 Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is.
 
+### Project Requirements
+
+Linux OS, VSCode, CMake, Python3, Conan2, Compilers, cmake-formatter, clang-formatter.
+
+
 ### Project Documentation
 
 I thought about how best to guide a newcomer to try this project. The simplest way is to explain everything at the level of individual parts of the project.
@@ -32,8 +37,8 @@ I thought about how best to guide a newcomer to try this project. The simplest w
 First, clone the entire repository to the location where you want to store the project. Typically, you will do something like the following, where you install the basic software for development under Linux and launch VSCode directly from the repository location. To install VSCode, I recommend visiting the editor's official website: <https://code.visualstudio.com>.
 
 ```bash
-sudo apt-get update &&
-sudo apt-get install build-essential cmake -y
+sudo apt-get update && sudo apt-get install build-essential cmake -y
+
 git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
 cd MarkWareVCMake/
 code .
