@@ -98,6 +98,11 @@ function cmake_build() {
     cmake --build "$buildDir" --target all -j $(nproc)
 }
 
+function cmake_build_cpm_licenses() {
+    local buildDir=$1
+    cmake --build "$buildDir" --target write-licenses -j
+}
+
 function clean_build() {
     local buildDir=$1
     rm -rf "$buildDir"
@@ -111,11 +116,6 @@ function cmake_test() {
 function cmake_install() {
     local buildDir=$1
     cmake --build "$buildDir" --target install
-}
-
-function cmake_write_licenses() {
-    local buildDir=$1
-    cmake --build "$buildDir" --target write-licenses -j
 }
 
 # ---------------------------------------------------------------------------------
@@ -137,6 +137,15 @@ function Build() {
     fi
     if [ "$2" == "true" ]; then
         cmake_build "$(get_build_dir Standalone)"
+    fi
+}
+
+function BuildLicenses() {
+    if [ "$1" == "true" ]; then
+        cmake_build_cpm_licenses "$(get_build_dir Library)"
+    fi
+    if [ "$2" == "true" ]; then
+        cmake_build_cpm_licenses "$(get_build_dir Standalone)"
     fi
 }
 
@@ -176,15 +185,6 @@ function Install() {
     fi
 }
 
-function WriteLicenses() {
-    if [ "$1" == "true" ]; then
-        cmake_write_licenses "$(get_build_dir Library)"
-    fi
-    if [ "$2" == "true" ]; then
-        cmake_write_licenses "$(get_build_dir Standalone)"
-    fi
-}
-
 # ---------------------------
 #   Task controller
 # ---------------------------
@@ -195,7 +195,29 @@ function WriteLicenses() {
 case $taskName in
 
 # --- Rebuild ---
-"🧹⚔️⚙️🔨Rebuild All")
+
+" ")
+    notify-send "This is only empty task"
+    exit 0
+    ;;
+    
+"Rebuild Library")
+    Clean true false
+    ConanInstall true false
+    Configure true false
+    Build true false
+    exit 0
+    ;;
+
+"Rebuild Standalone")
+    Clean false true
+    ConanInstall false true
+    Configure false true
+    Build false true
+    exit 0
+    ;;
+
+"Rebuild 🧹⚔️⚙️🔨")
     Clean true true
     ConanInstall true true
     Configure true true
@@ -204,86 +226,86 @@ case $taskName in
     ;;
 
 # --- Build ---
-"🔨 Build Library")
+"Build Library")
     Build true false
     exit 0
     ;;
-"🔨 Build Standalone")
+"Build Standalone")
     Build false true
     exit 0
     ;;
-"🔨 Build All")
+"Build 🔨")
     Build true true
     exit 0
     ;;
 
 # --- Configure ---
-"⚙️ Configure Library")
+"Configure Library")
     Configure true false
     exit 0
     ;;
-"⚙️ Configure Standalone")
+"Configure Standalone")
     Configure false true
     exit 0
     ;;
-"⚙️ Configure All")
+"Configure ⚙️")
     Configure true true
     exit 0
     ;;
 
 # --- Conan Install ---
-"⚔️ Conan Install Library")
+"Conan Library")
     ConanInstall true false
     exit 0
     ;;
-"⚔️ Conan Install Standalone")
+"Conan Standalone")
     ConanInstall false true
     exit 0
     ;;
-"⚔️ Conan Install All")
+"Conan ⚔️")
     ConanInstall true true
     exit 0
     ;;
 
 # --- Clean ---
-"🧹 Clean Library")
+"Clean Library")
     Clean true false
     exit 0
     ;;
-"🧹 Clean Standalone")
+"Clean Standalone")
     Clean false true
     exit 0
     ;;
-"🧹 Clean All")
+"Clean 🧹")
     Clean true true
     exit 0
     ;;
 
 # --- Install ---
-"📌 Install Standalone")
+"Install Standalone")
     Install true false
     exit 0
     ;;
-"📌 Install Library")
+"Install Library")
     Install false true
     exit 0
     ;;
-"📌 Install All")
+"Install 📌")
     Install true true
     exit 0
     ;;
 
 # --- Write licenses ---
-"📜 Write Licenses Library")
-    WriteLicenses true false
+"Licenses Library")
+    BuildLicenses true false
     exit 0
     ;;
-"📜 Write Licenses Standalone")
-    WriteLicenses false true
+"Licenses Standalone")
+    BuildLicenses false true
     exit 0
     ;;
-"📜 Write Licenses All")
-    WriteLicenses true true
+"Licenses 📜")
+    BuildLicenses true true
     exit 0
     ;;
 

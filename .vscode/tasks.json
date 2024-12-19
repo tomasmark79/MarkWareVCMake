@@ -131,39 +131,39 @@
         {
             "id": "taskName",
             "type": "pickString",
-            "description": "Select CMake task",
+            "description": "Select task",
             "options": [
-                "🔨 Build All",
-                "🧹⚔️⚙️🔨Rebuild All", /* steps: Clean, Conan, Configure, Build in one step*/
-                "🔨 Build Library",
-                "🔨 Build Standalone",
-                /* separator*/
-                "⚙️ Configure Library",
-                "⚙️ Configure Standalone",
-                "⚙️ Configure All",
-                /* separator*/
-                "⚔️ Conan Install Library",
-                "⚔️ Conan Install Standalone",
-                "⚔️ Conan Install All",
-                /* separator*/
-                "🧹 Clean Library",
-                "🧹 Clean Standalone",
-                "🧹 Clean All",
-                /* separator*/
-                "📌 Install Standalone",
-                "📌 Install Library",
-                "📌 Install All",
-                /* separator*/
-                "📜 Write Licenses Library",
-                "📜 Write Licenses Standalone",
-                "📜 Write Licenses All"
+                "Build 🔨",
+                "Rebuild 🧹⚔️⚙️🔨",
+                " ",
+                "Configure ⚙️",
+                "Conan ⚔️",
+                "Clean 🧹",
+                "Install 📌",
+                "Licenses 📜",
+                " ",
+                "Build Standalone",
+                "Rebuild Standalone",
+                "Configure Standalone",
+                "Conan Standalone",
+                "Clean Standalone",
+                "Install Standalone",
+                "Licenses Standalone",
+                " ",
+                "Build Library",
+                "Rebuild Library",
+                "Configure Library",
+                "Conan Library",
+                "Clean Library",
+                "Install Library",
+                "Licenses Library",
             ],
-            "default": "🔨 Build All"
+            "default": "Build 🔨"
         },
         {
             "id": "buildArch",
             "type": "pickString",
-            "description": "Select architecture",
+            "description": "Select target architecture",
             "options": [
                 "Native",
                 "Aarch64"
@@ -173,7 +173,7 @@
         {
             "id": "buildType",
             "type": "pickString",
-            "description": "Select build type",
+            "description": "Select type of build",
             "options": [
                 "Debug",
                 "Release",
