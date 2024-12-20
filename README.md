@@ -62,6 +62,7 @@ Is a modular and intelligently designed project structure that gives me enormous
 ### Project Requirements 🛠️
 
  - Linux OS - Any - I'm Dev on Kubuntu 24.04.1
+ - MAC OS - the template on MAC OS works out of the box ( Thanks to Sleepy Monax )
  - VSCode - https://code.visualstudio.com
  - CMake - https://cmake.org/download/
  - Python3 - https://www.python.org/downloads/
