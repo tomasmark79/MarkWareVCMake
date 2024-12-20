@@ -46,6 +46,12 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
     "Licenses Library",
 ```                
 
+### Video presentation
+Automatic translated subtitles are available.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/9koSyjwtRUA/0.jpg)](https://www.youtube.com/watch?v=9koSyjwtRUA)
+
+### Screen shot of menu selector
 <div style="text-align:center">
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/edfaab22-feb2-4c69-89bc-908501e9252e" />
 </div>
