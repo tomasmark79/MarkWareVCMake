@@ -62,10 +62,12 @@ target_compile_options(
 include(cmake/CPM.cmake)
 include(cmake/Dependencies.cmake)
 
-# ---- Conan dependencies ----
+# ---- Conan dependencies ---- 
+# 
+# find_package(dpp CONFIG REQUIRED) # CONFIG means find_package require dpp-config.cmake to configure the package correctly
 find_package(BZip2 REQUIRED)
 find_package(CURL REQUIRED)
-target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE CURL::libcurl BZip2::BZip2)
+target_link_libraries(${PROJECT_LIBRARY_NAME} PRIVATE BZip2::BZip2 CURL::libcurl)
 
 # ---- CMake Modules ----
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
