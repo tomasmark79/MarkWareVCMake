@@ -51,17 +51,17 @@ is a script that allows you to rename the template project to your desired names
 
 are simple scripts that quickly reformat C/C++ and CMake files.
 
-### Dependencies 🔃
+### List of dependencies 🔃
 
  - Linux 🐧 or Mac
- - VSCode - https://code.visualstudio.com
- - CMake - https://cmake.org/download/
- - Python3 - https://www.python.org/downloads/
- - Conan2 Configurator - https://docs.conan.io/2/installation.html
- - Compilers - https://gcc.gnu.org, https://clang.llvm.org, ...
- - Cmake-formatter - https://cmake-format.readthedocs.io/en/latest/
- - Clang-formatter - https://clang.llvm.org/docs/ClangFormat.html
- - Cross-compiler with a toolchain and a sysroot - https://crosstool-ng.github.io
+ - VSCode - https://code.visualstudio.com (mandatory)
+ - CMake - https://cmake.org/download/ (mandatory)
+ - Python3 - https://www.python.org/downloads/ (mandatory)
+ - Conan2 Configurator - https://docs.conan.io/2/installation.html (mandatory)
+ - Compilers - https://gcc.gnu.org, https://clang.llvm.org, ... (mandatory)
+ - Cmake-formatter - https://cmake-format.readthedocs.io/en/latest/ (optional)
+ - Clang-formatter - https://clang.llvm.org/docs/ClangFormat.html (optional)
+ - Cross-compiler with a toolchain and a sysroot - https://crosstool-ng.github.io (optional)
 
 ### Quick Start 💣
 
