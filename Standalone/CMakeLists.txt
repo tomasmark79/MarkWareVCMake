@@ -1,37 +1,53 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 # (c) Tomáš Mark 2024
 
-# ---- Project attributes ----
+# ---- Project Standalone namespace::name  ----
 set(PROJECT_STANDALONE_NAMESPACE dsdotname)
-set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./ProjectRenamer.sh
+set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./TemplateRenamer.sh
 
+# ---- Generate Static/Shared targets (used by Conan as well) ----
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
+# ---- Project ----
 project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX ASM)
 
-# --- Import tools ----
+# ---- Include guards ----
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+    message(
+        FATAL_ERROR
+        "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+    )
+endif()
+
+# Glob not recommended, but the simplest way for this template
+file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
+)
+
+# ---- Create standalone executable ----
+add_executable(${PROJECT_STANDALONE_NAME} ${sources})
+
+# ---- Standalone options ----
+set_target_properties(
+    ${PROJECT_STANDALONE_NAME}
+    PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
+)
+
+# ---- CPM -----
+include(../cmake/CPM.cmake)
+#include(../cmake/Dependencies.cmake)
 include(../cmake/tools.cmake)
 
-# ---- Dependencies ----
-include(../cmake/CPM.cmake)
-
-# ---- Conan dependencies ----
-# Replace 'CURL' and 'OpenSSL' with actual dependencies specified in your conanfile.txt
-find_package(CURL REQUIRED)
-find_package(OpenSSL REQUIRED)
+# ---- CMake Modules ----
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}../cmake/Modules")
 
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
-# ---- Create standalone executable ----
-file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
-)
-
-add_executable(${PROJECT_STANDALONE_NAME} ${sources})
-
-set_target_properties(
-    ${PROJECT_STANDALONE_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
-)
-
 target_link_libraries(
-    ${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib CURL::libcurl OpenSSL::SSL OpenSSL::Crypto
+    ${PROJECT_STANDALONE_NAME}
+    PRIVATE
+    dsdotname::VCMLib 
 )
+
+# ---- Install ----
