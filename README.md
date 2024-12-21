@@ -9,7 +9,7 @@ This solution represents a **complete workflow** for **modern** C/C++ software d
 
 To create a project template for myself that is flexible, works out of the box, and saves me a lot of time.
 
-### The Result of My Efforts 🚀
+### The Result of my efforts 🧑🏻‍💻
 
 Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is.
 
@@ -182,7 +182,7 @@ Thanks to Sleepy Monax for Mac OS feedback.
 
 ---
 
-### About Me 👨‍💻
+### About Me 🧑🏻‍💻
 
 "The result of a lot of hours of incredible work. Time seemed to stand still. The outcome is a template that takes C++ development to a whole new level. 
     
