@@ -32,8 +32,8 @@ CPMAddPackage(
     OPTIONS "EMOJI_INSTALL NO"
 )
 
-if(NOT EmojiToolsLib_ADDED)
-    message(FATAL_ERROR "Failed to add EmojiTools")
-else()
-    target_link_libraries(${PROJECT_LIBRARY_NAME} PUBLIC EmojiToolsLib)
-endif()
+# if(NOT EmojiToolsLib_ADDED)
+#     message(FATAL_ERROR "Failed to add EmojiTools")
+# else()
+#     target_link_libraries(${PROJECT_LIBRARY_NAME} PUBLIC EmojiToolsLib)
+# endif()

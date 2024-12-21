@@ -9,8 +9,8 @@
 #include <openssl/ssl.h>
 #endif
 
-#include <curl/curl.h>
 #include "bzlib.h"
+#include <curl/curl.h>
 
 // Library implementation
 
@@ -25,7 +25,6 @@ VCMLib::VCMLib()
 
     std::cout << "--- " << curl_version() << " linked ---" << std::endl;
     std::cout << "--- " << BZ2_bzlibVersion() << " linked ---" << std::endl;
-    
 }
 
 VCMLib::~VCMLib()
