@@ -92,7 +92,6 @@ target_link_libraries(${PROJECT_LIBRARY_NAME}
     PUBLIC
     BZip2::BZip2
     CURL::libcurl
-    X11
     Threads::Threads
     dsdotname::EmojiTools
 )
