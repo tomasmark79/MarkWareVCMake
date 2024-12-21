@@ -12,7 +12,7 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 # ---- Project ----
 project(
     ${PROJECT_LIBRARY_NAME}
-    VERSION 0.0.1
+    VERSION 0.0.4
     LANGUAGES C CXX ASM
 )
 
