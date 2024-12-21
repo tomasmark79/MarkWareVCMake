@@ -20,6 +20,15 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
+# ---- CPMs -----
+include(../cmake/CPM.cmake)
+include(../cmake/tools.cmake)
+
+# ---- CMake Modules ----
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}../cmake/Modules")
+
+CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+
 # Glob not recommended, but the simplest way for this template
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
@@ -34,14 +43,6 @@ set_target_properties(
     PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
 )
 
-# ---- CPM -----
-include(../cmake/CPM.cmake)
-include(../cmake/tools.cmake)
-
-# ---- CMake Modules ----
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}../cmake/Modules")
-
-CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 target_link_libraries(
     ${PROJECT_STANDALONE_NAME}
