@@ -128,12 +128,10 @@ code .
 
 ### TODO by Priority ✅
 
-- 🚧 Workflow processing if Build and no Config is existing, etc. 🚧
+- 🚧 add Modern CMake Install Configuration 🚧
 - Extract the commands currently generated to allow working only in CLI if needed
 - Port to Windows (it will likely be necessary to convert the shell script to PowerShell)
-- Port to Mac (I am currently completely lost here and looking for a contributor to help me with this) 🍎
 - Later, when I find that I need it, we will add testing options
-- There are other possibilities like sanitizers implemented by CMake, but that will come later
 
 ### Project Documentation
 
