@@ -25,22 +25,21 @@ include(../cmake/CPM.cmake)
 include(../cmake/tools.cmake)
 
 # ---- CMake Modules ----
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}../cmake/Modules")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      "${PROJECT_SOURCE_DIR}../cmake/Modules")
 
-CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # Glob not recommended, but the simplest way for this template
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
-)
+     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c)
 
 # ---- Create standalone executable ----
 add_executable(${PROJECT_STANDALONE_NAME} ${sources})
 
 # ---- Standalone options ----
-set_target_properties(
-    ${PROJECT_STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
-)
+set_target_properties(${PROJECT_STANDALONE_NAME}
+                      PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}")
 
 target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
