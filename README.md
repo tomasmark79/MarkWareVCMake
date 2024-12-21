@@ -1,56 +1,9 @@
 # MarkWare VCMake Template 🎁
 v0.0.4
 
-### Brief Description 😊
+### Brief Description 📑
 
-This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates technologies such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more into a single functional unit. It allows you to create a **Standalone Application** and a **library** *immediately*. 🎉
-
-### Integrated Configurations 🔧
-
-- **VSCode** is an indispensable editor, ranking first due to its flexibility and configurability.
-- **Tasks** are jobs that build a robust system using **Conan** and **CMake**.
-- **CMake**, as a modern configurator with object-oriented elements, provides enormous flexibility.
-- **CPM.cmake** adds simplified support for fetching packages from GitHub, ensuring an easier way to obtain such packages.
-- **Conan 2**, which manages dependencies, is the cherry on top 🍒, allowing you to easily add libraries that your project may need.
-- **ModernCppStarter** is a project structure proven over many years and projects for developing programs and libraries. The essence of this structure is also embedded in this project.
-- **Formatters** are simple scripts that quickly reformat C/C++ and CMake files.
-
-### Integrated tasks
-
-```txt
-                            [ for Library and Standalone at once]
-    "Build 🔨",             - CMake: --build --target all
-    "Rebuild 🧹⚔️⚙️🔨",       - all steps at once (clean, conan, configure, build)
-    
-    "Configure ⚙️",          - CMake: -S -B
-    "Conan ⚔️",              - Conan: install
-    "Clean 🧹",             - rm -rf respective folder
-    "Install 📌",           - CMake: --build --target install
-    "Licenses 📜",          - CMake: --build --target write-licenses
-
-                            [ the same as above but splited for only Standalone or Lib ]
-    "Build Standalone",     
-    "Rebuild Standalone",
-    "Configure Standalone",
-    "Conan Standalone",
-    "Clean Standalone",
-    "Install Standalone",
-    "Licenses Standalone",
-                            
-    "Build Library",
-    "Rebuild Library",
-    "Configure Library",
-    "Conan Library",
-    "Clean Library",
-    "Install Library",
-    "Licenses Library",
-```                
-
-### Screen shot of menu selector
-<div style="text-align:center">
-  <img width="773" alt="image" src="https://github.com/user-attachments/assets/edfaab22-feb2-4c69-89bc-908501e9252e" />
-</div>
-
+This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates tools such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more into a single functional unit. It allows you to create a **Standalone Application** and a **library** *immediately*.
 
 ### My Goal 🎯
 
@@ -58,7 +11,45 @@ To create a project template for myself that is flexible, works out of the box, 
 
 ### The Result of My Efforts 🚀
 
-Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is. 😄
+Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is.
+
+### Deep Dive 🤿
+
+##### VSCode
+
+is an indispensable editor, ranking first due to its flexibility and configurability.  
+  
+##### VSCode Tasks
+
+are predefined tasks in Visual Studio Code that automate common development workflows, such as building, cleaning, and running your project. These tasks are defined in the `tasks.json` file and can be customized to fit your specific needs.
+
+##### Conan 2
+
+is a powerful dependency manager for C/C++ projects. It simplifies the process of adding and managing libraries that your project may need. With Conan 2, you can easily specify the dependencies in a `conanfile.txt` or `conanfile.py`, and it will handle the downloading, building, and integrating of these libraries into your project. This ensures that you always have the correct versions of the libraries and that they are configured properly for your development environment. Conan 2 also supports package creation, allowing you to create and share your own libraries with others.
+
+##### CMake
+
+as a modern configurator with object-oriented elements, provides enormous flexibility.
+
+##### CPM.cmake
+
+add simplified support for fetching packages from GitHub, ensuring an easier way to obtain such packages.
+
+##### CPM.Licenses
+
+also helps in managing and writing license files for the dependencies used in the project.
+
+##### ModernCppStarter
+
+is a project structure proven over many years and projects for developing programs and libraries. The essence of this structure is also embedded in this project.
+
+##### TemplateRenamer
+
+is a script that allows you to rename the template project to your desired names for both the library and the standalone application. This ensures that the project is uniquely identified and tailored to your specific needs.
+  
+##### Formatters
+
+are simple scripts that quickly reformat C/C++ and CMake files.
 
 ### Dependencies 🔃
 
@@ -81,19 +72,48 @@ cd NameOfMyAwesomeApp/
 code .
 ```
 
-### ToDo
+### Integrated VSCode tasks
+```json
+{
+            "id": "taskName",
+            "type": "pickString",
+            "description": "Select task",
+            "options": [
+                "Build 🔨", /* Both */
+                "Rebuild 🧹⚔️⚙️🔨", /* Both */
+                " ",
+                "Configure ⚙️", /* Both */
+                "Conan ⚔️", /* Both */
+                "Clean 🧹", /* Both */
+                "Install 📌", /* Both */
+                "Licenses 📜", /* Both */
+                " ",
+                "Build Standalone", /* Only Standalone */
+                "Rebuild Standalone",
+                "Configure Standalone",
+                "Conan Standalone",
+                "Clean Standalone",
+                "Install Standalone",
+                "Licenses Standalone",
+                " ",
+                "Build Library", /* Only Library */
+                "Rebuild Library",
+                "Configure Library",
+                "Conan Library",
+                "Clean Library",
+                "Install Library",
+                "Licenses Library",
+            ],
+            "default": "Build 🔨"
+}
+```
 
-- 🚧 add installation CMake configuration
-- prepare list of commands to only CLI workflow
-- port to MS Windows family OS
-- included some other features useful for devs
-
-### Project Structure
+### Project filesystem structure description
 
 ```txt
 tree -a --prune -I '.git|Build|Hidden'
 .
-├── .clang-format - configuration file for clang-format, a tool to format C/C++/Java/JavaScript/Objective-C/Protobuf code
+├── .clang-format - configuration file for clang-format, a tool to format C/C++/Objective-C/...
 ├── cmake - directory containing CMake-related scripts and modules
 │   ├── CPM.cmake - is a cross-platform CMake script that adds dependency management capabilities to CMake
 │   ├── Modules - directory for custom CMake modules
@@ -138,23 +158,26 @@ This shell script is a very powerful renamer for the entire project. After cloni
 Usage: ./TemplateRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>
 ```
   
+### ToDo
+
+I still want to add:
+- 🚧 add installation CMake configuration
+- prepare list of commands for CLI-only workflow
+- port to MS Windows family OS
+- include some other features useful for developers
+
 ### My Code Codex
                
 I use capital letters at the beginning of words for naming all new folders and files.  
 One exception: No capital letter in the "include" folder is intentional!
 
-
-### Inspirations and help for you
-
-I drew inspiration from the following projects:
+### I drew inspiration from the following projects
 
 - [ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
 - [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)
 - [CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake.git)
 - 
-
-
 Thanks to Sleepy Monax for Mac OS feedback.
 
 ---
@@ -165,10 +188,12 @@ Thanks to Sleepy Monax for Mac OS feedback.
     
 "Buy me a coffee ☕🍵 or spare some time. 🙂"
 
-Tomáš Mark 2024
-
 ```
 paypal.me/TomasMark
 Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
+
+MIT License
+
+Copyright (c) 2024 Tomáš Mark
