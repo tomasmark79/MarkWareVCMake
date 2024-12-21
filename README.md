@@ -177,7 +177,7 @@ One exception: No capital letter in the "include" folder is intentional!
 - [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)
 - [CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake.git)
-- 
+  
 Thanks to Sleepy Monax for Mac OS feedback.
 
 ---
