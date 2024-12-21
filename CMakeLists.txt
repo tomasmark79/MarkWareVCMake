@@ -35,7 +35,7 @@ if(CPMLicenses.cmake_ADDED)
     )
 endif()
 
-CPMAddPackage(NAME EmojiToolsLib GITHUB_REPOSITORY tomasmark79/EmojiTools GIT_TAG main OPTIONS "EMOJI_INSTALL NO")
+CPMAddPackage(NAME EmojiTools GITHUB_REPOSITORY tomasmark79/EmojiTools GIT_TAG main OPTIONS "EMOJI_INSTALL NO")
 
 # ---- CMake Modules ----
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules")
@@ -79,8 +79,7 @@ target_include_directories(
     ${PROJECT_LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
-
-    # PUBLIC ${PROJECT_SOURCE_DIR}/Source
+    # PRIVATE ${PROJECT_SOURCE_DIR}/Source
 )
 
 # being a cross-platform target, we enforce standards conformance on MSVC
@@ -95,7 +94,7 @@ target_link_libraries(${PROJECT_LIBRARY_NAME}
     CURL::libcurl
     X11
     Threads::Threads
-    EmojiToolsLib
+    dsdotname::EmojiTools
 )
 
 # ---- Versioning ----

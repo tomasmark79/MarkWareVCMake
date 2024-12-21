@@ -36,7 +36,6 @@ set_target_properties(
 
 # ---- CPM -----
 include(../cmake/CPM.cmake)
-#include(../cmake/Dependencies.cmake)
 include(../cmake/tools.cmake)
 
 # ---- CMake Modules ----
