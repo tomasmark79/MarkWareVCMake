@@ -79,16 +79,16 @@ code .
             "type": "pickString",
             "description": "Select task",
             "options": [
-                "Build 🔨", /* Both */
-                "Rebuild 🧹⚔️⚙️🔨", /* Both */
+                "Build 🔨", /* Both 👇 */
+                "Rebuild 🧹⚔️⚙️🔨",
                 " ",
-                "Configure ⚙️", /* Both */
-                "Conan ⚔️", /* Both */
-                "Clean 🧹", /* Both */
-                "Install 📌", /* Both */
-                "Licenses 📜", /* Both */
+                "Configure ⚙️",
+                "Conan ⚔️",
+                "Clean 🧹",
+                "Install 📌",
+                "Licenses 📜",
                 " ",
-                "Build Standalone", /* Only Standalone */
+                "Build Standalone", /* Only Standalone 👇 */
                 "Rebuild Standalone",
                 "Configure Standalone",
                 "Conan Standalone",
@@ -96,7 +96,7 @@ code .
                 "Install Standalone",
                 "Licenses Standalone",
                 " ",
-                "Build Library", /* Only Library */
+                "Build Library", /* Only Library  👇*/
                 "Rebuild Library",
                 "Configure Library",
                 "Conan Library",
