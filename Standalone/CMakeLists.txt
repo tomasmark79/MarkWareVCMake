@@ -16,7 +16,7 @@ project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX ASM)
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(
         FATAL_ERROR
-        "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+            "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
     )
 endif()
 
@@ -31,7 +31,7 @@ CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # Glob not recommended, but the simplest way for this template
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
+     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
 )
 
 # ---- Create standalone executable ----
@@ -39,15 +39,9 @@ add_executable(${PROJECT_STANDALONE_NAME} ${sources})
 
 # ---- Standalone options ----
 set_target_properties(
-    ${PROJECT_STANDALONE_NAME}
-    PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
+    ${PROJECT_STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}"
 )
 
-
-target_link_libraries(
-    ${PROJECT_STANDALONE_NAME}
-    PRIVATE
-    dsdotname::VCMLib 
-)
+target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
 # ---- Install ----
