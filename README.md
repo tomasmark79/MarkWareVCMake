@@ -65,6 +65,10 @@ are simple scripts that quickly reformat C/C++ and CMake files.
 
 ### Quick Start 💣
 
+
+https://github.com/user-attachments/assets/60b51d6a-1724-4b05-9cc8-94683e2f2131
+
+
 ```bash
 # clone 
 git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
