@@ -11,7 +11,7 @@
         },
         {
             /* CMAKE TASKS */
-            "label": "CMake Tasks",
+            "label": "MarkWare Tasks",
             "type": "shell",
             "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
@@ -23,7 +23,27 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "CMake Tasks",
+            "detail": "MarkWare Tasks",
+            "problemMatcher": [],
+            "dependsOn": [
+                "clear terminal"
+            ]
+        },
+        {
+            /* Build Native Debug */
+            "label": "Build Native Debug",
+            "type": "shell",
+            "command": "${workspaceFolder}/CMakeController.sh",
+            "args": [
+                "Build 🔨",
+                "Native",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build Native Debug",
             "problemMatcher": [],
             "dependsOn": [
                 "clear terminal"
@@ -131,7 +151,7 @@
         {
             "id": "taskName",
             "type": "pickString",
-            "description": "Select task",
+            "description": "Select MarkWare Task",
             "options": [
                 "Build 🔨",
                 "Rebuild 🧹⚔️⚙️🔨",

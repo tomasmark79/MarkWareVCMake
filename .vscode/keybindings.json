@@ -8,12 +8,17 @@
     {
         "key": "f7",
         "command": "workbench.action.tasks.runTask",
-        "args": "CMake Tasks"
+        "args": "Build Native Debug"
+    },
+    {
+        "key": "shift+f7",
+        "command": "workbench.action.tasks.runTask",
+        "args": "MarkWare Tasks"
     },
     {
         "key": "ctrl+alt+c",
         "command": "workbench.action.tasks.runTask",
-        "args": "CMake Tasks"
+        "args": "MarkWare Tasks"
     },
     {
         "key": "ctrl+alt+m",
@@ -29,5 +34,5 @@
         "key": "ctrl+alt+l",
         "command": "workbench.action.tasks.runTask",
         "args": "lint"
-    }
+    },
 ]
