@@ -10,7 +10,7 @@
             "problemMatcher": []
         },
         {
-            /* CMAKE TASKS */
+            /* MarkWare Tasks */
             "label": "MarkWare Tasks",
             "type": "shell",
             "command": "${workspaceFolder}/CMakeController.sh",

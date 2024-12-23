@@ -100,7 +100,7 @@ function cmake_build() {
 
 function cmake_build_cpm_licenses() {
     local buildDir=$1
-    cmake --build "$buildDir" --target write-licenses -j
+    cmake --build "$buildDir" --target write-licenses
 }
 
 function clean_build() {
