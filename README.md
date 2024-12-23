@@ -1,5 +1,5 @@
 # MarkWare VCMake Template 🎁
-v0.0.4
+v0.0.5
 
 ### Brief Description 📑
 
@@ -72,41 +72,34 @@ cd NameOfMyAwesomeApp/
 code .
 ```
 
-### Integrated VSCode tasks
-```json
-{
-            "id": "taskName",
-            "type": "pickString",
-            "description": "Select task",
-            "options": [
-                "Build 🔨", /* Both 👇 */
-                "Rebuild 🧹⚔️⚙️🔨",
-                " ",
-                "Configure ⚙️",
-                "Conan ⚔️",
-                "Clean 🧹",
-                "Install 📌",
-                "Licenses 📜",
-                " ",
-                "Build Standalone", /* Only Standalone 👇 */
-                "Rebuild Standalone",
-                "Configure Standalone",
-                "Conan Standalone",
-                "Clean Standalone",
-                "Install Standalone",
-                "Licenses Standalone",
-                " ",
-                "Build Library", /* Only Library  👇*/
-                "Rebuild Library",
-                "Configure Library",
-                "Conan Library",
-                "Clean Library",
-                "Install Library",
-                "Licenses Library",
-            ],
-            "default": "Build 🔨"
-}
-```
+### Integrated VSCode Tasks and Key Associations
+
+#### F5
+
+- Debug
+
+#### F7
+
+- Build Native Debug  
+notice: (no menu appearing, direct building only)
+
+#### **Shift+F7**
+
+Displays a menu with items such as:
+
+- Build
+- Rebuild
+- Configure
+- Conan
+- Clean
+- Install
+- Licenses
+
+The menu shows 3 variants of items:
+
+- for both targets
+- for Standalone
+- for Library
 
 ### Project filesystem structure description
 
