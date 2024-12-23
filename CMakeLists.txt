@@ -24,18 +24,18 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # ---- CPMs  ----
-
 include(cmake/CPM.cmake)
 
 # include(cmake/Dependencies.cmake)
 cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 cpmaddpackage("gh:fmtlib/fmt#11.0.2")
 cpmaddpackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
+cpmaddpackage("gh:nlohmann/json@3.11.3")
 
 if(CPMLicenses.cmake_ADDED)
     cpm_licenses_create_disclaimer_target(
-        write-licenses-${PROJECT_LIBRARY_NAME}
-        "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt" "${CPM_PACKAGES}")
+        write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
+        "${CPM_PACKAGES}")
 endif()
 
 cpmaddpackage(
@@ -98,7 +98,9 @@ target_include_directories(
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
-    # PRIVATE ${PROJECT_SOURCE_DIR}/Source
+        # PRIVATE ${PROJECT_SOURCE_DIR}/Source # for headers in Source folder
+    PRIVATE ${nlohmann_json_SOURCE_DIR}/include # by CPM.cmake for
+                                                # nlohmann/json.hpp
 )
 
 # being a cross-platform target, we enforce standards conformance on MSVC
