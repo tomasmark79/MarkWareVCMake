@@ -186,7 +186,8 @@
             "description": "Select target architecture",
             "options": [
                 "Native",
-                "Aarch64"
+                "Aarch64",
+                "Win64"
             ],
             "default": "Native"
         },
