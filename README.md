@@ -1,69 +1,55 @@
 # MarkWare VCMake Template 🎁
 v0.0.5
 
-### Description 📑
+### Modern Configurable Project Template for C and C++ 🎁
 
-This solution represents a **Modern C/C++ Project Template** for professional software development.
+This template offers a comprehensive solution for quickly starting development in C and C++. It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies. The template integrates the following components:
 
-It integrates tools and is inspired by **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. It allows you to create a **Standalone Application** with a **library** *immediately*. It works natively on **Linux**, **Mac OS**, and **Windows**. It supports **cross-compilation**.
+- **Visual Studio Code**: Support for the development environment with preconfigured settings.
+- **Conan 2**: Dependency management for seamless integration of external libraries.
+- **Modern CMake**: Advanced configuration and build system leveraging modern best practices.
+- **CPM.cmake**: Simple dependency management without requiring external package installations.
+- **CPM.license**: Automated management of third-party licenses.
+- **ModernCppStarter**: Inspired by best practices for initializing modern C++ projects.
+- **TemplateRenamer**: Easily rename the template to suit your project.
+- **Clang and CMake Formatters**: Automated formatting for code and build scripts.
 
-### My Goal 🎯
+---
 
-To create a project template for myself that is flexible, works out of the box, and saves me a lot of time ⌚.
+### Key Features
 
-### The Result of my efforts 🧑🏻‍💻
+- **Quick Start**: Ready to use immediately after cloning.
+- **Flexibility**: Supports the creation of applications with statically or dynamically linked libraries.
+- **Cross-Platform Support**: Works on Linux, macOS, and Windows.
+- **Cross-Compilation Support**: Enables compilation for various platforms.
+- **Modularity**: Easily extendable and customizable to meet project needs.
 
-Is a modular and intelligently designed project structure that gives me enormous flexibility and decision-making power at every point on how the project will be configured. For others, it may take a while to get used to the project, but in return, you will be pleasantly surprised at how simple it actually is.
+---
 
-### Deep Dive 🤿
+### Benefits for Developers
 
-##### VSCode
+- Accelerated project initialization with pre-configured tools.
+- Adherence to modern development standards in C and C++.
+- Easy integration of additional tools and libraries.
+- Broad support for various environments and build systems.
 
-is an indispensable editor, ranking first due to its flexibility and configurability.  
-  
-##### VSCode Tasks
+This template serves as an ideal starting point for developers who want to efficiently work on modern projects while leveraging the advantages of proven technologies.
 
-are predefined tasks in Visual Studio Code that automate common development workflows, such as building, cleaning, and running your project. These tasks are defined in the `tasks.json` file and can be customized to fit your specific needs.
+---
 
-##### Conan 2
+### List of Dependencies 🔃
 
-is a powerful dependency manager for C/C++ projects. It simplifies the process of adding and managing libraries that your project may need. With Conan 2, you can easily specify the dependencies in a `conanfile.txt` or `conanfile.py`, and it will handle the downloading, building, and integrating of these libraries into your project. This ensures that you always have the correct versions of the libraries and that they are configured properly for your development environment. Conan 2 also supports package creation, allowing you to create and share your own libraries with others.
+- **Operating Systems**: Linux 🐧, macOS 🍎, Windows 🪟
+- **Visual Studio Code**: [Download](https://code.visualstudio.com) (mandatory)
+- **CMake**: [Download](https://cmake.org/download/) (mandatory)
+- **Python 3**: [Download](https://www.python.org/downloads/) (mandatory)
+- **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html) (mandatory)
+- **Compilers**: [GCC](https://gcc.gnu.org), [Clang](https://clang.llvm.org) (mandatory)
+- **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) (optional)
+- **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html) (optional)
+- **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io) (optional)
 
-##### CMake
-
-as a modern configurator with object-oriented elements, provides enormous flexibility.
-
-##### CPM.cmake
-
-add simplified support for fetching packages from GitHub, ensuring an easier way to obtain such packages.
-
-##### CPM.Licenses
-
-also helps in managing and writing license files for the dependencies used in the project.
-
-##### ModernCppStarter
-
-is a project structure proven over many years and projects for developing programs and libraries. The essence of this structure is also embedded in this project.
-
-##### TemplateRenamer
-
-is a script that allows you to rename the template project to your desired names for both the library and the standalone application. This ensures that the project is uniquely identified and tailored to your specific needs.
-  
-##### Formatters
-
-are simple scripts that quickly reformat C/C++ and CMake files.
-
-### List of dependencies 🔃
-
- - Linux 🐧 or Mac
- - VSCode - https://code.visualstudio.com (mandatory)
- - CMake - https://cmake.org/download/ (mandatory)
- - Python3 - https://www.python.org/downloads/ (mandatory)
- - Conan2 Configurator - https://docs.conan.io/2/installation.html (mandatory)
- - Compilers - https://gcc.gnu.org, https://clang.llvm.org, ... (mandatory)
- - Cmake-formatter - https://cmake-format.readthedocs.io/en/latest/ (optional)
- - Clang-formatter - https://clang.llvm.org/docs/ClangFormat.html (optional)
- - Cross-compiler with a toolchain and a sysroot - https://crosstool-ng.github.io (optional)
+---
 
 ### Quick Start 💣
 
@@ -74,136 +60,200 @@ https://github.com/user-attachments/assets/60b51d6a-1724-4b05-9cc8-94683e2f2131
 # clone 
 git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
 cd NameOfMyAwesomeApp/
+./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
 code .
 ```
 
-### Integrated VSCode Tasks and Key Associations
+---
 
-#### F5
+### Integrated VSCode Tasks and Key Bindings
 
-- Debug
+#### F5 - Debug
 
-#### F7
+- Initiates the debugging process.
 
-- Build Native Debug  
-notice: (no menu appearing, direct building only)
+#### F7 - Build Native Debug
 
-#### **Shift+F7**
+- Directly builds the project without displaying a menu.
 
-Displays a menu with items such as:
+#### Shift+F7 - Task Menu
 
-- Build
-- Rebuild
-- Configure
-- Conan
-- Clean
-- Install
-- Licenses
+Displays a menu with the following options:
 
-The menu shows 3 variants of items:
+- **Build**
+- **Rebuild**
+- **Configure**
+- **Conan**
+- **Clean**
+- **Install**
+- **Licenses**
 
-- for both targets
-- for Standalone
-- for Library
+Each menu item is available in three variants:
 
-At next level within menu you will meet architecture:
+- For both targets
+- For Standalone
+- For Library
+
+Within each menu item, you can select the architecture:
 
 - Native
 - Aarch64
 - Win64
 
-And built type:
+And the build type:
 
 - Debug
 - Release
 - RelWithDebInfo
 - MinSizeRel
 
-### Project filesystem structure description
+---
 
-```txt
-tree -a --prune -I '.git|Build|Hidden'
+### Project Structure
+
+`tree -a --prune -I '.git|Build' --dirsfirst --gitignore`
+
 .
-├── .clang-format - configuration file for clang-format, a tool to format C/C++/Objective-C/...
-├── cmake - directory containing CMake-related scripts and modules
-│   ├── CPM.cmake - is a cross-platform CMake script that adds dependency management capabilities to CMake
-│   ├── Modules - directory for custom CMake modules
-│   │   └── FindX11.cmake - custom CMake module to find X11 libraries
-│   └── tools.cmake - CMake script for additional tools and utilities
-├── CMakeController.sh - shell script to control CMake build process
-├── .cmake-format - configuration file for cmake-format, a tool to format CMake scripts
-├── CMakeLists.txt - main CMake build script for library
-├── CMakeUserPresets.json - JSON file containing user presets for CMake
-├── conanfile.txt - Conan package manager configuration file
-├── .gitattributes - Git configuration file for defining attributes per path
-├── .gitignore - Git configuration file to specify untracked files to ignore
-├── include - directory containing header files
-│   └── VCMLib - directory for VCMLib library headers
-│       └── VCMLib.hpp - header file for VCMLib library
-├── LICENSE - license file for the project
-├── .python-version - file specifying the Python version for the project
-├── README.md - markdown file containing the project documentation
-├── Source - directory containing source files
-│   └── VCMLib.cpp - source file for VCMLib library
-├── Standalone - directory for standalone application
-│   ├── CMakeLists.txt - CMake build script for standalone application
-│   ├── LICENSE - license file for standalone application
-│   └── Source - directory containing source files for standalone application
-│       └── Main.cpp - main source file for standalone application
-├── TemplateRenamer.sh - shell script to rename names for standalone and library
-└── .vscode - directory containing Visual Studio Code configuration files
-├── c_cpp_properties.json - VSCode configuration file for C/C++ properties
-├── keybindings.json - VSCode configuration file for custom keybindings
-├── launch.json - VSCode configuration file for debugging settings
-├── settings.json - VSCode configuration file for workspace settings
-└── tasks.json - VSCode configuration file for defining tasks
-```
+├── cmake
+│   ├── Modules
+│   │   └── FindX11.cmake
+│   ├── CPM.cmake
+│   └── tools.cmake
+├── include
+│   └── VCMLib
+│       └── VCMLib.hpp
+├── MarkWareUtilities
+│   ├── CMakeToolChains
+│   │   ├── aarch64.cmake
+│   │   └── X86_64-w64-mingw32.cmake
+│   ├── ConanProfiles
+│   │   ├── aarch64
+│   │   ├── default
+│   │   └── x86_64-w64-mingw32
+│   ├── ConanPythonConfigurer
+│   │   └── conanfile.py
+│   └── AboutThisFolder.md
+├── Source
+│   └── VCMLib.cpp
+├── Standalone
+│   ├── Source
+│   │   └── Main.cpp
+│   ├── CMakeLists.txt
+│   └── LICENSE
+├── .vscode
+│   ├── c_cpp_properties.json
+│   ├── keybindings.json
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── .clang-format
+├── CMakeController.sh
+├── .cmake-format
+├── CMakeLists.txt
+├── conanfile.txt
+├── .gitattributes
+├── .gitignore
+├── LICENSE
+├── .python-version
+├── README.md
+└── TemplateRenamer.sh
 
-##### Useful to Know
+### Project Structure Description
 
-`└── TemplateRenamer.sh`
+- **cmake/**
+  - **Modules/**  
+    Contains custom CMake modules (e.g., FindX11.cmake) that help locate system libraries or provide extra CMake functionality.
+  - **CPM.cmake**  
+    Manages third-party dependencies via the CMake Package Manager.
+  - **tools.cmake**  
+    Provides auxiliary CMake functions and macros to simplify the build process.
 
-This shell script is a very powerful renamer for the entire project. After cloning the repository into your folder, you can use this script to create your own names for both the library and the application. The names must not be the same.
+- **include/**
+  - **VCMLib/**  
+    Houses public header files for the core VCMLib library, exposing its functionality to other parts of the project.
 
-```bash
-Usage: ./TemplateRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>
-```
-  
-### ToDo
+- **MarkWareUtilities/**
+  - **CMakeToolChains/**  
+    Includes toolchain files for cross-compiling (e.g., aarch64.cmake, X86_64-w64-mingw32.cmake).
+  - **ConanProfiles/**  
+    Stores Conan configuration profiles for different target platforms (e.g., aarch64, x86_64-w64-mingw32).
+  - **ConanPythonConfigurer/**  
+    Contains a conanfile.py for Python-based Conan configuration.
+  - **AboutThisFolder.md**  
+    Explains the purpose and usage of the MarkWareUtilities folder.
 
-I still want to add:
-- 🚧 add installation CMake configuration
-- prepare list of commands for CLI-only workflow
-- include some other features useful for developers
+- **Source/**
+  - **VCMLib.cpp**  
+    Implements the core functionality of the VCMLib library.
 
-### My Code Codex
-               
-I use capital letters at the beginning of words for naming all new folders and files.  
-One exception: No capital letter in the "include" folder is intentional!
+- **Standalone/**
+  - **Source/Main.cpp**  
+    Entry point for the standalone application that uses VCMLib.
+  - **CMakeLists.txt**  
+    Handles build instructions for the standalone application.
+  - **LICENSE**  
+    License file specific to the standalone application.
 
-### I drew inspiration from the following projects
+- **.vscode/**
+  - **c_cpp_properties.json**  
+    Configures C/C++ IntelliSense and compiler settings in VS Code.
+  - **keybindings.json**  
+    Defines custom keyboard shortcuts.
+  - **launch.json**  
+    Specifies debugging configurations for VS Code.
+  - **settings.json**  
+    Holds project-specific VS Code settings.
+  - **tasks.json**  
+    Defines build-or-run tasks for automation in VS Code.
 
-- [ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
-- [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
-- [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)
-- [CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake.git)
-  
-Thanks to Sleepy Monax for Mac OS feedback.
+- **.clang-format**  
+  Defines code formatting rules for C++ based on ClangFormat.
+- **CMakeController.sh**  
+  A convenience script for configuring, building, and cleaning the project via CMake.
+- **.cmake-format**  
+  Provides formatting rules for CMake files.
+- **CMakeLists.txt**  
+  Top-level build configuration for the entire project.
+- **conanfile.txt**  
+  Lists external dependencies managed by Conan.
+- **.gitattributes**  
+  Specifies Git’s handling of certain files (e.g., line endings, diff behavior).
+- **.gitignore**  
+  Tells Git which files and directories to ignore in the repository.
+- **LICENSE**  
+  The main license file covering the entire project.
+- **.python-version**  
+  Indicates which Python version to use with this project.
+- **README.md**  
+  Provides instructions, documentation, and an overview of the project.
+- **TemplateRenamer.sh**  
+  Script used to rename or customize template components across the project.
 
 ---
 
-### About Me 🧑🏻‍💻
+### Acknowledgements
 
-"The result of a lot of hours of incredible work. Time seemed to stand still. The outcome is a template that takes C++ development to a whole new level. 
-    
-"Buy me a coffee ☕🍵 or spare some time. 🙂"
+I would like to extend my gratitude to everyone who has contributed directly or indirectly to this project.
+Special thanks to all the developers of the tools utilized in this template.
+A heartfelt thank you to Lars Melchior TheLartians for his various CPM extensions.
+Appreciation also goes to Sleepy Monax for his feedback on macOS.
+
+---
+
+### About the Author 🧑🏻‍💻
+
+This template is the culmination of countless hours of dedicated work, designed to elevate C++ development to new heights.
+
+If you find this project helpful and would like to support its development, consider making a donation:
 
 ```
-paypal.me/TomasMark
+PayPal: paypal.me/TomasMark
 Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
 
+---
+
 MIT License
 
-Copyright (c) 2024 Tomáš Mark
+© 2024 Tomáš Mark
