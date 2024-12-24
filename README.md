@@ -97,9 +97,9 @@ Each menu item is available in three variants:
 
 Within each menu item, you can select the architecture:
 
-- Native
-- Aarch64
-- Win64
+- x86_64-linux-gnu
+- aarch64-linux-gnu
+- x86_64-w64-mingw32
 
 And the build type:
 

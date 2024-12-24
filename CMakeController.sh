@@ -17,13 +17,17 @@ echo -e "${GREEN}buildType: $buildType"
 echo -e "${GREEN}workSpaceDir: $workSpaceDir${NC}"
 
 # ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# x86_64-linux-gnu is using default conan profile - change to fit your needs
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
 
 # Install Conan dependencies
 function conan_install() {
     local buildDir=$1
 
-    # Native
-    if [ "$buildArch" == "Native" ]; then
+    # x86_64-linux-gnu
+    if [ "$buildArch" == "x86_64-linux-gnu" ]; then
         # Generate Static/Shared targets at simple level
         # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
         # default is "-o *:shared=False"
@@ -42,8 +46,8 @@ function conan_install() {
         return
     fi
 
-    # Cross-compilation to Aarch64
-    if [ "$buildArch" == "Aarch64" ]; then
+    # Cross-compilation to aarch64-linux-gnu
+    if [ "$buildArch" == "aarch64-linux-gnu" ]; then
         # Generate Static/Shared targets at simple level
         # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
         # default is "-o *:shared=False"
@@ -64,7 +68,7 @@ function conan_install() {
     fi
 
     # Cross-compilation to Windows 64-bit
-    if [ "$buildArch" == "Win64" ]; then
+    if [ "$buildArch" == "x86_64-w64-mingw32" ]; then
         # Generate Static/Shared targets at simple level
         # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
         # default is "-o *:shared=False"
@@ -91,8 +95,8 @@ function cmake_configure() {
     local sourceDir=$1
     local buildDir=$2
 
-    # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for Aarch64
-    if [ "$buildArch" == "Aarch64" ] || [ "$buildArch" == "Win64" ]; then
+    # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for aarch64-linux-gnu
+    if [ "$buildArch" == "aarch64-linux-gnu" ] || [ "$buildArch" == "x86_64-w64-mingw32" ]; then
         echo "source $workSpaceDir/$buildDir/conanbuild.sh"
         source $workSpaceDir/$buildDir/conanbuild.sh
     fi
@@ -103,7 +107,7 @@ function cmake_configure() {
     else
         # Kept for manual selection via existing CMake toolchain aarh64.cmake within the workspace
         toolchainFile="" # default
-        [[ $buildArch == "Aarch64" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
     fi
 
     # Compose CMake configure command
@@ -208,19 +212,20 @@ function Install() {
 }
 
 # TODO - implement
+# TODO - need refactor redundant code
+
 function ArchiveArtifacts() {
     local outputDir="ReleaseArtifacts"
     mkdir -p "$outputDir"
 
     # Architecture differencies - convert to common names
 
-    if [ "$buildArch" == "Native" ]; then
-        buildArchFilePart="x86_64-linux-gnu"
+    if [ "$buildArch" == "x86_64-linux-gnu" ]; then
 
         if [ "$1" == "true" ]; then
             local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
             local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
             if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
                 tarCommand+="lib$libraryName.a"
@@ -236,7 +241,7 @@ function ArchiveArtifacts() {
             local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
             # Version taken from Library CMakeLists.txt
             local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName"
             echo $tarCommand
             $tarCommand
@@ -244,13 +249,12 @@ function ArchiveArtifacts() {
 
     fi
 
-    if [ "$buildArch" == "Aarch64" ]; then
-        buildArchFilePart="aarch64-linux-gnu"
+    if [ "$buildArch" == "aarch64-linux-gnu" ]; then
 
         if [ "$1" == "true" ]; then
             local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
             local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
             if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
                 tarCommand+="lib$libraryName.a"
@@ -266,20 +270,19 @@ function ArchiveArtifacts() {
             local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
             # Version taken from Library CMakeLists.txt
             local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName"
             echo $tarCommand
             $tarCommand
         fi
     fi
 
-    if [ "$buildArch" == "Win64" ]; then
-        buildArchFilePart="x86_64-w64-mingw32"
+    if [ "$buildArch" == "x86_64-w64-mingw32" ]; then
 
         if [ "$1" == "true" ]; then
             local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
             local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
             if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
                 tarCommand+="lib$libraryName.a"
@@ -295,7 +298,7 @@ function ArchiveArtifacts() {
             local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
             # Version taken from Library CMakeLists.txt
             local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
-            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArch-$buildType.tar.gz"
             local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName.exe"
             echo $tarCommand
             $tarCommand
