@@ -161,6 +161,7 @@
                 "Clean 🧹",
                 "Install 📌",
                 "Licenses 📜",
+                "Archive Artifacts 📦",
                 " ",
                 "Build Standalone",
                 "Rebuild Standalone",
@@ -169,6 +170,7 @@
                 "Clean Standalone",
                 "Install Standalone",
                 "Licenses Standalone",
+                "Archive Artifacts Standalone",
                 " ",
                 "Build Library",
                 "Rebuild Library",
@@ -177,6 +179,8 @@
                 "Clean Library",
                 "Install Library",
                 "Licenses Library",
+                "Archive Artifacts Library"
+                
             ],
             "default": "Build 🔨"
         },

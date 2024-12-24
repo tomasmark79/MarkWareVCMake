@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
-# (c) Tomáš Mark 2024
+# ---- (c) Tomáš Mark 2024 ----
 
 # ---- Project Standalone namespace::name  ----
 set(PROJECT_STANDALONE_NAMESPACE dsdotname)
+
+# Project name - important!
+# Use ./TemplateRenamer.sh for rename Standalone and Library names
+# Script ./CMakeController.sh depends on this string regex pattern
 set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./TemplateRenamer.sh
 
 # ---- Generate Static/Shared targets (used by Conan as well) ----
