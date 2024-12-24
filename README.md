@@ -5,7 +5,7 @@ v0.0.5
 
 This solution represents a **Modern C/C++ Project Template** for professional software development.
 
-It integrates tools or is inspired by **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. It allows you to create a **Standalone Application** with a **library** *immediately*. It works natively on **Linux**, **Mac OS**, and **Windows**. It support **cross compilation**.
+It integrates tools and is inspired by **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. It allows you to create a **Standalone Application** with a **library** *immediately*. It works natively on **Linux**, **Mac OS**, and **Windows**. It supports **cross-compilation**.
 
 ### My Goal 🎯
 
