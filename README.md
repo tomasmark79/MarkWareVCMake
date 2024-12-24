@@ -1,13 +1,15 @@
 # MarkWare VCMake Template 🎁
 v0.0.5
 
-### Brief Description 📑
+### Description 📑
 
-This solution represents a **complete workflow** for **modern** C/C++ software development. It integrates tools such as **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more into a single functional unit. It allows you to create a **Standalone Application** and a **library** *immediately*.
+This solution represents a **Modern C/C++ Project Template** for professional software development.
+
+It integrates tools or is inspired by **VSCode**, **Conan**, **CMake**, **CPM.cmake**, **ModernCppStarter**, **TemplateRenamer**, **Formatters**, and more. It allows you to create a **Standalone Application** and a **library** *immediately*. It works natively on **Linux**, **Mac OS**, and **Windows**.
 
 ### My Goal 🎯
 
-To create a project template for myself that is flexible, works out of the box, and saves me a lot of time.
+To create a project template for myself that is flexible, works out of the box, and saves me a lot of time ⌚.
 
 ### The Result of my efforts 🧑🏻‍💻
 
@@ -65,7 +67,6 @@ are simple scripts that quickly reformat C/C++ and CMake files.
 
 ### Quick Start 💣
 
-
 https://github.com/user-attachments/assets/60b51d6a-1724-4b05-9cc8-94683e2f2131
 
 
@@ -104,6 +105,19 @@ The menu shows 3 variants of items:
 - for both targets
 - for Standalone
 - for Library
+
+At next level within menu you will meet architecture:
+
+- Native
+- Aarch64
+- Win64
+
+And built type:
+
+- Debug
+- Release
+- RelWithDebInfo
+- MinSizeRel
 
 ### Project filesystem structure description
 
@@ -160,7 +174,6 @@ Usage: ./TemplateRenamer.sh <old_lib_name> <new_lib_name> <old_standalone_name> 
 I still want to add:
 - 🚧 add installation CMake configuration
 - prepare list of commands for CLI-only workflow
-- port to MS Windows family OS
 - include some other features useful for developers
 
 ### My Code Codex

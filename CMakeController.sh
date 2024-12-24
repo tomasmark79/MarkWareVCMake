@@ -42,7 +42,7 @@ function conan_install() {
         return
     fi
 
-    # Cross-compilation
+    # Cross-compilation to Aarch64
     if [ "$buildArch" == "Aarch64" ]; then
         # Generate Static/Shared targets at simple level
         # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
@@ -62,6 +62,28 @@ function conan_install() {
 
         return
     fi
+
+    # Cross-compilation to Windows 64-bit
+    if [ "$buildArch" == "Win64" ]; then
+        # Generate Static/Shared targets at simple level
+        # taken from Library cmakelists.txt line 10: option(BUILD_SHARED_LIBS "Build using shared libraries" OFF or ON)
+        # default is "-o *:shared=False"
+        local buildSharedLibs=$(grep -oP 'BUILD_SHARED_LIBS\s+\KON' CMakeLists.txt)
+        [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
+
+        # compose Conan command
+        local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=x86_64-w64-mingw32 --settings=build_type=$buildType $buildSharedLibs"
+        echo $conanCommand
+
+        # Activate Python environment
+        source /home/tomas/.pyenv/versions/3.9.2/envs/env392/bin/activate # user should change this to their own Python environment
+
+        # Run Conan in env
+        $conanCommand || exit 1
+
+        return
+    fi
+
 }
 
 # Configure by CMake
@@ -70,7 +92,7 @@ function cmake_configure() {
     local buildDir=$2
 
     # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for Aarch64
-    if [ "$buildArch" == "Aarch64" ]; then
+    if [ "$buildArch" == "Aarch64" ] || [ "$buildArch" == "Win64" ]; then 
         echo "source $workSpaceDir/$buildDir/conanbuild.sh"
         source $workSpaceDir/$buildDir/conanbuild.sh
     fi
