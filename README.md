@@ -97,7 +97,7 @@ Each menu item is available in three variants:
 
 Within each menu item, you can select the architecture:
 
-- x86_64-linux-gnu
+- x86_64-linux-gnu (used by default Conan profile)
 - aarch64-linux-gnu
 - x86_64-w64-mingw32
 
