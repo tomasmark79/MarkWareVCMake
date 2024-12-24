@@ -55,7 +55,7 @@ function conan_install() {
         [[ $buildSharedLibs == "ON" ]] && buildSharedLibs="-o *:shared=True" || buildSharedLibs="-o *:shared=False"
 
         # compose Conan command
-        local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=aarch64 --settings=build_type=$buildType $buildSharedLibs"
+        local conanCommand="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=aarch64-linux-gnu --settings=build_type=$buildType $buildSharedLibs"
         echo $conanCommand
 
         # Activate Python environment
@@ -107,7 +107,7 @@ function cmake_configure() {
     else
         # Kept for manual selection via existing CMake toolchain aarh64.cmake within the workspace
         toolchainFile="" # default
-        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64.cmake"
+        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64-linux-gnu.cmake"
     fi
 
     # Compose CMake configure command
