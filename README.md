@@ -1,5 +1,5 @@
 # MarkWare VCMake Template 🎁
-v0.0.5
+v0.0.6
 
 ### Modern Configurable Project Template for C and C++ 🎁
 
@@ -87,6 +87,7 @@ Displays a menu with the following options:
 - **Clean**
 - **Install**
 - **Licenses**
+- **Archive Artifacts**
 
 Each menu item is available in three variants:
 

@@ -92,7 +92,7 @@ function cmake_configure() {
     local buildDir=$2
 
     # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for Aarch64
-    if [ "$buildArch" == "Aarch64" ] || [ "$buildArch" == "Win64" ]; then 
+    if [ "$buildArch" == "Aarch64" ] || [ "$buildArch" == "Win64" ]; then
         echo "source $workSpaceDir/$buildDir/conanbuild.sh"
         source $workSpaceDir/$buildDir/conanbuild.sh
     fi
@@ -207,6 +207,103 @@ function Install() {
     fi
 }
 
+# TODO - implement
+function ArchiveArtifacts() {
+    local outputDir="ReleaseArtifacts"
+    mkdir -p "$outputDir"
+
+    # Architecture differencies - convert to common names
+
+    if [ "$buildArch" == "Native" ]; then
+        buildArchFilePart="x86_64-linux-gnu"
+
+        if [ "$1" == "true" ]; then
+            local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
+            local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
+            if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
+                tarCommand+="lib$libraryName.a"
+            elif [ -f "$(get_build_dir Library)/lib$libraryName.so" ]; then
+                tarCommand+="lib$libraryName.so"
+            fi
+            echo $tarCommand
+            $tarCommand
+        fi
+
+        if [ "$2" == "true" ]; then
+            # Standalone
+            local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
+            # Version taken from Library CMakeLists.txt
+            local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName"
+            echo $tarCommand
+            $tarCommand
+        fi
+
+    fi
+
+    if [ "$buildArch" == "Aarch64" ]; then
+        buildArchFilePart="aarch64-linux-gnu"
+
+        if [ "$1" == "true" ]; then
+            local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
+            local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
+            if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
+                tarCommand+="lib$libraryName.a"
+            elif [ -f "$(get_build_dir Library)/lib$libraryName.so" ]; then
+                tarCommand+="lib$libraryName.so"
+            fi
+            echo $tarCommand
+            $tarCommand
+        fi
+
+        if [ "$2" == "true" ]; then
+            # Standalone
+            local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
+            # Version taken from Library CMakeLists.txt
+            local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName"
+            echo $tarCommand
+            $tarCommand
+        fi
+    fi
+
+    if [ "$buildArch" == "Win64" ]; then
+        buildArchFilePart="x86_64-w64-mingw32"
+
+        if [ "$1" == "true" ]; then
+            local libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
+            local libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local libraryArchiveName="$libraryName-$libraryVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$libraryArchiveName -C $(get_build_dir Library) "
+            if [ -f "$(get_build_dir Library)/lib$libraryName.a" ]; then
+                tarCommand+="lib$libraryName.a"
+            elif [ -f "$(get_build_dir Library)/lib$libraryName.dll" ]; then
+                tarCommand+="lib$libraryName.dll"
+            fi
+            echo $tarCommand
+            $tarCommand
+        fi
+
+        if [ "$2" == "true" ]; then
+            # Standalone
+            local standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
+            # Version taken from Library CMakeLists.txt
+            local standaloneVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
+            local standaloneArchiveName="$standaloneName-$standaloneVersion-$buildArchFilePart-$buildType.tar.gz"
+            local tarCommand="tar -czf $outputDir/$standaloneArchiveName -C $(get_build_dir Standalone) $standaloneName.exe"
+            echo $tarCommand
+            $tarCommand
+        fi
+    fi
+
+}
+
 # ---------------------------
 #   Task controller
 # ---------------------------
@@ -222,7 +319,7 @@ case $taskName in
     notify-send "This is only empty task"
     exit 0
     ;;
-    
+
 "Rebuild Library")
     Clean true false
     ConanInstall true false
@@ -328,6 +425,22 @@ case $taskName in
     ;;
 "Licenses 📜")
     BuildLicenses true true
+    exit 0
+    ;;
+
+# --- Archive Artifacts ---
+"Archive Artifacts Library")
+    ArchiveArtifacts true false
+    exit 0
+    ;;
+
+"Archive Artifacts Standalone")
+    ArchiveArtifacts false true
+    exit 0
+    ;;
+
+"Archive Artifacts 📦")
+    ArchiveArtifacts true true
     exit 0
     ;;
 

@@ -4,7 +4,11 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 # ---- Project Library namespace::name  ----
 set(PROJECT_LIBRARY_NAMESPACE dsdotname)
-set(PROJECT_LIBRARY_NAME VCMLib) # for change use ./TemplateRenamer.sh
+
+# Project name - important!
+# Use ./TemplateRenamer.sh for rename Standalone and Library names
+# Script ./CMakeController.sh depends on this string regex pattern
+set(PROJECT_LIBRARY_NAME VCMLib)
 
 # ---- Generate Static/Shared targets (used by Conan as well) ----
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
@@ -12,7 +16,7 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 # ---- Project ----
 project(
     ${PROJECT_LIBRARY_NAME}
-    VERSION 0.0.5
+    VERSION 0.0.6
     LANGUAGES C CXX ASM)
 
 # ---- Include guards ----
@@ -26,7 +30,7 @@ endif()
 # ---- CPMs  ----
 include(cmake/CPM.cmake)
 
-# include(cmake/Dependencies.cmake)
+# include(cmake/Dependencies.cmake) 
 cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 cpmaddpackage("gh:fmtlib/fmt#11.0.2")
 cpmaddpackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
