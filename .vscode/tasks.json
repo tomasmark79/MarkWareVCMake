@@ -189,11 +189,11 @@
             "type": "pickString",
             "description": "Select target architecture",
             "options": [
-                "Native",
-                "Aarch64",
-                "Win64"
+                "x86_64-linux-gnu",
+                "aarch64-linux-gnu",
+                "x86_64-w64-mingw32"
             ],
-            "default": "Native"
+            "default": "x86_64-linux-gnu" /* change regarding you are sitting */
         },
         {
             "id": "buildType",
