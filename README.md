@@ -113,50 +113,50 @@ And the build type:
 
 `tree -a --prune -I '.git|Build' --dirsfirst --gitignore`
 
-.
-├── cmake
-│   ├── Modules
-│   │   └── FindX11.cmake
-│   ├── CPM.cmake
-│   └── tools.cmake
-├── include
-│   └── VCMLib
-│       └── VCMLib.hpp
-├── MarkWareUtilities
-│   ├── CMakeToolChains
-│   │   ├── aarch64.cmake
-│   │   └── X86_64-w64-mingw32.cmake
-│   ├── ConanProfiles
-│   │   ├── aarch64
-│   │   ├── default
-│   │   └── x86_64-w64-mingw32
-│   ├── ConanPythonConfigurer
-│   │   └── conanfile.py
-│   └── AboutThisFolder.md
-├── Source
-│   └── VCMLib.cpp
-├── Standalone
-│   ├── Source
-│   │   └── Main.cpp
-│   ├── CMakeLists.txt
-│   └── LICENSE
-├── .vscode
-│   ├── c_cpp_properties.json
-│   ├── keybindings.json
-│   ├── launch.json
-│   ├── settings.json
-│   └── tasks.json
-├── .clang-format
-├── CMakeController.sh
-├── .cmake-format
-├── CMakeLists.txt
-├── conanfile.txt
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-├── .python-version
-├── README.md
-└── TemplateRenamer.sh
+.  
+├── cmake  
+│   ├── Modules  
+│   │   └── FindX11.cmake  
+│   ├── CPM.cmake  
+│   └── tools.cmake  
+├── include  
+│   └── VCMLib  
+│       └── VCMLib.hpp  
+├── MarkWareUtilities  
+│   ├── CMakeToolChains  
+│   │   ├── aarch64.cmake  
+│   │   └── X86_64-w64-mingw32.cmake  
+│   ├── ConanProfiles  
+│   │   ├── aarch64  
+│   │   ├── default  
+│   │   └── x86_64-w64-mingw32  
+│   ├── ConanPythonConfigurer  
+│   │   └── conanfile.py  
+│   └── AboutThisFolder.md  
+├── Source  
+│   └── VCMLib.cpp  
+├── Standalone  
+│   ├── Source  
+│   │   └── Main.cpp  
+│   ├── CMakeLists.txt  
+│   └── LICENSE  
+├── .vscode  
+│   ├── c_cpp_properties.json  
+│   ├── keybindings.json  
+│   ├── launch.json  
+│   ├── settings.json  
+│   └── tasks.json  
+├── .clang-format  
+├── CMakeController.sh  
+├── .cmake-format  
+├── CMakeLists.txt  
+├── conanfile.txt  
+├── .gitattributes  
+├── .gitignore  
+├── LICENSE  
+├── .python-version  
+├── README.md  
+└── TemplateRenamer.sh  
 
 ### Project Structure Description
 
