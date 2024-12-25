@@ -55,7 +55,7 @@
             "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
                 "Build 🔨",
-                "Native",
+                "x86_64-linux-gnu",
                 "Debug"
             ],
             "group": {
