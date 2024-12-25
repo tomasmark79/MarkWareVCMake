@@ -7,6 +7,7 @@ project(
     LANGUAGES C CXX ASM
     DESCRIPTION "Executable template by Tomáš Mark 2024"
     HOMEPAGE_URL "https://github.com/tomasmark79")
+
 # ---------------------------------
 
 # dep: conanInstall(), CPM.cmake
@@ -21,9 +22,21 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # ---- Mandatory CPMs  ----
-include(../cmake/CPM.cmake)
 include(../cmake/tools.cmake)
-cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+include(../cmake/CPM.cmake)
+cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+
+cpmaddpackage(
+    NAME
+    cxxopts
+    GITHUB_REPOSITORY
+    jarro2783/cxxopts
+    VERSION
+    3.2.1
+    OPTIONS
+    "CXXOPTS_BUILD_EXAMPLES OFF"
+    "CXXOPTS_BUILD_TESTS OFF"
+    "CXXOPTS_ENABLE_INSTALL OFF")
 
 # Glob not recommended, but the simplest way for this template
 file(
@@ -54,4 +67,8 @@ set_target_properties(${PROJECT_STANDALONE_NAME}
 
 target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
-# ---- Install ----
+# ---- Install Standalone configuration ----
+set(CMAKE_INSTALL_PREFIX
+    "${CMAKE_CURRENT_SOURCE_DIR}/../install/"
+    CACHE PATH "Installation Directory" FORCE)
+install(TARGETS ${PROJECT_STANDALONE_NAME} RUNTIME DESTINATION bin)
