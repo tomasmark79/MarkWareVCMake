@@ -24,8 +24,8 @@ This template offers a comprehensive solution for quickly starting development i
 
 - **Quick Start**: Ready to use immediately after cloning.
 - **Flexibility**: Supports the creation of applications with statically or dynamically linked libraries.
-- **Cross-Platform Support**: Works on Linux, macOS, and Windows.
-- **Cross-Compilation Support**: Enables compilation for various platforms.
+- **Cross-Platform Support**: Works on Linux 🐧, macOS 🍏, and Windows 🪟.
+- **Cross-Compilation Support**: Enables compilation for various platforms with help of Conan 2 and CMake.
 - **Modularity**: Easily extendable and customizable to meet project needs.
 
 ---
@@ -107,11 +107,11 @@ code .
 
 #### Ctrl + Alt + M
 
-- recursive CMake-format for CMake language files
+- recursive CMake-format for CMake based files
 
 #### Ctrl + Alt + F
 
-- recursive Clang-format for C/C++ language files 
+- recursive Clang-format for C++ based files
 
 #### Ctrl + Shift + Alt + B
 
@@ -150,7 +150,7 @@ code .
 ├── include
 │   └── VCMLib
 │       └── VCMLib.hpp
-├── MarkWareUtilities
+├── Utilities
 │   ├── CMakeToolChains
 │   │   ├── aarch64.cmake
 │   │   └── X86_64-w64-mingw32.cmake
@@ -201,7 +201,7 @@ code .
   - **VCMLib/**  
     Houses public header files for the core VCMLib library, exposing its functionality to other parts of the project.
 
-- **MarkWareUtilities/**
+- **Utilities/**
   - **CMakeToolChains/**  
     Includes toolchain files for cross-compiling (e.g., aarch64.cmake, X86_64-w64-mingw32.cmake).
   - **ConanProfiles/**  
