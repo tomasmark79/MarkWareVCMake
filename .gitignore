@@ -3,6 +3,7 @@
 /build*
 /CMakeFiles*
 /ReleaseArtefacts*
+/install*
 CMakeCache.txt
 CMakeUserPresets.json
 Settings.json
