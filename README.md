@@ -3,6 +3,7 @@ v0.0.6
 
 todo
 - install targets in CMakeLists.txt
+- missing license writting when Standalone
 
 
 ### Modern Configurable Project Template for C and C++ 🎁
