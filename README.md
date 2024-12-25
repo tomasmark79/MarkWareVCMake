@@ -1,6 +1,10 @@
 # MarkWare VCMake Template 🎁
 v0.0.6
 
+todo
+- install targets in CMakeLists.txt
+
+
 ### Modern Configurable Project Template for C and C++ 🎁
 
 This template offers a comprehensive solution for quickly starting development in C and C++. It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies. The template integrates the following components:
@@ -48,7 +52,7 @@ This template serves as an ideal starting point for developers who want to effic
 - **CMake**: [Download](https://cmake.org/download/) (mandatory)
 - **Python 3**: [Download](https://www.python.org/downloads/) (mandatory)
 - **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html) (mandatory)
-- **Compilers**: [GCC](https://gcc.gnu.org), [Clang](https://clang.llvm.org) (mandatory)
+- **Compilers**: [GCC](https://gcc.gnu.org) or [Clang](https://clang.llvm.org) (mandatory), ...
 - **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) (optional)
 - **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html) (optional)
 - **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io) (optional)
@@ -276,9 +280,3 @@ PayPal: paypal.me/TomasMark
 Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
-
----
-
-MIT License
-
-© 2024 Tomáš Mark
