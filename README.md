@@ -57,8 +57,7 @@ This template serves as an ideal starting point for developers who want to effic
 
 ### Quick Start 💣
 
-https://github.com/user-attachments/assets/60b51d6a-1724-4b05-9cc8-94683e2f2131
-
+https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
 ```bash
 # clone 
