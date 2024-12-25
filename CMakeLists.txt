@@ -25,19 +25,20 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # ---- Mandatory CPMs  ----
-include(cmake/CPM.cmake)
 include(cmake/tools.cmake)
+include(cmake/CPM.cmake)
 cpmaddpackage("gh:fmtlib/fmt#11.0.2")
 cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 cpmaddpackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
-# ---- Optional CPMs  ----
-cpmaddpackage("gh:tomasmark79/EmojiTools#main")
-cpmaddpackage("gh:nlohmann/json@3.11.3")
 
-# CPM.license target put at the end of all CPMs
+# ---- Optional CPMs  ----
+cpmaddpackage("gh:nlohmann/json@3.11.3")
+cpmaddpackage("gh:tomasmark79/EmojiTools#main")
+
+# put CPM.license target after all packages have been added
 cpm_licenses_create_disclaimer_target(
     write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
-    "${CPM_PACKAGES}" "/home/tomas/.conan2/")
+    "${CPM_PACKAGES}")
 
 # ---- CMake modules path ----
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
@@ -118,11 +119,10 @@ packageproject(
     BINARY_DIR
     ${PROJECT_BINARY_DIR}
     # location of the target's public headers
-    INCLUDE_DIR
-    ${PROJECT_SOURCE_DIR}/include
+    INCLUDE_DIR/include
     # should match the target's INSTALL_INTERFACE include directory
     INCLUDE_DESTINATION
-    include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}
+    include/${PROJECT_LIBRARY_NAME_LOWER}-${PROJECT_VERSION}
     # (optional) option to install only header files with matching pattern
     INCLUDE_HEADER_PATTERN
     "*.h"
@@ -134,10 +134,8 @@ packageproject(
     VERSION_HEADER
     "${PROJECT_LIBRARY_NAME_LOWER}/version.h"
     # (optional) create a export header using GenerateExportHeader module
-    EXPORT_HEADER
-    "${PROJECT_LIBRARY_NAME_LOWER}/export.h"
-    # (optional) install your library with a namespace (Note: do NOT add extra
-    # '::')
+    # EXPORT_HEADER "${PROJECT_LIBRARY_NAME_LOWER}/export.h" (optional) install
+    # your library with a namespace (Note: do NOT add extra '::')
     NAMESPACE
     ${PROJECT_LIBRARY_NAMESPACE}
     # (optional) define the project's version compatibility, defaults to
@@ -156,4 +154,9 @@ packageproject(
     CPACK
     YES)
 
-# ---- Install ---- TODO
+# ---- Install library configuration ----
+set(CMAKE_INSTALL_PREFIX
+    "${CMAKE_CURRENT_SOURCE_DIR}/install/"
+    CACHE PATH "Installation Directory" FORCE)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_LIBRARY_NAME}
+        DESTINATION include/)
