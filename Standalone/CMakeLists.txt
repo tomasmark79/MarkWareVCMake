@@ -1,17 +1,16 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
-# ---- Standalone Name ----
+# dep: conanInstall(), CPM.cmake
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
+# ---- Standalone name ----
+# dep: CMakeController.sh
 set(PROJECT_STANDALONE_NAME VCMStandalone)
 project(
     ${PROJECT_STANDALONE_NAME}
     LANGUAGES C CXX ASM
     DESCRIPTION "Executable template by Tomáš Mark 2024"
     HOMEPAGE_URL "https://github.com/tomasmark79")
-
-# ---------------------------------
-
-# dep: conanInstall(), CPM.cmake
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
@@ -24,19 +23,13 @@ endif()
 # ---- Mandatory CPMs  ----
 include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
-cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
-cpmaddpackage(
-    NAME
-    cxxopts
-    GITHUB_REPOSITORY
-    jarro2783/cxxopts
-    VERSION
-    3.2.1
-    OPTIONS
-    "CXXOPTS_BUILD_EXAMPLES OFF"
-    "CXXOPTS_BUILD_TESTS OFF"
-    "CXXOPTS_ENABLE_INSTALL OFF")
+CPMAddPackage(
+    NAME cxxopts
+    GITHUB_REPOSITORY jarro2783/cxxopts
+    VERSION 3.2.1
+    OPTIONS "CXXOPTS_BUILD_EXAMPLES OFF" "CXXOPTS_BUILD_TESTS OFF" "CXXOPTS_ENABLE_INSTALL OFF")
 
 # Glob not recommended, but the simplest way for this template
 file(
@@ -62,9 +55,9 @@ file(
 add_executable(${PROJECT_STANDALONE_NAME} ${sources})
 
 # ---- Standalone options ----
-set_target_properties(${PROJECT_STANDALONE_NAME}
-                      PROPERTIES OUTPUT_NAME "${PROJECT_STANDALONE_NAME}")
-
+set_target_properties(${PROJECT_STANDALONE_NAME} PROPERTIES OUTPUT_NAME
+                                                            "${PROJECT_STANDALONE_NAME}")
+# ---- link developed library ----
 target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
 # ---- Install Standalone ----
