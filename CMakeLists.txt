@@ -154,7 +154,7 @@ packageproject(
     CPACK
     YES)
 
-# ---- Install library configuration ----
+# ---- Install library ----
 set(CMAKE_INSTALL_PREFIX
     "${CMAKE_CURRENT_SOURCE_DIR}/install/"
     CACHE PATH "Installation Directory" FORCE)
