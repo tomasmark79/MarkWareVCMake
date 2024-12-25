@@ -8,7 +8,7 @@
 
 // Standalone main entry point
 
-auto main(int argc, char *argv[], char *env[]) -> int
+int main()
 {
     // init VCMLib instance
     std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>();

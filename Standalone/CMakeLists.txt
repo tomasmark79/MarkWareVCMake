@@ -1,42 +1,49 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
-# ---- (c) Tomáš Mark 2024 ----
+# ---- Standalone Name ----
+set(PROJECT_STANDALONE_NAME VCMStandalone)
+project(
+    ${PROJECT_STANDALONE_NAME}
+    LANGUAGES C CXX ASM
+    DESCRIPTION "Executable template by Tomáš Mark 2024"
+    HOMEPAGE_URL "https://github.com/tomasmark79")
+# ---------------------------------
 
-# ---- Project Standalone namespace::name  ----
-set(PROJECT_STANDALONE_NAMESPACE dsdotname)
-
-# Project name - important!
-# Use ./TemplateRenamer.sh for rename Standalone and Library names
-# Script ./CMakeController.sh depends on this string regex pattern
-set(PROJECT_STANDALONE_NAME VCMStandalone) # for change use ./TemplateRenamer.sh
-
-# ---- Generate Static/Shared targets (used by Conan as well) ----
+# dep: conanInstall(), CPM.cmake
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-
-# ---- Project ----
-project(${PROJECT_STANDALONE_NAME} LANGUAGES C CXX ASM)
 
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(
         FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+            "In-source builds not allowed. Please make a new directory (called a Build directory) and run CMake from there."
     )
 endif()
 
-# ---- CPMs -----
+# ---- Mandatory CPMs  ----
 include(../cmake/CPM.cmake)
 include(../cmake/tools.cmake)
-
-# ---- CMake Modules ----
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      "${PROJECT_SOURCE_DIR}../cmake/Modules")
-
-cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+cpmaddpackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 # Glob not recommended, but the simplest way for this template
-file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c)
+file(
+    GLOB_RECURSE
+    headers
+    CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
+
+# Glob not recommended, but the simplest way for this template
+file(
+    GLOB_RECURSE
+    sources
+    CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
 
 # ---- Create standalone executable ----
 add_executable(${PROJECT_STANDALONE_NAME} ${sources})

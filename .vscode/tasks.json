@@ -10,6 +10,25 @@
             "problemMatcher": []
         },
         {
+            /* shellcheck project *.sh */
+            "label": "shellcheck project bash scripts",
+            "type": "shell",
+            "command": "shellcheck",
+            "args": [
+                "${workspaceFolder}/CMakeController.sh",
+                "${workspaceFolder}/TemplateRenamer.sh"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "shellcheck project bash scripts",
+            "problemMatcher": [],
+            "dependsOn": [
+                "clear terminal"
+            ]
+        },
+        {
             /* MarkWare Tasks */
             "label": "MarkWare Tasks",
             "type": "shell",
@@ -153,34 +172,35 @@
             "type": "pickString",
             "description": "Select MarkWare Task",
             "options": [
-                "Build 🔨",
-                "Rebuild 🧹⚔️⚙️🔨",
-                " ",
-                "Configure ⚙️",
-                "Conan ⚔️",
+                "Zero to Hero 🦸",
                 "Clean 🧹",
-                "Install 📌",
-                "Licenses 📜",
-                "Archive Artifacts 📦",
-                " ",
-                "Build Standalone",
-                "Rebuild Standalone",
-                "Configure Standalone",
-                "Conan Standalone",
-                "Clean Standalone",
-                "Install Standalone",
-                "Licenses Standalone",
-                "Archive Artifacts Standalone",
-                " ",
-                "Build Library",
-                "Rebuild Library",
-                "Configure Library",
-                "Conan Library",
-                "Clean Library",
-                "Install Library",
-                "Licenses Library",
-                "Archive Artifacts Library"
-                
+                "Conan 🗡️",
+                "Configure 🔧",
+                "Build 🔨",
+                "Collect Licenses 📜",
+                "Install Artefacts 📌",
+                "Release Artefacts 📦",
+                "",
+                "📚 Zero to Hero 🦸",
+                "📚 Clean 🧹",
+                "📚 Conan 🗡️",
+                "📚 Configure 🔧",
+                "📚 Build 🔨",
+                "📚 Collect Licenses 📜",
+                "📚 Install Artefacts 📌",
+                "📚 Release Artefacts 📦",
+                "",
+                "🎯 Zero to Hero 🦸",
+                "🎯 Clean 🧹",
+                "🎯 Conan 🗡️",
+                "🎯 Configure 🔧",
+                "🎯 Build 🔨",
+                "🎯 Collect Licenses 📜",
+                "🎯 Install Artefacts 📌",
+                "🎯 Release Artefacts 📦",
+                "",
+                "Permutate All Tasks 🕧",
+
             ],
             "default": "Build 🔨"
         },

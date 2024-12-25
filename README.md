@@ -39,8 +39,12 @@ This template serves as an ideal starting point for developers who want to effic
 
 ### List of Dependencies 🔃
 
-- **Operating Systems**: Linux 🐧, macOS 🍎, Windows 🪟
 - **Visual Studio Code**: [Download](https://code.visualstudio.com) (mandatory)
+  Recomended extensions for VSCode
+  - natqe.reload | ms-vscode.cpptools | jeff-hykin.better-cpp-syntax | FleeXo.cpp-class-creator | amiralizadeh9480.cpp-helper | xaver.clang-format | josetr.cmake-language-support-vscode | ms-vscode-remote.remote-ssh | ms-vscode-remote.remote-ssh-edit | ms-vscode.remote-explorer | yzhang.markdown-all-in-one | shd101wyy.markdown-preview-enhanced
+
+####
+
 - **CMake**: [Download](https://cmake.org/download/) (mandatory)
 - **Python 3**: [Download](https://www.python.org/downloads/) (mandatory)
 - **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html) (mandatory)
@@ -66,42 +70,60 @@ code .
 
 ---
 
-### Integrated VSCode Tasks and Key Bindings
+### Implemented VSCode Tasks
+
+#### Shift + F7 - Task Menu
+
+|Task                    |  |Description
+|------------------------|--|-------------------------------------
+|**Zero to Hero**        |🦸|Clean -> Conan -> Configure -> Build
+|**Clean**               |🧹|Remove entire desired Build folder
+|**Conan**               |🗡️|Build Conan 2 dependencies
+|**Configure**           |🔧|CMake configuration
+|**Build**               |🔨|VMake build
+|**Collect Licenses**    |📜|from attached CPM.cmake packages
+|**Install Artefacts**   |📌|install to --install-prefix
+|**Release Artefacts**   |📦|release tar.gz archives
+|**Permutate All Tasks** |🕧|permutate throught all task scenarios
+
+###
+
+| Icons meaning     |  |Description
+|-------------------|--|----
+|**Library**        |📚| it only applies to the library
+|**Standalone**     |🎯| it only applies to the Standalone
 
 #### F5 - Debug
 
 - Initiates the debugging process.
 
 #### F7 - Build Native Debug
-
+ 
 - Directly builds the project without displaying a menu.
 
-#### Shift+F7 - Task Menu
+#### Ctrl + Alt + M
 
-Displays a menu with the following options:
+- recursive CMake-format for CMake language files
 
-- **Build**
-- **Rebuild**
-- **Configure**
-- **Conan**
-- **Clean**
-- **Install**
-- **Licenses**
-- **Archive Artifacts**
+#### Ctrl + Alt + F
 
-Each menu item is available in three variants:
+- recursive Clang-format for C/C++ language files 
 
-- For both targets
-- For Standalone
-- For Library
+#### Ctrl + Shift + Alt + B
 
-Within each menu item, you can select the architecture:
+- shellcheck project .sh scripts for `CmakeController.sh`, `TemplateRenamer.sh`
+
+---
+  
+### Default architectures
 
 - x86_64-linux-gnu (used by default Conan profile)
 - aarch64-linux-gnu
 - x86_64-w64-mingw32
 
-And the build type:
+---
+
+### Default build types
 
 - Debug
 - Release

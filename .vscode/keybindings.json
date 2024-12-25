@@ -35,4 +35,10 @@
         "command": "workbench.action.tasks.runTask",
         "args": "lint"
     },
+    {
+        "key": "ctrl+alt+shift+b",
+        "command": "workbench.action.tasks.runTask",
+        "args": "shellcheck project bash scripts"
+    }
+    
 ]
