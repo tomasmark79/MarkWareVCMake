@@ -1,10 +1,6 @@
 # MarkWare VCMake Template 🎁
 v0.0.6
 
-todo
-- missing license writting when Standalone
-- cpack in cooperation packageProject target
-
 ### Modern Configurable Project Template for C and C++ 🎁
 
 This template offers a comprehensive solution for quickly starting development in C and C++. It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies. The template integrates the following components:
@@ -280,3 +276,7 @@ PayPal: paypal.me/TomasMark
 Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
+
+### todo
+- missing license writting when Standalone
+- cpack in cooperation packageProject target
