@@ -67,7 +67,7 @@ set_target_properties(${PROJECT_STANDALONE_NAME}
 
 target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
-# ---- Install Standalone configuration ----
+# ---- Install Standalone ----
 set(CMAKE_INSTALL_PREFIX
     "${CMAKE_CURRENT_SOURCE_DIR}/../install/"
     CACHE PATH "Installation Directory" FORCE)
