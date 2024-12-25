@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 # dep: conanInstall(), CPM.cmake
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# ---- Library name ----
+# ---- User definition of Library name, namespace, and install prefix ----
 # dep: CMakeController.sh
 set(PROJECT_LIBRARY_NAMESPACE dsdotname)
 set(PROJECT_LIBRARY_NAME VCMLib)
@@ -133,8 +133,8 @@ packageProject(
     # (optional) option to generate CPack variables
     CPACK YES)
 
-# ---- Install library ----
-set(CMAKE_INSTALL_PREFIX
-    "${CMAKE_CURRENT_SOURCE_DIR}/install/"
-    CACHE PATH "Installation Directory" FORCE)
+# ---- Set installation directory ----
+# set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/Build/Installed/" CACHE PATH "Installation
+# Directory" FORCE)
+
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_LIBRARY_NAME} DESTINATION include/)

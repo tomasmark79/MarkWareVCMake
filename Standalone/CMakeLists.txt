@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 # dep: conanInstall(), CPM.cmake
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# ---- Standalone name ----
+# ---- User definition of Standalone name, and install prefix ----
 # dep: CMakeController.sh
 set(PROJECT_STANDALONE_NAME VCMStandalone)
 project(
@@ -60,8 +60,7 @@ set_target_properties(${PROJECT_STANDALONE_NAME} PROPERTIES OUTPUT_NAME
 # ---- link developed library ----
 target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
-# ---- Install Standalone ----
-set(CMAKE_INSTALL_PREFIX
-    "${CMAKE_CURRENT_SOURCE_DIR}/../install/"
-    CACHE PATH "Installation Directory" FORCE)
+# ---- Set installation directory ----
+# set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/../Build/Installed/" CACHE PATH
+# "Installation Directory" FORCE)
 install(TARGETS ${PROJECT_STANDALONE_NAME} RUNTIME DESTINATION bin)
