@@ -20,7 +20,7 @@ This template offers a comprehensive solution for quickly starting development i
 
 - **Quick Start**: Ready to use immediately after cloning.
 - **Flexibility**: Supports the creation of applications with statically or dynamically linked libraries.
-- **Cross-Platform Support**: Works on Linux 🐧, macOS 🍏, and Windows 🪟.
+- **Cross-Platform Support**: Works on Linux 🐧, macOS 🍏. 
 - **Cross-Compilation Support**: Enables compilation for various platforms with help of Conan 2 and CMake.
 - **Modularity**: Easily extendable and customizable to meet project needs.
 
@@ -279,3 +279,4 @@ Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ### todo
 - missing license writting when Standalone
 - cpack in cooperation packageProject target
+- port workflow bash scripts to windows (PowerShell?)
