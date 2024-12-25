@@ -79,7 +79,11 @@ function cmakeConfigure() {
     fi
 
     # Compose CMake configure command
+    
+    #TODO: Add sanitizers and static analyzers
+    # -DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>
     # local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DUSE_SANITIZER=Address -DUSE_STATIC_ANALYZER=clang-tidy -DUSE_CCACHE=YES"
+    
     local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType"
     echo "$configureCommand"
 
