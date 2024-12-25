@@ -1,67 +1,52 @@
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
-# ---- (c) Tomáš Mark 2024 ----
-
-# ---- Project Library namespace::name  ----
+# ---- Library NameSpace::Name ----
 set(PROJECT_LIBRARY_NAMESPACE dsdotname)
-
-# Project name - important!
-# Use ./TemplateRenamer.sh for rename Standalone and Library names
-# Script ./CMakeController.sh depends on this string regex pattern
 set(PROJECT_LIBRARY_NAME VCMLib)
-
-# ---- Generate Static/Shared targets (used by Conan as well) ----
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-
-# ---- Project ----
 project(
     ${PROJECT_LIBRARY_NAME}
     VERSION 0.0.6
-    LANGUAGES C CXX ASM)
+    LANGUAGES C CXX ASM
+    DESCRIPTION
+        "library template Copyright (c) 2024 TomasMark [at] digitalspace.name"
+    HOMEPAGE_URL "https://github.com/tomasmark79")
+
+# ---------------------------------
+
+# dep: conanInstall(), CPM.cmake
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(
         FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+            "In-source builds not allowed. Please make a new directory (called a Build directory) and run CMake from there."
     )
 endif()
 
-# ---- CPMs  ----
+# ---- Mandatory CPMs  ----
 include(cmake/CPM.cmake)
-
-# include(cmake/Dependencies.cmake) 
-cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.12.0")
+include(cmake/tools.cmake)
 cpmaddpackage("gh:fmtlib/fmt#11.0.2")
+cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 cpmaddpackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
+# ---- Optional CPMs  ----
+cpmaddpackage("gh:tomasmark79/EmojiTools#main")
 cpmaddpackage("gh:nlohmann/json@3.11.3")
 
-if(CPMLicenses.cmake_ADDED)
-    cpm_licenses_create_disclaimer_target(
-        write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
-        "${CPM_PACKAGES}")
-endif()
+# CPM.license target put at the end of all CPMs
+cpm_licenses_create_disclaimer_target(
+    write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
+    "${CPM_PACKAGES}" "/home/tomas/.conan2/")
 
-cpmaddpackage(
-    NAME
-    EmojiTools
-    GITHUB_REPOSITORY
-    tomasmark79/EmojiTools
-    GIT_TAG
-    main
-    OPTIONS
-    "EMOJI_INSTALL NO")
-
-# ---- CMake Modules ----
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      "${PROJECT_SOURCE_DIR}/cmake/Modules")
+# ---- CMake modules path ----
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 find_package(Threads REQUIRED)
 find_package(X11 REQUIRED)
 
 # ---- Conan ----
-# find_package(dpp CONFIG REQUIRED) # CONFIG means find_package require
-# dpp-config.cmake file
+# find_package(dpp CONFIG REQUIRED)
 find_package(BZip2 REQUIRED)
 find_package(CURL REQUIRED)
 
@@ -104,7 +89,7 @@ target_include_directories(
         $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
         # PRIVATE ${PROJECT_SOURCE_DIR}/Source # for headers in Source folder
     PRIVATE ${nlohmann_json_SOURCE_DIR}/include # by CPM.cmake for
-                                                # nlohmann/json.hpp
+    # nlohmann/json.hpp
 )
 
 # being a cross-platform target, we enforce standards conformance on MSVC

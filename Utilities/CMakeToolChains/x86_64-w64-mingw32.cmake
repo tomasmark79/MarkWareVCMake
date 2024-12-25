@@ -18,8 +18,7 @@ set(CMAKE_ASM_COMPILER
     /home/tomas/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-as)
 set(CMAKE_LINKER
     /home/tomas/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ld)
-set(CMAKE_AR
-    /home/tomas/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ar)
+set(CMAKE_AR /home/tomas/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ar)
 set(CMAKE_RANLIB
     /home/tomas/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ranlib)
 set(CMAKE_STRIP
@@ -41,5 +40,3 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 # Set the path for pkg-config
 set(ENV{PKG_CONFIG_PATH}
     "${CMAKE_SYSROOT}/usr/lib/pkgconfig:${CMAKE_SYSROOT}/usr/share/pkgconfig")
-
-
