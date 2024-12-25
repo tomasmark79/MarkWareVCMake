@@ -86,7 +86,7 @@ code .
 |**Configure**           |🔧|CMake configuration
 |**Build**               |🔨|VMake build
 |**Collect Licenses**    |📜|from attached CPM.cmake packages
-|**Install Artefacts**   |📌|install to --install-prefix
+|**Install Artefacts**   |📌|install to `/Build/Installed/*`
 |**Release Artefacts**   |📦|release tar.gz archives
 |**Permutate All Tasks** |🕧|permutate throught all task scenarios
 
