@@ -115,7 +115,7 @@ pip install conan
 conan profile detect --force
 ```
 
-If conan have found compiler configuration is done.
+### If conan have found compiler configuration is done.
 
 ```bash
 # clone solution to folder ./AwesomeLibraryWithStandalone
@@ -131,6 +131,35 @@ cd AwesomeLibraryWithStandalone/
 
 code .
 ```
+### Cross-Compilation 🤩 How-To 🍒
+
+It’s easier than you might think! All you need for cross-compilation is a properly configured toolchain for the target platform. Once this requirement is met, the project will handle the rest, leveraging cross-compilation to its fullest potential.
+
+Everything starts and ends with creating the toolchain, and for that, we use the **ng-crosstool** utility.
+
+#### Cross-Compiling to Windows 64-bit
+
+As an example, here’s how to set up a configuration for building binary targets for the Windows 64-bit OS:  
+
+1. **Install the ng-crosstool utility**:  
+   ```bash
+   pip install ng-crosstool
+   ```
+
+2. **Generate a toolchain file**:  
+   Use `ng-crosstool` to create the configuration for the target platform.  
+
+3. **Update your CMake configuration**:  
+   Point to the generated toolchain file when configuring the build.  
+
+4. **Build your project**:  
+   Run the CMake build system as usual, and the toolchain will handle the cross-compilation.  
+
+This process allows you to seamlessly compile your project for different platforms without needing native access to the target environment.
+
+
+
+
 
 ---
 
