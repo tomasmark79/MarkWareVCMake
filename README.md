@@ -404,13 +404,10 @@ And that’s it. 💆🏻  The template already knows the `x86_64-w64-mingw32` a
 - **Python 3**: [Download](https://www.python.org/downloads/)
 - **Pyenv**: [Download](https://github.com/pyenv/pyenv)
 - **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html)
-- **Compilers**:
-  - [GCC](https://gcc.gnu.org)
-  - [Clang](https://clang.llvm.org),
-  - ...
+- **Compilers**: [GCC](https://gcc.gnu.org),[Clang](https://clang.llvm.org), ...
 - **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) 
 - **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html)
-- **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io)
+- **Cross-Compilation with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io)
 
 ---
 
