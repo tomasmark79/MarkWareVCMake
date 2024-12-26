@@ -54,7 +54,7 @@ This template serves as an ideal starting point for developers who want to effic
 
 # FAQ
 
-### Why not use the CMake extension by Microsoft in VS Code? 🤷🏻‍♂️
+##### Why not use the CMake extension by Microsoft in VS Code? 🤷🏻‍♂️
 
 😏 While the existing CMake extension is adequate for simple native scenarios, it falls short when it comes to cross-compilation. It lacks the reliability needed for more complex, cross-platform development tasks.
 
