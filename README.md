@@ -75,14 +75,18 @@ wsl --list --online
 wsl --install Debian
 wsl --set-default-version 2
 shutdown /r
+```
 
-# Start Debian
+Start Debian and
+
+```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install cmake python3-pip curl git -y
-
+sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev 
 # pyenv for Python venv support
 curl https://pyenv.run | bash
 pyenv install 3.9.2
+pyenv local 3.9.2
+pyenv prefix
 
 
 
