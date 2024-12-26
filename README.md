@@ -93,7 +93,9 @@ Afterwards, your VSCode editor will be connected to the WSL environment.
 
 # required apt packages 
 sudo apt update && sudo apt upgrade -y
-sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
+sudo apt install cmake python3-pip curl git libssl-dev \
+libbz2-dev libcurses-ocaml-dev build-essential libffi-dev \
+libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
 # install and configure pyenv
 curl https://pyenv.run | bash
@@ -104,15 +106,30 @@ pip install --upgrade pip
 # install latest conan
 pip install conan
 
+# create default conan profile
+conan profile detect --force
+```
+
+If conan have found compiler configuration is done.
+
+```bash
 # clone template project
 git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
 cd NameOfMyAwesomeApp/
+
+# use renamer if you want
 ./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
 
-# launch Visual Studio Code from current folder
+# and finally launch Visual Studio Code from the current folder
+
 code .
 
 ```
+
+# That's all. 
+
+🚀 From this point, you have a fully functional solution whether you are on Linux, macOS, or Windows.
+
 
 ### Implemented VSCode Tasks
 
