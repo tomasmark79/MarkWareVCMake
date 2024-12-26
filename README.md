@@ -20,7 +20,7 @@ This template offers a comprehensive solution for quickly starting development i
 
 - **Quick Start**: Ready to use immediately after cloning.
 - **Flexibility**: Supports the creation of applications with statically or dynamically linked libraries.
-- **Cross-Platform Support**: Works on Linux 🐧, macOS 🍏. 
+- **Cross-Platform Support**: Works natively on Linux 🐧, macOS 🍏 and on Windows via WSL 🪟. 
 - **Cross-Compilation Support**: Enables compilation for various platforms with help of Conan 2 and CMake.
 - **Modularity**: Easily extendable and customizable to meet project needs.
 
@@ -79,9 +79,13 @@ shutdown /r
 
 In Debian bash under Windows WSL2
 
+In Windows WSL bash
 ```bash
+
+# install essentials via apt package manager
 sudo apt update && sudo apt upgrade -y
 sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev 
+
 # pyenv for Python venv support
 curl https://pyenv.run | bash
 pyenv install 3.9.2
@@ -89,23 +93,22 @@ pyenv local 3.9.2
 pyenv global 3.9.2
 pyenv prefix
 pyenv virtualenv 3.9.2 env392
-pip install conan
 pip install --upgrade pip
-# create projects folder on Windows fs
-mkdir /mnt/c/dev
-cd /mnt/c/dev
-# clone
-git clone https://github.com/tomasmark79/MarkWareVCMake ./MyAwesomeApp 
-cd MyAwesomeApp/
+
+# install latest conan
+pip install conan
+
+# clone project to Windows filesystem
+git clone https://github.com/tomasmark79/MarkWareVCMake /mnt/c/dev/MyAwesomeApp
+cd /mnt/c/dev/MyAwesomeApp
+
 ```
-
-- Open VSCode in Windows
-- Open folder with the project from C:\Dev\...
-- Copy keybindings.json from .vscode to system keybinding settings by ctrl+shift+p and by selecting task "Preferences: Open Keyboard Shortcut (JSON).
-- VSCode will trying to offer you install CMake tools. Don't install recomended CMakeTools. You don't need them.
-- 
-
-
+In Windows UI
+- Open VSCode
+- Install extension for WSL connection support  (id: ms-vscode-remote.remote-wsl)
+- In tasks select and run `WSL> Connect to WSL`
+  
+And Enjoy! 🚀 You are with your VSCode within the WSL environemt as you are sitting within Linux OS.
 
 ---
 
