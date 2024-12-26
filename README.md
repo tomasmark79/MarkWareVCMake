@@ -21,8 +21,8 @@ If you love working in C/C++ and are at home in Linux, this is something you abs
 ### Benefits
 
 - **Quick Start**: Ready to use immediately after cloning (only initial environment setup required).  
+- **Native Linux C/C++ Debugging**: Enables seamless step-by-step debugging.  
 - **Cross-Platform Support**: Runs natively on Linux 🐧, macOS 🍏, and Windows via WSL 🪟.  
-- **Native C/C++ Debugging**: Enables seamless step-by-step debugging, regardless of the operating system used for development.  
 - **Cross-Compilation Support**: Facilitates compilation for multiple platforms with the help of Conan 2 and CMake.  
 - **Modularity**: Easily extendable and customizable to meet your project's unique requirements.  
 
@@ -58,24 +58,6 @@ https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
 ---
 
-### List of Dependencies 🔃
-
-- **Visual Studio Code**: [Download](https://code.visualstudio.com) (mandatory)
-  Recomended extensions for VSCode
-  - natqe.reload | ms-vscode.cpptools | jeff-hykin.better-cpp-syntax | FleeXo.cpp-class-creator | amiralizadeh9480.cpp-helper | xaver.clang-format | josetr.cmake-language-support-vscode | ms-vscode-remote.remote-ssh | ms-vscode-remote.remote-ssh-edit | ms-vscode.remote-explorer | yzhang.markdown-all-in-one | shd101wyy.markdown-preview-enhanced
-
-####
-
-- **CMake**: [Download](https://cmake.org/download/) (mandatory)
-- **Python 3**: [Download](https://www.python.org/downloads/) (mandatory)
-- **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html) (mandatory)
-- **Compilers**: [GCC](https://gcc.gnu.org) or [Clang](https://clang.llvm.org) (mandatory), ...
-- **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) (optional)
-- **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html) (optional)
-- **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io) (optional)
-
----
-
 ### Prepare development environment
 
 This template solution can be used on virtually any platform. **On Linux and macOS, it is essentially a native solution**. If you are on **Windows**, you only **need to enable WSL**, install a distribution such as Debian, and then connect to it in the VSCode editor using the **WSL extension**. VSCode on Windows will then behave as if it were installed directly on Linux. The **Quick Start below are common to all existing platforms**. On Windows, you will just use the aforementioned WSL interface.
@@ -106,42 +88,48 @@ Afterwards, your VSCode editor will be connected to the WSL environment.
 7. Let's continue to the **Quick Start** section, which is the same for all platforms.
 ---
 
-### Quick Start
+### Quick Start all operating systems
 
 ```bash
 
-# required apt packages 
+# required apt packages
+
 sudo apt update && sudo apt upgrade -y
 sudo apt install cmake python3-pip curl git libssl-dev \
 libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev \
 libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
 # install and configure pyenv
+
 curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv virtualenv 3.9.2 env392
 pip install --upgrade pip
 
 # install latest conan
+
 pip install conan
 
 # create default conan profile
+
 conan profile detect --force
 ```
 
 If conan have found compiler configuration is done.
 
 ```bash
-# clone template project
-git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
-cd NameOfMyAwesomeApp/
+# clone solution to folder ./AwesomeLibraryWithStandalone
 
-# use renamer if you want
+git clone https://github.com/tomasmark79/MarkWareVCMake ./AwesomeLibraryWithStandalone
+cd AwesomeLibraryWithStandalone/
+
+# rename library and standalone to your fit
+
 ./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
 
-# and finally launch Visual Studio Code from the current folder
-code .
+# and finally
 
+code .
 ```
 
 ---
@@ -337,6 +325,29 @@ code .
   Script used to rename or customize template components across the project.
 
 ---
+
+### Odkazy a dokumentace k použitým technologiím
+
+- **Visual Studio Code**: [Download](https://code.visualstudio.com)
+  Recomended extensions for VSCode
+  - natqe.reload | ms-vscode.cpptools | jeff-hykin.better-cpp-syntax | FleeXo.cpp-class-creator | amiralizadeh9480.cpp-helper | xaver.clang-format | josetr.cmake-language-support-vscode | ms-vscode-remote.remote-ssh | ms-vscode-remote.remote-ssh-edit | ms-vscode.remote-explorer | yzhang.markdown-all-in-one | shd101wyy.markdown-preview-enhanced
+
+####
+
+- **CMake**: [Download](https://cmake.org/download/)
+- **Python 3**: [Download](https://www.python.org/downloads/)
+- **Pyenv**: [Download](https://github.com/pyenv/pyenv)
+- **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html)
+- **Compilers**:
+  - [GCC](https://gcc.gnu.org)
+  - [Clang](https://clang.llvm.org),
+  - ...
+- **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) 
+- **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html)
+- **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io)
+
+---
+
 
 ### Acknowledgements
 
