@@ -91,27 +91,22 @@ Afterwards, your VSCode editor will be connected to the WSL environment.
 ### Quick Start all operating systems
 
 ```bash
-
 # required apt packages
-
 sudo apt update && sudo apt upgrade -y
 sudo apt install cmake python3-pip curl git libssl-dev \
 libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev \
 libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
 # install and configure pyenv
-
 curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv virtualenv 3.9.2 env392
 pip install --upgrade pip
 
 # install latest conan
-
 pip install conan
 
 # create default conan profile
-
 conan profile detect --force
 ```
 
@@ -131,6 +126,8 @@ cd AwesomeLibraryWithStandalone/
 
 code .
 ```
+---
+
 ### Cross-Compilation 🤩 How-To 🍒
 
 It’s easier than you might think! All you need for cross-compilation is a properly configured toolchain for the target platform. Once this requirement is met, the project will handle the rest, leveraging cross-compilation to its fullest potential.
@@ -139,27 +136,63 @@ Everything starts and ends with creating the toolchain, and for that, we use the
 
 #### Cross-Compiling to Windows 64-bit
 
-As an example, here’s how to set up a configuration for building binary targets for the Windows 64-bit OS:  
+As an example, here’s how to set up a configuration for building binary targets for the Windows 64-bit OS:
 
-1. **Install the ng-crosstool utility**:  
-   ```bash
-   pip install ng-crosstool
-   ```
+In the bash console:
 
-2. **Generate a toolchain file**:  
-   Use `ng-crosstool` to create the configuration for the target platform.  
+```bash
+# Install the ng-crosstool utility
+pip install ng-crosstool
 
-3. **Update your CMake configuration**:  
-   Point to the generated toolchain file when configuring the build.  
+# List available target architectures
+ct-ng list-samples
 
-4. **Build your project**:  
-   Run the CMake build system as usual, and the toolchain will handle the cross-compilation.  
+# Import configuration to the ct configurator
+ct-ng x86_64-w64-mingw32
 
-This process allows you to seamlessly compile your project for different platforms without needing native access to the target environment.
+# Use menu to configure your toolchain
+ct-ng menuconfig
 
+# And build the toolchain ☕
+ct-ng build
+```
 
+Creating the toolchain takes ages, so treat yourself to something good to eat in the meantime. 🙂  
+Finally, this process allows you to seamlessly compile your project for different platforms without needing native access to the target environment.
 
+If you kept the default output settings, you’ll find your new toolchain at: `~/x-tools/`.
 
+Now for the final step: we need to tell Conan about the new toolchain.  
+
+Create a new profile file for Conan, typically located in `~/.conan2/profiles`.  
+
+The file will be named `x86_64-w64-mingw32` and should contain:
+
+```ini
+[settings]
+os=Windows
+arch=x86_64
+compiler=gcc
+compiler.cppstd=17
+compiler.libcxx=libstdc++11
+compiler.version=13
+build_type=Release
+
+[buildenv]
+CMAKE_SYSROOT=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/x86_64-w64-mingw32/sys-root
+CC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-gcc
+CXX=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-g++
+LD=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ld
+AR=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ar
+AS=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-as
+RANLIB=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ranlib
+STRIP=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-strip
+RC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-windres
+```
+
+And that’s it. 💆🏻  
+
+The template already knows the `x86_64-w64-mingw32` architecture profile from the start. You can now select it when performing any task.
 
 ---
 
