@@ -1,5 +1,5 @@
 # MarkWare VCMake Template 🎁
-v0.0.6
+v0.0.7
 
 ### Modern Configurable Project Template for C and C++ 🎁
 
