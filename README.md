@@ -62,33 +62,11 @@ https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
 This template solution can be used on virtually any platform. **On Linux and macOS, it is essentially a native solution**. If you are on **Windows**, you only **need to enable WSL**, install a distribution such as Debian, and then connect to it in the VSCode editor using the **WSL extension**. VSCode on Windows will then behave as if it were installed directly on Linux. The **Quick Start below are common to all existing platforms**. On Windows, you will just use the aforementioned WSL interface.
 
-```bash
+---
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
+### Windows user? You need to activate WSL - folow those steps
 
-# pyenv for Python venv support
-curl https://pyenv.run | bash
-pyenv install 3.9.2
-pyenv local 3.9.2
-pyenv global 3.9.2
-pyenv prefix
-pyenv virtualenv 3.9.2 env392
-pip install --upgrade pip
-
-# install latest conan
-pip install conan
-
-# clone 
-git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
-cd NameOfMyAwesomeApp/
-./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
-code .
-```
-
-### Quick Start Windows
-
-In Windows powershell as Administrator
+In Windows powershell console as Administrator run those commands
 
 ```powershell
 wsl --install
@@ -98,43 +76,43 @@ wsl --set-default-version 2
 shutdown /r
 ```
 
-In Debian bash under Windows WSL2
+After restarting your Windows, you need to install the required VSCode extension for Remote WSL connection.
+1. In VSCode, install the extension (id: ms-vscode-remote.remote-wsl).
+2. In VSCode, run the task `WSL: Connect to WSL`.
+
+Afterwards, your VSCode editor will be connected to the WSL environment.
+
+3. Finally, open the project template folder `/mnt/c/dev/MyAwesomeApp` in VSCode.
+4. Close VSCode
+5. Continue to the **Quick Start** section to install all required software in shell.
+---
+
+### Quick Start
 
 ```bash
 
-# install essentials via apt package manager
+# required apt packages 
 sudo apt update && sudo apt upgrade -y
-sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev 
+sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
-# pyenv for Python venv support
+# install and configure pyenv
 curl https://pyenv.run | bash
 pyenv install 3.9.2
-pyenv local 3.9.2
-pyenv global 3.9.2
-pyenv prefix
 pyenv virtualenv 3.9.2 env392
 pip install --upgrade pip
 
 # install latest conan
 pip install conan
 
-# clone project to Windows filesystem
-git clone https://github.com/tomasmark79/MarkWareVCMake /mnt/c/dev/MyAwesomeApp
-cd /mnt/c/dev/MyAwesomeApp
+# clone template project
+git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
+cd NameOfMyAwesomeApp/
+./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
+
+# launch Visual Studio Code from current folder
+code .
+
 ```
-
-In Windows UI
-- Open VSCode
-- Install extension for WSL connection support  (id: ms-vscode-remote.remote-wsl)
-- In tasks select and run `WSL> Connect to WSL`
-- Open project folder from /mnt/c/dev/MyAwesomeApp
-  
-And Enjoy! 🚀 You are with your VSCode within the WSL environemt as you are sitting within Linux OS.
-
-You need to continue settings your Conan 2 profiles, etc. This all is the same as for native Linux, or Mac.
-
-
----
 
 ### Implemented VSCode Tasks
 
