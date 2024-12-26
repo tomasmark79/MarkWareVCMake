@@ -86,7 +86,9 @@ sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocam
 curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv local 3.9.2
+pyenv global 3.9.2
 pyenv prefix
+pyenv virtualenv 3.9.2 env392
 # create projects folder on Windows fs
 mkdir /mnt/c/dev
 cd /mnt/c/dev
