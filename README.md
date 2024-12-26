@@ -30,25 +30,25 @@ This template is designed for maximum customization, making it easier to create 
 
 ### Integrated template configurations
 
-- **Visual Studio Code**: Preconfigured settings for a streamlined development experience.
+- **Visual Studio Code**: Preconfigured settings for a streamlined development experience.  
   https://code.visualstudio.com/
-- **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.
+- **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.  
   https://docs.conan.io
-- **Modern CMake**: Leverages advanced configuration and build practices for modern development.
+- **Modern CMake**: Leverages advanced configuration and build practices for modern development.  
   https://cmake.org/download/
-- **Python 3**:
+- **Python 3**:  
   https://www.python.org/downloads/
-- **Pyenv**:
+- **Pyenv**:  
   https://github.com/pyenv/pyenv
-- **CPM.cmake**: Lightweight dependency management without external installations.
+- **CPM.cmake**: Lightweight dependency management without external installations.  
   - https://github.com/cpm-cmake/CPM.cmake
-- **CPM.license**: Automates third-party license management.
+- **CPM.license**: Automates third-party license management.  
   https://github.com/cpm-cmake/CPMLicenses.cmake
-- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.
+- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
   https://github.com/TheLartians/ModernCppStarter
-- **Clang and CMake Formatters**: Ensures clean, consistent code and build script formatting.
+- **Clang and CMake Formatters**: Ensures clean, consistent code and build script formatting.  
   https://clang.llvm.org/docs/ClangFormat.html
-  https://cmake-format.readthedocs.io/en/latest/
+  https://cmake-format.readthedocs.io/en/latest/  
 
 ---
 
