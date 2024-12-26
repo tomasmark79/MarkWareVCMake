@@ -36,12 +36,12 @@ This template is designed for maximum customization, making it easier to create 
   https://docs.conan.io
 - **Modern CMake**: Leverages advanced configuration and build practices for modern development.  
   https://cmake.org/download/
-- **Python 3**:  
+- **Python 3**: Everybody know what is this Python.  
   https://www.python.org/downloads/
-- **Pyenv**:  
+- **Pyenv**: Simple Python Version Management.  
   https://github.com/pyenv/pyenv
 - **CPM.cmake**: Lightweight dependency management without external installations.  
-  - https://github.com/cpm-cmake/CPM.cmake
+  https://github.com/cpm-cmake/CPM.cmake
 - **CPM.license**: Automates third-party license management.  
   https://github.com/cpm-cmake/CPMLicenses.cmake
 - **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
