@@ -52,7 +52,7 @@ This template serves as an ideal starting point for developers who want to effic
 
 ---
 
-### Workflow video presentation
+### Project Video Tour (en subtitles)
 
 https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
