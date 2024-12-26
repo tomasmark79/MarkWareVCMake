@@ -30,14 +30,25 @@ This template is designed for maximum customization, making it easier to create 
 
 ### Integrated template configurations
 
-- **Visual Studio Code**: Preconfigured settings for a streamlined development experience.  
-- **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.  
-- **Modern CMake**: Leverages advanced configuration and build practices for modern development.  
-- **CPM.cmake**: Lightweight dependency management without external installations.  
-- **CPM.license**: Automates third-party license management.  
-- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
-- **TemplateRenamer**: Simplifies renaming the template to align with your project.  
-- **Clang and CMake Formatters**: Ensures clean, consistent code and build script formatting.  
+- **Visual Studio Code**: Preconfigured settings for a streamlined development experience.
+  https://code.visualstudio.com/
+- **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.
+  https://docs.conan.io
+- **Modern CMake**: Leverages advanced configuration and build practices for modern development.
+  https://cmake.org/download/
+- **Python 3**:
+  https://www.python.org/downloads/
+- **Pyenv**:
+  https://github.com/pyenv/pyenv
+- **CPM.cmake**: Lightweight dependency management without external installations.
+  - https://github.com/cpm-cmake/CPM.cmake
+- **CPM.license**: Automates third-party license management.
+  https://github.com/cpm-cmake/CPMLicenses.cmake
+- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.
+  https://github.com/TheLartians/ModernCppStarter
+- **Clang and CMake Formatters**: Ensures clean, consistent code and build script formatting.
+  https://clang.llvm.org/docs/ClangFormat.html
+  https://cmake-format.readthedocs.io/en/latest/
 
 ---
 
@@ -397,25 +408,6 @@ RC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-wind
 ```
 
 And that’s it. 💆🏻  The template already knows the `x86_64-w64-mingw32` architecture profile, because I already added this architecture configuration. You can now select it when performing any task in the task menu immediately.
-
----
-
-#### Links and Documentation for Used Technologies
-
-- **Visual Studio Code**: [Download](https://code.visualstudio.com)
-  Recomended extensions for VSCode
-  - natqe.reload | ms-vscode.cpptools | jeff-hykin.better-cpp-syntax | FleeXo.cpp-class-creator | amiralizadeh9480.cpp-helper | xaver.clang-format | josetr.cmake-language-support-vscode | ms-vscode-remote.remote-ssh | ms-vscode-remote.remote-ssh-edit | ms-vscode.remote-explorer | yzhang.markdown-all-in-one | shd101wyy.markdown-preview-enhanced
-
-####
-
-- **CMake**: [Download](https://cmake.org/download/)
-- **Python 3**: [Download](https://www.python.org/downloads/)
-- **Pyenv**: [Download](https://github.com/pyenv/pyenv)
-- **Conan 2 Configurator**: [Installation Guide](https://docs.conan.io/2/installation.html)
-- **Compilers**: [GCC](https://gcc.gnu.org),[Clang](https://clang.llvm.org), ...
-- **CMake Formatter**: [Documentation](https://cmake-format.readthedocs.io/en/latest/) 
-- **Clang Formatter**: [Documentation](https://clang.llvm.org/docs/ClangFormat.html)
-- **Cross-Compilation with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io)
 
 ---
 
