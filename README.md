@@ -182,9 +182,9 @@ code .
   
 ### Default architectures
 
-- x86_64-linux-gnu (used by default Conan profile)
-- aarch64-linux-gnu
-- x86_64-w64-mingw32
+- x86_64-linux-gnu (used natively by conan default profile)
+- aarch64-linux-gnu (require cross compilation 👇🏻)
+- x86_64-w64-mingw32 (require cross compilation 👇🏻)
 
 ---
 
