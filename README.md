@@ -1,13 +1,32 @@
 # MarkWare VCMake Template 🎁
 
+### Modern configurable project template for C and C++ 🎁
+
+It aims for a unique design, combining an **application** and **library** **within a single solution**.
+
+It's spectacular! Give it a try! 👍🏼
+
 0.0.7
 
-### Modern Configurable Project Template for C and C++ 🎁
+---
 
 
+<img width="189" alt="image" src="https://github.com/user-attachments/assets/df0f7209-aaec-4c51-a434-4455344e0d57" />
 
+---
 
-This template offers a comprehensive solution for quickly starting development in C and C++. It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies. The template integrates the following components:
+### Key Features
+
+- **Quick Start**: Ready to use immediately after cloning (only initial environment setup required).  
+- **Flexibility**: Supports building applications with either statically or dynamically linked libraries.  
+- **Cross-Platform Support**: Runs natively on Linux 🐧, macOS 🍏, and Windows via WSL 🪟.  
+- **Native C/C++ Debugging**: Allows seamless step-by-step debugging, regardless of the operating system used for development.  
+- **Cross-Compilation Support**: Facilitates compilation for multiple platforms with the help of Conan 2 and CMake.  
+- **Modularity**: Easily extendable and customizable to suit your project's unique requirements.  
+
+It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies.
+
+The template integrates the following components:
 
 - **Visual Studio Code**: Support for the development environment with preconfigured settings.
 - **Conan 2**: Dependency management for seamless integration of external libraries.
@@ -18,15 +37,7 @@ This template offers a comprehensive solution for quickly starting development i
 - **TemplateRenamer**: Easily rename the template to suit your project.
 - **Clang and CMake Formatters**: Automated formatting for code and build scripts.
 
----
 
-### Key Features
-
-- **Quick Start**: Ready to use immediately after cloning.
-- **Flexibility**: Supports the creation of applications with statically or dynamically linked libraries.
-- **Cross-Platform Support**: Works natively on Linux 🐧, macOS 🍏 and on Windows via WSL 🪟. 
-- **Cross-Compilation Support**: Enables compilation for various platforms with help of Conan 2 and CMake.
-- **Modularity**: Easily extendable and customizable to meet project needs.
 
 ---
 
