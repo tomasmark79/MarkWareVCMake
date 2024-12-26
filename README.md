@@ -37,6 +37,12 @@ This template serves as an ideal starting point for developers who want to effic
 
 ---
 
+### Workflow video presentation
+
+https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
+
+---
+
 ### List of Dependencies 🔃
 
 - **Visual Studio Code**: [Download](https://code.visualstudio.com) (mandatory)
@@ -54,9 +60,6 @@ This template serves as an ideal starting point for developers who want to effic
 - **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io) (optional)
 
 ---
-### Workflow video presentation
-
-https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
 ### Prepare development environment
 
@@ -75,16 +78,17 @@ wsl --install Debian
 wsl --set-default-version 2
 shutdown /r
 ```
-
 After restarting your Windows, you need to install the required VSCode extension for Remote WSL connection.
-1. In VSCode, install the extension (id: ms-vscode-remote.remote-wsl).
+1. In VSCode, install mandatory extensions such as `ms-vscode-remote.remote-wsl` and `ms-vscode.cpptools`.
 2. In VSCode, run the task `WSL: Connect to WSL`.
 
 Afterwards, your VSCode editor will be connected to the WSL environment.
 
 3. Finally, open the project template folder `/mnt/c/dev/MyAwesomeApp` in VSCode.
-4. Close VSCode
-5. Continue to the **Quick Start** section to install all required software in shell.
+4. You will need to install some VSCode extensions again because the VSCode environment has changed.
+5. Close VSCode.
+6. The next launch of VSCode can be done with the `code .` command from the WSL Debian bash console, and everything will work.
+7. Let's continue to the **Quick Start** section, which is the same for all platforms.
 ---
 
 ### Quick Start
@@ -94,7 +98,7 @@ Afterwards, your VSCode editor will be connected to the WSL environment.
 # required apt packages 
 sudo apt update && sudo apt upgrade -y
 sudo apt install cmake python3-pip curl git libssl-dev \
-libbz2-dev libcurses-ocaml-dev build-essential libffi-dev \
+libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev \
 libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
 # install and configure pyenv
@@ -121,15 +125,17 @@ cd NameOfMyAwesomeApp/
 ./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
 
 # and finally launch Visual Studio Code from the current folder
-
 code .
 
 ```
 
+---
+
 # That's all. 
 
-🚀 From this point, you have a fully functional solution whether you are on Linux, macOS, or Windows.
+# 🚀 From this point, you have a fully functional solution whether you are on Linux, macOS, or Windows.
 
+---
 
 ### Implemented VSCode Tasks
 
