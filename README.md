@@ -1,43 +1,43 @@
 # MarkWare VCMake Template 🎁
 
-### Modern configurable project template for C and C++ 🎁
+### Modern configurable project template for C and C++ 
 
 It aims for a unique design, combining an **application** and **library** **within a single solution**.
 
-It's spectacular! Give it a try! 👍🏼
+It's spectacular! Give it a try! 😎
 
 0.0.7
 
 ---
 
-
 <img width="189" alt="image" src="https://github.com/user-attachments/assets/df0f7209-aaec-4c51-a434-4455344e0d57" />
 
 ---
 
-### Key Features
+### Why?
+
+If you love working in C/C++ and are at home in Linux, this is something you absolutely must try! I'm not kidding. While many ready-made solutions exist, this one is unique—tailored precisely to the needs of modern OOP development in C++ using Modern CMake and the latest Conan 2. Of course, it also allows writing in pure C or Objective-C if desired. This solution offers numerous advantages that I personally find invaluable.
+
+### Benefits
 
 - **Quick Start**: Ready to use immediately after cloning (only initial environment setup required).  
-- **Flexibility**: Supports building applications with either statically or dynamically linked libraries.  
 - **Cross-Platform Support**: Runs natively on Linux 🐧, macOS 🍏, and Windows via WSL 🪟.  
-- **Native C/C++ Debugging**: Allows seamless step-by-step debugging, regardless of the operating system used for development.  
+- **Native C/C++ Debugging**: Enables seamless step-by-step debugging, regardless of the operating system used for development.  
 - **Cross-Compilation Support**: Facilitates compilation for multiple platforms with the help of Conan 2 and CMake.  
-- **Modularity**: Easily extendable and customizable to suit your project's unique requirements.  
+- **Modularity**: Easily extendable and customizable to meet your project's unique requirements.  
 
-It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies.
+This template is designed for maximum customization, making it easier to create modern applications using proven tools and technologies.
 
-The template integrates the following components:
+### Integrated Components
 
-- **Visual Studio Code**: Support for the development environment with preconfigured settings.
-- **Conan 2**: Dependency management for seamless integration of external libraries.
-- **Modern CMake**: Advanced configuration and build system leveraging modern best practices.
-- **CPM.cmake**: Simple dependency management without requiring external package installations.
-- **CPM.license**: Automated management of third-party licenses.
-- **ModernCppStarter**: Inspired by best practices for initializing modern C++ projects.
-- **TemplateRenamer**: Easily rename the template to suit your project.
-- **Clang and CMake Formatters**: Automated formatting for code and build scripts.
-
-
+- **Visual Studio Code**: Preconfigured settings for a streamlined development experience.  
+- **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.  
+- **Modern CMake**: Leverages advanced configuration and build practices for modern development.  
+- **CPM.cmake**: Lightweight dependency management without external installations.  
+- **CPM.license**: Automates third-party license management.  
+- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
+- **TemplateRenamer**: Simplifies renaming the template to align with your project.  
+- **Clang and CMake Formatters**: Ensures clean, consistent code and build script formatting.  
 
 ---
 
