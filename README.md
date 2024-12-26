@@ -107,7 +107,7 @@ Afterwards, your VSCode editor will be connected to the WSL environment.
 7. Let's continue to the **Quick Start** section, which is the same for all platforms.
 ---
 
-### Quick Start all operating systems
+### Quick Start for all operating systems
 
 ```bash
 # required apt packages
