@@ -1,7 +1,11 @@
 # MarkWare VCMake Template 🎁
-v0.0.7
+
+0.0.7
 
 ### Modern Configurable Project Template for C and C++ 🎁
+
+
+
 
 This template offers a comprehensive solution for quickly starting development in C and C++. It is designed to be easily customizable and enables the creation of modern applications using proven tools and technologies. The template integrates the following components:
 
