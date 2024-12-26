@@ -55,7 +55,7 @@ This template serves as an ideal starting point for developers who want to effic
 
 ---
 
-### Quick Start 💣
+### Quick Start Linux and Mac
 
 https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
@@ -65,6 +65,27 @@ git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
 cd NameOfMyAwesomeApp/
 ./TemplateRenamer.sh VCMLib MyAwesomeLibrary VCMStandalone MyAwesomeStandalone
 code .
+```
+
+### Quick Start Windows
+
+```powershell
+wsl --install
+wsl --list --online
+wsl --install Debian
+wsl --set-default-version 2
+shutdown /r
+
+# Start Debian
+sudo apt update && sudo apt upgrade -y
+sudo apt install cmake python3-pip curl git -y
+
+# pyenv for Python venv support
+curl https://pyenv.run | bash
+pyenv install 3.9.2
+
+
+
 ```
 
 ---
