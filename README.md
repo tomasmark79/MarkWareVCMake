@@ -77,7 +77,7 @@ wsl --set-default-version 2
 shutdown /r
 ```
 
-Start Debian and
+In Debian bash under Windows WSL2
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -87,10 +87,21 @@ curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv local 3.9.2
 pyenv prefix
-
-
-
+# create projects folder on Windows fs
+mkdir /mnt/c/dev
+cd /mnt/c/dev
+# clone
+git clone https://github.com/tomasmark79/MarkWareVCMake ./MyAwesomeApp 
+cd MyAwesomeApp/
 ```
+
+- Open VSCode in Windows
+- Open folder with the project from C:\Dev\...
+- Copy keybindings.json from .vscode to system keybinding settings by ctrl+shift+p and by selecting task "Preferences: Open Keyboard Shortcut (JSON).
+- VSCode will trying to offer you install CMake tools. Don't install recomended CMakeTools. You don't need them.
+- 
+
+
 
 ---
 
