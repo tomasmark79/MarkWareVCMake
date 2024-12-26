@@ -180,7 +180,7 @@ code .
 
 ---
   
-### Default architectures
+### Preconfigured architectures
 
 - x86_64-linux-gnu (used natively by conan default profile)
 - aarch64-linux-gnu (require cross compilation 👇🏻)
@@ -188,7 +188,7 @@ code .
 
 ---
 
-### Default build types
+### Preconfigured build types
 
 - Debug
 - Release
