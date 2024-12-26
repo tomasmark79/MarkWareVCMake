@@ -58,7 +58,9 @@ This template serves as an ideal starting point for developers who want to effic
 
 https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
-### Quick Start
+### Prepare development environment
+
+This template solution can be used on virtually any platform. **On Linux and macOS, it is essentially a native solution**. If you are on **Windows**, you only **need to enable WSL**, install a distribution such as Debian, and then connect to it in the VSCode editor using the **WSL extension**. VSCode on Windows will then behave as if it were installed directly on Linux. The **Quick Start below are common to all existing platforms**. On Windows, you will just use the aforementioned WSL interface.
 
 ```bash
 
