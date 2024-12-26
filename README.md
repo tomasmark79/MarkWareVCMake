@@ -150,7 +150,7 @@ code .
 
 # That's all. 
 
-# 🚀 From this point, you have a fully functional solution for making Linux binaries whether you are on Linux, macOS, or Windows.
+### 🚀 From this point, you have a fully functional solution for making Linux binaries whether you are on Linux, macOS, or Windows.
 
 ---
 
