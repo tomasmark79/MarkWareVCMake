@@ -396,7 +396,7 @@ STRIP=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-s
 RC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-windres
 ```
 
-And that’s it. 💆🏻  The template already knows the `x86_64-w64-mingw32` architecture profile from the start. You can now select it when performing any task in the task menu immediately.
+And that’s it. 💆🏻  The template already knows the `x86_64-w64-mingw32` architecture profile, because I already added this architecture configuration. You can now select it when performing any task in the task menu immediately.
 
 ---
 
