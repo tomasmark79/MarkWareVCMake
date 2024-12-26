@@ -89,6 +89,8 @@ pyenv local 3.9.2
 pyenv global 3.9.2
 pyenv prefix
 pyenv virtualenv 3.9.2 env392
+pip install conan
+pip install --upgrade pip
 # create projects folder on Windows fs
 mkdir /mnt/c/dev
 cd /mnt/c/dev
