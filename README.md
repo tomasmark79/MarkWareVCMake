@@ -69,6 +69,8 @@ code .
 
 ### Quick Start Windows
 
+In Windows powershell as Administrator
+
 ```powershell
 wsl --install
 wsl --list --online
@@ -79,7 +81,6 @@ shutdown /r
 
 In Debian bash under Windows WSL2
 
-In Windows WSL bash
 ```bash
 
 # install essentials via apt package manager
@@ -101,14 +102,18 @@ pip install conan
 # clone project to Windows filesystem
 git clone https://github.com/tomasmark79/MarkWareVCMake /mnt/c/dev/MyAwesomeApp
 cd /mnt/c/dev/MyAwesomeApp
-
 ```
+
 In Windows UI
 - Open VSCode
 - Install extension for WSL connection support  (id: ms-vscode-remote.remote-wsl)
 - In tasks select and run `WSL> Connect to WSL`
+- Open project folder from /mnt/c/dev/MyAwesomeApp
   
 And Enjoy! 🚀 You are with your VSCode within the WSL environemt as you are sitting within Linux OS.
+
+You need to continue settings your Conan 2 profiles, etc. This all is the same as for native Linux, or Mac.
+
 
 ---
 
