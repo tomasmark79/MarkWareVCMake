@@ -129,7 +129,7 @@ pip install conan
 conan profile detect --force
 ```
 
-### If conan have found compiler configuration is done.
+### after Conan pokes around the system and finds the default compiler
 
 ```bash
 # clone solution to folder ./AwesomeLibraryWithStandalone
