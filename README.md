@@ -28,7 +28,7 @@ If you love working in C/C++ and are at home in Linux, this is something you abs
 
 This template is designed for maximum customization, making it easier to create modern applications using proven tools and technologies.
 
-### Integrated Components
+### Integrated template configurations
 
 - **Visual Studio Code**: Preconfigured settings for a streamlined development experience.  
 - **Conan 2**: Simplifies dependency management and integrates external libraries seamlessly.  
