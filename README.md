@@ -425,7 +425,15 @@ Bitcoin: 3JMZR6SQo65kLAxxxXKrVE7nBKrixbPgSZ
 Ethereum: 0x7a6C564004EdecFf8DD9EAd8bD4Bbc5D2720BeE7
 ```
 
-### todo
-- missing license writting when Standalone
-- cpack in cooperation packageProject target
-- port workflow bash scripts to windows (PowerShell?)
+### Future
+
+Since the first moment of creating this template, I have been using it in parallel in side projects and constantly coming up with new ideas to improve it. For this reason, it looks like it will be a long-term project. Something truly exceptional would have to come along for me to replace this template with something else. However, I believe that for 99% of the time, there is not only nothing like that existing, but nothing even remotely close to what I have created here. And since there are still many features that can be added, they will be added gradually.
+
+### Know issues
+
+- missing license-writting when Standalone is building
+
+### To Do
+- sanitizers
+- tests
+- cpack in cooperation packageProject target and build deb packages
