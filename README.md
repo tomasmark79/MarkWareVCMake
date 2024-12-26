@@ -126,79 +126,12 @@ cd AwesomeLibraryWithStandalone/
 
 code .
 ```
----
-
-### Cross-Compilation 🤩 How-To 🍒
-
-It’s easier than you might think! All you need for cross-compilation is a properly configured toolchain for the target platform. Once this requirement is met, the project will handle the rest, leveraging cross-compilation to its fullest potential.
-
-Everything starts and ends with creating the toolchain, and for that, we use the **ng-crosstool** utility.
-
-#### Cross-Compiling to Windows 64-bit
-
-As an example, here’s how to set up a configuration for building binary targets for the Windows 64-bit OS:
-
-In the bash console:
-
-```bash
-# Install the ng-crosstool utility
-pip install ng-crosstool
-
-# List available target architectures
-ct-ng list-samples
-
-# Import configuration to the ct configurator
-ct-ng x86_64-w64-mingw32
-
-# Use menu to configure your toolchain
-ct-ng menuconfig
-
-# And build the toolchain ☕
-ct-ng build
-```
-
-Creating the toolchain takes ages, so treat yourself to something good to eat in the meantime. 🙂  
-Finally, this process allows you to seamlessly compile your project for different platforms without needing native access to the target environment.
-
-If you kept the default output settings, you’ll find your new toolchain at: `~/x-tools/`.
-
-Now for the final step: we need to tell Conan about the new toolchain.  
-
-Create a new profile file for Conan, typically located in `~/.conan2/profiles`.  
-
-The file will be named `x86_64-w64-mingw32` and should contain:
-
-```ini
-[settings]
-os=Windows
-arch=x86_64
-compiler=gcc
-compiler.cppstd=17
-compiler.libcxx=libstdc++11
-compiler.version=13
-build_type=Release
-
-[buildenv]
-CMAKE_SYSROOT=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/x86_64-w64-mingw32/sys-root
-CC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-gcc
-CXX=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-g++
-LD=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ld
-AR=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ar
-AS=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-as
-RANLIB=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ranlib
-STRIP=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-strip
-RC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-windres
-```
-
-And that’s it. 💆🏻  
-
-The template already knows the `x86_64-w64-mingw32` architecture profile from the start. You can now select it when performing any task.
 
 ---
 
 # That's all. 
 
-# 🚀 From this point, you have a fully functional solution whether you are on Linux, macOS, or Windows.
+# 🚀 From this point, you have a fully functional solution for making Linux binaries whether you are on Linux, macOS, or Windows.
 
 ---
 
@@ -388,7 +321,78 @@ The template already knows the `x86_64-w64-mingw32` architecture profile from th
 
 ---
 
-### Odkazy a dokumentace k použitým technologiím
+## If you want more 🦸🏼
+
+### Cross-Compilation 🤩 How-To 🍒
+
+It’s easier than you might think! All you need for cross-compilation is a properly configured toolchain for the target platform. Once this requirement is met, the project will handle the rest, leveraging cross-compilation to its fullest potential.
+
+Everything starts and ends with creating the toolchain, and for that, we use the **ng-crosstool** utility.
+
+#### Cross-Compiling to Windows 64-bit
+
+As an example, here’s how to set up a configuration for building binary targets for the Windows 64-bit OS:
+
+In the bash console:
+
+```bash
+# Install the ng-crosstool utility
+pip install ng-crosstool
+
+# List available target architectures
+ct-ng list-samples
+
+# Import configuration to the ct configurator
+ct-ng x86_64-w64-mingw32
+
+# Use menu to configure your toolchain
+ct-ng menuconfig
+
+# And build the toolchain ☕
+ct-ng build
+```
+
+Creating the toolchain takes ages, so treat yourself to something good to eat in the meantime. 🙂 
+
+#### When toolchain is done.
+
+If you kept the default output settings, you’ll find your new toolchain at: `~/x-tools/`.
+
+#### Now for the final step:
+
+we need to **tell Conan** about the **new toolchain**.  
+
+Create a new profile file for Conan, typically located in `~/.conan2/profiles`.  
+
+The file will be named `x86_64-w64-mingw32` and should contain:
+
+```ini
+[settings]
+os=Windows
+arch=x86_64
+compiler=gcc
+compiler.cppstd=17
+compiler.libcxx=libstdc++11
+compiler.version=13
+build_type=Release
+
+[buildenv]
+CMAKE_SYSROOT=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/x86_64-w64-mingw32/sys-root
+CC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-gcc
+CXX=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-g++
+LD=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ld
+AR=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ar
+AS=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-as
+RANLIB=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-ranlib
+STRIP=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-strip
+RC=/home/changetoyouruser/x-tools/x86_64-w64-mingw32/bin/x86_64-w64-mingw32-windres
+```
+
+And that’s it. 💆🏻  The template already knows the `x86_64-w64-mingw32` architecture profile from the start. You can now select it when performing any task in the task menu immediately.
+
+---
+
+#### Links and Documentation for Used Technologies
 
 - **Visual Studio Code**: [Download](https://code.visualstudio.com)
   Recomended extensions for VSCode
@@ -409,7 +413,6 @@ The template already knows the `x86_64-w64-mingw32` architecture profile from th
 - **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io)
 
 ---
-
 
 ### Acknowledgements
 
