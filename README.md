@@ -54,12 +54,29 @@ This template serves as an ideal starting point for developers who want to effic
 - **Cross-Compiler with Toolchain and Sysroot**: [crosstool-NG](https://crosstool-ng.github.io) (optional)
 
 ---
-
-### Quick Start Linux and Mac
+### Workflow video presentation
 
 https://github.com/user-attachments/assets/88ef7e5d-f72d-4a20-abce-b7e3e6c85389
 
+### Quick Start
+
 ```bash
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
+
+# pyenv for Python venv support
+curl https://pyenv.run | bash
+pyenv install 3.9.2
+pyenv local 3.9.2
+pyenv global 3.9.2
+pyenv prefix
+pyenv virtualenv 3.9.2 env392
+pip install --upgrade pip
+
+# install latest conan
+pip install conan
+
 # clone 
 git clone https://github.com/tomasmark79/MarkWareVCMake ./NameOfMyAwesomeApp
 cd NameOfMyAwesomeApp/
