@@ -1,33 +1,69 @@
 #!/bin/bash
-
-workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# This script is a controller for CMake tasks
 # (c) Tomáš Mark 2024
 
-export SolutionControllerVersion="0.0.2"
-
-# Arguments and defaults
+# system declarations
+GREEN="\033[0;32m" YELLOW="\033[0;33m" RED="\033[0;31m" NC="\033[0m" LIGHTBLUE="\033[1;34m"
+workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+nameOfScript=$(basename "$0")
+scriptAuthor="(c) Tomáš Mark 2004"
+scriptVersion="0.0.2"
 taskName=$1
 buildArch=$2
 buildType=${3:-"Release"} # Default to "Release" if not specified
 
-GREEN="\033[0;32m" YELLOW="\033[0;33m" RED="\033[0;31m" NC="\033[0m" LIGHTBLUE="\033[1;34m"
+# user declarations
+buildFolderName="Build"
+installOutputDir="$workSpaceDir/${buildFolderName}/Install"
+artefactsOutputDir="$workSpaceDir/${buildFolderName}/Artefacts"
 
-echo -e "${YELLOW}SolutionController.sh v$SolutionControllerVersion by Tomáš Mark 2024${NC}"
-echo -e "------------------------------------------------------------------------"
+function exitOk() {
+    echo -e "${GREEN}$1${NC}"
+    exit 0
+}
+
+function exitWithError() {
+    echo -e "${RED}$1${NC}"
+    exit 1
+}
+
+if [ -z "$taskName" ]; then
+    exitWithError "Task name is missing. Exiting."
+fi
+
+if [ -z "$buildArch" ]; then
+    exitWithError "Build architecture is missing. Exiting."
+fi
+
+# Print out the configuration
+echo -e "/-------------------------------------------------------------\\"
+echo -e "${YELLOW}${nameOfScript} ${scriptAuthor} v ${scriptVersion} ${NC}"
+echo -e "---------------------------------------------------------------"
 echo -e "${LIGHTBLUE}taskName\t: $taskName${NC}"
-echo -e "------------------------------------------------------------------------"
-echo -e "${GREEN}buildArch\t: $buildArch"
-echo -e "${GREEN}buildType\t: $buildType"
-echo -e "${GREEN}workSpaceDir\t: $workSpaceDir${NC}"
-echo -e "------------------------------------------------------------------------"
+echo -e "---------------------------------------------------------------"
+echo -e "${GREEN}Build Arch\t: $buildArch"
+echo -e "${GREEN}Build Type\t: $buildType"
+echo -e "${GREEN}Work Space\t: $workSpaceDir${NC}"
+echo -e "${GREEN}Install to\t: $installOutputDir${NC}"
+echo -e "${GREEN}Artefacts to\t: $artefactsOutputDir${NC}"
+echo -e "\\-------------------------------------------------------------/"
 
-# Installation output directory
-installOutputDir="$workSpaceDir/Build/Install"
+function log2file() {
+    local message=$1
+    echo "$message" >>"$workSpaceDir/SolutionController.log"
 
-# Release artefacts output directory
-releaseArtefactsOutputDir="$workSpaceDir/Build/Artefacts"
+}
+
+function executeCommand() {
+    local cmd=$1
+    echo -e "${LIGHTBLUE}$cmd${NC}"
+    log2file "$cmd"
+    $cmd
+}
+
+function getBuildDir() {
+    local type=$1
+    echo "${buildFolderName}/${type}/${buildArch}/${buildType}"
+}
 
 # ---------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------
@@ -62,9 +98,7 @@ function conanInstall() {
         local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=$buildArch --settings=build_type=$buildType $conanWithSharedLibs"
     fi
 
-    echo "$conanCmd"
-    $conanCmd || exit 1
-
+    executeCommand "$conanCmd" || exit 1
 }
 
 # Configure by CMake
@@ -99,53 +133,41 @@ function cmakeConfigure() {
     echo "install buildType: $buildType"
     local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DCMAKE_INSTALL_PREFIX=$installOutputDir/$buildArch/$buildType"
 
-    echo "$configureCommand"
-
-    # Run CMake configure
-    $configureCommand || exit 1
-
+    executeCommand "$configureCommand" || exit 1
 }
 
 function cmakeBuild() {
     local buildDir=$1
-    cmake --build "$buildDir" --target all -j "$(nproc)"
+    local cmd
+    cmd="cmake --build $buildDir --target all -j $(nproc)"
+    executeCommand "$cmd" || exit 1
 }
 
 function cmakeBuildCpmLicenses() {
     local buildDir=$1
-    cmake --build "$buildDir" --target write-licenses
+    local cmd
+    cmd="cmake --build $buildDir --target write-licenses"
+    executeCommand "$cmd" || exit 1
 }
 
-function cleanBuild() {
+function cleanBuildFolder() {
     local buildDir=$1
-    rm -rf "$buildDir"
+    local cmd
+    cmd="rm -rf $buildDir"
+    executeCommand "$cmd" || exit 1
 }
-
-# not used yet
-# function cmakeTest() {
-#     local buildDir=$1
-#     ctest --output-on-failure -C "$buildType" -T test --build-config "$buildType" --test-dir "$buildDir"
-# }
 
 function cmakeInstall() {
     local buildDir=$1
-    cmake --build "$buildDir" --target install
+    local cmd
+    cmd="cmake --build $buildDir --target install"
+    executeCommand "$cmd" || exit 1
 }
 
-# ---------------------------------------------------------------------------------
-#   Folder splitter
-# ---------------------------------------------------------------------------------
-#   library=$1      bool
-#   standalone=$2   bool
-# ---------------------------------------------------------------------------------
+# not used yet
+# ctest --output-on-failure -C "$buildType" -T test --build-config "$buildType" --test-dir "$buildDir"
 
-# Directory structure helper
-function getBuildDir() {
-    local type=$1
-    echo "Build/${type}/${buildArch}/${buildType}"
-}
-
-function cmakeBuildSplitter() {
+function buildSpltr() {
     if [ "$1" == "true" ]; then
         cmakeBuild "$(getBuildDir Library)"
     fi
@@ -154,7 +176,7 @@ function cmakeBuildSplitter() {
     fi
 }
 
-function cmakeBuildCpmLicensesSplitter() {
+function licenseSpltr() {
     if [ "$1" == "true" ]; then
         cmakeBuildCpmLicenses "$(getBuildDir Library)"
     fi
@@ -163,7 +185,7 @@ function cmakeBuildCpmLicensesSplitter() {
     fi
 }
 
-function cmakeConfigureSplitter() {
+function configureSpltr() {
     if [ "$1" == "true" ]; then
         cmakeConfigure "." "$(getBuildDir Library)"
     fi
@@ -172,7 +194,7 @@ function cmakeConfigureSplitter() {
     fi
 }
 
-function conanInstallSplitter() {
+function conanSpltr() {
     if [ "$1" == "true" ]; then
         conanInstall "$(getBuildDir Library)"
     fi
@@ -181,16 +203,16 @@ function conanInstallSplitter() {
     fi
 }
 
-function cleanBuildSplitter() {
+function cleanSpltr() {
     if [ "$1" == "true" ]; then
-        cleanBuild "$(getBuildDir Library)"
+        cleanBuildFolder "$(getBuildDir Library)"
     fi
     if [ "$2" == "true" ]; then
-        cleanBuild "$(getBuildDir Standalone)"
+        cleanBuildFolder "$(getBuildDir Standalone)"
     fi
 }
 
-function cmakeInstallSplitter() {
+function installSpltr() {
     if [ "$1" == "true" ]; then
         cmakeInstall "$(getBuildDir Library)"
     fi
@@ -199,9 +221,9 @@ function cmakeInstallSplitter() {
     fi
 }
 
-function releaseArtefactsSplitter() {
+function aretfactsSpltr() {
 
-    mkdir -p "$releaseArtefactsOutputDir"
+    mkdir -p "$artefactsOutputDir"
 
     local conanWithSharedLibs
     libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
@@ -234,7 +256,7 @@ function releaseArtefactsSplitter() {
 
             # Archive library files if found
             if [ -n "$filesToArchive" ]; then
-                local tarCommand="tar -czf $releaseArtefactsOutputDir/$archiveName -C $sourceDir $filesToArchive"
+                local tarCommand="tar -czf $artefactsOutputDir/$archiveName -C $sourceDir $filesToArchive"
                 echo -e "${LIGHTBLUE}$tarCommand${NC}"
                 $tarCommand
             else
@@ -245,7 +267,7 @@ function releaseArtefactsSplitter() {
         # STANDALONE
         if [ "$2" == "true" ]; then
             local standaloneArchiveName="$standaloneName-$libraryVersion-$buildArch-$buildType.tar.gz"
-            tarCommand="tar -czf $releaseArtefactsOutputDir/$standaloneArchiveName -C $(getBuildDir Standalone) $standaloneName"
+            tarCommand="tar -czf $artefactsOutputDir/$standaloneArchiveName -C $(getBuildDir Standalone) $standaloneName"
             echo -e "${LIGHTBLUE}$tarCommand${NC}"
             $tarCommand
         fi
@@ -274,7 +296,7 @@ function releaseArtefactsSplitter() {
 
             # Archive library files if found
             if [ -n "$filesToArchive" ]; then
-                local tarCommand="tar -czf $releaseArtefactsOutputDir/$archiveName -C $sourceDir $filesToArchive"
+                local tarCommand="tar -czf $artefactsOutputDir/$archiveName -C $sourceDir $filesToArchive"
                 echo -e "${LIGHTBLUE}$tarCommand${NC}"
                 $tarCommand
             else
@@ -285,169 +307,161 @@ function releaseArtefactsSplitter() {
         # STANDALONE
         if [ "$2" == "true" ]; then
             local standaloneArchiveName="$standaloneName-$libraryVersion-$buildArch-$buildType.tar.gz"
-            tarCommand="tar -czf $releaseArtefactsOutputDir/$standaloneArchiveName -C $(getBuildDir Standalone) $standaloneName.exe"
+            tarCommand="tar -czf $artefactsOutputDir/$standaloneArchiveName -C $(getBuildDir Standalone) $standaloneName.exe"
             echo -e "${LIGHTBLUE}$tarCommand${NC}"
             $tarCommand
         fi
     fi
 }
 
-# ---------------------------
-#   Task controller
-# ---------------------------
-#   library=$1      bool
-#   standalone=$2   bool
-# ---------------------------
-
+# /------------------------------------
+#   Task receiver from tasks.json
+# \------------------------------------
 case $taskName in
-
-"")
-    exit 0
-    ;;
 
 # --- Zero to Hero ---
 
 "Zero to Hero 🦸")
-    cleanBuildSplitter true true
-    conanInstallSplitter true true
-    cmakeConfigureSplitter true true
-    cmakeBuildSplitter true true
-    exit 0
+    cleanSpltr true true
+    conanSpltr true true
+    configureSpltr true true
+    buildSpltr true true
+    exitOk ""
     ;;
 
 "📚 Zero to Hero 🦸")
-    cleanBuildSplitter true false
-    conanInstallSplitter true false
-    cmakeConfigureSplitter true false
-    cmakeBuildSplitter true false
-    exit 0
+    cleanSpltr true false
+    conanSpltr true false
+    configureSpltr true false
+    buildSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Zero to Hero 🦸")
-    cleanBuildSplitter false true
-    conanInstallSplitter false true
-    cmakeConfigureSplitter false true
-    cmakeBuildSplitter false true
-    exit 0
+    cleanSpltr false true
+    conanSpltr false true
+    configureSpltr false true
+    buildSpltr false true
+    exitOk ""
     ;;
 
 # --- Clean ---
 
 "Clean 🧹")
-    cleanBuildSplitter true true
-    exit 0
+    cleanSpltr true true
+    exitOk ""
     ;;
 
 "📚 Clean 🧹")
-    cleanBuildSplitter true false
-    exit 0
+    cleanSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Clean 🧹")
-    cleanBuildSplitter false true
-    exit 0
+    cleanSpltr false true
+    exitOk ""
     ;;
 
 # --- Conan Install ---
 
 "Conan 🗡️")
-    conanInstallSplitter true true
-    exit 0
+    conanSpltr true true
+    exitOk ""
     ;;
 
 "📚 Conan 🗡️")
-    conanInstallSplitter true false
-    exit 0
+    conanSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Conan 🗡️")
-    conanInstallSplitter false true
-    exit 0
+    conanSpltr false true
+    exitOk ""
     ;;
 
 # --- Configure ---
 
 "Configure 🔧")
-    cmakeConfigureSplitter true true
-    exit 0
+    configureSpltr true true
+    exitOk ""
     ;;
 
 "📚 Configure 🔧")
-    cmakeConfigureSplitter true false
-    exit 0
+    configureSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Configure 🔧")
-    cmakeConfigureSplitter false true
-    exit 0
+    configureSpltr false true
+    exitOk ""
     ;;
 
 # --- Build ---
 
 "Build 🔨")
-    cmakeBuildSplitter true true
-    exit 0
+    buildSpltr true true
+    exitOk ""
     ;;
 
 "📚 Build 🔨")
-    cmakeBuildSplitter true false
-    exit 0
+    buildSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Build 🔨")
-    cmakeBuildSplitter false true
-    exit 0
+    buildSpltr false true
+    exitOk ""
     ;;
 
 # --- Collect licenses ---
 
 "Collect Licenses 📜")
-    cmakeBuildCpmLicensesSplitter true true
-    exit 0
+    licenseSpltr true true
+    exitOk ""
     ;;
 
 "📚 Collect Licenses 📜")
-    cmakeBuildCpmLicensesSplitter true false
-    exit 0
+    licenseSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Collect Licenses 📜")
-    cmakeBuildCpmLicensesSplitter false true
-    exit 0
+    licenseSpltr false true
+    exitOk ""
     ;;
 
 # --- Install artefacts ---
 
 "Install Artefacts 📌")
-    cmakeInstallSplitter true true
-    exit 0
+    installSpltr true true
+    exitOk ""
     ;;
 
 "📚 Install Artefacts 📌")
-    cmakeInstallSplitter true false
-    exit 0
+    installSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Install Artefacts 📌")
-    cmakeInstallSplitter false true
-    exit 0
+    installSpltr false true
+    exitOk ""
     ;;
 
 # --- Release Artefacts ---
 
 "Release Artefacts 📦")
-    releaseArtefactsSplitter true true
-    exit 0
+    aretfactsSpltr true true
+    exitOk ""
     ;;
 
 "📚 Release Artefacts 📦")
-    releaseArtefactsSplitter true false
-    exit 0
+    aretfactsSpltr true false
+    exitOk ""
     ;;
 
 "🎯 Release Artefacts 📦")
-    releaseArtefactsSplitter false true
-    exit 0
+    aretfactsSpltr false true
+    exitOk ""
     ;;
 
 # --- Permutate ---
@@ -458,20 +472,25 @@ case $taskName in
 
     for buildArch in x86_64-linux-gnu aarch64-linux-gnu x86_64-w64-mingw32; do
         for buildType in Debug Release RelWithDebInfo MinSizeRel; do
-            cleanBuildSplitter true true
-            conanInstallSplitter true true
-            cmakeConfigureSplitter true true
-            cmakeBuildSplitter true true
-            cmakeBuildCpmLicensesSplitter true true
-            cmakeInstallSplitter true true
-            releaseArtefactsSplitter true true
+            cleanSpltr true true
+            conanSpltr true true
+            configureSpltr true true
+            buildSpltr true true
+            licenseSpltr true true
+            installSpltr true true
+            aretfactsSpltr true true
         done
     done
-    exit 0
+    exitOk ""
+    ;;
+
+"")
+    exitOk ""
     ;;
 
 *)
-    echo "Unknown task: $taskName"
-    exit 1
+    echo "Received unknown task: $taskName"
+    exitWithError "Task name is missing. Exiting."
     ;;
+
 esac

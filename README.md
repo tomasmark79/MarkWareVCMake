@@ -24,11 +24,11 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 ## Key Features
 
 ✨✨✨  
-- **Quick Start**: Minimal setup required, ready to use immediately after cloning.
-- **Modern Standards**: Supports best practices for C and C++ development.
-- **Native Debugging**: Step-by-step debugging directly on Linux.
-- **Cross-Platform**: Runs on Linux 🐧, macOS 🍏, and Windows 🪟 (via WSL).
-- **Cross-Compilation**: Easily target multiple architectures.
+- **Quick Start**: Minimal setup required, ready to use immediately after cloning.  
+- **Modern Standards**: Supports best practices for C and C++ development.  
+- **Native Debugging**: Step-by-step debugging directly on Linux.  
+- **Cross-Platform**: Runs on Linux 🐧, macOS 🍏, and Windows 🪟 (via WSL).  
+- **Cross-Compilation**: Easily target multiple architectures.  
 - **Highly Customizable**: Modular structure tailored to your specific project needs.  
 
 ✨✨✨
@@ -227,6 +227,7 @@ From this point, you have a fully functional solution for developing Linux binar
 ### Task Menu (Shift + F7)  
 
 🛠️🛠️🛠️  
+
 | Task                  | Description                              |
 |-----------------------|------------------------------------------|
 | **Zero to Hero**      | Clean → Conan → Configure → Build      |
@@ -237,12 +238,21 @@ From this point, you have a fully functional solution for developing Linux binar
 | **Collect Licenses**  | Gathers licenses from CPM dependencies  |
 | **Install Artefacts** | Installs to `/Build/Installed/`         |
 | **Release Artefacts** | Creates release archives                |
-| **Permutate All Tasks** | Executes all task scenarios           |
+
+
+| Task                  | Description                              |
+|-----------------------|------------------------------------------|
+| **Permutate All Tasks**  | Executes all task scenarios           |
+
+
+
 
 ### Key Shortcuts
 
 - **F5**: Start debugging.
 - **F7**: Build native debug configuration.
+- **Shift + F7**: Task Menu
+- **Shift + Ctrl + s**: Special Task Menu
 - **Ctrl + Alt + M**: Format all CMake files.
 - **Ctrl + Alt + F**: Format all C++ files.
 - **Ctrl + Alt + L**: Lint all C++ files.
