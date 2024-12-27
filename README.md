@@ -230,6 +230,7 @@ From this point, you have a fully functional solution for developing Linux binar
 - **Ctrl + Alt + M**: Format all CMake files.
 - **Ctrl + Alt + F**: Format all C++ files.
 - **Ctrl + Shift + Alt + B**: Run ShellCheck on scripts.  
+
 🛠️🛠️🛠️
 
 ---
