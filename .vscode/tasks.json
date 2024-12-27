@@ -15,7 +15,7 @@
             "type": "shell",
             "command": "shellcheck",
             "args": [
-                "${workspaceFolder}/CMakeController.sh",
+                "${workspaceFolder}/CMakeController-raw.sh",
                 "${workspaceFolder}/TemplateRenamer.sh"
             ],
             "group": {
@@ -29,10 +29,28 @@
             ]
         },
         {
+            /* shc Make Binary*/
+            "label": "CMakeControllerCompile",
+            "type": "shell",
+            "command": "shc",
+            "args": [
+                "-f",
+                "CMakeController-raw.sh",
+                "-o",
+                "CMakeController"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "CMakeControllerCompile",
+            "problemMatcher": []
+        },
+        {
             /* MarkWare Tasks */
             "label": "MarkWare Tasks",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeController.sh",
+            "command": "${workspaceFolder}/CMakeController",
             "args": [
                 "${input:taskName}",
                 "${input:buildArch}",
@@ -45,14 +63,15 @@
             "detail": "MarkWare Tasks",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal"
+                "clear terminal",
+                "CMakeControllerCompile"
             ]
         },
         {
             /* Build Native Debug */
             "label": "Build Native Debug",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeController.sh",
+            "command": "${workspaceFolder}/CMakeController",
             "args": [
                 "Build 🔨",
                 "x86_64-linux-gnu",
@@ -65,7 +84,8 @@
             "detail": "Build Native Debug",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal"
+                "clear terminal",
+                "CMakeControllerCompile"
             ]
         },
         {
