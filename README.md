@@ -237,6 +237,6 @@ From this point, you have a fully functional solution for developing Linux binar
 ## License
 
 📜📜📜  
-This template is licensed under [LICENSE].  
+This template is licensed under MIT License.  
 📜📜📜
 
