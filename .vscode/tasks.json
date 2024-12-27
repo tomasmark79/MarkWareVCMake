@@ -3,6 +3,7 @@
     "version": "2.0.0",
     "inputs": [
         {
+            /* MARKWARE SPECIAL INPUT ITEMS */
             "id": "specialTaskName",
             "type": "pickString",
             "description": "Select MarkWare Special Task",
@@ -13,6 +14,7 @@
 
         },
         {
+            /* MARKWARE INPUT ITEMS */
             "id": "taskName",
             "type": "pickString",
             "description": "Select MarkWare Task",
@@ -51,6 +53,7 @@
             "default": "Build 🔨"
         },
         {
+            /* BUILD ARCH INPUT ITEMS */
             "id": "buildArch",
             "type": "pickString",
             "description": "Select target architecture",
@@ -62,6 +65,7 @@
             "default": "x86_64-linux-gnu" /* change regarding you are sitting */
         },
         {
+            /* BUILD TYPE INPUT ITEMS */
             "id": "buildType",
             "type": "pickString",
             "description": "Select type of build",
