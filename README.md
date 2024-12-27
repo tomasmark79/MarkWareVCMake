@@ -14,7 +14,9 @@ Version: **0.0.7**
 ## Introduction
 
 🌟🌟🌟  
+
 The **MarkWare VCMake Template** provides a modern solution for C and C++ development by combining **application** and **library** workflows within a single configurable template. Designed for developers who value efficiency and modern tools, it simplifies project initialization while adhering to industry best practices. Built with **Modern CMake**, **Conan 2**, and **VSCode** integration, this template is an essential starting point for your next project.  
+
 🌟🌟🌟
 
 ---
@@ -237,7 +239,4 @@ From this point, you have a fully functional solution for developing Linux binar
 
 ## License
 
-📜📜📜  
 This template is licensed under MIT License.  
-📜📜📜
-
