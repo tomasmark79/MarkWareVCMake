@@ -25,9 +25,10 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 - **Quick Start**: Minimal setup required, ready to use immediately after cloning.
 - **Modern Standards**: Supports best practices for C and C++ development.
 - **Native Debugging**: Step-by-step debugging directly on Linux.
-- **Cross-Platform**: Runs on Linux 🐧, macOS 🍏, and Windows (via WSL 🖾).
+- **Cross-Platform**: Runs on Linux 🐧, macOS 🍏, and Windows 🪟 (via WSL).
 - **Cross-Compilation**: Easily target multiple architectures.
 - **Highly Customizable**: Modular structure tailored to your specific project needs.  
+
 ✨✨✨
 
 ---
@@ -49,6 +50,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
   [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
 - **CPM.cmake**: Lightweight dependency management.  
   [https://github.com/cpm-cmake/CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)  
+
 🌐🌐🌐
 
 ### Additional Integrations
@@ -60,7 +62,8 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
   [https://github.com/TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
 - **Formatters**: Preconfigured for consistent code formatting.  
   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
-  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/)  
+  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
+   
 🔧🔧🔧
 
 ---
@@ -141,6 +144,7 @@ From this point, you have a fully functional solution for developing Linux binar
 - `x86_64-linux-gnu` (default profile)
 - `aarch64-linux-gnu` (requires cross-compilation)
 - `x86_64-w64-mingw32` (requires cross-compilation)  
+
 🌍🌍🌍
 
 ---
@@ -152,6 +156,7 @@ From this point, you have a fully functional solution for developing Linux binar
 - `Release`
 - `RelWithDebInfo`
 - `MinSizeRel`  
+
 🏗️🏗️🏗️
 
 ---
