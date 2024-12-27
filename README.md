@@ -211,7 +211,7 @@ From this point, you have a fully functional solution for developing Linux binar
 
 ## Implemented VSCode Tasks
 
-### Task Menu (Shift + F7)
+### Task Menu (Shift + F7)  
 
 🛠️🛠️🛠️  
 | Task                  | Description                              |
@@ -232,6 +232,7 @@ From this point, you have a fully functional solution for developing Linux binar
 - **F7**: Build native debug configuration.
 - **Ctrl + Alt + M**: Format all CMake files.
 - **Ctrl + Alt + F**: Format all C++ files.
+- **Ctrl + Alt + L**: Lint all C++ files.
 - **Ctrl + Shift + Alt + B**: Run ShellCheck on scripts.  
 
 🛠️🛠️🛠️
