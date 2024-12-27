@@ -29,8 +29,7 @@
             ]
         },
         {
-            /* shc Make Binary*/
-            "label": "CMakeControllerCompile",
+            "label": "compile CMakeController",
             "type": "shell",
             "command": "shc",
             "args": [
@@ -43,7 +42,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "CMakeControllerCompile",
+            "detail": "compile CMakeController",
             "problemMatcher": []
         },
         {
@@ -63,8 +62,7 @@
             "detail": "MarkWare Tasks",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal",
-                "CMakeControllerCompile"
+                "clear terminal"
             ]
         },
         {
@@ -84,8 +82,7 @@
             "detail": "Build Native Debug",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal",
-                "CMakeControllerCompile"
+                "clear terminal"
             ]
         },
         {
@@ -229,7 +226,6 @@
                 "🎯 Release Artefacts 📦",
                 "",
                 "Permutate All Tasks 🕧",
-
             ],
             "default": "Build 🔨"
         },
