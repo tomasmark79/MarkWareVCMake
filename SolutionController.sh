@@ -10,6 +10,7 @@ scriptVersion="0.0.2"
 taskName=$1
 buildArch=$2
 buildType=${3:-"Release"} # Default to "Release" if not specified
+isCrossCompilation=false
 
 # user declarations
 buildFolderName="Build"
@@ -66,13 +67,35 @@ function getBuildDir() {
     echo "${buildFolderName}/${type}/${buildArch}/${buildType}"
 }
 
+function isCross() {
+    if [ "$buildArch" == "x86_64-linux-gnu" ]; then
+        isCrossCompilation=false
+    elif
+        [ "$buildArch" == "aarch64-linux-gnu" ]
+    then
+        isCrossCompilation=true
+    elif
+        [ "$buildArch" == "x86_64-w64-mingw32" ]
+    then
+        isCrossCompilation=true
+    elif
+        [ "$buildArch" == "SPECIALTASK" ]
+    then
+        isCrossCompilation=true
+    else
+        # Somethink is wrong
+        exitWithError "Unknown build architecture. Exiting."
+    fi
+}
+
+isCross
+
 # ---------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------
 # x86_64-linux-gnu is using default conan profile - change to fit your needs
 # ---------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------
 
-# Install Conan dependencies
 function conanInstall() {
     local buildDir=$1
 
@@ -85,56 +108,42 @@ function conanInstall() {
     [[ $conanWithSharedLibs == "ON" ]] && conanWithSharedLibs="-o *:shared=True" || conanWithSharedLibs="-o *:shared=False"
     # ------------------------------------------------------------------------------------
 
-    if [ "$buildArch" == "x86_64-linux-gnu" ]; then
+    # Conan install composer
+    if [ "$isCrossCompilation" = true ]; then
+        local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=$buildArch --settings=build_type=$buildType $conanWithSharedLibs"
+    else
+        
         local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType $conanWithSharedLibs"
     fi
-
-    # Cross-compilation to aarch64-linux-gnu
-    if [ "$buildArch" == "aarch64-linux-gnu" ]; then
-        local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=$buildArch --settings=build_type=$buildType $conanWithSharedLibs"
-    fi
-
-    # Cross-compilation to Windows 64-bit
-    if [ "$buildArch" == "x86_64-w64-mingw32" ]; then
-        local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=$buildArch --settings=build_type=$buildType $conanWithSharedLibs"
-    fi
-
-    executeCommand "$conanCmd" || exit 1
+    executeCommand "$conanCmd" || exitWithError "Conan install failed."
 }
 
-# Configure by CMake
+
 function cmakeConfigure() {
     local sourceDir=$1
     local buildDir=$2
 
-    # Cross-compilation - I guess conanbuild.sh may be runned everytime but for now we will run it only for aarch64-linux-gnu
-    # if [ "$buildArch" == "aarch64-linux-gnu" ] || [ "$buildArch" == "x86_64-w64-mingw32" ]; then
-    #     echo "source $workSpaceDir/$buildDir/conanbuild.sh"
-    #     # shellcheck source=/dev/null
-    #     source "$workSpaceDir/$buildDir/conanbuild.sh"
-    # fi
+    # !!! Failing this step will result crazies CMakes behaviour !!!
+    if [ "$isCrossCompilation" = true ]; then
+        echo -e "${YELLOW}Cross compilation is enabled${NC}"
+        local envCmd="source $workSpaceDir/$buildDir/conanbuild.sh"
+        log2file "$envCmd"
+        # source command has to be called in the same process 
+        $envCmd
+    fi
 
-    # Check for Conan toolchain - is supposed to be in the build directory always
+    # Use Conan toolchain file if available
     if [ -f "$buildDir/conan_toolchain.cmake" ]; then
         toolchainFile="-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
     else
-        # Kept for manual selection via existing CMake toolchain aarh64.cmake within the workspace
-        toolchainFile="" # default
-        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/aarch64-linux-gnu.cmake"
+        # This case should never happened, but for backwards compatibility with no Conan projects
+        toolchainFile="" # default system toolchain
+        [[ $buildArch == "x86_64-w64-mingw32" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/CMakeToolChains/x86_64-w64-mingw32.cmake"
+        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/CMakeToolChains/aarch64-linux-gnu.cmake"
     fi
 
-    # Compose CMake configure command
-
-    #TODO: Add sanitizers and static analyzers
-    # -DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>
-    # local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DUSE_SANITIZER=Address -DUSE_STATIC_ANALYZER=clang-tidy -DUSE_CCACHE=YES"
-
-    echo "install workSpaceDir: $workSpaceDir"
-    echo "install buildArch: $buildArch"
-    echo "install buildType: $buildType"
-    local configureCommand="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DCMAKE_INSTALL_PREFIX=$installOutputDir/$buildArch/$buildType"
-
-    executeCommand "$configureCommand" || exit 1
+    local confCmd="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DCMAKE_INSTALL_PREFIX=$installOutputDir/$buildArch/$buildType"
+    executeCommand "$confCmd" || exitWithError "CMake configure failed."
 }
 
 function cmakeBuild() {
@@ -490,7 +499,7 @@ case $taskName in
     # it is generated by cmake with -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
     # it is located in the build directory
     # is trying to find it in the build directory and if not found, it is trying to find it in the standalone build directory
-    
+
     function lintC() {
         local lintCmd
         lintCmd="find \"$workSpaceDir/\" \
