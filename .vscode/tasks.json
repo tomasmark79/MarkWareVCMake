@@ -33,6 +33,7 @@
             "type": "shell",
             "command": "shc",
             "args": [
+                "CFLAGS=\"-static\"",
                 "-f",
                 "CMakeController-raw.sh",
                 "-o",
