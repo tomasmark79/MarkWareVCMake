@@ -35,9 +35,9 @@
             "args": [
                 "CFLAGS=\"-static\"",
                 "-f",
-                "CMakeController-raw.sh",
+                "CMakeController.sh",
                 "-o",
-                "CMakeController"
+                "CMakeController.shc"
             ],
             "group": {
                 "kind": "build",
@@ -50,7 +50,7 @@
             /* MarkWare Tasks */
             "label": "MarkWare Tasks",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeController",
+            "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
                 "${input:taskName}",
                 "${input:buildArch}",
@@ -70,7 +70,7 @@
             /* Build Native Debug */
             "label": "Build Native Debug",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeController",
+            "command": "${workspaceFolder}/CMakeController.sh",
             "args": [
                 "Build 🔨",
                 "x86_64-linux-gnu",
