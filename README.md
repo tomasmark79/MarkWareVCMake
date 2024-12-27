@@ -228,9 +228,9 @@ From this point, you have a fully functional solution for developing Linux binar
 
 🛠️🛠️🛠️  
 
-| Task                  | Description                              |
-|-----------------------|------------------------------------------|
-| **Zero to Hero**      | Clean → Conan → Configure → Build      |
+| Task Menu             | Description                             |
+|-----------------------|-----------------------------------------|
+| **Zero to Hero**      | Clean → Conan → Configure → Build       |
 | **Clean**             | Removes the entire build folder         |
 | **Conan**             | Builds Conan dependencies               |
 | **Configure**         | Configures CMake                        |
@@ -238,14 +238,13 @@ From this point, you have a fully functional solution for developing Linux binar
 | **Collect Licenses**  | Gathers licenses from CPM dependencies  |
 | **Install Artefacts** | Installs to `/Build/Installed/`         |
 | **Release Artefacts** | Creates release archives                |
+| **Lint C/C++**        | C/C++ files diagnostics                 |
+| **Format C/C++**      | Recursive formatting for C/C++ files    | 
+| **Format CMake**      | Recursive formatting for CMake files    |
 
-
-| Task                  | Description                              |
+| Special Task Menu     | Description                              |
 |-----------------------|------------------------------------------|
 | **Permutate All Tasks**  | Executes all task scenarios           |
-
-
-
 
 ### Key Shortcuts
 
