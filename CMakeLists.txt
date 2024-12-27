@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 # dep: conanInstall(), CPM.cmake
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+# required by clangd clinting
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---- User definition of Library name, namespace, and install prefix ----
 # dep: CMakeController.sh
