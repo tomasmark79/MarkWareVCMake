@@ -135,7 +135,8 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    code .
    ```
 
-From this point, you have a fully functional solution for developing Linux binaries, regardless of the host platform.  
+From this point, you have a fully functional solution for developing Linux binaries, regardless of the host platform. 
+ 
 🚀🚀🚀
 
 ---
