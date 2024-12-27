@@ -2,7 +2,7 @@
 
 ### Modern configurable project template for C and C++ 
 
-It aims for a unique design, combining an **application** and **library** **within a single solution**.
+by Tomáš Mark, It aims for a unique design, combining an **application** and **library** **within a single solution**.
 
 It's spectacular! Give it a try! 😎
 
