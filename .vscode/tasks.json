@@ -85,7 +85,9 @@
             "type": "shell",
             "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
-                "${input:specialTaskName}"
+                "${input:specialTaskName}",
+                "SPECIALTASK"
+
             ],
             "group": {
                 "kind": "build",
