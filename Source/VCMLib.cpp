@@ -11,8 +11,7 @@
 
 VCMLib::VCMLib()
 {
-    std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
-              << std::endl;
+    std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---" << std::endl;
 
     std::cout << "--- " << curl_version() << " linked ---" << std::endl;
     std::cout << "--- " << BZ2_bzlibVersion() << " linked ---" << std::endl;
