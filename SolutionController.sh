@@ -5,7 +5,7 @@ workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # This script is a controller for CMake tasks
 # (c) Tomáš Mark 2024
 
-export CMakeControllerVersion="0.0.2"
+export SolutionControllerVersion="0.0.2"
 
 # Arguments and defaults
 taskName=$1
@@ -14,9 +14,10 @@ buildType=${3:-"Release"} # Default to "Release" if not specified
 
 GREEN="\033[0;32m" YELLOW="\033[0;33m" RED="\033[0;31m" NC="\033[0m" LIGHTBLUE="\033[1;34m"
 
+echo -e "${YELLOW}SolutionController.sh v$SolutionControllerVersion by Tomáš Mark 2024${NC}"
 echo -e "------------------------------------------------------------------------"
-echo -e "${YELLOW}CMakeController.sh v$CMakeControllerVersion by Tomáš Mark 2024"
-echo -e "${LIGHTBLUE}taskName\t: $taskName"
+echo -e "${LIGHTBLUE}taskName\t: $taskName${NC}"
+echo -e "------------------------------------------------------------------------"
 echo -e "${GREEN}buildArch\t: $buildArch"
 echo -e "${GREEN}buildType\t: $buildType"
 echo -e "${GREEN}workSpaceDir\t: $workSpaceDir${NC}"
@@ -24,6 +25,7 @@ echo -e "-----------------------------------------------------------------------
 
 # Installation output directory
 installOutputDir="$workSpaceDir/Build/Install"
+
 # Release artefacts output directory
 releaseArtefactsOutputDir="$workSpaceDir/Build/Artefacts"
 

@@ -94,6 +94,9 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    pip install conan
    conan profile detect --force
    ```  
+
+
+
 🛠️🛠️🛠️
 
 ### Windows (via WSL)
@@ -128,7 +131,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    ```
 2. Rename components:
    ```bash
-   ./TemplateRenamer.sh VCMLib MyLibrary VCMStandalone MyStandalone
+   ./SolutionRenamer.sh VCMLib MyLibrary VCMStandalone MyStandalone
    ```
 3. Open the project in VSCode:
    ```bash
@@ -167,44 +170,54 @@ From this point, you have a fully functional solution for developing Linux binar
 ## Project Structure
 
 📂📂📂  
-```txt
+
+```tree  
 .
 ├── cmake
-│   ├── Modules
-│   │   └── FindX11.cmake
-│   ├── CPM.cmake
-│   └── tools.cmake
+│   ├── Modules
+│   │   └── FindX11.cmake
+│   ├── CPM.cmake
+│   └── tools.cmake
 ├── include
-│   └── VCMLib
-│       └── VCMLib.hpp
-├── Utilities
-│   ├── CMakeToolChains
-│   │   ├── aarch64.cmake
-│   │   └── X86_64-w64-mingw32.cmake
-│   ├── ConanProfiles
-│   │   ├── aarch64
-│   │   ├── default
-│   │   └── x86_64-w64-mingw32
-│   ├── ConanPythonConfigurer
-│   │   └── conanfile.py
-│   └── AboutThisFolder.md
+│   └── VCMLib
+│       └── VCMLib.hpp
 ├── Source
-│   └── VCMLib.cpp
+│   └── VCMLib.cpp
 ├── Standalone
-│   ├── Source
-│   │   └── Main.cpp
-│   ├── CMakeLists.txt
-│   └── LICENSE
+│   ├── Source
+│   │   └── Main.cpp
+│   ├── CMakeLists.txt
+│   └── LICENSE
+├── Utilities
+│   ├── CMakeToolChains
+│   │   ├── aarch64-linux-gnu.cmake
+│   │   └── x86_64-w64-mingw32.cmake
+│   ├── ConanProfiles
+│   │   ├── aarch64-linux-gnu
+│   │   ├── default
+│   │   └── x86_64-w64-mingw32
+│   ├── ConanPythonConfigurer
+│   │   └── conanfile.py
+│   └── AboutThisFolder.md
 ├── .vscode
-│   ├── c_cpp_properties.json
-│   ├── keybindings.json
-│   ├── launch.json
-│   ├── settings.json
-│   └── tasks.json
+│   ├── c_cpp_properties.json
+│   ├── keybindings.json
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── .clang-format
+├── .cmake-format
+├── CMakeLists.txt
+├── conanfile.txt
+├── .gitattributes
+├── .gitignore
 ├── LICENSE
+├── .python-version
 ├── README.md
-└── TemplateRenamer.sh
+├── SolutionController.sh
+└── SolutionRenamer.sh
 ```  
+
 📂📂📂
 
 ---

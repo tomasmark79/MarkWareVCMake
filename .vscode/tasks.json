@@ -1,56 +1,98 @@
 {
     /* (c) Tomáš Mark 2024 */
     "version": "2.0.0",
-    "tasks": [
-        { /* clear terminal */
-            "label": "clear terminal",
-            "type": "shell",
-            "command": "clear",
-            "group": "none",
-            "problemMatcher": []
+    "inputs": [
+        {
+            "id": "specialTaskName",
+            "type": "pickString",
+            "description": "Select MarkWare Special Task",
+            "options": [
+                "Permutate All Tasks 🕧"
+            ],
+            "default": "Permutate All Tasks 🕧"
         },
         {
-            /* shellcheck project *.sh */
-            "label": "shellcheck project bash scripts",
+            "id": "taskName",
+            "type": "pickString",
+            "description": "Select MarkWare Task",
+            "options": [
+                "Zero to Hero 🦸",
+                "Clean 🧹",
+                "Conan 🗡️",
+                "Configure 🔧",
+                "Build 🔨",
+                "Collect Licenses 📜",
+                "Install Artefacts 📌",
+                "Release Artefacts 📦",
+                "",
+                "📚 Zero to Hero 🦸",
+                "📚 Clean 🧹",
+                "📚 Conan 🗡️",
+                "📚 Configure 🔧",
+                "📚 Build 🔨",
+                "📚 Collect Licenses 📜",
+                "📚 Install Artefacts 📌",
+                "📚 Release Artefacts 📦",
+                "",
+                "🎯 Zero to Hero 🦸",
+                "🎯 Clean 🧹",
+                "🎯 Conan 🗡️",
+                "🎯 Configure 🔧",
+                "🎯 Build 🔨",
+                "🎯 Collect Licenses 📜",
+                "🎯 Install Artefacts 📌",
+                "🎯 Release Artefacts 📦",
+            ],
+            "default": "Build 🔨"
+        },
+        {
+            "id": "buildArch",
+            "type": "pickString",
+            "description": "Select target architecture",
+            "options": [
+                "x86_64-linux-gnu",
+                "aarch64-linux-gnu",
+                "x86_64-w64-mingw32"
+            ],
+            "default": "x86_64-linux-gnu" /* change regarding you are sitting */
+        },
+        {
+            "id": "buildType",
+            "type": "pickString",
+            "description": "Select type of build",
+            "options": [
+                "Debug",
+                "Release",
+                "RelWithDebInfo",
+                "MinSizeRel"
+            ],
+            "default": "Debug"
+        },
+    ],
+    "tasks": [
+        {
+            /* MarkWare Special Tasks Menu */
+            "label": "MarkWare Special Tasks Menu",
             "type": "shell",
-            "command": "shellcheck",
+            "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
-                "${workspaceFolder}/CMakeController-raw.sh",
-                "${workspaceFolder}/TemplateRenamer.sh"
+                "${input:specialTaskName}"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "shellcheck project bash scripts",
+            "detail": "MarkWare Special Tasks Menu",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal"
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
             ]
         },
         {
-            "label": "compile CMakeController",
+            /* MarkWare Tasks Menu */
+            "label": "MarkWare Tasks Menu",
             "type": "shell",
-            "command": "shc",
-            "args": [
-                "CFLAGS=\"-static\"",
-                "-f",
-                "CMakeController.sh",
-                "-o",
-                "CMakeController.shc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "compile CMakeController",
-            "problemMatcher": []
-        },
-        {
-            /* MarkWare Tasks */
-            "label": "MarkWare Tasks",
-            "type": "shell",
-            "command": "${workspaceFolder}/CMakeController.sh",
+            "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
                 "${input:taskName}",
                 "${input:buildArch}",
@@ -60,17 +102,17 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "MarkWare Tasks",
+            "detail": "MarkWare Tasks Menu",
             "problemMatcher": [],
             "dependsOn": [
-                "clear terminal"
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
             ]
         },
         {
-            /* Build Native Debug */
-            "label": "Build Native Debug",
+            /* Direct Build (no menu) */
+            "label": "Direct Build",
             "type": "shell",
-            "command": "${workspaceFolder}/CMakeController.sh",
+            "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
                 "Build 🔨",
                 "x86_64-linux-gnu",
@@ -80,14 +122,11 @@
                 "kind": "build",
                 "isDefault": false
             },
-            "detail": "Build Native Debug",
-            "problemMatcher": [],
-            "dependsOn": [
-                "clear terminal"
-            ]
+            "detail": "Direct Build",
+            "problemMatcher": []
         },
         {
-            /* LINT */
+            /* LINT ctrl + atl + L */
             "label": "lint",
             "type": "shell",
             "command": "find",
@@ -121,7 +160,7 @@
             "detail": "Generated task for linting C++ files with clang-tidy.",
         },
         {
-            /* CLANG FORMAT */
+            /* CLANG FORMAT ctrl + atl + F */
             "label": "clang-format",
             "type": "shell",
             "command": "find",
@@ -157,7 +196,7 @@
             "detail": "Generated task for formatting C++ files with clang-format.",
         },
         {
-            /* CMAKE FORMAT */
+            /* CMAKE FORMAT ctrl + atl + M */
             "label": "cmake-format",
             "type": "shell",
             "command": "find",
@@ -191,67 +230,32 @@
             "group": "build",
             "problemMatcher": [],
             "detail": "Generated task for formatting CMake files with cmake-format.",
-        }
-    ],
-    "inputs": [
-        {
-            "id": "taskName",
-            "type": "pickString",
-            "description": "Select MarkWare Task",
-            "options": [
-                "Zero to Hero 🦸",
-                "Clean 🧹",
-                "Conan 🗡️",
-                "Configure 🔧",
-                "Build 🔨",
-                "Collect Licenses 📜",
-                "Install Artefacts 📌",
-                "Release Artefacts 📦",
-                "",
-                "📚 Zero to Hero 🦸",
-                "📚 Clean 🧹",
-                "📚 Conan 🗡️",
-                "📚 Configure 🔧",
-                "📚 Build 🔨",
-                "📚 Collect Licenses 📜",
-                "📚 Install Artefacts 📌",
-                "📚 Release Artefacts 📦",
-                "",
-                "🎯 Zero to Hero 🦸",
-                "🎯 Clean 🧹",
-                "🎯 Conan 🗡️",
-                "🎯 Configure 🔧",
-                "🎯 Build 🔨",
-                "🎯 Collect Licenses 📜",
-                "🎯 Install Artefacts 📌",
-                "🎯 Release Artefacts 📦",
-                "",
-                "Permutate All Tasks 🕧",
-            ],
-            "default": "Build 🔨"
         },
         {
-            "id": "buildArch",
-            "type": "pickString",
-            "description": "Select target architecture",
-            "options": [
-                "x86_64-linux-gnu",
-                "aarch64-linux-gnu",
-                "x86_64-w64-mingw32"
+            /* SPELLCHECK BASH SCRIPTS recursive /* ctrl + shift + atl + B  */
+            "label": "shellcheck project bash scripts",
+            "type": "shell",
+            "command": "shellcheck",
+            "args": [
+                "${workspaceFolder}/SolutionController.sh",
+                "${workspaceFolder}/SolutionRenamer.sh"
             ],
-            "default": "x86_64-linux-gnu" /* change regarding you are sitting */
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "shellcheck project bash scripts",
+            "problemMatcher": [],
+            "dependsOn": [
+                "clear terminal"
+            ]
         },
-        {
-            "id": "buildType",
-            "type": "pickString",
-            "description": "Select type of build",
-            "options": [
-                "Debug",
-                "Release",
-                "RelWithDebInfo",
-                "MinSizeRel"
-            ],
-            "default": "Debug"
+        { /* clear terminal */
+            "label": "clear terminal",
+            "type": "shell",
+            "command": "clear",
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
