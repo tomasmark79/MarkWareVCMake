@@ -152,7 +152,7 @@ From this point, you have a fully functional solution for developing Linux binar
  
 🚀🚀🚀
 
-## Basic default CLI configuration and build
+## configuration and build via cli
 
 Library
 ```bash
