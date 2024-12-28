@@ -1,4 +1,4 @@
-name: Ubuntu
+name: Windows
 
 on:
   push:
@@ -28,4 +28,4 @@ jobs:
       - name: configureStandalone
         run: cmake -S . -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeStandalone
-        run: cmake --build Build/Library/Debug --target all
+        run: cmake --build Build/Standalone/Debug --target all
