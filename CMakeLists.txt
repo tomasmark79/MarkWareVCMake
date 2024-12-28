@@ -12,7 +12,7 @@ set(PROJECT_LIBRARY_NAMESPACE dsdotname)
 set(PROJECT_LIBRARY_NAME VCMLib)
 project(
     ${PROJECT_LIBRARY_NAME}
-    VERSION 0.0.8
+    VERSION 0.0.9
     LANGUAGES C CXX ASM
     DESCRIPTION "library template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")

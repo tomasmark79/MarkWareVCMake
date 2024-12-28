@@ -3,7 +3,7 @@
 ### Modern, Configurable Project Template for C and C++
 
 Author: **Tomáš Mark**  
-Version: **0.0.8**
+Version: **0.0.9**
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
@@ -278,7 +278,7 @@ cmake --build Build/Standalone/Debug --target all
 - **F5**: Start debugging.
 - **F7**: Build native debug configuration.
 - **Shift + F7**: Task Menu
-- **Shift + Ctrl + s**: Special Task Menu
+- **Shift + Ctrl + S**: Special Task Menu
 - **Ctrl + Alt + M**: Format all CMake files.
 - **Ctrl + Alt + F**: Format all C++ files.
 - **Ctrl + Alt + L**: Lint all C++ files.
