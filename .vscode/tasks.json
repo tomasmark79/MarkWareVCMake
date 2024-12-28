@@ -160,6 +160,7 @@
             "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
                 "📐 Format C/C++ files (Clang)",
+                "SPECIALTASK"
             ],
             "group": {
                 "kind": "build",
@@ -175,6 +176,7 @@
             "command": "${workspaceFolder}/SolutionController.sh",
             "args": [
                 "📏 Format CMake files",
+                "SPECIALTASK"
             ],
             "group": {
                 "kind": "build",
