@@ -3,7 +3,7 @@
 ### Modern, Configurable Project Template for C and C++
 
 Author: **Tomáš Mark**  
-Version: **0.0.7**
+Version: **0.0.8**
 
 ---
 
