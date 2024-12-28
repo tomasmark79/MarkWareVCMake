@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 # dep: conanInstall(), CPM.cmake
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
 # required by clangd clinting
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -45,10 +46,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 find_package(Threads REQUIRED)
 find_package(X11 REQUIRED)
 
-# ---- Conan ----
-# find_package(dpp CONFIG REQUIRED)
-find_package(BZip2 REQUIRED)
-find_package(CURL REQUIRED)
+# ---- Conan dependencies example ----
+# find_package(dpp CONFIG REQUIRED) find_package(BZip2 REQUIRED) find_package(CURL REQUIRED)
 
 # Glob not recommended, but the simplest way for this template
 file(
@@ -85,7 +84,7 @@ target_include_directories(
     ${PROJECT_LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
            $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
-           # PRIVATE ${PROJECT_SOURCE_DIR}/Source # for headers in Source folder
+    # PRIVATE ${PROJECT_SOURCE_DIR}/Source # for headers in Source folder
     PRIVATE ${nlohmann_json_SOURCE_DIR}/include # by CPM.cmake for nlohmann/json.hpp
 )
 
@@ -96,8 +95,10 @@ target_compile_options(
 )
 
 # ---- Link libraries ----
-target_link_libraries(${PROJECT_LIBRARY_NAME} PUBLIC BZip2::BZip2 CURL::libcurl Threads::Threads
-                                                     dsdotname::EmojiTools)
+target_link_libraries(
+    ${PROJECT_LIBRARY_NAME} PUBLIC Threads::Threads dsdotname::EmojiTools
+    # Conan dependencies example BZip2::BZip2 CURL::libcurl
+)
 
 # ---- Packaging ----
 string(TOLOWER "${PROJECT_LIBRARY_NAME}" PROJECT_LIBRARY_NAME_LOWER)
@@ -138,5 +139,4 @@ packageProject(
 # ---- Set installation directory ----
 # set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/Build/Installed/" CACHE PATH "Installation
 # Directory" FORCE)
-
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_LIBRARY_NAME} DESTINATION include/)

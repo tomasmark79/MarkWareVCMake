@@ -108,38 +108,39 @@ function conanInstall() {
     [[ $conanWithSharedLibs == "ON" ]] && conanWithSharedLibs="-o *:shared=True" || conanWithSharedLibs="-o *:shared=False"
     # ------------------------------------------------------------------------------------
 
-    # Conan install composer
+    # Conan install command composer
     if [ "$isCrossCompilation" = true ]; then
         local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=$buildArch --settings=build_type=$buildType $conanWithSharedLibs"
     else
-        
+
         local conanCmd="conan install $workSpaceDir --output-folder=$buildDir --build=missing --profile=default --settings=build_type=$buildType $conanWithSharedLibs"
     fi
     executeCommand "$conanCmd" || exitWithError "Conan install failed."
 }
 
-
 function cmakeConfigure() {
     local sourceDir=$1
     local buildDir=$2
 
-    # !!! Failing this step will result crazies CMakes behaviour !!!
-    if [ "$isCrossCompilation" = true ]; then
-        echo -e "${YELLOW}Cross compilation is enabled${NC}"
-        local envCmd="source $workSpaceDir/$buildDir/conanbuild.sh"
-        log2file "$envCmd"
-        # source command has to be called in the same process 
-        $envCmd
-    fi
-
-    # Use Conan toolchain file if available
+    
     if [ -f "$buildDir/conan_toolchain.cmake" ]; then
+        # Conan detected
+        echo -e "${LIGHTBLUE}Using CONAN: True$cmd${NC}"
         toolchainFile="-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
+        
+        if [ "$isCrossCompilation" = true ]; then
+            echo -e "${YELLOW}Cross compilation is enabled${NC}"
+            # source conanbuild.sh
+            local envCmd="source $workSpaceDir/$buildDir/conanbuild.sh"
+            log2file "$envCmd"
+            $envCmd
+        fi
     else
-        # This case should never happened, but for backwards compatibility with no Conan projects
-        toolchainFile="" # default system toolchain
-        [[ $buildArch == "x86_64-w64-mingw32" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/CMakeToolChains/x86_64-w64-mingw32.cmake"
-        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/CMakeToolChains/aarch64-linux-gnu.cmake"
+        # No Conan - configure with only CMakelists.txt even Cross compilation is enabled
+        echo -e "${LIGHTBLUE}Using CONAN: False$cmd${NC}"
+        [[ $buildArch == "x86_64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-linux-gnu.cmake"
+        [[ $buildArch == "x86_64-w64-mingw32" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-w64-mingw32.cmake"
+        [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/aarch64-linux-gnu.cmake"
     fi
 
     local confCmd="cmake -S $sourceDir -B $workSpaceDir/$buildDir $toolchainFile -DCMAKE_BUILD_TYPE=$buildType -DCMAKE_INSTALL_PREFIX=$installOutputDir/$buildArch/$buildType"

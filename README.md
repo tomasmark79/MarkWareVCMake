@@ -40,6 +40,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 ### Development Tools
 
 🌐🌐🌐  
+
 - **Visual Studio Code**: Preconfigured for seamless development.  
   [https://code.visualstudio.com/](https://code.visualstudio.com/)
 - **Conan 2**: Simplifies dependency management.  
@@ -58,6 +59,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 ### Additional Integrations
 
 🔧🔧🔧  
+
 - **CPM.license**: Automates third-party license management.  
   [https://github.com/cpm-cmake/CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake)
 - **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
@@ -68,6 +70,11 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    
 🔧🔧🔧
 
+### Conan 2 Notice
+
+- In the freshly cloned default template, **Conan is not required**. You may uncomment the Conan dependency examples in marked locations to activate using Conan by template workflow.  
+- If you invoke the Conan task in the task menu, Conan will be part of the project configuration even if it does not explicitly provide dependency packages to the configuration.
+  
 ---
 
 ## Development Environment Setup
