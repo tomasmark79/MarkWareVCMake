@@ -5,7 +5,8 @@
 Author: **Tomáš Mark**  
 Version: **0.0.8**
 
-![Build Status](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/c-cpp.yml/badge.svg)
+![Build Status](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/library-c-cpp.yml/badge.svg)
+![Build Status](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/standalone-c-cpp.yml/badge.svg)
 
 ---
 
