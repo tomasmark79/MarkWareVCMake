@@ -11,7 +11,6 @@ env:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
@@ -20,12 +19,33 @@ jobs:
         with:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-     
-      - name: configureLibrary
-        run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug
-      - name: makeLibrary
-        run: cmake --build Build/Library/Debug --target all
-      - name: configureStandalone
-        run: cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
-      - name: makeStandalone
-        run: cmake --build Build/Standalone/Debug --target all
+
+      - name: Set reusable strings
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      # Library configuration
+      - name: Configure Library
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}/library
+          -DCMAKE_CXX_COMPILER=cl
+          -DCMAKE_C_COMPILER=cl
+          -DCMAKE_BUILD_TYPE=Debug
+          -S ${{ github.workspace }}
+
+      - name: Build Library
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }}/library --config Debug
+
+      # Standalone configuration  
+      - name: Configure Standalone
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}/standalone
+          -DCMAKE_CXX_COMPILER=cl
+          -DCMAKE_C_COMPILER=cl
+          -DCMAKE_BUILD_TYPE=Debug
+          -S ${{ github.workspace }}/Standalone
+
+      - name: Build Standalone
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }}/standalone --config Debug
