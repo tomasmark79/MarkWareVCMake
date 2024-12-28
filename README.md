@@ -264,7 +264,7 @@ cmake --build Build/Standalone/Debug --target all
 | **Build**             | Builds the project                      |
 | **Collect Licenses**  | Gathers licenses from CPM dependencies  |
 | **Install Artefacts** | Installs to `/Build/Installed/`         |
-| **Release Artefacts** | Creates release archives                |
+| **Release Artefacts** | Tarballs to `/Build/Artefacts/`         |
 | **Lint C/C++**        | C/C++ files diagnostics                 |
 | **Format C/C++**      | Recursive formatting for C/C++ files    | 
 | **Format CMake**      | Recursive formatting for CMake files    |
