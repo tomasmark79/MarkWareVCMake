@@ -26,6 +26,6 @@ jobs:
       - name: makeLibrary
         run: cmake --build Build/Library/Debug --target all
       - name: configureStandalone
-        run: cmake -S . -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeStandalone
         run: cmake --build Build/Standalone/Debug --target all
