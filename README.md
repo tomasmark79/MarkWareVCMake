@@ -152,6 +152,20 @@ From this point, you have a fully functional solution for developing Linux binar
  
 🚀🚀🚀
 
+## Basic default CLI configuration and build
+
+Library
+```bash
+cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug
+cmake --build Build/Library/Debug --target all
+```
+
+Standalone with Library
+```bash
+cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
+cmake --build Build/Standalone/Debug --target all
+```
+
 ---
 
 ## Preconfigured Architectures
