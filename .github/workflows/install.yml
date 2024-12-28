@@ -29,7 +29,7 @@ jobs:
         run: cmake --install Build/Library/Debug --prefix Build/Library/Debug/Install
       
       - name: configureStandalone
-        run: cmake -S . -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeStandalone
         run: cmake --build Build/Standalone/Debug --target all
       - name: installStandalone
