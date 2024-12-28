@@ -288,6 +288,13 @@ cmake --build Build/Standalone/Debug --target all
 
 ---
 
+### Comparison Overview to Similar Templates
+
+<img width="796" alt="image" src="https://github.com/user-attachments/assets/ca816296-b122-42ed-95ee-a944f9001d41" />
+
+```
+
+
 ## License
 
 This template is licensed under MIT License.  
