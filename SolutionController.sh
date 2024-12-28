@@ -75,6 +75,10 @@ function isCross() {
     then
         isCrossCompilation=true
     elif
+        [ "$buildArch" == "x86_64-unknown-linux-gnu" ]
+    then
+        isCrossCompilation=true
+    elif
         [ "$buildArch" == "x86_64-w64-mingw32" ]
     then
         isCrossCompilation=true
@@ -138,7 +142,8 @@ function cmakeConfigure() {
     else
         # No Conan - configure with only CMakelists.txt even Cross compilation is enabled
         echo -e "${LIGHTBLUE}Using CONAN: False$cmd${NC}"
-        [[ $buildArch == "x86_64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-linux-gnu.cmake"
+        [[ $buildArch == "x86_64-linux-gnu" ]] && toolchainFile="" # -DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-linux-gnu.cmake"
+        [[ $buildArch == "x86_64-unknown-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-unknown-linux-gnu.cmake"
         [[ $buildArch == "x86_64-w64-mingw32" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/x86_64-w64-mingw32.cmake"
         [[ $buildArch == "aarch64-linux-gnu" ]] && toolchainFile="-DCMAKE_TOOLCHAIN_FILE=$workSpaceDir/Utilities/CMakeToolChains/aarch64-linux-gnu.cmake"
     fi
