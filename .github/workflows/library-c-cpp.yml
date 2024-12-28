@@ -22,6 +22,6 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
      
       - name: configure
-      run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug    
+        run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug    
       - name: make
-      run: cmake --build Build/Library/Debug --target all
+        run: cmake --build Build/Library/Debug --target all
