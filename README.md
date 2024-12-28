@@ -5,6 +5,8 @@
 Author: **Tomáš Mark**  
 Version: **0.0.8**
 
+![Build Status](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/c-cpp.yml/badge.svg)
+
 ---
 
 <img width="189" alt="image" src="https://github.com/user-attachments/assets/df0f7209-aaec-4c51-a434-4455344e0d57" />
