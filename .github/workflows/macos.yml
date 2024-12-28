@@ -1,4 +1,4 @@
-name: Windows
+name: MacOS
 
 on:
   push:
@@ -12,7 +12,7 @@ env:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,6 @@ jobs:
         run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeLibrary
         run: cmake --build Build/Library/Debug --target all
-      
       - name: configureStandalone
         run: cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeStandalone
