@@ -310,19 +310,20 @@ cmake --build Build/Standalone/Debug --target all
 | VSCode Tasks via Menu and Shortcuts         | yes                                    | no               | no              |
 | Clean                                       | Removes the entire build folder        | no               | no              |
 | Conan                                       | Builds Conan dependencies              | no               | no              |
-| Configure                                   | Configures CMake                       | no               | no              |
-| Build                                       | Builds the project                     | no               | no              |
+| Configure                                   | Configures CMake                       | only cli         | only cli        |
+| Build                                       | Builds the project                     | only cli         | only cli        |
 | Collect Licenses                            | Gathers licenses from CPM dependencies | no               | no              |
 | Install Artefacts                           | Installs to /Build/Installed/          | no               | no              |
 | Release Artefacts                           | Tarballs to /Build/Artefacts/          | no               | no              |
-| Lint C/C++                                  | C/C++ files diagnostics                | only cli         | no              |
-| Format C/C++                                | Recursive formatting for C/C++ files   | only cli         | no              |
-| Format CMake                                | Recursive formatting for CMake files   | only cli         | no              |
+| Lint C/C++                                  | C/C++ files diagnostics                | only cli         | only cli        |
+| Format C/C++                                | Recursive formatting for C/C++ files   | only cli         | only cli        |
+| Format CMake                                | Recursive formatting for CMake files   | only cli         | only cli        |
 | Permutate All Tasks                         | Executes all task scenarios (testing)  | no               | no              |
 | Loging runned commands                      | yes, to file                           | no               | no              |
 | C/C++ tests                                 | not yet                                | yes              | yes             |
 | Doxygen                                     | not yet                                | yes              | no              |
 
+---
 
 ## License
 
