@@ -154,9 +154,11 @@ From this point, you have a fully functional solution for developing Linux binar
 ## Preconfigured Architectures
 
 🌍🌍🌍  
-- `x86_64-linux-gnu` (default profile)
-- `aarch64-linux-gnu` (requires cross-compilation)
-- `x86_64-w64-mingw32` (requires cross-compilation)  
+
+- `x86_64-linux-gnu` (default native Linux profile)  
+- `x86_64-unknown-linux-gnu` (requires cross-compilation toolchain)  
+- `aarch64-linux-gnu` (requires cross-compilation toolchain)  
+- `x86_64-w64-mingw32` (requires cross-compilation toolchain)  
 
 🌍🌍🌍
 
