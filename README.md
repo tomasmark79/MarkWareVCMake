@@ -296,6 +296,7 @@ cmake --build Build/Standalone/Debug --target all
 | Stanadlone->Library concept                 | yes                                    | yes              | yes             |
 | Highly Customizable                         | yes                                    | yes              | yes             |
 | Github workflow with badges                 | yes                                    | yes              | not sure        |
+| PackageProject.cmake                        | yes                                    | author           | no              |
 | Dependency solution CPM.cmake integrated    | yes                                    | author           | no              |
 | CPM.license integrated                      | yes                                    | author           | no              |
 | CPM.tools integrated                        | yes                                    | author           | no              |
