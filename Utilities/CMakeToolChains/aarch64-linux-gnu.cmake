@@ -1,22 +1,20 @@
 # (c) Tomáš Mark 2024
 
-# Set system name and processor
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
-set(CROSS_HOST "arm-linux-gnu") # This is the host system
+set(user_dir "/home/tomas") # edit me
+set(triple "aarch64-rpi4-linux-gnu")
 
-# Define sysroot
-set(CMAKE_SYSROOT /home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot)
+set(CMAKE_SYSROOT ${user_dir}/x-tools/${triple}/${triple}/sysroot)
 
-# Specify cross-compilers
-set(CMAKE_C_COMPILER /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-gcc)
-set(CMAKE_CXX_COMPILER /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-g++)
-set(CMAKE_ASM_COMPILER /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-as)
-set(CMAKE_LINKER /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ld)
-set(CMAKE_AR /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ar)
-set(CMAKE_RANLIB /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ranlib)
-set(CMAKE_STRIP /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-strip)
-set(CMAKE_LIBTOOL /home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-libtool)
+set(CMAKE_C_COMPILER ${user_dir}/x-tools/${triple}/bin/${triple}-gcc)
+set(CMAKE_CXX_COMPILER ${user_dir}/x-tools/${triple}/bin/${triple}-g++)
+set(CMAKE_ASM_COMPILER ${user_dir}/x-tools/${triple}/bin/${triple}-as)
+set(CMAKE_LINKER ${user_dir}/x-tools/${triple}/bin/${triple}-ld)
+set(CMAKE_AR ${user_dir}/x-tools/${triple}/bin/${triple}-ar)
+set(CMAKE_RANLIB ${user_dir}/x-tools/${triple}/bin/${triple}-ranlib)
+set(CMAKE_STRIP ${user_dir}/x-tools/${triple}/bin/${triple}-strip)
+set(CMAKE_LIBTOOL ${user_dir}/x-tools/${triple}/bin/${triple}-libtool)
 
 # where is the CMAKE_FIND_ROOT_PATH target environment located
 set(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT})
