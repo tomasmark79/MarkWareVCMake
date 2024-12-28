@@ -43,8 +43,9 @@ cpm_licenses_create_disclaimer_target(write-licenses "${CMAKE_CURRENT_BINARY_DIR
 # ---- CMake modules path ----
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
+# ---- System Libraries example ----
 find_package(Threads REQUIRED)
-find_package(X11 REQUIRED)
+# find_package(X11 REQUIRED)
 
 # ---- Conan dependencies example ----
 # find_package(dpp CONFIG REQUIRED) find_package(BZip2 REQUIRED) find_package(CURL REQUIRED)
