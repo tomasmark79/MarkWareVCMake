@@ -94,7 +94,7 @@ target_compile_options(
 
 # ---- Link libraries ----
 target_link_libraries(
-    ${PROJECT_LIBRARY_NAME} PUBLIC Threads::Threads dsdotname::EmojiTools
+    ${PROJECT_LIBRARY_NAME} PUBLIC Threads::Threads dsdotname::EmojiTools nlohmann_json::nlohmann_json
     # Conan dependencies example BZip2::BZip2 CURL::libcurl
 )
 
@@ -138,3 +138,6 @@ packageProject(
 # set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/Build/Installed/" CACHE PATH "Installation
 # Directory" FORCE)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_LIBRARY_NAME} DESTINATION include/)
+
+# ---- Explicitly export the targets if missing ----
+# install(TARGETS nlohmann_json EXPORT ${PROJECT_LIBRARY_NAME}Targets)
