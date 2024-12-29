@@ -8,7 +8,8 @@
             "type": "pickString",
             "description": "Select MarkWare Special Task",
             "options": [
-                "Permutate All Tasks 🕧"
+                "Permutate All Tasks 🕧",
+                "Compile Controller 🧨"
             ],
             "default": "Permutate All Tasks 🕧"
 

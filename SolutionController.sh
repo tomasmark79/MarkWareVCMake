@@ -126,12 +126,11 @@ function cmakeConfigure() {
     local sourceDir=$1
     local buildDir=$2
 
-    
     if [ -f "$buildDir/conan_toolchain.cmake" ]; then
         # Conan detected
         echo -e "${LIGHTBLUE}Using CONAN: True$cmd${NC}"
         toolchainFile="-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
-        
+
         if [ "$isCrossCompilation" = true ]; then
             echo -e "${YELLOW}Cross compilation is enabled${NC}"
             # source conanbuild.sh
@@ -498,6 +497,20 @@ case $taskName in
         done
     done
     exitOk ""
+    ;;
+
+"Compile Controller 🧨")
+    function compileController() {
+        local confCmd="cmake -S $workSpaceDir/Controller/ -B $workSpaceDir/Controller/Build"
+        executeCommand "$confCmd" || exitWithError "CMake configure failed."
+        local compileCmd="cmake --build $workSpaceDir/Controller/Build --target all"
+        executeCommand "$compileCmd" || exitWithError "CMake build failed."
+        local copyCmd="cp -f $workSpaceDir/Controller/Build/SolutionController $workSpaceDir/"
+        executeCommand "$copyCmd" || exitWithError "Copy artefact failed."
+        local cleanBuildDirCmd="rm -rf $workSpaceDir/Controller/Build"
+        executeCommand "$cleanBuildDirCmd" || exitWithError "Clean build directory failed."
+    }
+    compileController
     ;;
 
 "🔍 Lint C/C++ files")
