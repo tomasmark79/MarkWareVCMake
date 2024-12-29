@@ -71,7 +71,7 @@ is_cross()
 
 def conan_install(build_dir):
     conan_with_shared_libs = "-o *:shared=True" if "ON" in open("CMakeLists.txt").read() else "-o *:shared=False"
-    conan_cmd = f"conan install {workSpaceDir} --output-folder={build_dir} --build=missing --profile={'default' if not isCrossCompilation else buildArch} --settings=build_type={buildType} {conan_with_shared_libs}"
+    conan_cmd = f"conan install \"{workSpaceDir}\" --output-folder=\"{build_dir}\" --build=missing --profile={'default' if not isCrossCompilation else buildArch} --settings=build_type={buildType} {conan_with_shared_libs}"
     execute_command(conan_cmd)
 
 def cmake_configure(source_dir, build_dir):
