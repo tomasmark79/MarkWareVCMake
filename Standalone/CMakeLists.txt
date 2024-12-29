@@ -63,6 +63,4 @@ set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NA
 target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
 # ---- Set installation directory ----
-# set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/../Build/Installed/" CACHE PATH
-# "Installation Directory" FORCE)
 install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
