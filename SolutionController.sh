@@ -244,9 +244,9 @@ function aretfactsSpltr() {
     local conanWithSharedLibs
     libraryVersion=$(grep -oP 'VERSION\s+\K\d+\.\d+\.\d+' CMakeLists.txt)
     local libraryName
-    libraryName=$(grep -oP 'set\(PROJECT_LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
+    libraryName=$(grep -oP 'set\(LIBRARY_NAME\s+\K\w+' CMakeLists.txt)
     local standaloneName
-    standaloneName=$(grep -oP 'set\(PROJECT_STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
+    standaloneName=$(grep -oP 'set\(STANDALONE_NAME\s+\K\w+' Standalone/CMakeLists.txt)
 
     # L I N U X 🐧
     # tar x86_64-linux-gnu
