@@ -1,56 +1,62 @@
-cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# dep: conanInstall(), CPM.cmake
+# ===========================
+# Static or shared library
+# ===========================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# required by clangd clinting
+# Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# ---- User definition of Library name, namespace, and install prefix ----
-# dep: CMakeController.sh
-set(PROJECT_LIBRARY_NAMESPACE dsdotname)
-set(PROJECT_LIBRARY_NAME VCMLib)
+# ===========================
+# Project configuration
+# ===========================
+set(LIBRARY_NAME VCMLib)
+string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
+set(LIBRARY_NAMESPACE dsdotname)
 project(
-    ${PROJECT_LIBRARY_NAME}
-    VERSION 0.0.9
+    ${LIBRARY_NAME}
+    VERSION 0.0.10
     LANGUAGES C CXX ASM
     DESCRIPTION "library template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
-# ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(
-        FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory (called a Build directory) and run CMake from there."
-    )
+    message(FATAL_ERROR "In-source builds not allowed.
+        Please make a new directory (called a Build directory) and run CMake from there.")
 endif()
 
-# ---- Mandatory CPMs  ----
+# CPM.cmake configuration
 include(cmake/tools.cmake)
 include(cmake/CPM.cmake)
+
+# ===========================
+# CPM dependencies
+# ===========================
 CPMAddPackage("gh:fmtlib/fmt#11.0.2")
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
-
-# ---- Optional CPMs  ----
 CPMAddPackage("gh:nlohmann/json@3.11.3")
 CPMAddPackage("gh:tomasmark79/EmojiTools#main")
 
-# put CPM.license target after all packages have been added
+# CPM licenses generation target
 cpm_licenses_create_disclaimer_target(write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
                                       "${CPM_PACKAGES}")
 
-# ---- CMake modules path ----
+# ===========================
+# find_packade section
+# ===========================
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
-# ---- System Libraries example ----
-find_package(Threads REQUIRED)
-# find_package(X11 REQUIRED)
+# find_package(Threads REQUIRED) # system
+# find_package(X11 REQUIRED) # cmake/Modules/FindX11.cmake
+# find_package(dpp CONFIG REQUIRED) # conan
+# find_package(BZip2 REQUIRED) # conan
+# find_package(CURL REQUIRED) # conan
 
-# ---- Conan dependencies example ----
-# find_package(dpp CONFIG REQUIRED) find_package(BZip2 REQUIRED) find_package(CURL REQUIRED)
-
-# Glob not recommended, but the simplest way for this template
+# ===========================
+# Source and header files Glob not recommended, but the simplest way for this template
+# ===========================
 file(
     GLOB_RECURSE
     headers
@@ -59,8 +65,6 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
-
-# Glob not recommended, but the simplest way for this template
 file(
     GLOB_RECURSE
     sources
@@ -70,40 +74,59 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
 
-# ---- Create library ----
-add_library(${PROJECT_LIBRARY_NAME} ${headers} ${sources})
+# ===========================
+# Create library
+# ===========================
+add_library(${LIBRARY_NAME})
+target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
-# ---- Library features ----
-target_compile_features(${PROJECT_LIBRARY_NAME} PUBLIC cxx_std_17)
+# ===========================
+# Set library properties
+# ===========================
+set(CMAKE_CXX_STANDARD 17)
+# if various C++ standards are used, use target_compile_features
+# target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
 
+# ===========================
+# Set library headers
+# ===========================
 # header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
-# <add_library(${PROJECT_LIBRARY_NAME} INTERFACE)>
+# <add_library(${LIBRARY_NAME} INTERFACE)>
 target_include_directories(
-    ${PROJECT_LIBRARY_NAME}
+    ${LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-           $<INSTALL_INTERFACE:include/${PROJECT_LIBRARY_NAME}-${PROJECT_VERSION}>
-    # PRIVATE ${PROJECT_SOURCE_DIR}/Source # for headers in Source folder
-    PRIVATE ${nlohmann_json_SOURCE_DIR}/include # by CPM.cmake for nlohmann/json.hpp
-)
+    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Source> # for exceptions 😎
+           $<INSTALL_INTERFACE:include/${LIBRARY_NAME}-${PROJECT_VERSION}>)
 
-# being a cross-platform target, we enforce standards conformance on MSVC
+# ===========================
+# Set library definitions
+# ===========================
 target_compile_options(
-    ${PROJECT_LIBRARY_NAME}
-    PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/W4;/permissive->>"
-           "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic>")
+    ${LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/W4;/permissive->"
+                           "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic>")
 
-# ---- Link libraries ----
+# ===========================
+# Set library linking
+# ===========================
 target_link_libraries(
-    ${PROJECT_LIBRARY_NAME} PUBLIC Threads::Threads dsdotname::EmojiTools nlohmann_json::nlohmann_json
-    # Conan dependencies example BZip2::BZip2 CURL::libcurl
+    ${LIBRARY_NAME}
+    PUBLIC # System
+           # Threads::Threads
+           # CPM
+           fmt::fmt
+           dsdotname::EmojiTools
+           nlohmann_json::nlohmann_json
+           # Conan
+           # BZip2::BZip2
+           # CURL::libcurl
 )
 
-# ---- Packaging ----
-string(TOLOWER "${PROJECT_LIBRARY_NAME}" PROJECT_LIBRARY_NAME_LOWER)
-
+# ===========================
+# Set library installation
+# ===========================
 packageProject(
     # the name of the target to export
-    NAME ${PROJECT_LIBRARY_NAME}
+    NAME ${LIBRARY_NAME}
     # the version of the target to export
     VERSION ${PROJECT_VERSION}
     # a temporary directory to create the config files
@@ -111,18 +134,18 @@ packageProject(
     # location of the target's public headers
     INCLUDE_DIR "/include"
     # should match the target's INSTALL_INTERFACE include directory
-    INCLUDE_DESTINATION include/${PROJECT_LIBRARY_NAME_LOWER}-${PROJECT_VERSION}
+    INCLUDE_DESTINATION include/${LIBRARY_NAME_LOWER}-${PROJECT_VERSION}
     # (optional) option to install only header files with matching pattern
     INCLUDE_HEADER_PATTERN "*.h"
     # semicolon separated list of the project's dependencies
     DEPENDENCIES "fmt#11.0.2;CPMLicenses.cmake@0.0.7;json@3.11.3;EmojiTools@0.0.1"
-    # (optional) create a header containing the version info Note: that the path to headers should
-    # be lowercase
-    VERSION_HEADER "${PROJECT_LIBRARY_NAME_LOWER}/version.h"
+    # (optional) create a header containing the version info Note: that the path to headers should be
+    # lowercase
+    VERSION_HEADER "${LIBRARY_NAME_LOWER}/version.h"
     # (optional) create a export header using GenerateExportHeader module
-    EXPORT_HEADER "${PROJECT_LIBRARY_NAME_LOWER}/export.h"
+    EXPORT_HEADER "${LIBRARY_NAME_LOWER}/export.h"
     # (optional) install your library with a namespace (Note: do NOT add extra '::')
-    NAMESPACE ${PROJECT_LIBRARY_NAMESPACE}
+    NAMESPACE ${LIBRARY_NAMESPACE}
     # (optional) define the project's version compatibility, defaults to `AnyNewerVersion` supported
     # values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|ExactVersion`
     COMPATIBILITY AnyNewerVersion
@@ -134,10 +157,13 @@ packageProject(
     # (optional) option to generate CPack variables
     CPACK YES)
 
-# ---- Set installation directory ----
-# set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/Build/Installed/" CACHE PATH "Installation
-# Directory" FORCE)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_LIBRARY_NAME} DESTINATION include/)
+# ===========================
+# Set installation directory
+# ===========================
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME} DESTINATION include/)
 
-# ---- Explicitly export the targets if missing ----
-# install(TARGETS nlohmann_json EXPORT ${PROJECT_LIBRARY_NAME}Targets)
+# ===========================
+# Export the targets
+# ===========================
+# nlohmann as CPM package does not export the target, we need to do it manually
+install(TARGETS nlohmann_json EXPORT ${LIBRARY_NAME}Targets)

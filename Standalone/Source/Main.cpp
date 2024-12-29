@@ -3,22 +3,17 @@
 
 #include <chrono>
 #include <iostream>
-// #include <memory>
 #include <thread>
-
-// Standalone main entry point
 
 int main()
 {
-    // init VCMLib instance
     std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>();
 
-    // five seconds delay
-    std::cout << "Wait for 5 seconds please ..." << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-
-    // bye bye
+    // remove me ------------------👇🏻
+    std::cout << "Wait for 2 seconds please ..." << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
     std::cout << "Bye bye!" << std::endl;
-
+    // remove me ------------------👆🏻
+    
     return 0;
 }

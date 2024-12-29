@@ -1,7 +1,7 @@
+// Library declaration
+
 #ifndef __VCMLIB_H__
 #define __VCMLIB_H__
-
-// Library declaration
 
 class VCMLib
 {

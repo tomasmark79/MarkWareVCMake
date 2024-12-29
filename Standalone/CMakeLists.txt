@@ -1,37 +1,38 @@
-cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# dep: conanInstall(), CPM.cmake
+# ===========================
+# Static or shared library
+# ===========================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-# required by clangd clinting
+
+# Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# ---- User definition of Standalone name, and install prefix ----
-# dep: CMakeController.sh
-set(PROJECT_STANDALONE_NAME VCMStandalone)
+# ===========================
+# Project configuration
+# ===========================
+set(STANDALONE_NAME VCMStandalone)
+string(TOLOWER "${STANDALONE_NAME}" STANDALONE_NAME_LOWER)
+set(STANDALONE_NAMESPACE dsdotname)
 project(
-    ${PROJECT_STANDALONE_NAME}
+    ${STANDALONE_NAME}
     LANGUAGES C CXX ASM
-    DESCRIPTION "Executable template by Tomáš Mark 2024"
+    DESCRIPTION "Standalone template by Tomáš Mark 2024"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(
-        FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory (called a Build directory) and run CMake from there."
-    )
+    message(FATAL_ERROR "In-source builds not allowed.
+            Please make a new directory (called a Build directory) and run CMake from there.")
 endif()
 
-# ---- Mandatory CPMs  ----
+# CPM.cmake configuration
 include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
+# ===========================
+# CPM dependencies
+# ===========================
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
-
-CPMAddPackage(
-    NAME cxxopts
-    GITHUB_REPOSITORY jarro2783/cxxopts
-    VERSION 3.2.1
-    OPTIONS "CXXOPTS_BUILD_EXAMPLES OFF" "CXXOPTS_BUILD_TESTS OFF" "CXXOPTS_ENABLE_INSTALL OFF")
 
 # Glob not recommended, but the simplest way for this template
 file(
@@ -54,15 +55,14 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
 
 # ---- Create standalone executable ----
-add_executable(${PROJECT_STANDALONE_NAME} ${sources})
+add_executable(${STANDALONE_NAME} ${sources})
 
 # ---- Standalone options ----
-set_target_properties(${PROJECT_STANDALONE_NAME} PROPERTIES OUTPUT_NAME
-                                                            "${PROJECT_STANDALONE_NAME}")
+set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NAME}")
 # ---- link developed library ----
-target_link_libraries(${PROJECT_STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
+target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
 # ---- Set installation directory ----
 # set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/../Build/Installed/" CACHE PATH
 # "Installation Directory" FORCE)
-install(TARGETS ${PROJECT_STANDALONE_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
