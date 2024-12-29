@@ -1,7 +1,8 @@
-import os # for path manipulation
-import sys # for command line arguments
-import subprocess # for executing shell commands
-import shutil # for file operations
+import os
+import sys
+import subprocess
+import shutil
+import platform
 
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
@@ -12,23 +13,23 @@ LIGHTBLUE = "\033[1;34m"
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 nameOfScript = os.path.basename(__file__) + " (python version)"
 scriptAuthor = "(c) Tomáš Mark 2004"
-scriptVersion = "0.0.1"
+scriptVersion = "0.0.2"
+
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Release"
 isCrossCompilation = False
 
-# user defined variables
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
 
-def exit_ok(message):
-    print(f"{GREEN}{message}{NC}")
+def exit_ok(msg):
+    print(f"{GREEN}{msg}{NC}")
     sys.exit(0)
 
-def exit_with_error(message):
-    print(f"{RED}{message}{NC}")
+def exit_with_error(msg):
+    print(f"{RED}{msg}{NC}")
     sys.exit(1)
 
 if not taskName:
@@ -40,181 +41,237 @@ print(f"{'-'*63}")
 print(f"{LIGHTBLUE}taskName\t: {taskName}{NC}")
 print(f"{'-'*63}")
 print(f"{GREEN}Build Arch\t: {buildArch}")
-print(f"{GREEN}Build Type\t: {buildType}")
-print(f"{GREEN}Work Space\t: {workSpaceDir}{NC}")
-print(f"{GREEN}Install to\t: {installOutputDir}{NC}")
-print(f"{GREEN}Artefacts to\t: {artefactsOutputDir}{NC}")
+print(f"Build Type\t: {buildType}")
+print(f"Work Space\t: {workSpaceDir}{NC}")
+print(f"Install to\t: {installOutputDir}{NC}")
+print(f"Artefacts to\t: {artefactsOutputDir}{NC}")
 print(f"\\{'-'*61}/")
 
 def log2file(message):
-    with open(os.path.join(workSpaceDir, "SolutionController.log"), "a") as log_file:
-        log_file.write(message + "\n")
+    with open(os.path.join(workSpaceDir, "SolutionController.log"), "a") as f:
+        f.write(message + "\n")
 
 def execute_command(cmd):
     print(f"{LIGHTBLUE}> Executed: {cmd}{NC}")
     log2file(cmd)
-    result = subprocess.run(cmd, shell=True)
+    if platform.system().lower() == "windows":
+        result = subprocess.run(cmd, shell=True)
+    else:
+        result = subprocess.run(cmd, shell=True, executable="/bin/bash")
     if result.returncode != 0:
         exit_with_error(f"Command failed: {cmd}")
 
-def get_build_dir(type):
-    return os.path.join(buildFolderName, type, buildArch, buildType)
+def get_build_dir(kind):
+    return os.path.join(buildFolderName, kind, buildArch, buildType)
 
 def is_cross():
     global isCrossCompilation
-    if buildArch in ["x86_64-linux-gnu", "aarch64-linux-gnu", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "SPECIALTASK"]:
-        isCrossCompilation = buildArch != "x86_64-linux-gnu"
+    valid_archs = ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-unknown-linux-gnu","x86_64-w64-mingw32","SPECIALTASK"]
+    if buildArch in valid_archs:
+        isCrossCompilation = (buildArch != "x86_64-linux-gnu")
     else:
-        exit_with_error("Unknown build architecture. Exiting.")
+        # Pro macOS by se mohlo přidat "arm64-apple-darwin" nebo podobně
+        if "darwin" in platform.system().lower():
+            isCrossCompilation = False
+        else:
+            exit_with_error("Unknown build architecture. Exiting.")
 
 is_cross()
 
-def conan_install(build_dir):
-    conan_with_shared_libs = "-o *:shared=True" if "ON" in open("CMakeLists.txt").read() else "-o *:shared=False"
-    conan_cmd = f"conan install \"{workSpaceDir}\" --output-folder=\"{build_dir}\" --build=missing --profile={'default' if not isCrossCompilation else buildArch} --settings=build_type={buildType} {conan_with_shared_libs}"
-    execute_command(conan_cmd)
+def conan_install(bdir):
+    shared_flag = "-o *:shared=True" if "ON" in open("CMakeLists.txt").read() else "-o *:shared=False"
+    profile = "default" if not isCrossCompilation else buildArch
+    cmd = f'conan install "{workSpaceDir}" --output-folder="{bdir}" --build=missing --profile={profile} --settings=build_type={buildType} {shared_flag}'
+    execute_command(cmd)
 
-def cmake_configure(source_dir, build_dir):
+def cmake_configure(src, bdir):
     toolchain_file = ""
-    if os.path.isfile(os.path.join(build_dir, "conan_toolchain.cmake")):
+    conan_toolchain = os.path.join(bdir, "conan_toolchain.cmake")
+    if os.path.isfile(conan_toolchain):
         print(f"{LIGHTBLUE}Using CONAN: True{NC}")
         toolchain_file = "-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake"
         if isCrossCompilation:
             print(f"{YELLOW}Cross compilation is enabled{NC}")
-            env_cmd = f"source {os.path.join(workSpaceDir, build_dir, 'conanbuild.sh')}"
-            log2file(env_cmd)
-            execute_command(env_cmd)
+            if platform.system().lower() in ["linux", "darwin"]:  # Linux nebo macOS
+                env_script = os.path.join(workSpaceDir, bdir, "conanbuild.sh")
+                env_cmd = f'source "{env_script}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir,buildArch,buildType)}"'
+                log2file(env_cmd)
+                result = subprocess.run(env_cmd, shell=True, executable="/bin/bash")
+                if result.returncode != 0:
+                    exit_with_error(f"Command failed: {env_cmd}")
+            elif platform.system().lower() == "windows":
+                env_cmd = f'call "{os.path.join(workSpaceDir, bdir, "conanbuild.bat")}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir,buildArch,buildType)}"'
+                log2file(env_cmd)
+                execute_command(env_cmd)
     else:
         print(f"{LIGHTBLUE}Using CONAN: False{NC}")
+        # Pro rozšíření pro macOS
+        chain_dir = os.path.join(workSpaceDir, "Utilities", "CMakeToolChains")
         if buildArch == "x86_64-unknown-linux-gnu":
-            toolchain_file = f"-DCMAKE_TOOLCHAIN_FILE={os.path.join(workSpaceDir, 'Utilities', 'CMakeToolChains', 'x86_64-unknown-linux-gnu.cmake')}"
+            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"x86_64-unknown-linux-gnu.cmake")}"'
         elif buildArch == "x86_64-w64-mingw32":
-            toolchain_file = f"-DCMAKE_TOOLCHAIN_FILE={os.path.join(workSpaceDir, 'Utilities', 'CMakeToolChains', 'x86_64-w64-mingw32.cmake')}"
+            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"x86_64-w64-mingw32.cmake")}"'
         elif buildArch == "aarch64-linux-gnu":
-            toolchain_file = f"-DCMAKE_TOOLCHAIN_FILE={os.path.join(workSpaceDir, 'Utilities', 'CMakeToolChains', 'aarch64-linux-gnu.cmake')}"
+            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"aarch64-linux-gnu.cmake")}"'
+        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir,buildArch,buildType)}"'
+        execute_command(cmd)
 
-    conf_cmd = f"cmake -S {source_dir} -B {os.path.join(workSpaceDir, build_dir)} {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX={os.path.join(installOutputDir, buildArch, buildType)}"
-    execute_command(conf_cmd)
-
-def cmake_build(build_dir):
-    cmd = f"cmake --build {build_dir} --target all -j {os.cpu_count()}"
+def cmake_build(bdir, target="all"):
+    cmd = f'cmake --build "{bdir}" --target {target} -j {os.cpu_count()}'
     execute_command(cmd)
 
-def cmake_build_cpm_licenses(build_dir):
-    cmd = f"cmake --build {build_dir} --target write-licenses"
-    execute_command(cmd)
+def cmake_install(bdir):
+    cmake_build(bdir, target="install")
 
-def clean_build_folder(build_dir):
-    cmd = f"rm -rf {build_dir}"
-    execute_command(cmd)
+def clean_build_folder(bdir):
+    print(f"{LIGHTBLUE}> Removing build directory: {bdir}{NC}")
+    log2file(f"Remove: {bdir}")
+    shutil.rmtree(bdir, ignore_errors=True)
 
-def cmake_install(build_dir):
-    cmd = f"cmake --build {build_dir} --target install"
-    execute_command(cmd)
-
-def build_spltr(library, standalone):
-    if library:
+def build_spltr(lib, st):
+    if lib:
         cmake_build(get_build_dir("Library"))
-    if standalone:
+    if st:
         cmake_build(get_build_dir("Standalone"))
 
-def license_spltr(library, standalone):
-    if library:
-        cmake_build_cpm_licenses(get_build_dir("Library"))
-    if standalone:
-        cmake_build_cpm_licenses(get_build_dir("Standalone"))
+def license_spltr(lib, st):
+    if lib:
+        cmake_build(get_build_dir("Library"), "write-licenses")
+    if st:
+        cmake_build(get_build_dir("Standalone"), "write-licenses")
 
-def configure_spltr(library, standalone):
-    if library:
+def configure_spltr(lib, st):
+    if lib:
         cmake_configure(".", get_build_dir("Library"))
-    if standalone:
+    if st:
         cmake_configure("./Standalone", get_build_dir("Standalone"))
 
-def conan_spltr(library, standalone):
-    if library:
+def conan_spltr(lib, st):
+    if lib:
         conan_install(get_build_dir("Library"))
-    if standalone:
+    if st:
         conan_install(get_build_dir("Standalone"))
 
-def clean_spltr(library, standalone):
-    if library:
+def clean_spltr(lib, st):
+    if lib:
         clean_build_folder(get_build_dir("Library"))
-    if standalone:
+    if st:
         clean_build_folder(get_build_dir("Standalone"))
 
-def install_spltr(library, standalone):
-    if library:
+def install_spltr(lib, st):
+    if lib:
         cmake_install(get_build_dir("Library"))
-    if standalone:
+    if st:
         cmake_install(get_build_dir("Standalone"))
 
-def artefacts_spltr(library, standalone):
+def create_archive(src_dir, files, out_path):
+    """
+    Vytvoří archiv z vybraných souborů. Pro zjednodušení
+    použijeme shutil.make_archive a soubory překopírujeme do temp.
+    """
+    if not files:
+        print("No files found to archive.")
+        return
+    tmp_dir = os.path.join(src_dir, "_tmp_archive")
+    os.makedirs(tmp_dir, exist_ok=True)
+
+    # Zkopírovat požadované soubory do tmp
+    for f in files:
+        full_path = os.path.join(src_dir, f)
+        if os.path.isfile(full_path):
+            shutil.copy2(full_path, tmp_dir)
+    shutil.make_archive(out_path.replace(".tar.gz",""), "gztar", tmp_dir)
+    shutil.rmtree(tmp_dir, ignore_errors=True)
+    print(f"{LIGHTBLUE}Created archive: {out_path}{NC}")
+
+def artefacts_spltr(lib, st):
     os.makedirs(artefactsOutputDir, exist_ok=True)
-    library_version = "0.0.0"
-    library_name = "library"
-    standalone_name = "standalone"
-
-    if buildArch in ["x86_64-linux-gnu", "aarch64-linux-gnu"]:
-        if library:
-            libraries = ["lib{}.a".format(library_name), "lib{}.so".format(library_name)]
-            archive_name = "{}-{}-{}-{}.tar.gz".format(library_name, library_version, buildArch, buildType)
+    # TODO - zjistit verzi knihovny
+    lib_ver = "0.0.0"
+    lib_name = "library"
+    st_name = "standalone"
+    if buildArch in ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-w64-mingw32"]:
+        if lib:
+            libs = [
+                f'lib{lib_name}.a',
+                f'lib{lib_name}.so',
+                f'lib{lib_name}.dll',
+                f'lib{lib_name}.dll.a',
+                f'lib{lib_name}.lib',
+                f'lib{lib_name}.pdb',
+                f'lib{lib_name}.exp',
+                f'lib{lib_name}.def'
+            ]
+            archive_name = f"{lib_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
             source_dir = get_build_dir("Library")
-            files_to_archive = " ".join([lib for lib in libraries if os.path.isfile(os.path.join(source_dir, lib))])
-            if files_to_archive:
-                tar_command = f"tar -czf {os.path.join(artefactsOutputDir, archive_name)} -C {source_dir} {files_to_archive}"
-                print(f"{LIGHTBLUE}{tar_command}{NC}")
-                execute_command(tar_command)
+            existing = [x for x in libs if os.path.isfile(os.path.join(source_dir, x))]
+            if existing:
+                out_path = os.path.join(artefactsOutputDir, archive_name)
+                create_archive(source_dir, existing, out_path)
             else:
                 print("No library files found to archive.")
-
-        if standalone:
-            standalone_archive_name = "{}-{}-{}-{}.tar.gz".format(standalone_name, library_version, buildArch, buildType)
-            tar_command = f"tar -czf {os.path.join(artefactsOutputDir, standalone_archive_name)} -C {get_build_dir('Standalone')} {standalone_name}"
-            print(f"{LIGHTBLUE}{tar_command}{NC}")
-            execute_command(tar_command)
-
-    if buildArch == "x86_64-w64-mingw32":
-        if library:
-            libraries = ["lib{}.a".format(library_name), "lib{}.dll".format(library_name), "lib{}.dll.a".format(library_name), "lib{}.lib".format(library_name), "lib{}.pdb".format(library_name), "lib{}.exp".format(library_name), "lib{}.def".format(library_name)]
-            archive_name = "{}-{}-{}-{}.tar.gz".format(library_name, library_version, buildArch, buildType)
-            source_dir = get_build_dir("Library")
-            files_to_archive = " ".join([lib for lib in libraries if os.path.isfile(os.path.join(source_dir, lib))])
-            if files_to_archive:
-                tar_command = f"tar -czf {os.path.join(artefactsOutputDir, archive_name)} -C {source_dir} {files_to_archive}"
-                print(f"{LIGHTBLUE}{tar_command}{NC}")
-                execute_command(tar_command)
+        if st:
+            st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
+            source_dir = get_build_dir("Standalone")
+            exe_files = [f"{st_name}", f"{st_name}.exe"]
+            existing = [x for x in exe_files if os.path.isfile(os.path.join(source_dir, x))]
+            if existing:
+                out_path = os.path.join(artefactsOutputDir, st_archive_name)
+                create_archive(source_dir, existing, out_path)
             else:
-                print("No library files found to archive.")
-
-        if standalone:
-            standalone_archive_name = "{}-{}-{}-{}.tar.gz".format(standalone_name, library_version, buildArch, buildType)
-            tar_command = f"tar -czf {os.path.join(artefactsOutputDir, standalone_archive_name)} -C {get_build_dir('Standalone')} {standalone_name}.exe"
-            print(f"{LIGHTBLUE}{tar_command}{NC}")
-            execute_command(tar_command)
+                print("No standalone files found to archive.")
 
 def lint_c():
-    lint_cmd = f"find \"{workSpaceDir}/\" ! -path \"{workSpaceDir}/Build/*\" -type f \\( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \\) -exec clang-tidy -p \"{get_build_dir('Library')}\" {{}} +"
-    execute_command(lint_cmd)
-    if subprocess.run(lint_cmd, shell=True).returncode != 0:
-        lint_cmd = f"find \"{workSpaceDir}/\" ! -path \"{workSpaceDir}/Build/*\" -type f \\( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \\) -exec clang-tidy -p \"{get_build_dir('Standalone')}\" {{}} +"
-        execute_command(lint_cmd)
+    bdir_lib = get_build_dir("Library")
+    bdir_st = get_build_dir("Standalone")
+
+    def run_clang_tidy(bdir):
+        for root, _, files in os.walk(workSpaceDir):
+            if "Build" in root:
+                continue
+            for file in files:
+                if file.endswith((".c", ".cpp", ".h", ".hpp")):
+                    cmd = f'clang-tidy -p "{bdir}" "{os.path.join(root, file)}"'
+                    execute_command(cmd)
+
+    run_clang_tidy(bdir_lib)
+    run_clang_tidy(bdir_st)
+
+    if subprocess.run(f'find "{workSpaceDir}/" ! -path "{workSpaceDir}/Build/*" -type f \\( -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \\) -exec clang-tidy -p "{bdir_lib}" {{}} +', shell=True).returncode != 0:
+        run_clang_tidy(bdir_st)
 
 def format_clang():
-    lint_cmd = f"find \"{workSpaceDir}/\" ! -path \"{workSpaceDir}/Build/*\" -type f \\( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \\) -exec sh -c 'echo \"Processing: {{}}\"; clang-format -i {{}} && echo \"Done: {{}}\"' \\;"
-    execute_command(lint_cmd)
+    for root, _, files in os.walk(workSpaceDir):
+        if "Build" in root:
+            continue
+        for file in files:
+            if file.endswith((".c", ".cpp", ".h", ".hpp")):
+                full_path = os.path.join(root, file)
+                cmd = f'clang-format -i "{full_path}"'
+                print(f"Processing: {full_path}")
+                execute_command(cmd)
+                print(f"Done: {full_path}")
 
 def format_cmake():
-    lint_cmd = f"find \"{workSpaceDir}/\" ! -path \"{workSpaceDir}/Build/*\" ! -path \"{workSpaceDir}/cmake/*\" ! -path \"{workSpaceDir}/Utilities/*\" -type f \\( -name 'CMakeLists.txt' -o -name '*.cmake' \\) -exec sh -c 'echo \"Processing: {{}}\"; cmake-format --enable-markup -i {{}} && echo \"Done: {{}}\"' \\;"
-    execute_command(lint_cmd)
+    for root, _, files in os.walk(workSpaceDir):
+        if "Build" in root or "cmake" in root or "Utilities" in root:
+            continue
+        for file in files:
+            if file == "CMakeLists.txt" or file.endswith(".cmake"):
+                full_path = os.path.join(root, file)
+                cmd = f'cmake-format --enable-markup -i "{full_path}"'
+                print(f"Processing: {full_path}")
+                execute_command(cmd)
+                print(f"Done: {full_path}")
 
 def permutate_all_tasks():
     shutil.rmtree("Build", ignore_errors=True)
     shutil.rmtree("ReleaseArtefacts", ignore_errors=True)
-    for arch in ["x86_64-linux-gnu", "aarch64-linux-gnu", "x86_64-w64-mingw32"]:
-        for type in ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]:
+    for arch in ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-w64-mingw32"]:
+        for t in ["Debug","Release","RelWithDebInfo","MinSizeRel"]:
             global buildArch, buildType
             buildArch = arch
-            buildType = type
+            buildType = t
             clean_spltr(True, True)
             conan_spltr(True, True)
             configure_spltr(True, True)
