@@ -4,7 +4,7 @@
 # system declarations
 GREEN="\033[0;32m" YELLOW="\033[0;33m" RED="\033[0;31m" NC="\033[0m" LIGHTBLUE="\033[1;34m"
 workSpaceDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-nameOfScript=$(basename "$0")
+nameOfScript="$(basename "$0") (bash version)"
 scriptAuthor="(c) Tomáš Mark 2004"
 scriptVersion="0.0.2"
 taskName=$1
@@ -497,20 +497,6 @@ case $taskName in
         done
     done
     exitOk ""
-    ;;
-
-"Compile Controller 🧨")
-    function compileController() {
-        local confCmd="cmake -S $workSpaceDir/Controller/ -B $workSpaceDir/Controller/Build"
-        executeCommand "$confCmd" || exitWithError "CMake configure failed."
-        local compileCmd="cmake --build $workSpaceDir/Controller/Build --target all"
-        executeCommand "$compileCmd" || exitWithError "CMake build failed."
-        local copyCmd="cp -f $workSpaceDir/Controller/Build/SolutionController $workSpaceDir/"
-        executeCommand "$copyCmd" || exitWithError "Copy artefact failed."
-        local cleanBuildDirCmd="rm -rf $workSpaceDir/Controller/Build"
-        executeCommand "$cleanBuildDirCmd" || exitWithError "Clean build directory failed."
-    }
-    compileController
     ;;
 
 "🔍 Lint C/C++ files")

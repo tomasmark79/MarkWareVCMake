@@ -8,11 +8,9 @@
             "type": "pickString",
             "description": "Select MarkWare Special Task",
             "options": [
-                "Permutate All Tasks 🕧",
-                "Compile Controller 🧨"
+                "Permutate All Tasks 🕧"
             ],
             "default": "Permutate All Tasks 🕧"
-
         },
         {
             /* MARKWARE INPUT ITEMS */
@@ -89,7 +87,6 @@
             "args": [
                 "${input:specialTaskName}",
                 "SPECIALTASK"
-
             ],
             "group": {
                 "kind": "build",
@@ -116,6 +113,49 @@
                 "isDefault": true
             },
             "detail": "MarkWare Tasks Menu",
+            "problemMatcher": [],
+            "dependsOn": [
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
+            ]
+        },
+        {
+            /* TODO */
+            /* PYTHON BASED MARKWARE SPECIAL TASKS MENU */
+            "label": "pyBased MarkWare Special Tasks Menu",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "${input:specialTaskName}",
+                "SPECIALTASK"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "pyBased MarkWare Special Tasks Menu",
+            "problemMatcher": [],
+            "dependsOn": [
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
+            ]
+        },
+        {
+            /* TODO */
+            /* PYTHON BASED MARKWARE TASKS MENU */
+            "label": "pyBased MarkWare Tasks Menu",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "${input:taskName}",
+                "${input:buildArch}",
+                "${input:buildType}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "pyBased MarkWare Tasks Menu",
             "problemMatcher": [],
             "dependsOn": [
                 /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
