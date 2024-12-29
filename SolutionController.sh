@@ -552,6 +552,7 @@ clang-format -i {} && echo \"Done: {}\"' \\;"
     ;;
 
 "📏 Format CMake files")
+    # https://cmake-format.readthedocs.io/en/latest/format-features.html#markup
     function formatCmake() {
         local lintCmd
 
@@ -569,7 +570,7 @@ clang-format -i {} && echo \"Done: {}\"' \\;"
 ! -path \"$workSpaceDir/Utilities/*\" \
 -type f \\( -name 'CMakeLists.txt' -o -name '*.cmake' \\) \
 -exec sh -c 'echo \"Processing: {}\"; \
-cmake-format -i {} && echo \"Done: {}\"' \\;"
+cmake-format --enable-markup -i {} && echo \"Done: {}\"' \\;"
 
         executeCommand "$lintCmd"
     }
