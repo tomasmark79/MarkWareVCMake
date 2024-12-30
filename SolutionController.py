@@ -14,6 +14,8 @@ NC = "\033[0m"
 LIGHTBLUE = "\033[1;34m"
 
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
+# explicitely defined cpm cache path in cmake command not used, seems buggy
+cpmCacheDir = os.path.join(workSpaceDir, ".cpm")
 nameOfScript = os.path.basename(__file__) + " (python version)"
 scriptAuthor = "(c) Tomáš Mark 2004"
 scriptVersion = "0.0.2"
@@ -22,6 +24,7 @@ taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
+
 
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
@@ -107,10 +110,10 @@ def cmake_configure(src, bdir):
         print(f"{LIGHTBLUE}Using CONAN: False{NC}")
         chain_dir = os.path.join(workSpaceDir, "Utilities", "CMakeToolChains")
         if buildArch in valid_archs:
-            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE={os.path.join(chain_dir, buildArch + ".cmake")}'
+            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE={os.path.abspath(os.path.join(chain_dir, buildArch + ".cmake"))}'
         else:
             toolchain_file =""
-    cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}" -DCPM_SOURCE_CACHE="{os.path.join(workSpaceDir, ".cpm")}"'
+    cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}"'
     execute_command(cmd)
     
 def cmake_build(bdir, target="all"):
