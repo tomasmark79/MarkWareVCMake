@@ -1,3 +1,4 @@
+.cpm*
 /Controller*
 /cpm_modules
 /Build*
