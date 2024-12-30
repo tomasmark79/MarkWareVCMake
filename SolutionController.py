@@ -6,7 +6,6 @@ import platform
 import glob
 import re
 import tarfile
-# Copyright (c) 2024 Tomáš Mark
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
 RED = "\033[0;31m"
@@ -16,7 +15,7 @@ LIGHTBLUE = "\033[1;34m"
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 nameOfScript = os.path.basename(__file__) + " (python version)"
 scriptAuthor = "(c) Tomáš Mark 2004"
-scriptVersion = "0.0.2"
+scriptVersion = "0.0.1"
 
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
@@ -315,3 +314,5 @@ if taskName in task_map:
 else:
     print(f"Received unknown task: {taskName}")
     exit_with_error("Task name is missing. Exiting.")
+    
+# Copyright (c) 2024 Tomáš Mark
