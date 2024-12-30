@@ -166,27 +166,6 @@ def install_spltr(lib, st):
     if st:
         cmake_install(get_build_dir("Standalone"))
 
-def create_archive(src_dir, files, out_path):
-    """
-    Vytvoří archiv z vybraných souborů. Pro zjednodušení
-    použijeme shutil.make_archive a soubory překopírujeme do temp.
-    """
-    if not files:
-        print("No files found to archive.")
-        return
-    tmp_dir = os.path.join(src_dir, "_tmp_archive")
-    os.makedirs(tmp_dir, exist_ok=True)
-
-    # Zkopírovat požadované soubory do tmp
-    for f in files:
-        full_path = os.path.join(src_dir, f)
-        if os.path.isfile(full_path):
-            shutil.copy2(full_path, tmp_dir)
-    shutil.make_archive(out_path.replace(".tar.gz",""), "gztar", tmp_dir)
-    shutil.rmtree(tmp_dir, ignore_errors=True)
-    print(f"{LIGHTBLUE}Created archive: {out_path}{NC}")
-
-
 def get_version_and_names():
     with open('CMakeLists.txt', 'r') as file:
         cmake_content = file.read()
