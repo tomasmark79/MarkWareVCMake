@@ -289,26 +289,75 @@ Je jednoduché přidat novou architekturu.
 
 🧮
 
-## CLI Control
+---
 
-The project can also be managed directly using commands in the console.
+## Command Line
+
+Of course, the recommended approach is to control the project workflow using the recommended method through tasks and menus in VSCode.
+
+For completeness and troubleshooting, I also present the command line commands here, which can be used at any time as needed.
+
+
+#### **Native** default build Debug 
 
 ```bash
 Remove: Build/Library/default/Debug
 Remove: Build/Standalone/default/Debug
-conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Library/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=True
-conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Standalone/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=True
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Library/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=False
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Standalone/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=False
 source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
 cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
 source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug/conanbuild.sh" && cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
 cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
-cmake --build "Build/Library/default/Debug" --target all -j 16
-cmake --build "Build/Standalone/default/Debug" --target all -j 16
-cmake --build "Build/Library/default/Debug" --target write-licenses -j 16
-cmake --build "Build/Standalone/default/Debug" --target write-licenses -j 16
-cmake --build "Build/Library/default/Debug" --target install -j 16
-cmake --build "Build/Standalone/default/Debug" --target install -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" --target install -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" --target install -j 16
 ```
+
+#### Release **Cross** build to **x86_64-w64-mingw32** 
+
+```bash
+Remove: Build/Library/x86_64-w64-mingw32/Release
+Remove: Build/Standalone/x86_64-w64-mingw32/Release
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Library/x86_64-w64-mingw32/Release" --build=missing --profile=x86_64-w64-mingw32 --settings=build_type=Release -o *:shared=False
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Standalone/x86_64-w64-mingw32/Release" --build=missing --profile=x86_64-w64-mingw32 --settings=build_type=Release -o *:shared=False
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/x86_64-w64-mingw32/Release"
+cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/x86_64-w64-mingw32/Release"
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release/conanbuild.sh" && cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/x86_64-w64-mingw32/Release"
+cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/x86_64-w64-mingw32/Release"
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/x86_64-w64-mingw32/Release" --target install -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" --target install -j 16
+```
+
+####  MinSizeRel **Cross** build to **aarch64-linux-gnu**
+
+```bash
+Remove: Build/Library/aarch64-linux-gnu/MinSizeRel
+Remove: Build/Standalone/aarch64-linux-gnu/MinSizeRel
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Library/aarch64-linux-gnu/MinSizeRel" --build=missing --profile=aarch64-linux-gnu --settings=build_type=MinSizeRel -o *:shared=False
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Standalone/aarch64-linux-gnu/MinSizeRel" --build=missing --profile=aarch64-linux-gnu --settings=build_type=MinSizeRel -o *:shared=False
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/aarch64-linux-gnu/MinSizeRel"
+cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/aarch64-linux-gnu/MinSizeRel"
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel/conanbuild.sh" && cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/aarch64-linux-gnu/MinSizeRel"
+cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/aarch64-linux-gnu/MinSizeRel"
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel" -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel" --target write-licenses -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/aarch64-linux-gnu/MinSizeRel" --target install -j 16
+cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarch64-linux-gnu/MinSizeRel" --target install -j 16
+```
+
+
+
+
 
 ---
 
