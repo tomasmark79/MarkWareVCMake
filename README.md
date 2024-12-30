@@ -31,7 +31,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 - **Quick Start**: Minimal setup required, ready to use immediately after cloning.  
 - **Modern Standards**: Supports best practices for C and C++ development.  
 - **Native Debugging**: Step-by-step debugging directly on Linux.  
-- **Cross-Platform**: Runs on Linux 🐧, macOS 🍏, and Windows 🪟 (via WSL).  
+- **Cross-Platform**: Runs natively on Linux 🐧, macOS 🍏, and Windows 🪟.
 - **Cross-Compilation**: Easily target multiple architectures.  
 - **Highly Customizable**: Modular structure tailored to your specific project needs.  
 
