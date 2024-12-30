@@ -57,12 +57,12 @@
             "type": "pickString",
             "description": "Select target architecture",
             "options": [
-                "x86_64-linux-gnu",
+                "Default", /* this is system default compiler */
                 "x86_64-unknown-linux-gnu",
-                "aarch64-linux-gnu",
-                "x86_64-w64-mingw32"
+                "x86_64-w64-mingw32",
+                "aarch64-linux-gnu"
             ],
-            "default": "x86_64-linux-gnu" /* change regarding you are sitting */
+            "default": "Default"
         },
         {
             /* BUILD TYPE INPUT ITEMS */
