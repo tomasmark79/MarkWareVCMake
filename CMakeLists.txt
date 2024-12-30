@@ -104,8 +104,9 @@ target_include_directories(
 # Set library definitions
 # ===========================
 target_compile_options(
-    ${LIBRARY_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/W4;/permissive->"
-                           "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic;;-MMD;-MP>")
+    ${LIBRARY_NAME}
+    PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/W4;/permissive->"
+           "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic;;-MMD;-MP>")
 
 # ===========================
 # Set library linking
