@@ -62,8 +62,6 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 
 ### Additional Integrations
 
-🔧🔧🔧  
-
 - **CPM.license**: Automates third-party license management.  
   [https://github.com/cpm-cmake/CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake)
 - **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
@@ -72,7 +70,8 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
    
-🔧🔧🔧
+
+🗡️🗡️🗡️
 
 ### Conan 2 Notice
 
@@ -83,9 +82,11 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 
 ## Development Environment Setup
 
-### Linux and macOS
+⚙️⚙️⚙️
 
-🛠️🛠️🛠️  
+### Linux 🐧 and macOS 🍏
+
+
 1. Update system packages:
    ```bash
    sudo apt update && sudo apt upgrade -y
@@ -93,6 +94,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev \
    libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
    ```
+
 2. Install and configure **Pyenv**:
    ```bash
    curl https://pyenv.run | bash
@@ -100,19 +102,31 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    pyenv virtualenv 3.9.2 env392
    pip install --upgrade pip
    ```
+
 3. Install **Conan**:
    ```bash
    pip install conan
    conan profile detect --force
    ```  
 
+### Windows native 🪟
 
+1. Install and configure **Pyenv** for Windows:
+   [Powershell Installation Steps](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md#powershell)  
+    ```powershell
+    pyenv install 3.9.2
+    pyenv global 3.9.2
+    pyenv local 3.9.2
+    pip install --upgrade pip
+    ```
+3. Install **Conan**:
+    ```powershell
+    pip install conan
+    conan profile detect --force
+    ```  
 
-🛠️🛠️🛠️
+### Windows 🪟 via WSL 🐧
 
-### Windows (via WSL)
-
-🔑🔑🔑  
 1. Enable WSL and install Debian:
    ```powershell
    wsl --install
@@ -123,14 +137,14 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    ```
 2. Install required VSCode extensions:
    - `ms-vscode-remote.remote-wsl`
-   - `ms-vscode.cpptools`
-3. Connect to WSL and open the project in VSCode.
+   - `ms-vscode.cpptools`  
+3. Connect to WSL and open the project in VSCode
    ```bash
    code .
-   ```  
-🔑🔑🔑
+   ```
 
 ---
+
 
 ## Quick Start
 
@@ -153,30 +167,18 @@ From this point, you have a fully functional solution for developing Linux binar
  
 🚀🚀🚀
 
-## configuration and build via cli
-
-Library
-```bash
-cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug
-cmake --build Build/Library/Debug --target all
-```
-
-Standalone with Library
-```bash
-cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
-cmake --build Build/Standalone/Debug --target all
-```
-
 ---
 
 ## Preconfigured Architectures
 
 🌍🌍🌍  
 
-- `x86_64-linux-gnu` (default native Linux profile)  
+- `Default` (automatic system default compiler toolchain selection)  
 - `x86_64-unknown-linux-gnu` (requires cross-compilation toolchain)  
-- `aarch64-linux-gnu` (requires cross-compilation toolchain)  
 - `x86_64-w64-mingw32` (requires cross-compilation toolchain)  
+- `aarch64-linux-gnu` (requires cross-compilation toolchain)  
+
+Je jednoduché přidat novou architekturu.
 
 🌍🌍🌍
 
@@ -241,8 +243,8 @@ cmake --build Build/Standalone/Debug --target all
 ├── LICENSE
 ├── .python-version
 ├── README.md
-├── SolutionController.py - not used yet
-├── SolutionController.sh
+├── SolutionController.log
+├── SolutionController.py
 └── SolutionRenamer.sh
 ```  
 
@@ -267,12 +269,12 @@ cmake --build Build/Standalone/Debug --target all
 | **Install Artefacts** | Installs to `/Build/Installed/`         |
 | **Release Artefacts** | Tarballs to `/Build/Artefacts/`         |
 | **Lint C/C++**        | C/C++ files diagnostics                 |
-| **Format C/C++**      | Recursive formatting for C/C++ files    | 
-| **Format CMake**      | Recursive formatting for CMake files    |
+| **Format C/C++**      | Formatting for C/C++ files    | 
+| **Format CMake**      | Formatting for CMake files    |
 
 | Special Task Menu     | Description                              |
 |-----------------------|------------------------------------------|
-| **Permutate All Tasks**  | Executes all task scenarios           |
+| **Permutate All Tasks**  | Executes all task scenarios (testing purpose)           |
 
 ### Key Shortcuts
 
