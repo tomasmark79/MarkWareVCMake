@@ -80,7 +80,9 @@ def is_cross():
 is_cross()
 
 def conan_install(bdir):
-    shared_flag = "-o *:shared=True" if "ON" in open("CMakeLists.txt").read() else "-o *:shared=False"
+    with open("CMakeLists.txt") as f:
+        cmake_content = f.read()
+    shared_flag = "-o *:shared=True" if 'option(BUILD_SHARED_LIBS "Build using shared libraries" ON)' in cmake_content else "-o *:shared=False"
     profile = "default" if not isCrossCompilation else buildArch
     cmd = f'conan install "{workSpaceDir}" --output-folder="{bdir}" --build=missing --profile={profile} --settings=build_type={buildType} {shared_flag}'
     execute_command(cmd)
@@ -262,6 +264,8 @@ def format_cmake():
 def permutate_all_tasks():
     shutil.rmtree("Build", ignore_errors=True)
     for arch in valid_archs:
+        if arch == "independent_parameter":
+            continue
         for t in valid_build_types:
             global buildArch, buildType
             buildArch = arch
