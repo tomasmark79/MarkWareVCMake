@@ -6,7 +6,7 @@
             "name": "Debug Standalone Target",
             "type": "cppdbg",
             "request": "launch", /*🪲*/
-            "program": "${workspaceFolder}/Build/Standalone/x86_64-linux-gnu/Debug/VCMStandalone", 
+            "program": "${workspaceFolder}/Build/Standalone/default/Debug/VCMStandalone", 
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -26,7 +26,7 @@
             "name": "Debug RelWithDebInfo Standalone Target",
             "type": "cppdbg",
             "request": "launch", /*🪲*/
-            "program": "${workspaceFolder}/Build/Standalone/x86_64-linux-gnu/RelWithDebInfo/VCMController",
+            "program": "${workspaceFolder}/Build/Standalone/default/RelWithDebInfo/VCMController",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
