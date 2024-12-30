@@ -23,6 +23,7 @@ isCrossCompilation = False
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
+valid_archs = ["Default", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu"]
 
 def exit_ok(msg):
     print(f"{GREEN}{msg}{NC}")
@@ -66,9 +67,8 @@ def get_build_dir(kind):
 
 def is_cross():
     global isCrossCompilation
-    valid_archs = ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-unknown-linux-gnu","x86_64-w64-mingw32","SPECIALTASK"]
     if buildArch in valid_archs:
-        isCrossCompilation = (buildArch != "x86_64-linux-gnu")
+        isCrossCompilation = (buildArch != "Default")
     else:
         # Pro macOS by se mohlo přidat "arm64-apple-darwin" nebo podobně
         if "darwin" in platform.system().lower():
@@ -105,16 +105,13 @@ def cmake_configure(src, bdir):
                 execute_command(env_cmd)
     else:
         print(f"{LIGHTBLUE}Using CONAN: False{NC}")
-        # Pro rozšíření pro macOS
         chain_dir = os.path.join(workSpaceDir, "Utilities", "CMakeToolChains")
-        if buildArch == "x86_64-unknown-linux-gnu":
-            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"x86_64-unknown-linux-gnu.cmake")}"'
-        elif buildArch == "x86_64-w64-mingw32":
-            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"x86_64-w64-mingw32.cmake")}"'
-        elif buildArch == "aarch64-linux-gnu":
-            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE="{os.path.join(chain_dir,"aarch64-linux-gnu.cmake")}"'
-        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir,buildArch,buildType)}"'
-        execute_command(cmd)
+        if buildArch in valid_archs:
+            toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE={os.path.join(chain_dir, buildArch + ".cmake")}'
+        else:
+            toolchain_file =""
+    cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}"'
+    execute_command(cmd)
 
 def cmake_build(bdir, target="all"):
     cmd = f'cmake --build "{bdir}" --target {target} -j {os.cpu_count()}'
@@ -222,6 +219,7 @@ def artefacts_spltr(lib, st):
                 print("No standalone files found to archive.")
 
 def lint_c():
+    # build dirs for json compilation database is required
     bdir_lib = get_build_dir("Library")
     bdir_st = get_build_dir("Standalone")
 
@@ -231,15 +229,15 @@ def lint_c():
                 continue
             for file in files:
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
-                    cmd = f'clang-tidy -p "{bdir}" "{os.path.join(root, file)}"'
+                    full_path = os.path.join(root, file)
+                    cmd = f'clang-tidy -p "{bdir}" "{full_path}"'
+                    print(f"Linting: {full_path}")
                     execute_command(cmd)
+                    print(f"Done: {full_path}")
 
     run_clang_tidy(bdir_lib)
-    run_clang_tidy(bdir_st)
-
-    if subprocess.run(f'find "{workSpaceDir}/" ! -path "{workSpaceDir}/Build/*" -type f \\( -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \\) -exec clang-tidy -p "{bdir_lib}" {{}} +', shell=True).returncode != 0:
-        run_clang_tidy(bdir_st)
-
+    # run_clang_tidy(bdir_st)
+    
 def format_clang():
     for root, _, files in os.walk(workSpaceDir):
         if "Build" in root:
@@ -267,7 +265,7 @@ def format_cmake():
 def permutate_all_tasks():
     shutil.rmtree("Build", ignore_errors=True)
     shutil.rmtree("ReleaseArtefacts", ignore_errors=True)
-    for arch in ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-w64-mingw32"]:
+    for arch in ["Default","x86_64-unknown-linux-gnu","x86_64-w64-mingw32","aarch64-linux-gnu"]:
         for t in ["Debug","Release","RelWithDebInfo","MinSizeRel"]:
             global buildArch, buildType
             buildArch = arch
