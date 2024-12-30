@@ -14,8 +14,6 @@ NC = "\033[0m"
 LIGHTBLUE = "\033[1;34m"
 
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
-# explicitely defined cpm cache path in cmake command not used, seems buggy
-cpmCacheDir = os.path.join(workSpaceDir, ".cpm")
 nameOfScript = os.path.basename(__file__) + " (python version)"
 scriptAuthor = "(c) Tomáš Mark 2004"
 scriptVersion = "0.0.2"
