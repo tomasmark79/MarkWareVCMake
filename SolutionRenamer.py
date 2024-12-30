@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import codecs
 
 def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name):
     # Convert to lowercase and uppercase
@@ -29,13 +30,13 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
     # Replace the old library name with the new one in each file
     for file in files:
         if os.path.isfile(file):
-            with open(file, 'r') as f:
+            with codecs.open(file, 'r', encoding='utf-8') as f:
                 content = f.read()
             content = content.replace(old_lib_name, new_lib_name)
             content = content.replace(old_standalone_name, new_standalone_name)
             content = content.replace(old_lib_name_lower, new_lib_name_lower)
             content = content.replace(old_lib_name_upper, new_lib_name_upper)
-            with open(file, 'w') as f:
+            with codecs.open(file, 'w', encoding='utf-8') as f:
                 f.write(content)
             print(f"Renamed project names in file: {file}")
         else:
