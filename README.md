@@ -232,8 +232,6 @@ Je jednoduché přidat novou architekturu.
 │   │   ├── aarch64-linux-gnu
 │   │   ├── x86_64-unknown-linux-gnu
 │   │   └── x86_64-w64-mingw32
-│   ├── ConanPythonConfigurer
-│   │   └── conanfile.py
 │   └── AboutThisFolder.md
 ├── .vscode
 │   ├── c_cpp_properties.json
@@ -244,14 +242,15 @@ Je jednoduché přidat novou architekturu.
 ├── .clang-format
 ├── .cmake-format
 ├── CMakeLists.txt
-├── conanfile.txt
+├── conanfile.py
+├── conanfile.txt.obsolete
 ├── .gitattributes
 ├── .gitignore
 ├── LICENSE
 ├── .python-version
 ├── README.md
 ├── SolutionController.py
-└── SolutionRenamer.sh - planned tranform to python
+└── SolutionRenamer.py`
 ```  
 
 📂📂📂
