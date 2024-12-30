@@ -151,12 +151,12 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 🚀🚀🚀  
 1. Clone the template:
    ```bash
-   git clone https://github.com/tomasmark79/MarkWareVCMake ./MyAwesomeProject
-   cd MyAwesomeProject/
+   git clone https://github.com/tomasmark79/MarkWareVCMake
+   cd MarkWareVCMake/
    ```
 2. Rename components:
    ```bash
-   ./SolutionRenamer.sh VCMLib MyLibrary VCMStandalone MyStandalone
+   python SolutionRenamer.py VCMLib MyLibrary VCMStandalone MyStandalone
    ```
 3. Open the project in VSCode:
    ```bash
