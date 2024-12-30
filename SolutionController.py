@@ -178,13 +178,9 @@ def get_version_and_names():
 
     return lib_ver, lib_name, st_name
 
-def create_archive(source_dir, files, out_path):
+def create_archive(source_dir, out_path):
     with tarfile.open(out_path, "w:gz") as tar:
-        for file in files:
-            full_path = os.path.join(source_dir, file)
-            if os.path.isfile(full_path):
-                tar.add(full_path, arcname=os.path.basename(full_path))
-                print(f"Added {full_path} to archive")
+        tar.add(source_dir, arcname=os.path.basename(source_dir))
     print(f"Created archive: {out_path}")
 
 def artefacts_spltr(lib, st):
@@ -198,37 +194,26 @@ def artefacts_spltr(lib, st):
     
     if buildArch in valid_archs:
         if lib:
-            extensions = ['*.a', '*.so', '*.dll', '*.dll.a', '*.lib', '*.pdb', '*.exp', '*.def']
             archive_name = f"{lib_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
-            source_dir = get_build_dir("Library")
+            source_dir = os.path.join(installOutputDir, buildArch, buildType)
             
-            print(f"Checking library files in: {source_dir}")
-            existing = []
-            for ext in extensions:
-                existing.extend(glob.glob(os.path.join(source_dir, ext)))
-            
-            print(f"Existing library files: {existing}")
-            if existing:
+            if os.listdir(source_dir):
+                print(f"Creating archive for library from: {source_dir}")
                 out_path = os.path.join(artefactsOutputDir, archive_name)
-                create_archive(source_dir, [os.path.relpath(f, source_dir) for f in existing], out_path)
+                create_archive(source_dir, out_path)
             else:
-                print("No library files found to archive.")
+                print(f"No content found in {source_dir} for library.")
+            
         if st:
-            extensions = [st_name, f"{st_name}.exe"]
             st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
-            source_dir = get_build_dir("Standalone")
+            source_dir = os.path.join(installOutputDir, buildArch, buildType)
             
-            print(f"Checking standalone files in: {source_dir}")
-            existing = []
-            for ext in extensions:
-                existing.extend(glob.glob(os.path.join(source_dir, ext)))
-            
-            print(f"Existing standalone files: {existing}")
-            if existing:
+            if os.listdir(source_dir):
+                print(f"Creating archive for standalone from: {source_dir}")
                 out_path = os.path.join(artefactsOutputDir, st_archive_name)
-                create_archive(source_dir, [os.path.relpath(f, source_dir) for f in existing], out_path)
+                create_archive(source_dir, out_path)
             else:
-                print("No standalone files found to archive.")
+                print(f"No content found in {source_dir} for standalone.")
                 
 def lint_c():
     # build dirs for json compilation database is required
