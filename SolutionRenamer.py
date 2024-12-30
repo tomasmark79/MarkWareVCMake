@@ -1,8 +1,8 @@
 import os
 import sys
 import shutil
-import codecs
-
+import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
+# Copyright (c) 2024 Tomáš Mark
 def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name):
     # Convert to lowercase and uppercase
     old_lib_name_lower = old_lib_name.lower()
