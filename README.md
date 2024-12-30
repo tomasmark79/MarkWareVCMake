@@ -200,13 +200,19 @@ Je jednoduché přidat novou architekturu.
 
 📂📂📂  
 
-```tree  
+```txt
 .
 ├── cmake
 │   ├── Modules
 │   │   └── FindX11.cmake
 │   ├── CPM.cmake
 │   └── tools.cmake
+├── .github
+│   └── workflows
+│       ├── install.yml
+│       ├── macos.yml
+│       ├── ubuntu.yml
+│       └── windows.yml
 ├── include
 │   └── VCMLib
 │       └── VCMLib.hpp
@@ -220,10 +226,11 @@ Je jednoduché přidat novou architekturu.
 ├── Utilities
 │   ├── CMakeToolChains
 │   │   ├── aarch64-linux-gnu.cmake
+│   │   ├── x86_64-unknown-linux-gnu.cmake
 │   │   └── x86_64-w64-mingw32.cmake
 │   ├── ConanProfiles
 │   │   ├── aarch64-linux-gnu
-│   │   ├── default
+│   │   ├── x86_64-unknown-linux-gnu
 │   │   └── x86_64-w64-mingw32
 │   ├── ConanPythonConfigurer
 │   │   └── conanfile.py
@@ -243,9 +250,8 @@ Je jednoduché přidat novou architekturu.
 ├── LICENSE
 ├── .python-version
 ├── README.md
-├── SolutionController.log
 ├── SolutionController.py
-└── SolutionRenamer.sh
+└── SolutionRenamer.sh - planned tranform to python
 ```  
 
 📂📂📂
