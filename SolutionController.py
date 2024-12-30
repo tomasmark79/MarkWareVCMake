@@ -20,13 +20,13 @@ scriptVersion = "0.0.2"
 
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
-buildType = sys.argv[3] if len(sys.argv) > 3 else "Release"
+buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
 
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
-valid_archs = ["Default", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu"]
+valid_archs = ["default", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu", "independent_parameter"]
 valid_build_types = ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
 
 def exit_ok(msg):
@@ -69,7 +69,7 @@ def get_build_dir(kind):
 def is_cross():
     global isCrossCompilation
     if buildArch in valid_archs:
-        isCrossCompilation = (buildArch != "Default")
+        isCrossCompilation = (buildArch != "default")
     else:
         if "darwin" in platform.system().lower():
             isCrossCompilation = False
@@ -292,7 +292,6 @@ def format_cmake():
 
 def permutate_all_tasks():
     shutil.rmtree("Build", ignore_errors=True)
-    shutil.rmtree("ReleaseArtefacts", ignore_errors=True)
     for arch in valid_archs:
         for t in valid_build_types:
             global buildArch, buildType
