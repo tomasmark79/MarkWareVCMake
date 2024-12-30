@@ -287,7 +287,28 @@ Je jednoduché přidat novou architekturu.
 - **Ctrl + Alt + L**: Lint all C++ files.
 - **Ctrl + Shift + Alt + B**: Run ShellCheck on bash scripts.  
 
-🛠️🛠️🛠️
+🧮
+
+## CLI Control
+
+The project can also be managed directly using commands in the console.
+
+```bash
+Remove: Build/Library/default/Debug
+Remove: Build/Standalone/default/Debug
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Library/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=True
+conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="Build/Standalone/default/Debug" --build=missing --profile=default --settings=build_type=Debug -o *:shared=True
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
+cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
+source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug/conanbuild.sh" && cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
+cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/default/Debug" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
+cmake --build "Build/Library/default/Debug" --target all -j 16
+cmake --build "Build/Standalone/default/Debug" --target all -j 16
+cmake --build "Build/Library/default/Debug" --target write-licenses -j 16
+cmake --build "Build/Standalone/default/Debug" --target write-licenses -j 16
+cmake --build "Build/Library/default/Debug" --target install -j 16
+cmake --build "Build/Standalone/default/Debug" --target install -j 16
+```
 
 ---
 
