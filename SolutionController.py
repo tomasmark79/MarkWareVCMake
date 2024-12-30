@@ -3,6 +3,9 @@ import sys
 import subprocess
 import shutil
 import platform
+import glob
+import re
+import tarfile
 
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
@@ -24,6 +27,7 @@ buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
 valid_archs = ["Default", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu"]
+valid_build_types = ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
 
 def exit_ok(msg):
     print(f"{GREEN}{msg}{NC}")
@@ -36,17 +40,14 @@ def exit_with_error(msg):
 if not taskName:
     exit_with_error("Task name is missing. Exiting.")
 
-print(f"/{'-'*61}\\")
+# Print out the welcom and configuration
 print(f"{YELLOW}{nameOfScript} {scriptAuthor} v {scriptVersion} {NC}")
-print(f"{'-'*63}")
 print(f"{LIGHTBLUE}taskName\t: {taskName}{NC}")
-print(f"{'-'*63}")
 print(f"{GREEN}Build Arch\t: {buildArch}")
 print(f"Build Type\t: {buildType}")
 print(f"Work Space\t: {workSpaceDir}{NC}")
 print(f"Install to\t: {installOutputDir}{NC}")
 print(f"Artefacts to\t: {artefactsOutputDir}{NC}")
-print(f"\\{'-'*61}/")
 
 def log2file(message):
     with open(os.path.join(workSpaceDir, "SolutionController.log"), "a") as f:
@@ -70,11 +71,10 @@ def is_cross():
     if buildArch in valid_archs:
         isCrossCompilation = (buildArch != "Default")
     else:
-        # Pro macOS by se mohlo přidat "arm64-apple-darwin" nebo podobně
         if "darwin" in platform.system().lower():
             isCrossCompilation = False
         else:
-            exit_with_error("Unknown build architecture. Exiting.")
+            exit_with_error("Undefined build architecture. Exiting.")
 
 is_cross()
 
@@ -181,43 +181,71 @@ def create_archive(src_dir, files, out_path):
     shutil.rmtree(tmp_dir, ignore_errors=True)
     print(f"{LIGHTBLUE}Created archive: {out_path}{NC}")
 
+
+def get_version_and_names():
+    with open('CMakeLists.txt', 'r') as file:
+        cmake_content = file.read()
+    with open('Standalone/CMakeLists.txt', 'r') as file:
+        standalone_content = file.read()
+
+    lib_ver = re.search(r'VERSION\s+(\d+\.\d+\.\d+)', cmake_content).group(1)
+    lib_name = re.search(r'set\(LIBRARY_NAME\s+(\w+)', cmake_content).group(1)
+    st_name = re.search(r'set\(STANDALONE_NAME\s+(\w+)', standalone_content).group(1)
+
+    return lib_ver, lib_name, st_name
+
+def create_archive(source_dir, files, out_path):
+    with tarfile.open(out_path, "w:gz") as tar:
+        for file in files:
+            full_path = os.path.join(source_dir, file)
+            if os.path.isfile(full_path):
+                tar.add(full_path, arcname=os.path.basename(full_path))
+                print(f"Added {full_path} to archive")
+    print(f"Created archive: {out_path}")
+
 def artefacts_spltr(lib, st):
     os.makedirs(artefactsOutputDir, exist_ok=True)
-    # TODO - zjistit verzi knihovny
-    lib_ver = "0.0.0"
-    lib_name = "library"
-    st_name = "standalone"
-    if buildArch in ["x86_64-linux-gnu","aarch64-linux-gnu","x86_64-w64-mingw32"]:
+    lib_ver, lib_name, st_name = get_version_and_names()
+    
+    print(f"buildArch: {buildArch}")
+    print(f"buildType: {buildType}")
+    print(f"artefactsOutputDir: {artefactsOutputDir}")
+    print(f"valid_archs: {valid_archs}")
+    
+    if buildArch in valid_archs:
         if lib:
-            libs = [
-                f'lib{lib_name}.a',
-                f'lib{lib_name}.so',
-                f'lib{lib_name}.dll',
-                f'lib{lib_name}.dll.a',
-                f'lib{lib_name}.lib',
-                f'lib{lib_name}.pdb',
-                f'lib{lib_name}.exp',
-                f'lib{lib_name}.def'
-            ]
+            extensions = ['*.a', '*.so', '*.dll', '*.dll.a', '*.lib', '*.pdb', '*.exp', '*.def']
             archive_name = f"{lib_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
             source_dir = get_build_dir("Library")
-            existing = [x for x in libs if os.path.isfile(os.path.join(source_dir, x))]
+            
+            print(f"Checking library files in: {source_dir}")
+            existing = []
+            for ext in extensions:
+                existing.extend(glob.glob(os.path.join(source_dir, ext)))
+            
+            print(f"Existing library files: {existing}")
             if existing:
                 out_path = os.path.join(artefactsOutputDir, archive_name)
-                create_archive(source_dir, existing, out_path)
+                create_archive(source_dir, [os.path.relpath(f, source_dir) for f in existing], out_path)
             else:
                 print("No library files found to archive.")
         if st:
+            extensions = [st_name, f"{st_name}.exe"]
             st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
             source_dir = get_build_dir("Standalone")
-            exe_files = [f"{st_name}", f"{st_name}.exe"]
-            existing = [x for x in exe_files if os.path.isfile(os.path.join(source_dir, x))]
+            
+            print(f"Checking standalone files in: {source_dir}")
+            existing = []
+            for ext in extensions:
+                existing.extend(glob.glob(os.path.join(source_dir, ext)))
+            
+            print(f"Existing standalone files: {existing}")
             if existing:
                 out_path = os.path.join(artefactsOutputDir, st_archive_name)
-                create_archive(source_dir, existing, out_path)
+                create_archive(source_dir, [os.path.relpath(f, source_dir) for f in existing], out_path)
             else:
                 print("No standalone files found to archive.")
-
+                
 def lint_c():
     # build dirs for json compilation database is required
     bdir_lib = get_build_dir("Library")
@@ -265,8 +293,8 @@ def format_cmake():
 def permutate_all_tasks():
     shutil.rmtree("Build", ignore_errors=True)
     shutil.rmtree("ReleaseArtefacts", ignore_errors=True)
-    for arch in ["Default","x86_64-unknown-linux-gnu","x86_64-w64-mingw32","aarch64-linux-gnu"]:
-        for t in ["Debug","Release","RelWithDebInfo","MinSizeRel"]:
+    for arch in valid_archs:
+        for t in valid_build_types:
             global buildArch, buildType
             buildArch = arch
             buildType = t
