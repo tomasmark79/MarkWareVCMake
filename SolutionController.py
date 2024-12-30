@@ -112,9 +112,9 @@ def cmake_configure(src, bdir):
             toolchain_file =""
     cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}"'
     execute_command(cmd)
-
+    
 def cmake_build(bdir, target="all"):
-    cmd = f'cmake --build "{bdir}" --target {target} -j {os.cpu_count()}'
+    cmd = f'cmake --build "{os.path.abspath(bdir)}" --target {target} -j {os.cpu_count()}'
     execute_command(cmd)
 
 def cmake_install(bdir):
