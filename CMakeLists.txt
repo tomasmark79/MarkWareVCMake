@@ -119,8 +119,8 @@ target_link_libraries(
            # Threads::Threads
            # CPM
            fmt::fmt
-           dsdotname::EmojiTools
-           nlohmann_json::nlohmann_json
+           PRIVATE dsdotname::EmojiTools
+           PRIVATE nlohmann_json::nlohmann_json
            # Conan
            # BZip2::BZip2
            # CURL::libcurl
