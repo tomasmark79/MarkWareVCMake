@@ -3,7 +3,7 @@
 ### Modern, Configurable Project Template for C and C++
 
 Author: **Tomáš Mark**  
-Version: **0.0.10**
+Version: **0.0.11**
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
