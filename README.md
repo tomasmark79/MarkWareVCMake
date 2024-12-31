@@ -162,6 +162,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    ```bash
    code .
    ```
+4. File SolutionUpgrade.py can later update the template files from the repository that you choose. More information inside the script.
 
 From this point, you have a fully functional solution for developing Linux binaries, regardless of the host platform. 
  
@@ -243,14 +244,14 @@ Je jednoduché přidat novou architekturu.
 ├── .cmake-format
 ├── CMakeLists.txt
 ├── conanfile.py
-├── conanfile.txt.obsolete
 ├── .gitattributes
 ├── .gitignore
 ├── LICENSE
 ├── .python-version
 ├── README.md
 ├── SolutionController.py
-└── SolutionRenamer.py`
+├── SolutionRenamer.py
+└── SolutionUpgrade.py
 ```  
 
 📂📂📂
