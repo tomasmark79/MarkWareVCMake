@@ -57,5 +57,5 @@ jobs:
       - name: CMake configure Standalone
         run: cmake -S ./Standalone -B ${{github.workspace}}/build/Standalone -DCMAKE_TOOLCHAIN_FILE=../conan_toolchain.cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         
-      - name: CMake configure Standalone
+      - name: CMake build Standalone
         run: cmake --build ${{github.workspace}}/build/Standalone --config ${{env.BUILD_TYPE}}

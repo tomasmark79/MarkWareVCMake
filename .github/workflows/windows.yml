@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/.cpm_modules
   BUILD_TYPE: Release
 
 jobs:
@@ -18,11 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: create CPM cache
+        id: cache-cpm
+        uses: actions/cache@v3
+        with:
+          path: ${{env.CPM_SOURCE_CACHE}}
+          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/cpm.cmake') }}
+
       - name: install conan to system
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip3 install conan
+          choco install python --version=3.9.2
+          python -m pip install --upgrade pip
+          pip install conan
+          conan --version
 
       - name: create Conan cache
         id: cache-conan
@@ -50,5 +58,5 @@ jobs:
       - name: CMake configure Standalone
         run: cmake -S ./Standalone -B ${{github.workspace}}/build/Standalone -DCMAKE_TOOLCHAIN_FILE=../conan_toolchain.cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         
-      - name: CMake configure Standalone
+      - name: CMake build Standalone
         run: cmake --build ${{github.workspace}}/build/Standalone --config ${{env.BUILD_TYPE}}
