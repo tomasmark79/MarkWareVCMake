@@ -277,6 +277,10 @@ def permutate_all_tasks():
             install_spltr(True, True)
             artefacts_spltr(True, True)
 
+def conan_graph():
+    cmd = f'conan graph info "{workSpaceDir}" --format=html > graph.html'
+    execute_command(cmd)
+
 task_map = {
     "Zero to Hero 🦸": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), exit_ok("")),
     "📚 Zero to Hero 🦸": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), exit_ok("")),
@@ -303,6 +307,7 @@ task_map = {
     "📚 Release Artefacts 📦": lambda: (artefacts_spltr(True, False), exit_ok("")),
     "🎯 Release Artefacts 📦": lambda: (artefacts_spltr(False, True), exit_ok("")),
     "Permutate All Tasks 🕧": lambda: (permutate_all_tasks(), exit_ok("")),
+    "⚔️ Conan graph.html": lambda: (conan_graph(), exit_ok("")),
     "🔍 Lint C/C++ files": lambda: (lint_c(), exit_ok("")),
     "📐 Format C/C++ files (Clang)": lambda: (format_clang(), exit_ok("")),
     "📏 Format CMake files": lambda: (format_cmake(), exit_ok("")),

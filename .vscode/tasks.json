@@ -45,6 +45,7 @@
                 "🎯 Install Artefacts 📌",
                 "🎯 Release Artefacts 📦",
                 "",
+                "⚔️ Conan graph.html",
                 "🔍 Lint C/C++ files",
                 "📐 Format C/C++ files (Clang)",
                 "📏 Format CMake files"
