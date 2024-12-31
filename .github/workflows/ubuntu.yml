@@ -38,7 +38,7 @@ jobs:
         run: conan profile detect --force
 
       - name: Install dependencies
-        run: conan install . -s build_type=${{env.BUILD_TYPE}} --install-folder=${{github.workspace}}/build -pr default -b=missing
+        run: conan install . -s build_type=${{env.BUILD_TYPE}} -of=${{github.workspace}}/build -pr default -b=missing
 
       - name: configureLibrary
         run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
