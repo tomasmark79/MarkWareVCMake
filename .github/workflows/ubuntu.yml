@@ -34,9 +34,9 @@ jobs:
       - if: ${{ steps.cache-conan.outputs.cache-hit != 'true' }}
         name: Conan profile detect --force
         run: conan profile detect --force
-
-      - name: Conan profile detect
-        run: conan profile detect
+      
+      - name: Conan profile detect --force
+        run: conan profile detect --force
 
       - name: install Conan dependencies
         run: conan install . -s build_type=${{env.BUILD_TYPE}} -of=${{github.workspace}}/build -pr default -b=missing
