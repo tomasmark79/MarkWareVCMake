@@ -24,7 +24,7 @@ jobs:
           pip3 install conan
 
       - name: Configure Conan
-        run: conan profile new default --detect --force
+        run: conan profile detect --force
 
       - name: Install dependencies
         run: conan install . --build=missing
