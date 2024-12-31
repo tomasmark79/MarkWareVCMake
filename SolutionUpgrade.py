@@ -6,14 +6,11 @@ from datetime import datetime
 # URL of the repository with the updated files
 repo_url = "https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/refs/heads/main/"
 
-# !!!
-# Double-check function to prevent localy file updates even if they are here uncommented.
+# Double-check function to prevent local file updates even if they are uncommented.
 # Add the "<VCMAKE_NO_UPDATE>" directive directly to the file you want to doubly protect.
 
-# !!!
-# No fear - all localy updated files are backed up in the "backup" folder with a timestamp.
+# No fear - all locally updated files are backed up in the "backup" folder with a timestamp.
 
-# !!!
 # List of files to update - UNCOMMENT the files you want to update or create
 
 files_to_update = [
@@ -52,7 +49,7 @@ files_to_update = [
     # "README.md",
     # "SolutionController.py",
     # "SolutionRenamer.py",
-    # "SolutionUpgrade.py"
+    "SolutionUpgrade.py"
 ]
 
 # Create backup folder with a timestamp
@@ -100,3 +97,8 @@ for file_path in files_to_update:
         print(f"Creating new file: {file_path}")
         update_file(file_path)
         print(f"Created: {file_path}")
+
+# Provide a link to download the latest version of SolutionUpgrade.py
+if "SolutionUpgrade.py" in files_to_update:
+    print("To update SolutionUpgrade.py, please download the latest version from the following link:")
+    print(f"{repo_url}SolutionUpgrade.py")
