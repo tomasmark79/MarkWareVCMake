@@ -41,7 +41,7 @@ CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
 CPMAddPackage("gh:nlohmann/json@3.11.3")
 CPMAddPackage("gh:tomasmark79/EmojiTools#main")
 
-# CPM licenses generation target
+# CPM licenses generation target enough to exist at the top level of the project
 cpm_licenses_create_disclaimer_target(write-licenses "${CMAKE_CURRENT_BINARY_DIR}/third_party.txt"
                                       "${CPM_PACKAGES}")
 
@@ -86,6 +86,7 @@ target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 # Set library properties
 # ===========================
 set(CMAKE_CXX_STANDARD 17)
+
 # if various C++ standards are used, use target_compile_features
 # target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
 
@@ -107,8 +108,7 @@ target_include_directories(
 target_compile_options(
     ${LIBRARY_NAME}
     PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/W4>"
-    PUBLIC "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic;-MMD;-MP>"
-)
+    PUBLIC "$<$<NOT:$<COMPILE_LANG_AND_ID:CXX,MSVC>>:-Wall;-Wextra;-Wpedantic;-MMD;-MP>")
 
 # ===========================
 # Set library linking
