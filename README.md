@@ -274,13 +274,14 @@ Je jednoduché přidat novou architekturu.
 | **Collect Licenses**  | Gathers licenses from CPM dependencies  |
 | **Install Artefacts** | Installs to `/Build/Installed/`         |
 | **Release Artefacts** | Tarballs to `/Build/Artefacts/`         |
+| **Conan graph.html**  | Create html output of dependencies      |
 | **Lint C/C++**        | C/C++ files diagnostics                 |
-| **Format C/C++**      | Formatting for C/C++ files    | 
-| **Format CMake**      | Formatting for CMake files    |
+| **Format C/C++**      | Formatting for C/C++ files              | 
+| **Format CMake**      | Formatting for CMake files              |
 
-| Special Task Menu     | Description                              |
-|-----------------------|------------------------------------------|
-| **Permutate All Tasks**  | Executes all task scenarios (testing purpose)           |
+| Special Task Menu     | Description                             |
+|-----------------------|-----------------------------------------|
+| **Permutate All Tasks**  | Executes all task scenarios (testing purpose) |
 
 ### Key Shortcuts
 
