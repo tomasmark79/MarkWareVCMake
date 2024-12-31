@@ -30,7 +30,7 @@ jobs:
         run: conan install . --build=missing
 
       - name: configureLibrary
-        run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=$CONAN_PREFIX_PATH
       - name: makeLibrary
         run: cmake --build Build/Library/Debug --target all
       - name: configureStandalone
