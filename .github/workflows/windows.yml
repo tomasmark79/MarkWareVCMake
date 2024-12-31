@@ -50,13 +50,13 @@ jobs:
         run: conan install . -s build_type=${{env.BUILD_TYPE}} -of=${{github.workspace}}/build -pr default -b=missing
       
       - name: CMake configure Library
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/build/conan_toolchain.cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       
       - name: CMake build Library
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       
       - name: CMake configure Standalone
-        run: cmake -S ./Standalone -B ${{github.workspace}}/build/Standalone -DCMAKE_TOOLCHAIN_FILE=../conan_toolchain.cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        run: cmake -S ./Standalone -B ${{github.workspace}}/build/Standalone -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/build/Standalone/conan_toolchain.cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         
       - name: CMake build Standalone
         run: cmake --build ${{github.workspace}}/build/Standalone --config ${{env.BUILD_TYPE}}

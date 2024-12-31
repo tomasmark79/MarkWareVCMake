@@ -8,7 +8,6 @@ Version: **0.0.10**
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)
-[![Install](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/install.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/install.yml)
 ---
 
 <img width="189" alt="image" src="https://github.com/user-attachments/assets/df0f7209-aaec-4c51-a434-4455344e0d57" />
@@ -47,37 +46,38 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 
 - **Visual Studio Code**: Preconfigured for seamless development.  
   [https://code.visualstudio.com/](https://code.visualstudio.com/)
-- **Conan 2**: Simplifies dependency management.  
-  [https://docs.conan.io](https://docs.conan.io)
 - **Modern CMake**: Advanced configuration and build management.  
   [https://cmake.org/download/](https://cmake.org/download/)
-- **Python 3**: Integrated for scripting and automation.  
-  [https://www.python.org/downloads/](https://www.python.org/downloads/)
 - **Pyenv**: Simplifies Python version management.  
   [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
-- **CPM.cmake**: Lightweight dependency management.  
-  [https://github.com/cpm-cmake/CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)  
+- **Python 3**: Integrated for scripting and automation.  
+  [https://www.python.org/downloads/](https://www.python.org/downloads/)
+- **Conan 2**: Simplifies dependency management.  
+  [https://docs.conan.io](https://docs.conan.io)
+- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
+  [https://github.com/TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
+- **GitHub Action Workflows**: Actively monitors the source code status across all major platforms.
+   [https://github.com/tomasmark79/MarkWareVCMake/actions](https://github.com/tomasmark79/MarkWareVCMake/actions)
+
 
 🌐🌐🌐
 
 ### Additional Integrations
 
+- **CPM.cmake**: Lightweight dependency management as the add-in if neccessary.  
+  [https://github.com/cpm-cmake/CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)  
 - **CPM.license**: Automates third-party license management.  
   [https://github.com/cpm-cmake/CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake)
-- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
-  [https://github.com/TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
 - **Formatters**: Preconfigured for consistent code formatting.  
   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
    
 
+**Note:**
+Combining Conan 2 and CPM.cmake is generally not recommended, but it is not prohibited either. If you approach the dependency management concept with Conan 2 as the primary dependency manager and CPM.cmake as a supplementary dependency manager, everything will be fine. Just make sure to watch out for conflicts.
+
 🗡️🗡️🗡️
 
-### Conan 2 Notice
-
-- In the freshly cloned default template, **Conan is not required**. You may uncomment the Conan dependency examples in marked locations to activate using Conan by template workflow.  
-- If you invoke the Conan task in the task menu, Conan will be part of the project configuration even if it does not explicitly provide dependency packages to the configuration.
-  
 ---
 
 ## Development Environment Setup
@@ -162,7 +162,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
    ```bash
    code .
    ```
-4. File SolutionUpgrade.py can later update the template files from the repository that you choose. More information inside the script.
+4. File SolutionUpgrader.py can update the template files from the repository that you choose. More information inside the script.
 
 From this point, you have a fully functional solution for developing Linux binaries, regardless of the host platform. 
  
