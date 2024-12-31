@@ -23,15 +23,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.CPM_SOURCE_CACHE}}
-          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cpm.cmake') }}
+          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/cpm.cmake') }}
 
       - name: install conan to system
         run: |
           brew update
-          brew install pipx
           pipx install conan
           conan --version
-          
 
       - name: create Conan cache
         id: cache-conan
