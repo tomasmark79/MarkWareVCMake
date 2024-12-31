@@ -91,7 +91,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # if various C++ standards are used, use target_compile_features
-# target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
+target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
 
 # ===========================
 # Set library headers
