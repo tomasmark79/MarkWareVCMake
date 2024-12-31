@@ -36,7 +36,7 @@ jobs:
         id: cache-conan
         uses: actions/cache@v3
         with:
-          path: /home/runner/.conan2
+          path: C:\Users\runneradmin\.conan2
           key: ${{ runner.os }}-conan-${{ hashFiles('**/conanfile.py') }}
 
       - if: ${{ steps.cache-conan.outputs.cache-hit != 'true' }}
