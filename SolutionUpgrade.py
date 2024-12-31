@@ -2,6 +2,8 @@ import os
 import requests
 import shutil
 from datetime import datetime
+import sys
+import subprocess
 
 # URL of the repository with the updated files
 repo_url = "https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/refs/heads/main/"
@@ -98,7 +100,10 @@ for file_path in files_to_update:
         update_file(file_path)
         print(f"Created: {file_path}")
 
-# Provide a link to download the latest version of SolutionUpgrade.py
+# Update the script itself and restart
 if "SolutionUpgrade.py" in files_to_update:
-    print("To update SolutionUpgrade.py, please download the latest version from the following link:")
-    print(f"{repo_url}SolutionUpgrade.py")
+    print("Updating SolutionUpgrade.py")
+    update_file("SolutionUpgrade.py")
+    print("Restarting script...")
+    subprocess.Popen([sys.executable] + sys.argv)
+    sys.exit()
