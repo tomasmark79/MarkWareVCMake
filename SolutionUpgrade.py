@@ -79,7 +79,9 @@ def update_file(file_path):
             shutil.move(file_path, backup_path)
         
         # Write updated file
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        dir_name = os.path.dirname(file_path)
+        if dir_name and not os.path.exists(dir_name):
+            os.makedirs(dir_name, exist_ok=True)
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(response.text)
         print(f"Updated: {file_path}")
