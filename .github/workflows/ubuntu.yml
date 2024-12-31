@@ -18,14 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Conan Dependencies
+      - name: cache Conan dependencies
         id: cache-conan
         uses: actions/cache@v2
         with:
           path: path/to/.conan2
           key: ${{ runner.os }}-conan-${{ hashFiles('**/conanfile.py') }}
       
-      - name: Install Conan
+      - name: install Conan
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
@@ -34,14 +34,15 @@ jobs:
       # if we did hit the cache, then you do not want to create a new default  
       # profile since you already have one
       - if: ${{ steps.cache-conan.outputs.cache-hit != 'true' }}
-        name: Configure Conan
+        name: configure Conan
         run: conan profile detect --force
 
-      - name: Conan profile update
+      - name: Conan profile load
         run:  |
+          conan profile detect
           conan profile show
 
-      - name: Install dependencies
+      - name: install dependencies
         run: conan install . -s build_type=${{env.BUILD_TYPE}} -of=${{github.workspace}}/build -pr default -b=missing
       
       - name: configureLibrary
