@@ -105,7 +105,10 @@ for file_path in files_to_update:
 # Update the script itself and restart
 if "SolutionUpgrade.py" in files_to_update:
     print("Updating SolutionUpgrade.py")
+    # Create a temporary copy of the script
+    temp_script_path = "SolutionUpgrade_temp.py"
+    shutil.copy("SolutionUpgrade.py", temp_script_path)
     update_file("SolutionUpgrade.py")
     print("Restarting script...")
-    subprocess.Popen([sys.executable] + sys.argv)
+    subprocess.Popen([sys.executable, temp_script_path])
     sys.exit()
