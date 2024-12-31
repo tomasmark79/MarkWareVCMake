@@ -35,6 +35,9 @@ jobs:
         name: Conan profile detect --force
         run: conan profile detect --force
       
+      - name: Conan profile show
+        run: conan profile show
+
       - name: install Conan dependencies
         run: conan install . -s build_type=${{env.BUILD_TYPE}} -of=${{github.workspace}}/build -pr default -b=missing
       
