@@ -50,7 +50,7 @@ cpm_licenses_create_disclaimer_target(write-licenses "${CMAKE_CURRENT_BINARY_DIR
 # ===========================
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
-# find_package(Threads REQUIRED) # system
+find_package(Threads REQUIRED) # system
 # find_package(X11 REQUIRED) # cmake/Modules/FindX11.cmake
 # find_package(dpp CONFIG REQUIRED) # conan
 # find_package(BZip2 REQUIRED) # conan
@@ -115,15 +115,13 @@ target_compile_options(
 # ===========================
 target_link_libraries(
     ${LIBRARY_NAME}
-    PUBLIC # System
-           # Threads::Threads
-           # CPM
-           fmt::fmt
-           PRIVATE dsdotname::EmojiTools
-           PRIVATE nlohmann_json::nlohmann_json
-           # Conan
-           # BZip2::BZip2
-           # CURL::libcurl
+    PUBLIC Threads::Threads # System
+    PRIVATE fmt::fmt # CPM
+    PRIVATE $<BUILD_INTERFACE:dsdotname::EmojiTools>
+    PRIVATE $<BUILD_INTERFACE:nlohmann_json::nlohmann_json>
+    # Conan example
+    # BZip2::BZip2
+    # CURL::libcurl
 )
 
 # ===========================
@@ -166,9 +164,3 @@ packageProject(
 # Set installation directory
 # ===========================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME} DESTINATION include/)
-
-# ===========================
-# Export the targets
-# ===========================
-# nlohmann as CPM package does not export the target, we need to do it manually
-install(TARGETS nlohmann_json EXPORT ${LIBRARY_NAME}Targets)
