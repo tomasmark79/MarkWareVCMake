@@ -143,13 +143,19 @@ def main():
         logging.info("Lock file removed")
         return
 
-    backup_dir = create_backup_dir()
+    backup_dir = None
     updated_self = False
 
     for file_path in files_to_update:
         if os.path.exists(file_path):
             if can_update_file(file_path):
                 logging.info(f"Updating: {file_path}")
+                
+                # Vytvoř backup_dir pouze když je potřeba zálohovat
+                if file_path != "SolutionUpgrade.py" and backup_dir is None:
+                    backup_dir = create_backup_dir()
+                
+                # Update souboru
                 if update_file(file_path, backup_dir):
                     if file_path == "SolutionUpgrade.py":
                         updated_self = True
@@ -157,6 +163,8 @@ def main():
                 logging.info(f"Skipped (protected): {file_path}")
         else:
             logging.info(f"Creating new file: {file_path}")
+            if backup_dir is None:
+                backup_dir = create_backup_dir()
             update_file(file_path, backup_dir)
 
     if updated_self:
