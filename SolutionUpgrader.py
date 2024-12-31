@@ -14,7 +14,7 @@ logging.basicConfig(
 )
 
 # Use temp directory for lock file
-lock_file = os.path.join(tempfile.gettempdir(), "SolutionUpgrade.lock")
+lock_file = os.path.join(tempfile.gettempdir(), "SolutionUpgrader.lock")
 
 # URL of the repository with the updated files
 repo_url = "https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/refs/heads/main/"
@@ -55,7 +55,7 @@ files_to_update = [
     # "README.md",
     # "SolutionController.py",
     # "SolutionRenamer.py",
-    "SolutionUpgrade.py"
+    "SolutionUpgrader.py"
 ]
 
 def check_write_permissions(path):
@@ -76,7 +76,7 @@ def create_backup_dir():
 
 def can_update_file(file_path):
     # Always allow self-update
-    if file_path == "SolutionUpgrade.py":
+    if file_path == "SolutionUpgrader.py":
         return True
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -101,7 +101,7 @@ def update_file(file_path, backup_dir):
         response.raise_for_status()
 
         # Backup existing file
-        if os.path.exists(file_path) and file_path != "SolutionUpgrade.py":
+        if os.path.exists(file_path) and file_path != "SolutionUpgrader.py":
             backup_path = os.path.join(backup_dir, file_path)
             os.makedirs(os.path.dirname(backup_path), exist_ok=True)
             shutil.copy2(file_path, backup_path)
@@ -152,12 +152,12 @@ def main():
                 logging.info(f"Updating: {file_path}")
                 
                 # Vytvoř backup_dir pouze když je potřeba zálohovat
-                if file_path != "SolutionUpgrade.py" and backup_dir is None:
+                if file_path != "SolutionUpgrader.py" and backup_dir is None:
                     backup_dir = create_backup_dir()
                 
                 # Update souboru
                 if update_file(file_path, backup_dir):
-                    if file_path == "SolutionUpgrade.py":
+                    if file_path == "SolutionUpgrader.py":
                         updated_self = True
             else:
                 logging.info(f"Skipped (protected): {file_path}")
