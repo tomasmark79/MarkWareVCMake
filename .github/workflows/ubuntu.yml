@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.CPM_SOURCE_CACHE}}
-          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/cpm.cmake') }}
+          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/CPM.cmake') }}
 
       - name: install conan to system
         run: |

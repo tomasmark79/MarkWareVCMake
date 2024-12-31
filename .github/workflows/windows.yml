@@ -23,12 +23,12 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.CPM_SOURCE_CACHE}}
-          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/cpm.cmake') }}
+          key: ${{ runner.os }}-cpm-${{ hashFiles('**/cmake/CPM.cmake') }}
 
       - name: install conan to system
         run: |
-          choco install python --version=3.9.2
-          python -m pip install --upgrade pip
+          # choco install python --version=3.9.2
+          # python -m pip install --upgrade pip
           pip install conan
           conan --version
 
