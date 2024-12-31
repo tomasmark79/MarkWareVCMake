@@ -88,24 +88,32 @@ def update_file(file_path):
     else:
         print(f"Failed to update: {file_path}")
 
-# Main script
-for file_path in files_to_update:
-    if os.path.exists(file_path):
-        if can_update_file(file_path):
-            print(f"Updating: {file_path}")
-            update_file(file_path)
-            print(f"Done: {file_path}")
+# Check if the script is already updated
+lock_file = "SolutionUpgrade.lock"
+if os.path.exists(lock_file):
+    os.remove(lock_file)
+else:
+    # Main script
+    for file_path in files_to_update:
+        if os.path.exists(file_path):
+            if can_update_file(file_path):
+                print(f"Updating: {file_path}")
+                update_file(file_path)
+                print(f"Done: {file_path}")
+            else:
+                print(f"Skipped: {file_path}")
         else:
-            print(f"Skipped: {file_path}")
-    else:
-        print(f"Creating new file: {file_path}")
-        update_file(file_path)
-        print(f"Created: {file_path}")
+            print(f"Creating new file: {file_path}")
+            update_file(file_path)
+            print(f"Created: {file_path}")
 
-# Update the script itself and restart
-if "SolutionUpgrade.py" in files_to_update:
-    print("Updating SolutionUpgrade.py")
-    update_file("SolutionUpgrade.py")
-    print("Restarting script...")
-    subprocess.Popen([sys.executable] + sys.argv)
-    sys.exit()
+    # Update the script itself and restart
+    if "SolutionUpgrade.py" in files_to_update:
+        print("Updating SolutionUpgrade.py")
+        # Create a lock file to prevent infinite loop
+        with open(lock_file, 'w') as f:
+            f.write("lock")
+        update_file("SolutionUpgrade.py")
+        print("Restarting script...")
+        subprocess.Popen([sys.executable] + sys.argv)
+        sys.exit()
