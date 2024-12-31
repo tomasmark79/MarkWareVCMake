@@ -8,6 +8,7 @@ on:
 
 env:
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+  BUILD_TYPE: Release
 
 jobs:
   build:
@@ -17,22 +18,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache Conan Dependencies
+        id: cache-conan
+        uses: actions/cache@v2
+        with:
+          path: path/to/.conan2
+          key: # choose a key here
+      
       - name: Install Conan
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install conan
 
-      - name: Configure Conan
+      # if we did hit the cache, then you do not want to create a new default  
+      # profile since you already have one
+      - if: ${{ steps.cache-conan.outputs.cache-hit != 'true' }}
+        name: Configure Conan
         run: conan profile detect --force
 
       - name: Install dependencies
-        run: conan install . --build=missing
+        run: conan install . -s build_type=${{env.BUILD_TYPE}} --install-folder=${{github.workspace}}/build -pr default -b=missing
 
       - name: configureLibrary
-        run: cmake -S . -B Build/Library/Debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=$CONAN_PREFIX_PATH
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       - name: makeLibrary
-        run: cmake --build Build/Library/Debug --target all
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       - name: configureStandalone
         run: cmake -S ./Standalone -B Build/Standalone/Debug -DCMAKE_BUILD_TYPE=Debug
       - name: makeStandalone
