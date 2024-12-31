@@ -1,10 +1,11 @@
+
 #include <VCMLib/VCMLib.hpp>
 #include <vcmlib/version.h>
 
+#include <memory>
 #include <chrono>
 #include <iostream>
 #include <thread>
-#include <memory>
 
 int main()
 {
