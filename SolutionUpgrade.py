@@ -42,13 +42,15 @@ def create_backup_dir():
     return backup_dir
 
 def can_update_file(file_path):
+    # Always allow self-update
+    if file_path == "SolutionUpgrade.py":
+        return True
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             for line in file:
                 if "<VCMAKE_NO_UPDATE>" in line:
                     return False
     except UnicodeDecodeError:
-        # Try with system default encoding if UTF-8 fails
         with open(file_path, 'r') as file:
             for line in file:
                 if "<VCMAKE_NO_UPDATE>" in line:
