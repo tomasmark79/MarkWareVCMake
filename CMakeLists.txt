@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 cmake_policy(SET CMP0091 NEW)
 
 # ===========================
-# Static or shared library
+# Static or shared compiling
 # ===========================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
@@ -11,7 +11,7 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ===========================
-# Project configuration
+# Project attributes
 # ===========================
 set(LIBRARY_NAME VCMLib)
 string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
@@ -19,8 +19,8 @@ set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
     VERSION 0.0.10
-    LANGUAGES C CXX ASM
-    DESCRIPTION "library template Copyright (c) 2024 TomasMark [at] digitalspace.name"
+    LANGUAGES C CXX 
+    DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
@@ -51,7 +51,6 @@ cpm_licenses_create_disclaimer_target(write-licenses "${CMAKE_CURRENT_BINARY_DIR
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 find_package(Threads REQUIRED) # system
-
 # find_package(X11 REQUIRED) # cmake/Modules/FindX11.cmake
 # find_package(dpp CONFIG REQUIRED) # conan
 # find_package(BZip2 REQUIRED) # conan
@@ -78,23 +77,14 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
 
 # ===========================
-# Create library
+# Create target
 # ===========================
 add_library(${LIBRARY_NAME})
 target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
-# ===========================
-# Set library properties
-# ===========================
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-# if various C++ standards are used, use target_compile_features
-target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_17)
 
 # ===========================
-# Set library headers
+# Set headers
 # ===========================
 # header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
 # <add_library(${LIBRARY_NAME} INTERFACE)>
@@ -105,7 +95,7 @@ target_include_directories(
     $<INSTALL_INTERFACE:include/${LIBRARY_NAME}-${PROJECT_VERSION}>)
 
 # ===========================
-# Set library definitions
+# Set compile options
 # ===========================
 # note: generator expressions are evaluated during generation of the buildsystem, and not during processing of CMakeLists.txt files
 target_compile_options(
@@ -116,7 +106,12 @@ target_compile_options(
     )
 
 # ===========================
-# Set library linking
+# Set conpile features
+# ===========================
+target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_11)
+
+# ===========================
+# Set linking
 # ===========================
 target_link_libraries(
     ${LIBRARY_NAME}
@@ -131,7 +126,7 @@ target_link_libraries(
 )
 
 # ===========================
-# Set library installation
+# Set installation
 # ===========================
 packageProject(
 

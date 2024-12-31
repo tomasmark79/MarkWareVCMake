@@ -9,8 +9,8 @@
 
 int main()
 {
-    std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>(); // cpp14 compatible construction
-    // std::unique_ptr<VCMLib> Lib(new VCMLib()); // cpp11 compatible cnotruction
+    std::unique_ptr<VCMLib> Lib = std::make_unique<VCMLib>(); // cpp14 +
+    // std::unique_ptr<VCMLib> Lib(new VCMLib()); // cpp11 +
 
     // remove me ------------------👇🏻
     std::cout << "Wait for 5 seconds please ..." << std::endl;

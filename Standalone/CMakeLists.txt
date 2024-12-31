@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 cmake_policy(SET CMP0091 NEW)
 
 # ===========================
-# Static or shared library
+# Static or shared compiling
 # ===========================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
@@ -11,7 +11,7 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ===========================
-# Project configuration
+# Project attributes
 # ===========================
 set(STANDALONE_NAME VCMStandalone)
 string(TOLOWER "${STANDALONE_NAME}" STANDALONE_NAME_LOWER)
@@ -19,7 +19,7 @@ set(STANDALONE_NAMESPACE dsdotname)
 project(
     ${STANDALONE_NAME}
     LANGUAGES C CXX ASM
-    DESCRIPTION "Standalone template by Tomáš Mark 2024"
+    DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
 # ---- Include guards ----
@@ -31,12 +31,21 @@ endif()
 # CPM.cmake configuration
 include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
+
 # ===========================
 # CPM dependencies
 # ===========================
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
-# Glob not recommended, but the simplest way for this template
+# ===========================
+# find_packade section
+# ===========================
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+
+
+# ===========================
+# Source and header files Glob not recommended, but the simplest way for this template
+# ===========================
 file(
     GLOB_RECURSE
     headers
@@ -45,8 +54,6 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
-
-# Glob not recommended, but the simplest way for this template
 file(
     GLOB_RECURSE
     sources
@@ -56,13 +63,22 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
 
-# ---- Create standalone executable ----
+# ===========================
+# Create target
+# ===========================
 add_executable(${STANDALONE_NAME} ${sources})
 
-# ---- Standalone options ----
+# ===========================
+# Set conpile properties
+# ===========================
 set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NAME}")
-# ---- link developed library ----
+
+# ===========================
+# Set linking
+# ===========================
 target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
-# ---- Set installation directory ----
+# ===========================
+# Set installation directory
+# ===========================
 install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
