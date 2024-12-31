@@ -32,10 +32,10 @@ jobs:
           key: ${{ runner.os }}-conan-${{ hashFiles('**/conanfile.py') }}
 
       - if: ${{ steps.cache-conan.outputs.cache-hit != 'true' }}
-        name: configure Conan
+        name: Conan profile detect --force
         run: conan profile detect --force
 
-      - name: Conan profile show
+      - name: Conan profile detect
         run: conan profile detect
 
       - name: install Conan dependencies
