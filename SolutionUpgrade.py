@@ -72,7 +72,7 @@ def update_file(file_path):
     url = repo_url + file_path
     response = requests.get(url)
     if response.status_code == 200:
-        if os.path.exists(file_path):
+        if os.path.exists(file_path) and file_path != "SolutionUpgrade.py":
             # Move existing file to backup folder
             backup_path = os.path.join(backup_dir, file_path)
             os.makedirs(os.path.dirname(backup_path), exist_ok=True)
@@ -105,10 +105,7 @@ for file_path in files_to_update:
 # Update the script itself and restart
 if "SolutionUpgrade.py" in files_to_update:
     print("Updating SolutionUpgrade.py")
-    # Create a temporary copy of the script
-    temp_script_path = "SolutionUpgrade_temp.py"
-    shutil.copy("SolutionUpgrade.py", temp_script_path)
     update_file("SolutionUpgrade.py")
     print("Restarting script...")
-    subprocess.Popen([sys.executable, temp_script_path])
+    subprocess.Popen([sys.executable] + sys.argv)
     sys.exit()
