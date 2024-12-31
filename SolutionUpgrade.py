@@ -69,25 +69,34 @@ def can_update_file(file_path):
 
 # Function to update a file
 def update_file(file_path):
-    url = repo_url + file_path
-    response = requests.get(url)
-    if response.status_code == 200:
+    try:
+        url = repo_url + file_path
+        response = requests.get(url, timeout=30, verify=True)
+        response.raise_for_status()  # Raises exception for 4XX/5XX status codes
+        
         if os.path.exists(file_path) and file_path != "SolutionUpgrade.py":
-            # Move existing file to backup folder
             backup_path = os.path.join(backup_dir, file_path)
             os.makedirs(os.path.dirname(backup_path), exist_ok=True)
-            shutil.move(file_path, backup_path)
+            shutil.copy2(file_path, backup_path)  # copy2 preserves metadata
         
-        # Write updated file
         dir_name = os.path.dirname(file_path)
-        if dir_name and not os.path.exists(dir_name):
+        if dir_name:
             os.makedirs(dir_name, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(response.text)
-        print(f"Updated: {file_path}")
-    else:
-        print(f"Failed to update: {file_path}")
-
+            
+        try:
+            with open(file_path, 'w', encoding='utf-8') as file:
+                file.write(response.text)
+            print(f"Updated: {file_path}")
+        except UnicodeEncodeError:
+            with open(file_path, 'w', encoding=response.encoding) as file:
+                file.write(response.text)
+            print(f"Updated with {response.encoding} encoding: {file_path}")
+                
+    except requests.RequestException as e:
+        print(f"Failed to update {file_path}: {str(e)}")
+    except OSError as e:
+        print(f"File system error for {file_path}: {str(e)}")
+        
 # Check if the script is already updated
 lock_file = "SolutionUpgrade.lock"
 if os.path.exists(lock_file):
