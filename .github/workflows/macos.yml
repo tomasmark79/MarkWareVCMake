@@ -27,9 +27,11 @@ jobs:
 
       - name: install conan to system
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
+          brew update
+          brew install python3
+          pip3 install --upgrade pip
           pip3 install conan
+          conan --version
 
       - name: create Conan cache
         id: cache-conan
