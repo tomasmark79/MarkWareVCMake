@@ -6,6 +6,7 @@ cmake_policy(SET CMP0091 NEW)
 # Static or shared compiling
 # ==============================================================================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -static -pthread")
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
