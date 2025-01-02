@@ -22,7 +22,6 @@ buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
 
-
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
@@ -93,7 +92,7 @@ def conan_install(bdir):
         cmake_content = f.read()
     shared_flag = "-o *:shared=True" if 'option(BUILD_SHARED_LIBS "Build using shared libraries" ON)' in cmake_content else "-o *:shared=False"
     profile = "default" if not isCrossCompilation else buildArch
-    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{bdir}" --build=missing --profile={profile} --settings=build_type={buildType} {shared_flag}'
+    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --build=missing --profile={profile} --settings=build_type={buildType} {shared_flag}'
     execute_command(exeCmd)
 
 ### CMake configuration, revision 2
@@ -137,14 +136,22 @@ def cmake_configure(src, bdir):
         cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir,buildArch,buildType)}"'
         execute_command(cmd)
 
-### CMake build, revision 2
+
+
+### CMake build, revision 3
 def cmake_build(bdir, target=None):
+    if target is None:
+        target = ""
+    else:
+        target = f"--target {target}"    
+        
     conan_build_sh_file = os.path.join(workSpaceDir, bdir, 'conanbuild.sh')
     if os.path.exists(conan_build_sh_file):
-        bashCmd = f'source "{conan_build_sh_file}" && cmake --build "{os.path.abspath(bdir)}" -j {os.cpu_count()}'
+        bashCmd = f'source "{conan_build_sh_file}" && cmake --build "{os.path.abspath(bdir)}" {target} -j {os.cpu_count()}'
     else:
-        bashCmd = f'source "{conan_build_sh_file}" && cmake --build "{os.path.abspath(bdir)}" --target {target} -j {os.cpu_count()}'
+        bashCmd = f'cmake --build "{os.path.abspath(bdir)}" {target} -j {os.cpu_count()}'
     execute_subprocess(bashCmd, "/bin/bash")
+
 
 
 ### Clean build folder, revision 1   
