@@ -92,19 +92,20 @@ def conan_install(bdir):
         cmake_content = f.read()
     shared_flag = "-o *:shared=True" if 'option(BUILD_SHARED_LIBS "Build using shared libraries" ON)' in cmake_content else "-o *:shared=False"
     profile = "default" if not isCrossCompilation else buildArch
-    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --build=missing --profile={profile} --settings=build_type={buildType} {shared_flag}'
+    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --build=missing --profile {profile} --settings build_type={buildType} {shared_flag}'
     execute_command(exeCmd)
 
 ### CMake configuration, revision 2
 def cmake_configure(src, bdir):
     
-    conan_toolchain_file_path = os.path.join(bdir, "conan_toolchain.cmake")
+    conan_toolchain_file_path = os.path.join(workSpaceDir, bdir, "conan_toolchain.cmake")
     
     # Conan
     # ---------------------------------------------------------------------------------
     if os.path.isfile(conan_toolchain_file_path):
         print(f"{LIGHTBLUE} using file: conan_toolchain.cmake {NC}")
-        DCMAKE_TOOLCHAIN_FILE_CMD = "-DCMAKE_TOOLCHAIN_FILE=" + os.path.join(workSpaceDir, bdir, "conan_toolchain.cmake")
+        print(f"{LIGHTBLUE} using file:", conan_toolchain_file_path, NC)
+        DCMAKE_TOOLCHAIN_FILE_CMD = f'-DCMAKE_TOOLCHAIN_FILE="{conan_toolchain_file_path}"'
 
         if platform.system().lower() in ["linux", "darwin"]: 
             # CMake configuration for Linux and MacOS with Conan toolchain
