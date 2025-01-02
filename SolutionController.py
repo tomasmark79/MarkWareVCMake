@@ -112,8 +112,6 @@ def cmake_configure(src, bdir):
             toolchain_file = f'-DCMAKE_TOOLCHAIN_FILE={os.path.abspath(os.path.join(chain_dir, buildArch + ".cmake"))}'
         else:
             toolchain_file =""
-    cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {toolchain_file} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}"'
-    execute_command(cmd)
     
 def cmake_build(bdir, target=None):
     if target is None:
