@@ -7,12 +7,8 @@ cmake_policy(SET CMP0091 NEW)
 # ==============================================================================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-#if (WIN32)
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -static -pthread")
-#else()
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
-#endif()
-
+# for Win32 change to prefix -static-pthread
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -pthread")
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
