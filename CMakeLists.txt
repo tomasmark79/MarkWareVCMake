@@ -17,7 +17,7 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.12
+    VERSION 0.0.13
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
