@@ -59,7 +59,7 @@
             "description": "Select target architecture",
             "options": [
                 "default", /* this is system default compiler */
-                "x86_64-unknown-linux-gnu",
+                "x86_64-bookworm-linux-gnu",
                 "x86_64-w64-mingw32",
                 "aarch64-linux-gnu"
             ],

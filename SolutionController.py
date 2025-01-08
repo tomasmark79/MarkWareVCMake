@@ -22,10 +22,11 @@ buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
 
+
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
-valid_archs = ["default", "x86_64-unknown-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu", "independent_parameter"]
+valid_archs = ["default", "x86_64-bookworm-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu", "independent_parameter"]
 valid_build_types = ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
 
 def exit_ok(msg):
