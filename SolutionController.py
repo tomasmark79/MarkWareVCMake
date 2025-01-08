@@ -141,6 +141,8 @@ def cmake_configure(src, bdir):
 
 ### CMake build, revision 3
 def cmake_build(bdir, target=None):
+    
+    # --target is optional
     if target is None:
         target = ""
     else:
