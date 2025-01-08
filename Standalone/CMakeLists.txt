@@ -43,6 +43,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+cpm_licenses_create_disclaimer_target(
+    write-licenses-${STANDALONE_NAME} "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
+
 
 # ==============================================================================
 # Source and header files Glob not recommended, but the simplest way for this template

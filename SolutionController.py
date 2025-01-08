@@ -59,6 +59,18 @@ else:
 
 print(f"{YELLOW}Cross\t\t: {isCrossCompilation}{NC}")
 
+### Get version and names from CMakeLists.txt
+def get_version_and_names():
+    with open('CMakeLists.txt', 'r') as file:
+        cmake_content = file.read()
+    with open('Standalone/CMakeLists.txt', 'r') as file:
+        standalone_content = file.read()
+    lib_ver = re.search(r'VERSION\s+(\d+\.\d+\.\d+)', cmake_content).group(1)
+    lib_name = re.search(r'set\(LIBRARY_NAME\s+(\w+)', cmake_content).group(1)
+    st_name = re.search(r'set\(STANDALONE_NAME\s+(\w+)', standalone_content).group(1)
+    return lib_ver, lib_name, st_name
+
+
 ### Log to file, revision 1
 def log2file(message):
     with open(os.path.join(workSpaceDir, "SolutionController.log"), "a") as f:
@@ -155,8 +167,6 @@ def cmake_build(bdir, target=None):
         bashCmd = f'cmake --build "{os.path.abspath(bdir)}" {target} -j {os.cpu_count()}'
     execute_subprocess(bashCmd, "/bin/bash")
 
-
-
 ### Clean build folder, revision 1   
 def clean_build_folder(bdir):
     print(f"{LIGHTBLUE}> Removing build directory: {bdir}{NC}")
@@ -169,12 +179,6 @@ def build_spltr(lib, st):
         cmake_build(get_build_dir("Library"))
     if st:
         cmake_build(get_build_dir("Standalone"))
-
-def license_spltr(lib, st):
-    if lib:
-        cmake_build(get_build_dir("Library"), "write-licenses")
-    if st:
-        cmake_build(get_build_dir("Standalone"), "write-licenses")
 
 def configure_spltr(lib, st):
     if lib:
@@ -203,17 +207,12 @@ def install_spltr(lib, st):
     if st:
         cmake_install(get_build_dir("Standalone"))
 
-def get_version_and_names():
-    with open('CMakeLists.txt', 'r') as file:
-        cmake_content = file.read()
-    with open('Standalone/CMakeLists.txt', 'r') as file:
-        standalone_content = file.read()
-
-    lib_ver = re.search(r'VERSION\s+(\d+\.\d+\.\d+)', cmake_content).group(1)
-    lib_name = re.search(r'set\(LIBRARY_NAME\s+(\w+)', cmake_content).group(1)
-    st_name = re.search(r'set\(STANDALONE_NAME\s+(\w+)', standalone_content).group(1)
-
-    return lib_ver, lib_name, st_name
+def license_spltr(lib, st):
+    lib_ver, lib_name, st_name = get_version_and_names()
+    if lib:
+        cmake_build(get_build_dir("Library"), f"write-licenses-{lib_name}")
+    if st:
+        cmake_build(get_build_dir("Standalone"), f"write-licenses-{st_name}")
 
 def create_archive(source_dir, out_path):
     with tarfile.open(out_path, "w:gz") as tar:
