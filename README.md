@@ -3,7 +3,7 @@
 ### Modern, Configurable Project Template for C and C++
 
 Author: **Tomáš Mark**  
-Version: **main**
+Version: **0.0.11**
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
@@ -264,24 +264,24 @@ Je jednoduché přidat novou architekturu.
 
 🛠️🛠️🛠️  
 
-| Task Menu             | Description                             |
-|-----------------------|-----------------------------------------|
-| **Zero to Hero**      | Clean → Conan → Configure → Build       |
-| **Clean**             | Removes the entire build folder         |
-| **Conan**             | Builds Conan dependencies               |
-| **Configure**         | Configures CMake                        |
-| **Build**             | Builds the project                      |
-| **Collect Licenses**  | Gathers licenses from CPM dependencies  |
-| **Install Artefacts** | Installs to `/Build/Installed/`         |
-| **Release Artefacts** | Tarballs to `/Build/Artefacts/`         |
-| **Conan graph.html**  | Create html output of dependencies      |
-| **Lint C/C++**        | C/C++ files diagnostics                 |
-| **Format C/C++**      | Formatting for C/C++ files              | 
-| **Format CMake**      | Formatting for CMake files              |
+| Task Menu             | Description                            |
+| --------------------- | -------------------------------------- |
+| **Zero to Hero**      | Clean → Conan → Configure → Build      |
+| **Clean**             | Removes the entire build folder        |
+| **Conan**             | Builds Conan dependencies              |
+| **Configure**         | Configures CMake                       |
+| **Build**             | Builds the project                     |
+| **Collect Licenses**  | Gathers licenses from CPM dependencies |
+| **Install Artefacts** | Installs to `/Build/Installed/`        |
+| **Release Artefacts** | Tarballs to `/Build/Artefacts/`        |
+| **Conan graph.html**  | Create html output of dependencies     |
+| **Lint C/C++**        | C/C++ files diagnostics                |
+| **Format C/C++**      | Formatting for C/C++ files             |
+| **Format CMake**      | Formatting for CMake files             |
 
-| Special Task Menu     | Description                             |
-|-----------------------|-----------------------------------------|
-| **Permutate All Tasks**  | Executes all task scenarios (testing purpose) |
+| Special Task Menu       | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| **Permutate All Tasks** | Executes all task scenarios (testing purpose) |
 
 ### Key Shortcuts
 
@@ -368,40 +368,40 @@ cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/aarc
 
 ---
 
-### Comparison Overview to Similar Templates
-|                                             | MarkWareVCMake                         | ModernCppStarter | cmake_template                    |
-|---------------------------------------------|----------------------------------------|------------------|-----------------|
-| Minimal setup required                      | yes                                    | yes              | yes             |
-| Supports best practices + Modern CMake      | yes                                    | yes              | yes             |
-| Stanadlone->Library concept                 | yes                                    | yes              | yes             |
-| Highly Customizable                         | yes                                    | yes              | yes             |
-| Github workflow with badges                 | yes                                    | yes              | not sure        |
-| PackageProject.cmake                        | yes                                    | author           | no              |
-| Dependency solution CPM.cmake integrated    | yes                                    | author           | no              |
-| CPM.license integrated                      | yes                                    | author           | no              |
-| CPM.tools integrated                        | yes                                    | author           | no              |
-| LintC, clang-format, cmake-format           | VSCode Tasks + shortcuts + cli         | only cli         | no              |
-| Solution Renamer                            | yes                                    | no               | no              |
-| Dependency solution by Conan                | yes, wrapped by tasks in VSCode        | no               | no              |
-| CMake generators by Conan preconfigured     | yes                                    | no               | no              |
-| Cross-Compilation preconfigured             | yes, require toolchain                 | no               | no              |
-| Cross-Compilation targets preconfigured     | linux, windows, raspberry pi 4/5       | no               | no              |
-| VSCode CMake controller                     | yes                                    | no               | no              |
-| VSCode Tasks via Menu and Shortcuts         | yes                                    | no               | no              |
-| Clean                                       | Removes the entire build folder        | no               | no              |
-| Conan                                       | Builds Conan dependencies              | no               | no              |
-| Configure                                   | Configures CMake                       | only cli         | only cli        |
-| Build                                       | Builds the project                     | only cli         | only cli        |
-| Collect Licenses                            | Gathers licenses from CPM dependencies | no               | no              |
-| Install Artefacts                           | Installs to /Build/Installed/          | no               | no              |
-| Release Artefacts                           | Tarballs to /Build/Artefacts/          | no               | no              |
-| Lint C/C++                                  | C/C++ files diagnostics                | only cli         | only cli        |
-| Format C/C++                                | Recursive formatting for C/C++ files   | only cli         | only cli        |
-| Format CMake                                | Recursive formatting for CMake files   | only cli         | only cli        |
-| Permutate All Tasks                         | Executes all task scenarios (testing)  | no               | no              |
-| Loging runned commands                      | yes, to file                           | no               | no              |
-| C/C++ tests                                 | not yet                                | yes              | yes             |
-| Doxygen                                     | not yet                                | yes              | no              |
+### What This Template Offers Over Basic Templates
+|                                          | MarkWareVCMake                         | ModernCppStarter | cmake_template |
+| ---------------------------------------- | -------------------------------------- | ---------------- | -------------- |
+| Minimal setup required                   | yes                                    | yes              | yes            |
+| Supports best practices + Modern CMake   | yes                                    | yes              | yes            |
+| Stanadlone->Library concept              | yes                                    | yes              | yes            |
+| Highly Customizable                      | yes                                    | yes              | yes            |
+| Github workflow with badges              | yes                                    | yes              | not sure       |
+| PackageProject.cmake                     | yes                                    | author           | no             |
+| Dependency solution CPM.cmake integrated | yes                                    | author           | no             |
+| CPM.license integrated                   | yes                                    | author           | no             |
+| CPM.tools integrated                     | yes                                    | author           | no             |
+| LintC, clang-format, cmake-format        | VSCode Tasks + shortcuts + cli         | only cli         | no             |
+| Solution Renamer                         | yes                                    | no               | no             |
+| Dependency solution by Conan             | yes, wrapped by tasks in VSCode        | no               | no             |
+| CMake generators by Conan preconfigured  | yes                                    | no               | no             |
+| Cross-Compilation preconfigured          | yes, require toolchain                 | no               | no             |
+| Cross-Compilation targets preconfigured  | linux, windows, raspberry pi 4/5       | no               | no             |
+| VSCode CMake controller                  | yes                                    | no               | no             |
+| VSCode Tasks via Menu and Shortcuts      | yes                                    | no               | no             |
+| Clean                                    | Removes the entire build folder        | no               | no             |
+| Conan                                    | Builds Conan dependencies              | no               | no             |
+| Configure                                | Configures CMake                       | only cli         | only cli       |
+| Build                                    | Builds the project                     | only cli         | only cli       |
+| Collect Licenses                         | Gathers licenses from CPM dependencies | no               | no             |
+| Install Artefacts                        | Installs to /Build/Installed/          | no               | no             |
+| Release Artefacts                        | Tarballs to /Build/Artefacts/          | no               | no             |
+| Lint C/C++                               | C/C++ files diagnostics                | only cli         | only cli       |
+| Format C/C++                             | Recursive formatting for C/C++ files   | only cli         | only cli       |
+| Format CMake                             | Recursive formatting for CMake files   | only cli         | only cli       |
+| Permutate All Tasks                      | Executes all task scenarios (testing)  | no               | no             |
+| Loging runned commands                   | yes, to file                           | no               | no             |
+| C/C++ tests                              | not yet                                | yes              | yes            |
+| Doxygen                                  | not yet                                | yes              | no             |
 
 ---
 
