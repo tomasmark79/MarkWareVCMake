@@ -170,16 +170,16 @@ From this point, you have a fully functional solution for developing Linux binar
 
 ---
 
-## Preconfigured Architectures
+## Preconfigured Conan toolchain architectures
 
 🌍🌍🌍  
 
 - `Default` (automatic system default compiler toolchain selection)  
-- `x86_64-unknown-linux-gnu` (requires cross-compilation toolchain)  
+- `x86_64-bookworm-linux-gnu` (requires cross-compilation toolchain)  
 - `x86_64-w64-mingw32` (requires cross-compilation toolchain)  
 - `aarch64-linux-gnu` (requires cross-compilation toolchain)  
 
-Je jednoduché přidat novou architekturu.
+It is easy to add a new architecture.
 
 🌍🌍🌍
 
@@ -197,87 +197,26 @@ Je jednoduché přidat novou architekturu.
 
 ---
 
-## Project Structure
-
-📂📂📂  
-
-```txt
-.
-├── cmake
-│   ├── Modules
-│   │   └── FindX11.cmake
-│   ├── CPM.cmake
-│   └── tools.cmake
-├── .github
-│   └── workflows
-│       ├── install.yml
-│       ├── macos.yml
-│       ├── ubuntu.yml
-│       └── windows.yml
-├── include
-│   └── VCMLib
-│       └── VCMLib.hpp
-├── Source
-│   └── VCMLib.cpp
-├── Standalone
-│   ├── Source
-│   │   └── Main.cpp
-│   ├── CMakeLists.txt
-│   └── LICENSE
-├── Utilities
-│   ├── CMakeToolChains
-│   │   ├── aarch64-linux-gnu.cmake
-│   │   ├── x86_64-unknown-linux-gnu.cmake
-│   │   └── x86_64-w64-mingw32.cmake
-│   ├── ConanProfiles
-│   │   ├── aarch64-linux-gnu
-│   │   ├── x86_64-unknown-linux-gnu
-│   │   └── x86_64-w64-mingw32
-│   └── AboutThisFolder.md
-├── .vscode
-│   ├── c_cpp_properties.json
-│   ├── keybindings.json
-│   ├── launch.json
-│   ├── settings.json
-│   └── tasks.json
-├── .clang-format
-├── .cmake-format
-├── CMakeLists.txt
-├── conanfile.py
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-├── .python-version
-├── README.md
-├── SolutionController.py
-├── SolutionRenamer.py
-└── SolutionUpgrade.py
-```  
-
-📂📂📂
-
----
-
 ## Implemented VSCode Tasks
 
 ### Task Menu (Shift + F7)  
 
 🛠️🛠️🛠️  
 
-| Task Menu             | Description                            |
-| --------------------- | -------------------------------------- |
-| **Zero to Hero**      | Clean → Conan → Configure → Build      |
-| **Clean**             | Removes the entire build folder        |
-| **Conan**             | Builds Conan dependencies              |
-| **Configure**         | Configures CMake                       |
-| **Build**             | Builds the project                     |
-| **Collect Licenses**  | Gathers licenses from CPM dependencies |
-| **Install Artefacts** | Installs to `/Build/Installed/`        |
-| **Release Artefacts** | Tarballs to `/Build/Artefacts/`        |
-| **Conan graph.html**  | Create html output of dependencies     |
-| **Lint C/C++**        | C/C++ files diagnostics                |
-| **Format C/C++**      | Formatting for C/C++ files             |
-| **Format CMake**      | Formatting for CMake files             |
+| Task Menu             | Description                              |
+| --------------------- | ---------------------------------------- |
+| **Zero to Hero**      | Clean → Conan → Configure → Build        |
+| **Clean**             | Removes the entire build folder          |
+| **Conan**             | Builds Conan dependencies                |
+| **Configure**         | Configures CMake                         |
+| **Build**             | Builds the project                       |
+| **Collect Licenses**  | Gathers licenses from CPM dependencies   |
+| **Install Artefacts** | Installs to `/Build/Installed/`          |
+| **Release Artefacts** | Tarballs to `/Build/Artefacts/`          |
+| **Conan graph.html**  | Create html output of Conan dependencies |
+| **Lint C/C++**        | C/C++ files diagnostics                  |
+| **Format C/C++**      | Formatting for C/C++ files               |
+| **Format CMake**      | Formatting for CMake files               |
 
 | Special Task Menu       | Description                                   |
 | ----------------------- | --------------------------------------------- |
@@ -288,11 +227,10 @@ Je jednoduché přidat novou architekturu.
 - **F5**: Start debugging.
 - **F7**: Build native debug configuration.
 - **Shift + F7**: Task Menu
-- **Shift + Ctrl + S**: Special Task Menu
 - **Ctrl + Alt + M**: Format all CMake files.
 - **Ctrl + Alt + F**: Format all C++ files.
 - **Ctrl + Alt + L**: Lint all C++ files.
-- **Ctrl + Shift + Alt + B**: Run ShellCheck on bash scripts.  
+- **Shift + Ctrl + S**: Special Task Menu
 
 🧮
 
