@@ -201,20 +201,21 @@ It is easy to add a new architecture.
 
 ### MarkWare Tasks
 
-| Key binding set to    | ` SHIFT + F7`                            |      
-| --------------------- | ---------------------------------------- |
-| **Zero to Hero**      | Clean → Conan → Configure → Build        |
-| **Clean**             | Removes the entire build folder          |
-| **Conan**             | Builds Conan dependencies                |
-| **Configure**         | Configures CMake                         |
-| **Build** `F7`        | Builds the project                       |
-| **Collect Licenses**  | Gathers licenses from CPM dependencies   |
-| **Install Artefacts** | Installs to **/Build/Installed/**        |
-| **Release Artefacts** | Tarballs to **/Build/Artefacts/**        |
-| **Conan graph.html**  | Create html output of Conan dependencies |
-| **Lint C/C++**        | C/C++ files diagnostics                  |
-| **Format C/C++**      | Formatting for C/C++ files               |
-| **Format CMake**      | Formatting for CMake files               |
+| Key binding set to    | ` SHIFT + F7`                                                 |      
+| --------------------- | ------------------------------------------------------------- |
+| **Zero to Hero**      | Clean → Conan → Configure → Build                             |
+| **Zero to Release**   | Clean → Conan → Configure → Build → Install → Tarball release |
+| **Clean**             | Removes the entire build folder                               |
+| **Conan**             | Builds Conan dependencies                                     |
+| **Configure**         | Configures CMake                                              |
+| **Build** `F7`        | Builds the project                                            |
+| **Collect Licenses**  | Gathers licenses from CPM dependencies                        |
+| **Install Artefacts** | Installs to **/Build/Installed/**                             |
+| **Release Artefacts** | Tarballs to **/Build/Artefacts/**                             |
+| **Conan graph.html**  | Create html output of Conan dependencies                      |
+| **Lint C/C++**        | C/C++ files diagnostics                                       |
+| **Format C/C++**      | Formatting for C/C++ files                                    |
+| **Format CMake**      | Formatting for CMake files                                    |
 
 ### MarkWare Special Tasks
 

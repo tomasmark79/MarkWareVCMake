@@ -26,7 +26,11 @@ isCrossCompilation = False
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
-valid_archs = ["default", "x86_64-bookworm-linux-gnu", "x86_64-w64-mingw32", "aarch64-linux-gnu", "independent_parameter"]
+valid_archs = ["default", \
+    "x86_64-unknown-linux-gnu", \
+    "x86_64-w64-mingw32", \
+    "aarch64-rpi4-linux-gnu", \
+    "independent_parameter"]
 valid_build_types = ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
 
 def exit_ok(msg):
@@ -321,6 +325,9 @@ task_map = {
     "Zero to Hero 🦸": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), exit_ok("")),
     "📚 Zero to Hero 🦸": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), exit_ok("")),
     "🎯 Zero to Hero 🦸": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), exit_ok("")),
+    "Zero to Release 🚀": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), install_spltr(True, True), artefacts_spltr(True, True),exit_ok("")),
+    "📚 Zero to Release 🚀": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), install_spltr(True, False), artefacts_spltr(True, False),exit_ok("")),
+    "🎯 Zero to Release 🚀": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), install_spltr(False, True), artefacts_spltr(False, True),exit_ok("")),
     "Clean 🧹": lambda: (clean_spltr(True, True), exit_ok("")),
     "📚 Clean 🧹": lambda: (clean_spltr(True, False), exit_ok("")),
     "🎯 Clean 🧹": lambda: (clean_spltr(False, True), exit_ok("")),
