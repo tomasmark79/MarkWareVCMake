@@ -221,7 +221,7 @@ def license_spltr(lib, st):
 
 def create_archive(source_dir, out_path):
     with tarfile.open(out_path, "w:gz") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+        tar.add(source_dir, arcname=".")
     print(f"Created archive: {out_path}")
 
 def artefacts_spltr(lib, st):
