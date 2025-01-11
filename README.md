@@ -33,6 +33,7 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 - **Cross-Platform**: Runs natively on Linux 🐧, macOS 🍏, and Windows 🪟.
 - **Cross-Compilation**: Easily target multiple architectures.  
 - **Highly Customizable**: Modular structure tailored to your specific project needs.  
+- **Remote Development Ready**: Fully compatible with SSH, WSL, and other remote development environments.
 
 ✨✨✨
 
