@@ -12,10 +12,11 @@ RED = "\033[0;31m"
 NC = "\033[0m"
 LIGHTBLUE = "\033[1;34m"
 
+pythonVersion = sys.version.split()[0]
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
-nameOfScript = os.path.basename(__file__) + " (python version)"
+nameOfScript = os.path.basename(__file__) + f" is using Python runtime version: {pythonVersion}\n"
 scriptAuthor = "(c) Tomáš Mark 2004"
-scriptVersion = "0.0.1"
+scriptVersion = "0.0.2"
 
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
@@ -45,7 +46,7 @@ if not taskName:
     exit_with_error("Task name is missing. Exiting.")
 
 # Print out the welcom and configuration
-print(f"{YELLOW}{nameOfScript} {scriptAuthor} v {scriptVersion} {NC}")
+print(f"{YELLOW}{nameOfScript}{scriptAuthor} v {scriptVersion} {NC}")
 print(f"{LIGHTBLUE}taskName\t: {taskName}{NC}")
 print(f"{GREEN}Build Arch\t: {buildArch}")
 print(f"Build Type\t: {buildType}")
