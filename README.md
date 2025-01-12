@@ -3,7 +3,7 @@
 ### Modern, Configurable Project Template for C and C++
 
 Author: **Tomáš Mark**  
-Version: **0.0.14**
+Version: **0.0.15**
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
@@ -29,7 +29,8 @@ The **MarkWare VCMake Template** provides a modern solution for C and C++ develo
 ✨✨✨  
 - **Quick Start**: Minimal setup required, ready to use immediately after cloning.  
 - **Modern Standards**: Supports best practices for C and C++ development.  
-- **Native Debugging**: Step-by-step debugging directly on Linux.  
+- **Native Debugging 🪲**: Allows debugging of your C/C++ code.
+- **CMake Configure with Debugger 🪲**: Allows debugging of your own CMake CMakeLists.txt.
 - **Cross-Platform**: Runs natively on Linux 🐧, macOS 🍏, and Windows 🪟.
 - **Cross-Compilation**: Easily target multiple architectures.  
 - **Highly Customizable**: Modular structure tailored to your specific project needs.  
@@ -202,21 +203,22 @@ It is easy to add a new architecture.
 
 ### MarkWare Tasks
 
-| Key binding set to    | ` SHIFT + F7`                                                 |      
-| --------------------- | ------------------------------------------------------------- |
-| **Zero to Hero**      | Clean → Conan → Configure → Build                             |
-| **Zero to Release**   | Clean → Conan → Configure → Build → Install → Tarball release |
-| **Clean**             | Removes the entire build folder                               |
-| **Conan**             | Builds Conan dependencies                                     |
-| **Configure**         | Configures CMake                                              |
-| **Build** `F7`        | Builds the project                                            |
-| **Collect Licenses**  | Gathers licenses from CPM dependencies                        |
-| **Install Artefacts** | Installs to **/Build/Installed/**                             |
-| **Release Artefacts** | Tarballs to **/Build/Artefacts/**                             |
-| **Conan graph.html**  | Create html output of Conan dependencies                      |
-| **Lint C/C++**        | C/C++ files diagnostics                                       |
-| **Format C/C++**      | Formatting for C/C++ files                                    |
-| **Format CMake**      | Formatting for CMake files                                    |
+| Key binding set to                | ` SHIFT + F7`                                                 |      
+| --------------------------------- | ------------------------------------------------------------- |
+| **Zero to Hero**                  | Clean → Conan → Configure → Build                             |
+| **Zero to Release**               | Clean → Conan → Configure → Build → Install → Tarball release |
+| **Clean**                         | Removes the entire build folder                               |
+| **Conan**                         | Builds Conan dependencies                                     |
+| **Configure**                     | Configures CMake                                              |
+| **Configure with CMake Debugger** | Configures CMake with debugging of CMakeLists.txt. Requiring CMake > 3.27. Awesome feature to debug large CMake CMakeLists configurations. Add breakpoint to some line. Select this task in menu and afterwards select launch.json task "Debug CMakeLists.txt library".|
+| **Build** `F7`                    | Builds the project                                            |
+| **Collect Licenses**              | Gathers licenses from CPM dependencies                        |
+| **Install Artefacts**             | Installs to **/Build/Installed/**                             |
+| **Release Artefacts**             | Tarballs to **/Build/Artefacts/**                             |
+| **Conan graph.html**              | Create html output of Conan dependencies                      |
+| **Lint C/C++**                    | C/C++ files diagnostics                                       |
+| **Format C/C++**                  | Formatting for C/C++ files                                    |
+| **Format CMake**                  | Formatting for CMake files                                    |
 
 ### MarkWare Special Tasks
 
