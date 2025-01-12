@@ -210,15 +210,15 @@ It is easy to add a new architecture.
 | **Clean**                         | Removes the entire build folder                               |
 | **Conan**                         | Builds Conan dependencies                                     |
 | **Configure**                     | Configures CMake                                              |
-| **Configure with CMake Debugger** | Configures CMake with debugging of CMakeLists.txt. Requiring CMake > 3.27. Awesome feature to debug large CMake CMakeLists configurations. Add breakpoint to some line. Select this task in menu and afterwards select launch.json task "Debug CMakeLists.txt library".|
-| **Build** `F7`                    | Builds the project                                            |
-| **Collect Licenses**              | Gathers licenses from CPM dependencies                        |
-| **Install Artefacts**             | Installs to **/Build/Installed/**                             |
-| **Release Artefacts**             | Tarballs to **/Build/Artefacts/**                             |
-| **Conan graph.html**              | Create html output of Conan dependencies                      |
-| **Lint C/C++**                    | C/C++ files diagnostics                                       |
-| **Format C/C++**                  | Formatting for C/C++ files                                    |
-| **Format CMake**                  | Formatting for CMake files                                    |
+| **Configure with CMake Debugger** | Configures CMake with a debugger. Requires CMake > 3.27 & CMake Tools VSCode extension. An awesome feature to debug CMakeLists.txt files. It is simple: add a breakpoint to any line in CMakeLists.txt and start this task. If a message `Running with debugger on.` and `Waiting for debugger client to connect...` appears in the console, you have to launch the `Debug CMake configuration` task defined in launch.json. Or press Ctrl+C to break this action. |
+| **Build** `F7`                    | Builds the project.                                            |
+| **Collect Licenses**              | Gathers licenses from CPM dependencies.                        |
+| **Install Artifacts**             | Installs to **/Build/Installed/**.                             |
+| **Release Artifacts**             | Creates tarballs in **/Build/Artifacts/**.                     |
+| **Conan graph.html**              | Creates an HTML output of Conan dependencies.                  |
+| **Lint C/C++**                    | Runs diagnostics on C/C++ files.                               |
+| **Format C/C++**                  | Formats C/C++ files.                                           |
+| **Format CMake**                  | Formats CMake files.                                           |
 
 ### MarkWare Special Tasks
 

@@ -23,10 +23,10 @@
             "preLaunchTask": "Direct Build"
         },
         {
-            "name": "Debug CMakeLists.txt library",
+            "name": "Debug CMake configuration",
             "type": "cmake",
             "request": "launch",
-            "pipeName": "/tmp/cmake-debugger-pipe-1544715b-411f-4adc-a84e-ab2dec69b161",
+            "pipeName": "/tmp/cmake-debugger-pipe-5598f192-730e-47a6-8d26-4556c4424008",
             "cmakeDebugType": "external"
         },
         {
