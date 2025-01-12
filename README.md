@@ -1,93 +1,93 @@
-# MarkWare VCMake Template
-
-### Modern, Configurable Project Template for C and C++
-
-Author: **Tomáš Mark**  
-Version: **0.0.15**
-
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
-[![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)
----
+[![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)  
 
-<img width="189" alt="image" src="https://github.com/user-attachments/assets/df0f7209-aaec-4c51-a434-4455344e0d57" />
+# Tomas `Mark` Soft `Ware` `V`irtual `CMake` template  
 
----
+- For advanced Medior+ developers
+- C/C++ development in VSCode
+- Works on Linux 🐧, macOS 🍏, and Windows 🪟
+- Creates standalone executables and libraries
+- Includes modern CMake templates with a built-in debugger
+- Compatible with Conan
+- Supports cross-compilation
+- Compatible with SSH and WSL
+- Flexible and highly configurable
+- Follows best practices
+- Works out of the box if dependencies are met
 
 ## Introduction
 
 🌟🌟🌟  
 
-The **MarkWare VCMake Template** provides a modern solution for C and C++ development by combining **application** and **library** workflows within a single configurable template. Designed for developers who value efficiency and modern tools, it simplifies project initialization while adhering to industry best practices. Built with **Modern CMake**, **Conan 2**, and **VSCode** integration, this template is an essential starting point for your next project.  
+This template started as a small C++ project and gradually became larger and larger. From the very beginning, I created the template with the goal of having a flexibly designed solution. As I gradually added more and more important features, the project may seem quite large at first glance. However, every file in the project structure has its justification, and nothing is unnecessarily redundant.
+
+**Note:** To understand this project, you will need several hours, maybe days. The reward should be that you will subsequently be able to build any large project within 30 minutes, which will stand on solid foundations of the modern world.
 
 🌟🌟🌟
 
 ---
 
-## Key Features
-
-✨✨✨  
-- **Quick Start**: Minimal setup required, ready to use immediately after cloning.  
-- **Modern Standards**: Supports best practices for C and C++ development.  
-- **Native Debugging 🪲**: Allows debugging of your C/C++ code.
-- **CMake Configure with Debugger 🪲**: Allows debugging of your own CMake CMakeLists.txt.
-- **Cross-Platform**: Runs natively on Linux 🐧, macOS 🍏, and Windows 🪟.
-- **Cross-Compilation**: Easily target multiple architectures.  
-- **Highly Customizable**: Modular structure tailored to your specific project needs.  
-- **Remote Development Ready**: Fully compatible with SSH, WSL, and other remote development environments.
-
-✨✨✨
-
----
-
 ## Integrated Tools and Configurations
 
-### Development Tools
+The project contains its own **Main.cpp**, which is the main entry point for the standalone executable. It also includes **one header file** and **one implementation file** for the library. Thus, the project consists of one executable file and one library that is linked to this executable file. Together, they work in tandem.
 
-🌐🌐🌐  
+The project also includes custom Python scripts that manage the entire workflow. These scripts come with preconfigured CMake settings, task configurations, debugger settings, and more. Everything is ready and functional right out of the box.
+
+**Note:** The only requirement is to have all the **dependencies installed** that this project needs to function correctly.
+
+### Technologies You Need
 
 - **Visual Studio Code**: Preconfigured for seamless development.  
-  [https://code.visualstudio.com/](https://code.visualstudio.com/)
-- **Modern CMake**: Advanced configuration and build management.  
-  [https://cmake.org/download/](https://cmake.org/download/)
+   [https://code.visualstudio.com/](https://code.visualstudio.com/)
+    - [C++ Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+    - [Better C++ Syntax](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax)
+    - [C++ Class Creator](https://marketplace.visualstudio.com/items?itemName=FleeXo.cpp-class-creator)
+    - [C++ Helper](https://marketplace.visualstudio.com/items?itemName=amiralizadeh9480.cpp-helper)
+    - [CMake](https://marketplace.visualstudio.com/items?itemName=twxs.cmake)
+    - [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
+    - [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=github.vscode-github-actions)
+    - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+    - [Open HTML in Browser](https://marketplace.visualstudio.com/items?itemName=peakchen90.open-html-in-browser)
+    - [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload)
+    - [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+    - [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit)
+    - [Remote Server](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-server)
+    - [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+    - [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer)
+    - [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
 - **Pyenv**: Simplifies Python version management.  
-  [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
-- **Python 3**: Integrated for scripting and automation.  
-  [https://www.python.org/downloads/](https://www.python.org/downloads/)
+   [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
+- **Python 3**: Required for the project's internal workflow.  
+   [https://www.python.org/downloads/](https://www.python.org/downloads/)
 - **Conan 2**: Simplifies dependency management.  
-  [https://docs.conan.io](https://docs.conan.io)
-- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
-  [https://github.com/TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
-- **GitHub Action Workflows**: Actively monitors the source code status across all major platforms.
-   [https://github.com/tomasmark79/MarkWareVCMake/actions](https://github.com/tomasmark79/MarkWareVCMake/actions)
-
-
-🌐🌐🌐
-
-### Additional Integrations
-
-- **CPM.cmake**: Lightweight dependency management as the add-in if neccessary.  
-  [https://github.com/cpm-cmake/CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)  
-- **CPM.license**: Automates third-party license management.  
-  [https://github.com/cpm-cmake/CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake)
+   [https://docs.conan.io](https://docs.conan.io)
+- **CMake**: Ideally the latest version.  
+   [https://cmake.org/download/](https://cmake.org/download/)
 - **Formatters**: Preconfigured for consistent code formatting.  
-  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
-  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
+   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
+   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
+
+### Technologies already included in the template
+
+- **CPM.cmake**: Lightweight dependency management as an add-in if necessary.  
+   [https://github.com/cpm-cmake/CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)  
+- **CPM.license**: Automates third-party license management.  
+   [https://github.com/cpm-cmake/CPMLicenses.cmake](https://github.com/cpm-cmake/CPMLicenses.cmake)
+- **ModernCppStarter**: Inspired by industry best practices for initializing C++ projects.  
+   [https://github.com/TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
+- **GitHub Action Workflows**: Actively monitors the source code status across all major platforms.  
+   [https://github.com/tomasmark79/MarkWareVCMake/actions](https://github.com/tomasmark79/MarkWareVCMake/actions)
    
+As you can see, there is quite a bit that needs to be correctly installed on your system. Additionally, cross-tool tools are missing here, which are used to create a toolchain tailored precisely to your requirements.
 
-**Note:**
-Combining Conan 2 and CPM.cmake is generally not recommended, but it is not prohibited either. If you approach the dependency management concept with Conan 2 as the primary dependency manager and CPM.cmake as a supplementary dependency manager, everything will be fine. Just make sure to watch out for conflicts.
-
-🗡️🗡️🗡️
+**Note:** Combining Conan 2 and CPM.cmake is generally not recommended, but it is not prohibited either. If you approach the dependency management concept with Conan 2 as the primary dependency manager and CPM.cmake as a supplementary dependency manager, everything will be fine. **Just make sure to watch out for conflicts.**
 
 ---
 
-## Development Environment Setup
+## Quick start
 
-⚙️⚙️⚙️
-
-### Linux 🐧 and macOS 🍏
-
+### Linux, MacOS
 
 1. Update system packages:
    ```bash
@@ -105,7 +105,7 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
    pip install --upgrade pip
    ```
 
-3. Install **Conan**:
+3. Install **Conan** via Python:
    ```bash
    pip install conan
    conan profile detect --force
@@ -113,7 +113,7 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
 
 ### Windows native 🪟
 
-1. Install and configure **Pyenv** for Windows:
+1. Install and configure **Pyenv** in Powershell:  
    [Powershell Installation Steps](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md#powershell)  
     ```powershell
     pyenv install 3.9.2
@@ -121,7 +121,8 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
     pyenv local 3.9.2
     pip install --upgrade pip
     ```
-3. Install **Conan**:
+
+3. Install **Conan** in Powershell:
     ```powershell
     pip install conan
     conan profile detect --force
@@ -129,7 +130,7 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
 
 ### Windows 🪟 via WSL 🐧
 
-1. Enable WSL and install Debian:
+1. Enable WSL in Powershell and install for ex. Debian based distro:
    ```powershell
    wsl --install
    wsl --list --online
@@ -137,9 +138,11 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
    wsl --set-default-version 2
    shutdown /r
    ```
+
 2. Install required VSCode extensions:
    - `ms-vscode-remote.remote-wsl`
    - `ms-vscode.cpptools`  
+
 3. Connect to WSL and open the project in VSCode
    ```bash
    code .
@@ -147,59 +150,38 @@ Combining Conan 2 and CPM.cmake is generally not recommended, but it is not proh
 
 ---
 
-
-## Quick Start
+## Let`s go to start clone repo and build your first project!
 
 🚀🚀🚀  
+
 1. Clone the template:
    ```bash
    git clone https://github.com/tomasmark79/MarkWareVCMake
    cd MarkWareVCMake/
    ```
-2. Rename components:
+
+2. You may rename Standalone and Library name:
    ```bash
    python SolutionRenamer.py VCMLib MyLibrary VCMStandalone MyStandalone
    ```
+
 3. Open the project in VSCode:
    ```bash
    code .
    ```
-4. File SolutionUpgrader.py can update the template files from the repository that you choose. More information inside the script.
+4. If you have all the necessary dependencies installed, set up the keyboard shortcuts for convenient control. These shortcuts are already prepared for you in the `keybindings.json` file. You need to copy the content into the system `keybindings.json` file, which can be found through the VSCode settings.
 
-From this point, you have a fully functional solution for developing Linux binaries, regardless of the host platform. 
- 
+5. Once the keyboard shortcuts are functional, you can start controlling the entire setup.
+
+6. Press `Shift+F7` to display the menu where you can choose from the available actions.
+
+7. To simplify things at the beginning, just hit `Zero to Release 🚀`. If everything is in order, tarball archives will be created in the `Build/Artefacts` folder at the end of the process. If not, you will see an error that you need to fix to complete the build process.
+
 🚀🚀🚀
 
----
+## Detailed VSCode tasks description
 
-git ## Preconfigured Conan toolchain architectures
-
-🌍🌍🌍  
-
-- `Default` (automatic system default compiler toolchain selection)  
-- `x86_64-bookworm-linux-gnu` (requires cross-compilation toolchain)  
-- `x86_64-w64-mingw32` (requires cross-compilation toolchain)  
-- `aarch64-linux-gnu` (requires cross-compilation toolchain)  
-
-It is easy to add a new architecture.
-
-🌍🌍🌍
-
----
-
-## Build Types
-
-🏗️🏗️🏗️  
-- `Debug`
-- `Release`
-- `RelWithDebInfo`
-- `MinSizeRel`  
-
-🏗️🏗️🏗️
-
----
-
-## Implemented `VSCode` Tasks
+**Note:** All the tasks listed below are already prepared for you and are part of every project you clone. For the keyboard shortcuts to work correctly, remember that they must be set in the system file and not just in the project folder.
 
 ### MarkWare Tasks
 
@@ -239,37 +221,66 @@ It is easy to add a new architecture.
 
 ---
 
-## Command Line
+## Special Operations
 
-### Command Line Control
+### Rename script for Standalone & Library renaming
 
-CLI control of the projects is also available.
+When you clone my template to your local disk at the beginning, one of the first things you will want to do is **rename** the names of the standalone application and the library. If this had to be done manually, it would be very cumbersome, so I created another Python script. `SolutionRenamer.py` changes all the necessary strings, including those that define object classes. **It is ideal to use this renaming right at the beginning to avoid manual work later on.**
 
-**The real intention of this template is to completely avoid the command line when it is not absolutely necessary.** However, there may be situations where manual work is required, so I have listed some task scenarios here as examples. You can extract these commands yourself from the `SolutionController.log` file, which is automatically created in the main directory of the project file system, as the VSCode tasks are used.
 
-#### Library Release **default conan profile** system compiler
+### Upgrade Itself
 
-```bash
-conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" --build=missing --profile default --settings build_type=Debug -o *:shared=False
-source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug/conanbuild.sh" && cmake -S "." -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug/conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/default/Debug"
-source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Library/default/Debug"  -j 16
-```
-
-#### Standalone Release **Cross** build with **x86_64-w64-mingw32** toolchain compiler
-
-```bash
-Remove: Build/Standalone/x86_64-w64-mingw32/Release
-conan install "/home/tomas/dev/cpp/projects/MarkWareVCMake" --output-folder="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" --build=missing --profile x86_64-w64-mingw32 --settings build_type=Release -o *:shared=False
-source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release/conanbuild.sh" && cmake -S "./Standalone" -B "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release" -DCMAKE_TOOLCHAIN_FILE="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release/conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Install/x86_64-w64-mingw32/Release"
-source "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release/conanbuild.sh" && cmake --build "/home/tomas/dev/cpp/projects/MarkWareVCMake/Build/Standalone/x86_64-w64-mingw32/Release"  -j 16
-```
+Since the template is continuously evolving, I have also created an additional Python script, `SolutionUpgrader.py`, which allows updating the uncommented files defined within this script. Open the script and uncomment the files you want to be updated. The script creates a backup in case you accidentally update a file that was important to you. The update process involves downloading the latest files from the GitHub repository.
 
 ---
 
-### What This Template Offers Over Basic Templates
+## Additional Build Settings
+
+### The solution creates 4 build types as a classic CMake Layout
+
+- `Debug`, `Release`, `RelWithDebInfo`, `MinSizeRel`
+
+### Conan 2 and cmake_layout
+
+**Note**: Since this is a custom workflow solution, it is prohibited to use CMake Layout in the `conanfile.py` settings. Other options can be used.
+
+```python
+   # it should remain commented
+    # def layout(self):
+      # cmake_layout(self)
+```       
+
+### The project also supports cross-compilation
+
+**Note**: You will normally use the `Default` setting out of the box because it uses the compiler found in the system. Conan created a profile named `default` using the `conan profile detect` command, and this profile will be used by this setting.
+
+Other settings are essentially additional profiles for the Conan manager that I have created using existing toolchains and actively use. For this reason, I have left them in the template for you as well. 
+
+- `x86_64-bookworm-linux-gnu` (requires cross-compilation toolchain)  
+- `x86_64-w64-mingw32` (requires cross-compilation toolchain)  
+- `aarch64-linux-gnu` (requires cross-compilation toolchain)  
+
+It is easy to add a new architecture.
+
+---
+
+## Command Line
+
+### Command Line Control
+Command line control of projects is also available.
+
+**The real intention of this template is to completely avoid the command line unless absolutely necessary.**
+
+However, there may be situations where manual work is required. Therefore, I have provided some task scenarios as examples. You can extract these commands yourself from the `SolutionController.log` file, which is automatically created in the main directory of the project's file system when using VSCode tasks. In any case, if Visual Studio Code is not available, you can maintain the projects using just command line commands.
+
+---
+
+### Comparison: What This Project Offers Over Other Existing Projects
+
 |                                          | MarkWareVCMake                         | ModernCppStarter | cmake_template |
 | ---------------------------------------- | -------------------------------------- | ---------------- | -------------- |
 | Minimal setup required                   | yes                                    | yes              | yes            |
+| CMake configure with Debugger            | **yes**                                | no               | no             |
 | Supports best practices + Modern CMake   | yes                                    | yes              | yes            |
 | Stanadlone->Library concept              | yes                                    | yes              | yes            |
 | Highly Customizable                      | yes                                    | yes              | yes            |
