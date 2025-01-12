@@ -42,6 +42,7 @@ The project also includes custom Python scripts that manage the entire workflow.
    [https://code.visualstudio.com/](https://code.visualstudio.com/)
     - [C++ Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
     - [Better C++ Syntax](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax)
+    - [Cpp Reference](https://marketplace.visualstudio.com/items?itemName=Guyutongxue.cpp-reference)
     - [C++ Class Creator](https://marketplace.visualstudio.com/items?itemName=FleeXo.cpp-class-creator)
     - [C++ Helper](https://marketplace.visualstudio.com/items?itemName=amiralizadeh9480.cpp-helper)
     - [CMake](https://marketplace.visualstudio.com/items?itemName=twxs.cmake)
