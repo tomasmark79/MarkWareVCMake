@@ -2,9 +2,12 @@
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)  
 
-# Tomas `Mark` Soft `Ware` `V`irtual `CMake` template  
+# MarkWareVCMake
 
-- For advanced Medior+ developers
+### Multiplatform, Modern and Standalone/Library structured C/C++ project template for VSCode.
+
+- Works out of the box if system dependencies are once met
+- For advanced Medior developers
 - C/C++ development in VSCode
 - Works on Linux 🐧, macOS 🍏, and Windows 🪟
 - Creates standalone executables and libraries
@@ -14,7 +17,6 @@
 - Compatible with SSH and WSL
 - Flexible and highly configurable
 - Follows best practices
-- Works out of the box if dependencies are met
 
 ## Introduction
 
