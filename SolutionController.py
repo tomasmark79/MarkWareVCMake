@@ -156,9 +156,10 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
                 except json.JSONDecodeError as e:
                     print(f"Error decoding JSON: {e}")
                     exit(1) 
-
-
+                print("If you want to debug CMake, please put a breakpoint in your CMakeLists.txt and start debugging in Visual Studio Code.")
                 bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installOutputDir, buildArch, buildType)}" --debugger --debugger-pipe /tmp/cmake-debugger-pipe-{unique_id}'
+
+            # Execute comfigure bash command
             execute_subprocess(bashCmd, "/bin/bash")
         
         if platform.system().lower() == "windows":
@@ -364,12 +365,12 @@ task_map = {
     "Zero to Release 🚀": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), install_spltr(True, True), artefacts_spltr(True, True),exit_ok("")),
     "📚 Zero to Release 🚀": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), install_spltr(True, False), artefacts_spltr(True, False),exit_ok("")),
     "🎯 Zero to Release 🚀": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), install_spltr(False, True), artefacts_spltr(False, True),exit_ok("")),
-    "Clean 🧹": lambda: (clean_spltr(True, True), exit_ok("")),
-    "📚 Clean 🧹": lambda: (clean_spltr(True, False), exit_ok("")),
-    "🎯 Clean 🧹": lambda: (clean_spltr(False, True), exit_ok("")),
-    "Conan 🗡️": lambda: (conan_spltr(True, True), exit_ok("")),
-    "📚 Conan 🗡️": lambda: (conan_spltr(True, False), exit_ok("")),
-    "🎯 Conan 🗡️": lambda: (conan_spltr(False, True), exit_ok("")),
+    "Clean build 🧹": lambda: (clean_spltr(True, True), exit_ok("")),
+    "📚 Clean build 🧹": lambda: (clean_spltr(True, False), exit_ok("")),
+    "🎯 Clean build 🧹": lambda: (clean_spltr(False, True), exit_ok("")),
+    "Conan install 🗡️": lambda: (conan_spltr(True, True), exit_ok("")),
+    "📚 Conan install 🗡️": lambda: (conan_spltr(True, False), exit_ok("")),
+    "🎯 Conan install 🗡️": lambda: (conan_spltr(False, True), exit_ok("")),
     "Configure 🔧": lambda: (configure_spltr(True, True), exit_ok("")),
     "📚 Configure 🔧": lambda: (configure_spltr(True, False), exit_ok("")),
     "🎯 Configure 🔧": lambda: (configure_spltr(False, True), exit_ok("")),
