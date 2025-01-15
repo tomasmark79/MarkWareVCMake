@@ -30,6 +30,10 @@ This template started as a small C++ project and gradually became larger and lar
 
 ---
 
+https://github.com/user-attachments/assets/f02a2304-37d3-4214-9019-4119619f4fa2
+
+---
+
 ## Integrated Tools and Configurations
 
 The project contains its own **Main.cpp**, which is the main entry point for the standalone executable. It also includes **one header file** and **one implementation file** for the library. Thus, the project consists of one executable file and one library that is linked to this executable file. Together, they work in tandem.
