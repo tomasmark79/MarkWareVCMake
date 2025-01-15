@@ -7,7 +7,7 @@ cmake_policy(SET CMP0091 NEW)
 # ==============================================================================
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# Linux -pthread 
+# Linux -pthread
 # Win32 -static[space]-pthread
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -static -pthread")
 
@@ -44,8 +44,8 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 cpm_licenses_create_disclaimer_target(
-    write-licenses-${STANDALONE_NAME} "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
-
+    write-licenses-${STANDALONE_NAME}
+    "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
 
 # ==============================================================================
 # Source and header files Glob not recommended, but the simplest way for this template
