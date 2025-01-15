@@ -6,10 +6,11 @@
 
 VCMLib::VCMLib()
 {
-    std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---" << std::endl;
+  std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
+            << std::endl;
 }
 
 VCMLib::~VCMLib()
 {
-    std::cout << "--- VCMLib uninstantiated ---" << std::endl;
+  std::cout << "--- VCMLib uninstantiated ---" << std::endl;
 }

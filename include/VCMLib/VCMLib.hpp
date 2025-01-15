@@ -3,11 +3,11 @@
 
 class VCMLib
 {
-  public:
-    VCMLib();
-    ~VCMLib();
+public:
+  VCMLib();
+  ~VCMLib();
 
-  private:
+private:
 };
 
 #endif // __VCMLIB_H__
