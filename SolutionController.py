@@ -357,12 +357,12 @@ def conan_graph():
     execute_command(cmd)
 
 task_map = {
-    "🦸 Zero to Hero [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), exit_ok("")),
-    "🦸 Zero to Hero [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), exit_ok("")),
-    "🦸 Zero to Hero [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), exit_ok("")),
-    "🚀 Zero to Build [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), install_spltr(True, True), artefacts_spltr(True, True),exit_ok("")),
-    "🚀 Zero to Build [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), install_spltr(True, False), artefacts_spltr(True, False),exit_ok("")),
-    "🚀 Zero to Build [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), install_spltr(False, True), artefacts_spltr(False, True),exit_ok("")),
+    "🚀 Zero to Build [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), exit_ok("")),
+    "🚀 Zero to Build [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), exit_ok("")),
+    "🚀 Zero to Build [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), exit_ok("")),
+    "🦸 Zero to Hero [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), install_spltr(True, True), artefacts_spltr(True, True),exit_ok("")),
+    "🦸 Zero to Hero [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), install_spltr(True, False), artefacts_spltr(True, False),exit_ok("")),
+    "🦸 Zero to Hero [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), install_spltr(False, True), artefacts_spltr(False, True),exit_ok("")),
     "🧹 Clean folder [sl]": lambda: (clean_spltr(True, True), exit_ok("")),
     "🧹 Clean folder [l]": lambda: (clean_spltr(True, False), exit_ok("")), 
     "🧹 Clean folder [s]": lambda: (clean_spltr(False, True), exit_ok("")),
