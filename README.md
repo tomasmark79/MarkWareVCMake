@@ -212,9 +212,9 @@ As you can see, there is quite a bit that needs to be correctly installed on you
 | **📦 Release tarballs** | Creates tarballs in **/Build/Artifacts/**. |
 | **⚔️ Conan graph.html** | Creates an HTML output of Conan dependencies. |
 |-|-|
-| **🔍 lint** `Ctrl + Alt + L` | Runs diagnostics on C/C++ files. |
-| **📐 clang-format** `Ctrl + Alt + F` | Formats C/C++ files. |
-| **📏 cmake-format** `Ctrl + Alt + F` | Formats CMake files. |
+| **🔍 lint** `Ctrl+Alt+L` | Runs diagnostics on C/C++ files. |
+| **📐 clang-format** `Ctrl+Alt+F` | Formats all project C/C++ files. |
+| **📏 cmake-format** `Ctrl+Alt+M` | Formats all project CMake files. |
 
 ---
 

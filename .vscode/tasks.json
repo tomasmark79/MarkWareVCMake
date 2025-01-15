@@ -152,7 +152,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
-                "🔍 Lint C/C++ files",
+                "🔍 lint",
                 "${input:buildArch}",
                 "${input:buildType}"
             ],
@@ -170,7 +170,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
-                "📐 Format C/C++ files (Clang)",
+                "📐 clang-format",
                 "${input:buildArch}",
                 "${input:buildType}"
             ],
@@ -188,7 +188,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
-                "📏 Format CMake files",
+                "📏 cmake-format",
                 "${input:buildArch}",
                 "${input:buildType}"
             ],
