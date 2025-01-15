@@ -26,14 +26,14 @@
             "name": "Debug CMake configuration",
             "type": "cmake",
             "request": "launch",
-            "pipeName": "/tmp/cmake-debugger-pipe-5598f192-730e-47a6-8d26-4556c4424008",
+            "pipeName": "",
             "cmakeDebugType": "external"
         },
         {
             "name": "Debug RelWithDebInfo Standalone Target",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Build/Standalone/default/RelWithDebInfo/VCMController",
+            "program": "${workspaceFolder}/Build/Standalone/default/RelWithDebInfo/VCMStandalone",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

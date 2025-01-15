@@ -182,45 +182,39 @@ As you can see, there is quite a bit that needs to be correctly installed on you
 
 🚀🚀🚀
 
-## Detailed VSCode tasks description
+## Controll
 
-**Note:** All the tasks listed below are already prepared for you and are part of every project you clone. For the keyboard shortcuts to work correctly, remember that they must be set in the system file and not just in the project folder.
+### Configured shortcuts
 
-### MarkWare Tasks
+| | | |
+|-|-|-|
+|`F5`| **Debuging** | Launch Standalone process with active debugger. |
+|`F7`| **🔨 Build [s]** | Just Fast (Re)Build Standalone. |
+|`SHIFT+F7`| **Show Task Menu** | Menu with tasks to manage buildings, etc. | 
+|`Shift+Ctrl+S`| **Permutate scenarios ☕** | Does **🚀 Zero to Build** for all architectures and build types. May be chanhed on demand to fit your testing needs. |
+| | | |
 
-| Key binding set to                | ` SHIFT + F7`                                                 |      
-| --------------------------------- | ------------------------------------------------------------- |
-| **Zero to Hero**                  | Clean → Conan → Configure → Build                             |
-| **Zero to Release**               | Clean → Conan → Configure → Build → Install → Tarball release |
-| **Clean**                         | Removes the entire build folder                               |
-| **Conan**                         | Builds Conan dependencies                                     |
-| **Configure**                     | Configures CMake                                              |
-| **Configure with CMake Debugger** | Configures CMake with a debugger. Requires CMake > 3.27 & CMake Tools VSCode extension. An awesome feature to debug CMakeLists.txt files. It is simple: add a breakpoint to any line in CMakeLists.txt and start this task. If a message `Running with debugger on.` and `Waiting for debugger client to connect...` appears in the console, you have to launch the `Debug CMake configuration` task defined in launch.json. Or press Ctrl+C to break this action. |
-| **Build** `F7`                    | Builds the project.                                            |
-| **Collect Licenses**              | Gathers licenses from CPM dependencies.                        |
-| **Install Artifacts**             | Installs to **/Build/Installed/**.                             |
-| **Release Artifacts**             | Creates tarballs in **/Build/Artifacts/**.                     |
-| **Conan graph.html**              | Creates an HTML output of Conan dependencies.                  |
-| **Lint C/C++**                    | Runs diagnostics on C/C++ files.                               |
-| **Format C/C++**                  | Formats C/C++ files.                                           |
-| **Format CMake**                  | Formats CMake files.                                           |
+### Task Menu
 
-### MarkWare Special Tasks
+**Note**: If you are building sources with the **Standalone task**, **it will also automaticaly build the library** because the library source code is part of the Standalone source code. The separate tasks for Standalone `[s]`, Library `[l]`, and both `[sl]` are provided for specific needs and developer convenience.
 
-| Key binding set to      | `Shift + Ctrl + S`                       |
-| ----------------------- | --------------------------------------------- |
-| **Permutate All Tasks** | Permutate over all the tasks for all
-|                         | the architecturtes and build types. |
-| this means will does    | Clean → Conan → Configure → Build → Install Art. → Release Art. |
-
----
-
-### Another key bindings
-
-- `F5`: Start Standalone with debugging.
-- `Ctrl + Alt + M`: Format all CMake files.
-- `Ctrl + Alt + F`: Format all C++ files.
-- `Ctrl + Alt + L`: Lint all C++ files.
+| Task Menu | Description of individual steps |
+|-|-|
+| **🚀 Zero to Build** | Clean → Conan install → CMake configure → Build |
+| **🦸 Zero to Hero** | Clean → Conan install → CMake configure → Build → Install Artefacts → Release Tarballs |
+| **🧹 Clean folder** | Removes oarticular folder |
+| **🗡️ Conan install** | Prepare dependencies and CMake generators |
+| **🔧 CMake configure** | Configures CMake |
+| **🪲 CMake configure with debugger** | Configures CMake with a debugger. Requires CMake > 3.27 & CMake Tools VSCode extension. An awesome feature to debug CMakeLists.txt files. It is simple: add a breakpoint to any line in CMakeLists.txt and start this task. If a message `Running with debugger on.` and `Waiting for debugger client to connect...` appears in the console, you have to launch the `Debug CMake configuration` task defined in launch.json. Or press Ctrl+C to break this action. |
+| **🔨 Build** `F7` | Builds the project. |
+| **📜 Collect licenses** | Gathers licenses from CPM dependencies. |
+| **📌 Install artefacts** | Installs to **/Build/Installed/**. |
+| **📦 Release tarballs** | Creates tarballs in **/Build/Artifacts/**. |
+| **⚔️ Conan graph.html** | Creates an HTML output of Conan dependencies. |
+|-|-|
+| **🔍 lint** `Ctrl + Alt + L` | Runs diagnostics on C/C++ files. |
+| **📐 clang-format** `Ctrl + Alt + F` | Formats C/C++ files. |
+| **📏 cmake-format** `Ctrl + Alt + F` | Formats CMake files. |
 
 ---
 
