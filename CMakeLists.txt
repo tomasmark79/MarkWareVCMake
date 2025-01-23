@@ -11,7 +11,7 @@ if(NOT DEFINED BUILD_SHARED_LIBS)
 endif()
 
 if(NOT DEFINED USE_STATIC_RUNTIME)
-    option(USE_STATIC_RUNTIME "Link against static runtime libraries" ON)
+    option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
 endif()
 
 if(USE_STATIC_RUNTIME)
