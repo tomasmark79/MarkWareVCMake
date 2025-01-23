@@ -17,6 +17,15 @@ class MarkWareVCMake(ConanFile):
 
     # MarkWareVCMake is using self mechanism --
     # to define build ouput layout!          --
+    # ├── Build
+    #     ├── Artefacts - tarballs
+    #     ├── Install - final installation
+    #     ├── Library - library build
+    #     └── Standalone - standalone build
+    # ├── cmake
+    # ├── include
+    # ├── Source
+    # └── Standalone
     # ------------------------keep-commented --
     # def layout(self):                      --
         # cmake_layout(self)                 --
