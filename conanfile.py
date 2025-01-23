@@ -13,11 +13,14 @@ class MarkWareVCMake(ConanFile):
     # def build_requirements(self):
         # self.tool_requires("cmake/3.22.6")
 
-    # MarkWareVCMake is using self mechanism to define the layout!
-    # Do not use defaull cmake_layout bellow or template goes broken!
-    #def layout(self):
-        # cmake_layout(self)
-    
+    # ...
+
+    # MarkWareVCMake is using self mechanism --
+    # to define build ouput layout!          --
+    # ------------------------keep-commented --
+    # def layout(self):                      --
+        # cmake_layout(self)                 --
+    # -------------------------------------- --
 
        
 
