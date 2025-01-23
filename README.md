@@ -6,6 +6,7 @@
 
 ### Multiplatform, Modern and Standalone/Library structured C/C++ project template for VSCode.
 
+- All important tasks you just select in menu
 - Works out of the box if system dependencies are once met
 - For advanced Medior developers
 - C/C++ development in VSCode
