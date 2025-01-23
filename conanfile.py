@@ -7,13 +7,21 @@ class CompressorRecipe(ConanFile):
 
     def requirements(self):
         self.requires("zlib/1.2.11")
-        self.requires("fmt/11.0.2")
+        self.requires("fmt/11.1.1")
         self.requires("nlohmann_json/3.11.2")
         #self.requires("libcurl/8.10.1")
     
+    # example
     # def build_requirements(self):
         # self.tool_requires("cmake/3.22.6")
 
-    # WMVCMake is using own cmake_layout function, don't call it here
-    # def layout(self):
+    # !!! DO NOT USE Def Layout(self) with MARKWARE VCMAKE TEMPLATE !!!
+    # !!! MWVCMAKE IS USING OWN MULTICONFIG & MULTIPLATFORM LAYOUT  !!!
+    # !!! If you activate it, templae will goes broken              !!!
+    #def layout(self):
         # cmake_layout(self)
+    
+
+       
+
+        
