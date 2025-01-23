@@ -26,7 +26,7 @@
             "name": "Debug CMake configuration",
             "type": "cmake",
             "request": "launch",
-            "pipeName": "/tmp/cmake-debugger-pipe-d3361eda-74e1-49d1-be41-5fabde744815",
+            "pipeName": "",
             "cmakeDebugType": "external"
         },
         {
