@@ -252,6 +252,15 @@ Since the template is continuously evolving, I have also created an additional P
       # cmake_layout(self)
 ```       
 
+### Useful Variables and Tips for CMakeLists.txt
+
+
+```cmake
+   option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+   option(USE_STATIC_RUNTIME "Link against static runtime libraries" ON)
+```
+
+
 ### The project also supports cross-compilation
 
 **Note**: You will normally use the `Default` setting out of the box because it uses the compiler found in the system. Conan created a profile named `default` using the `conan profile detect` command, and this profile will be used by this setting.
