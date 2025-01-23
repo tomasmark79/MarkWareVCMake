@@ -143,7 +143,7 @@ packageProject(
     INCLUDE_DIR "/include"
     INCLUDE_DESTINATION include/${LIBRARY_NAME_LOWER}-${PROJECT_VERSION}
     INCLUDE_HEADER_PATTERN "*.h;*.hpp;*.hh;*.hxx"
-    DEPENDENCIES "fmt#11.0.2;CPMLicenses.cmake@0.0.7;zlib#1.2.11;nlohmann_json#3.11.2"
+    DEPENDENCIES "zlib#1.2.11;fmt#11.1.1;CPMLicenses.cmake@0.0.7;nlohmann_json#3.11.2"
     VERSION_HEADER "${LIBRARY_NAME_LOWER}/version.h"
     EXPORT_HEADER "${LIBRARY_NAME_LOWER}/export.h"
     NAMESPACE ${LIBRARY_NAMESPACE}
