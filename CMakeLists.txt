@@ -5,8 +5,27 @@ cmake_policy(SET CMP0091 NEW)
 # ==============================================================================
 # Static or shared compiling
 # ==============================================================================
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-# Linting C/C++ code
+# Inherit from parent project or set default if built standalone
+if(NOT DEFINED BUILD_SHARED_LIBS)
+    option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+endif()
+
+if(NOT DEFINED USE_STATIC_RUNTIME)
+    option(USE_STATIC_RUNTIME "Link against static runtime libraries" ON)
+endif()
+
+if(USE_STATIC_RUNTIME)
+    if(MSVC)
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    else()
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
+    endif()
+    
+    if(UNIX)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -pthread")
+    endif()
+endif()
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ==============================================================================
@@ -17,7 +36,7 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.15
+    VERSION 0.0.16
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
