@@ -114,7 +114,8 @@ def conan_install(bdir):
     with open("CMakeLists.txt") as f:
         cmake_content = f.read()
     profile = "default" if not isCrossCompilation else buildArch
-    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --build=missing --profile {profile} --settings build_type={buildType}'
+    exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --deployer=full_deploy --build=missing --profile {profile} --settings build_type={buildType}'
+    
     execute_command(exeCmd)
 
 ### CMake configuration, revision 2
