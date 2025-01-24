@@ -254,12 +254,16 @@ Since the template is continuously evolving, I have also created an additional P
 
 ### Useful Variables and Tips for CMakeLists.txt
 
-
 ```cmake
    option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
    option(USE_STATIC_RUNTIME "Link against static runtime libraries" ON)
 ```
 
+#### Static Linking of Libraries
+When correctly statically linking all source components, the resulting executable file is the only thing needed to run the application correctly, whether on the development platform or another transferred device.
+
+#### Dynamic Linking of Libraries
+When dynamically linking external libraries to our Standalone, all dynamic libraries must be available. On the native platform where we are currently developing, dynamic libraries are automatically accessible. However, when transferring the compiled Standalone/Library to another device or platform, dynamic libraries cannot be handled automatically. Therefore, the developer must ensure the availability of dynamic libraries on the foreign system. **The simplest** **way** to ensure the availability of dynamic libraries from the source platform on a foreign platform is to extract these libraries from the `host` folder, which **Conan** generates during the dependency installation preparation. The `host` folder is always located in the `Build` folder and is the result of Conan's dependency preparation.
 
 ### The project also supports cross-compilation
 
