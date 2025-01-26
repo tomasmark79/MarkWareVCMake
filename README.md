@@ -183,9 +183,47 @@ As you can see, there is quite a bit that needs to be correctly installed on you
 
 6. Press `Shift+F7` to display the menu where you can choose from the available actions.
 
-7. To simplify things at the beginning, just hit `Zero to Release 🚀`. If everything is in order, tarball archives will be created in the `Build/Artefacts` folder at the end of the process. If not, you will see an error that you need to fix to complete the build process.
+7. To simplify things at the beginning, just hit `**🚀 Zero to Build**`. If everything is in order, tarball archives will be created in the `Build/Artefacts` folder at the end of the process. If not, you will see an error that you need to fix to complete the build process.
 
 🚀🚀🚀
+
+
+## Conan profiles & Compilers Toolchains
+
+If you have installed at least the essential packages for building software, the default compiler of the distribution should be set up in your system. This default compiler will be used if you use the `default` architecture in the template. It is more than likely that you will want to modify your compiler settings over time. You can do this in the `tasks.json` and `SolutionController.py` files, where you can change or add names.
+
+Since Conan profiles are primarily used in the template, you will want to customize the individual configuration. As an example, here is a Conan profile for cross-compiling to Raspberry Pi 4.
+
+```ini
+[settings]
+os=Linux
+arch=armv8
+compiler=gcc
+compiler.cppstd=17
+compiler.libcxx=libstdc++11
+compiler.version=12
+#compiler.threads=posix
+build_type=Release
+
+[buildenv]
+CC=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-gcc
+CXX=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-g++
+LD=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ld
+AR=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ar
+AS=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-as
+RANLIB=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-ranlib
+STRIP=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-strip
+RC=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/bin/aarch64-rpi4-linux-gnu-windres
+CMAKE_SYSROOT=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot
+CMAKE_INCLUDE_PATH=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot/usr/include
+CMAKE_LIBRARY_PATH=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot/usr/lib/aarch64-rpi4-linux-gnu/
+
+[conf]
+tools.system.package_manager:mode=report
+tools.build:sysroot=/home/tomas/x-tools/aarch64-rpi4-linux-gnu/aarch64-rpi4-linux-gnu/sysroot
+tools.cmake.cmaketoolchain:system_name=Linux
+tools.cmake.cmaketoolchain:system_processor=aarch64
+```
 
 ## Controll
 

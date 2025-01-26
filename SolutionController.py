@@ -33,7 +33,7 @@ buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
 valid_archs = ["default", \
-    "x86_64-unknown-linux-gnu", \
+    "x86_64-clang-linux-gnu", \
     "x86_64-w64-mingw32", \
     "aarch64-rpi4-linux-gnu", \
     "independent_parameter"]
