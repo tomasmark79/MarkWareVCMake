@@ -333,6 +333,8 @@ However, there may be situations where manual work is required. Therefore, I hav
 
 ## ToDo
 
+Consider to implement
+ - CMakePresets.json a CMakeUserPresets.json
  - ubsan
  - asan
  - Hardening

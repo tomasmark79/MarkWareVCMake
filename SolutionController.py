@@ -26,6 +26,7 @@ buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
 
+
 # generate uuid for cmake debugger pipe
 unique_id = str(uuid.uuid4())
 
