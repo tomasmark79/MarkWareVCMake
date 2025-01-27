@@ -331,6 +331,16 @@ However, there may be situations where manual work is required. Therefore, I hav
 
 ---
 
+## ToDo
+
+ - ubsan
+ - asan
+ - Hardening
+ - ipo
+ - pch?
+ - cpack?
+
+---
 ### Comparison: What This Project Offers Over Other Existing Projects
 
 |                                          | MarkWareVCMake                         | ModernCppStarter | cmake_template |
