@@ -13,6 +13,8 @@
 - Works on Linux 🐧, macOS 🍏, and Windows 🪟
 - Creates standalone executables and libraries
 - Includes modern CMake templates with a built-in debugger
+- UBSan (Undefined Behavior Sanitizer)
+- ASan (Address Sanitizer)
 - Compatible with Conan
 - Supports cross-compilation
 - Compatible with SSH and WSL
@@ -335,8 +337,6 @@ However, there may be situations where manual work is required. Therefore, I hav
 
 Consider to implement
  - CMakePresets.json a CMakeUserPresets.json
- - ubsan
- - asan
  - Hardening
  - ipo
  - pch?
