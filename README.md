@@ -13,8 +13,7 @@
 - Works on Linux 🐧, macOS 🍏, and Windows 🪟
 - Creates standalone executables and libraries
 - Includes modern CMake templates with a built-in debugger
-- UBSan (Undefined Behavior Sanitizer)
-- ASan (Address Sanitizer)
+- Sanitizers implementation via CMake options
 - Compatible with Conan
 - Supports cross-compilation
 - Compatible with SSH and WSL
@@ -295,9 +294,12 @@ Since the template is continuously evolving, I have also created an additional P
 ### CMake Options in both CMakeLists.txt
 
 ```cmake
-    option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-    option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
-    option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" ON)
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
+option(SANITIZE_ADDRESS "Enable Address sanitizer" ON)
+option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
+option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
+option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 ```
 
 #### Static Linking of Libraries
