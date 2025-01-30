@@ -309,7 +309,11 @@ When correctly statically linking all source components, the resulting executabl
 When dynamically linking external libraries to our Standalone, all dynamic libraries must be available. On the native platform where we are currently developing, dynamic libraries are automatically accessible. However, when transferring the compiled Standalone/Library to another device or platform, dynamic libraries cannot be handled automatically. Therefore, the developer must ensure the availability of dynamic libraries on the foreign system. **The simplest** **way** to ensure the availability of dynamic libraries from the source platform on a foreign platform is to extract these libraries from the `host` folder, which **Conan** generates during the dependency installation preparation. The `host` folder is always located in the `Build` folder and is the result of Conan's dependency preparation. The `host` content is created thanks to `--deployer=full_deploy` argument when conan is installing.
  - https://docs.conan.io/2/examples/extensions/deployers/dev/development_deploy.html#examples-extensions-builtin-deployers-development
 
+
 **Be aware that Install and Artefacts folders are containing only CMakeLists.txt targets.**
+
+#### Using Sanitizers
+Enabling all sanitizers at once is not possible, so the developer must know which sanitizers can work together. The current settings are sufficient for basic sanitization. Please note that by default, sanitizers will only take effect during the Release build type.
 
 ### The project also supports cross-compilation
 
