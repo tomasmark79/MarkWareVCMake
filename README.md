@@ -292,11 +292,12 @@ Since the template is continuously evolving, I have also created an additional P
       # cmake_layout(self)
 ```       
 
-### Useful Variables and Tips for CMakeLists.txt
+### CMake Options in both CMakeLists.txt
 
 ```cmake
-   option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-   option(USE_STATIC_RUNTIME "Link against static runtime libraries" ON)
+    option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+    option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
+    option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" ON)
 ```
 
 #### Static Linking of Libraries
