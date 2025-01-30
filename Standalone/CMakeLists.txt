@@ -1,17 +1,15 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
-
 cmake_policy(SET CMP0091 NEW)
 
-# ==============================================================================
-# Static or shared compiling
-# ==============================================================================
-# Inherit from parent project or set default if built standalone
+# === options ==================================================================
 if(NOT DEFINED BUILD_SHARED_LIBS)
     option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 endif()
-
 if(NOT DEFINED USE_STATIC_RUNTIME)
     option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
+endif()
+if (NOT DEFINED ENABLE_SANITIZERS)
+    option(ENABLE_SANITIZERS "Enable AddressSanitizer and UndefinedBehaviorSanitizer" ON)
 endif()
 
 if(USE_STATIC_RUNTIME)
@@ -25,6 +23,16 @@ if(USE_STATIC_RUNTIME)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -pthread")
     endif()
 endif()
+
+if(ENABLE_SANITIZERS)
+    message(STATUS "Sanitizers enabled")
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined -fno-omit-frame-pointer")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SANITIZER_FLAGS}")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${SANITIZER_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${SANITIZER_FLAGS}")
+endif()
+# ==============================================================================
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
