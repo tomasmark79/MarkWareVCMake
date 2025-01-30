@@ -13,7 +13,7 @@
 - Works on Linux 🐧, macOS 🍏, and Windows 🪟
 - Creates standalone executables and libraries
 - Includes modern CMake templates with a built-in debugger
-- Sanitizers implementation via CMake options
+- Sanitizers available by CMake options
 - Compatible with Conan
 - Supports cross-compilation
 - Compatible with SSH and WSL
@@ -44,11 +44,27 @@ The project also includes custom Python scripts that manage the entire workflow.
 
 **Note:** The only requirement is to have all the **dependencies installed** that this project needs to function correctly.
 
-### Technologies You Need
+### Technologies you Need
 
 - **Visual Studio Code**: Preconfigured for seamless development.  
    [https://code.visualstudio.com/](https://code.visualstudio.com/)
     - [C++ Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+
+- **Pyenv**: Simplifies Python version management.  
+   [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
+- **Python 3**: Required for the project's internal workflow.  
+   [https://www.python.org/downloads/](https://www.python.org/downloads/)
+- **Conan 2**: Simplifies dependency management.  
+   [https://docs.conan.io](https://docs.conan.io)
+- **CMake**: Ideally the latest version.  
+   [https://cmake.org/download/](https://cmake.org/download/)
+- **Formatters**: Preconfigured for consistent code formatting.  
+   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
+   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
+
+### Technologies you may Want
+
+- **Visual Studio Code**: Preconfigured for advanced function for development.  
     - [Better C++ Syntax](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax)
     - [Cpp Reference](https://marketplace.visualstudio.com/items?itemName=Guyutongxue.cpp-reference)
     - [C++ Class Creator](https://marketplace.visualstudio.com/items?itemName=FleeXo.cpp-class-creator)
@@ -65,17 +81,6 @@ The project also includes custom Python scripts that manage the entire workflow.
     - [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
     - [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer)
     - [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
-- **Pyenv**: Simplifies Python version management.  
-   [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv)
-- **Python 3**: Required for the project's internal workflow.  
-   [https://www.python.org/downloads/](https://www.python.org/downloads/)
-- **Conan 2**: Simplifies dependency management.  
-   [https://docs.conan.io](https://docs.conan.io)
-- **CMake**: Ideally the latest version.  
-   [https://cmake.org/download/](https://cmake.org/download/)
-- **Formatters**: Preconfigured for consistent code formatting.  
-   - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)  
-   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
 
 ### Technologies already included in the template
 
