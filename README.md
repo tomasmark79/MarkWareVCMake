@@ -19,6 +19,8 @@ MarkWareVCMake is a comprehensive, modern C/C++ project template designed for cr
 - SSH and WSL compatibility
 - Automated workflow through Visual Studio Code tasks
 
+https://github.com/user-attachments/assets/f02a2304-37d3-4214-9019-4119619f4fa2
+
 ## System Requirements
 
 ### Essential Tools
