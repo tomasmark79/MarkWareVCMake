@@ -1,4 +1,3 @@
-
 #include <VCMLib/VCMLib.hpp>
 #include <vcmlib/version.h>
 #include <iostream>
