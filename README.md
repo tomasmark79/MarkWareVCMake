@@ -8,6 +8,8 @@
 
 MarkWare VCMake is a comprehensive, modern C/C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
 
+To safely use this template, you need to have at least intermediate knowledge in software development and be familiar with the technologies that the template uses.
+
 ### Key Features
 
 - Cross-platform compatibility (Linux, macOS, Windows)
