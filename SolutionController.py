@@ -295,7 +295,7 @@ def artefacts_spltr(lib, st):
 def lint_c():
     # build dirs for json compilation database is required
     bdir_lib = get_build_dir("Library")
-    bdir_st = get_build_dir("Standalone")
+    # bdir_st = get_build_dir("Standalone")
 
     def run_clang_tidy(bdir):
         for root, _, files in os.walk(workSpaceDir):
@@ -309,8 +309,8 @@ def lint_c():
                     execute_command(cmd)
                     print(f"Done: {full_path}")
 
+    # library contain also standalone
     run_clang_tidy(bdir_lib)
-    # run_clang_tidy(bdir_st)
     
 def format_clang():
     for root, _, files in os.walk(workSpaceDir):
