@@ -1,3 +1,4 @@
+
 function(apply_address_sanitizer TARGET_NAME)
     target_compile_options(${TARGET_NAME} PRIVATE -fsanitize=address -fno-omit-frame-pointer)
     if (NOT APPLE)
