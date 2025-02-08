@@ -4,6 +4,11 @@
     /* File -> Preferences -> Keyboard Shortcuts -> Open Keyboard Shortcuts */
     /* or via filesystem in `~/.config/Code/${user}/keybindings.json`       */
     {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Launch Standalone"
+    },
+    {
         "key": "f7",
         "command": "workbench.action.tasks.runTask",
         "args": "Direct Build"

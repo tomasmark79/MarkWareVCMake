@@ -87,6 +87,21 @@
     ],
     "tasks": [
         {
+            "label": "Launch Standalone",
+            "type": "shell",
+            "command": "${workspaceFolder}/Build/Standalone/default/Debug/VCMStandalone",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Launch Standalone",
+            "problemMatcher": [],
+            "dependsOn": [
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
+            ]
+
+        },
+        {
             /* SPECIAL TASKS RUN */
             "label": "MarkWare Special Tasks",
             "type": "shell",
