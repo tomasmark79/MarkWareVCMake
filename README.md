@@ -1,4 +1,4 @@
-# MarkWareVCMake
+# MarkWare VCMake
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
@@ -6,7 +6,7 @@
 
 ## Overview
 
-MarkWareVCMake is a comprehensive, modern C/C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
+MarkWare VCMake is a comprehensive, modern C/C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
 
 ### Key Features
 
@@ -32,12 +32,14 @@ https://github.com/user-attachments/assets/f02a2304-37d3-4214-9019-4119619f4fa2
 - **Code Formatters**:
   - Clang Format
   - CMake Format
+- **Syntaxe tools**:
+  - lint
 
 ### Integrated Technologies
 
 - CPM.cmake for lightweight dependency management
 - CPM.license for license management
-- ModernCppStarter integration
+- ModernCppStarter structure fragment ideas
 - GitHub Actions workflows for continuous integration
 
 ## Getting Started
@@ -107,10 +109,14 @@ code .
 
 ### Keyboard Shortcuts
 
-- `F5`: Launch debugger
-- `F7`: Quick build
-- `Shift+F7`: Task menu
-- `Shift+Ctrl+S`: Run all build scenarios
+- `Shift+F7`: show user-friendly `Task Menu`  
+- `F7`: 🔨 Quick build Standalone
+- `F5`: 🪲 Quick debug Standalone
+- `Ctrl+Alt+R`: Launch Standalone  
+- `Ctrl+Alt+F`: 📐 clang-format  
+- `Ctrl+Alt+M`: 📏 cmake-format
+- `Ctrl+Alt+L`: 🔍 lint  
+- `Ctrl+Alt+S`: show user-friendly `Special Menu`  
 
 ### Build Configuration
 
@@ -122,30 +128,41 @@ code .
 
 ### Cross-Compilation Support
 
-The template includes preconfigured support for:
+The template includes preconfigured menu items for:
 - x86_64-clang-linux-gnu
 - x86_64-w64-mingw32
-- aarch64-linux-gnu
+- aarch64-linux-gnu  
+
+May be `added/edited` in `tasks.json` and `SolutionController.py` files.
 
 ## Additional Features
 
-### Automated Tasks
+### Automatic Tasks
 
-- Clean build directories
-- Dependency installation
-- CMake configuration
-- Build management
-- License collection
-- Artifact management
-- Code formatting
-- Diagnostic tools
+The `user-friendly Task Menu` includes the following automation commands:
+
+- 🧹 Clean build directories  
+- 🗡️ Dependency installation with Conan 2  
+- 🔧 CMake configuration  
+- 🪲 CMake configuration with CMake 🦉 debugger  
+- 🔨 Build management  
+- 📜 License collection with CPM for CPM  
+- 📌 Install artefacts  
+- 🗜️ Release tarballs  
+- 📊 Conan 2 graph.html  
+- 🔍 Diagnostic tools with lint  
+- 📐📏 Code formatting 
 
 ### Project Maintenance
 
-- Solution renaming utility
-- Automatic upgrade functionality
-- Comprehensive logging system
+- Solution renaming utility with python script `SolutionRenamer.py`  
+- Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
+- Comprehensive logging system `Solution.log`  
+
+### Thanks
+
+To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me via the contacts listed on the digitalspace.name website.
