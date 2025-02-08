@@ -5,7 +5,7 @@ function(apply_address_sanitizer TARGET_NAME)
     else()
         target_link_options(${TARGET_NAME} PRIVATE -fsanitize=address)
     endif()
-    set(ENV{ASAN_OPTIONS} "detect_leaks=1:strict_string_checks=1")
+    set(ENV{ASAN_OPTIONS} "detect_leaks=1:strict_string_checks=1:verbosity=1:log_threads=1")
 endfunction()
 
 function(apply_undefined_sanitizer TARGET_NAME)
