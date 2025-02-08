@@ -18,7 +18,7 @@ LIGHTBLUE = "\033[1;34m"
 pythonVersion = sys.version.split()[0]
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 nameOfScript = os.path.basename(__file__) + f" is using Python runtime version: {pythonVersion}\n"
-scriptAuthor = "(c) Tomáš Mark 2004"
+scriptAuthor = "(c) Tomáš Mark 2024"
 scriptVersion = "0.0.2"
 
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
