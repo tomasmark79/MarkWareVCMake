@@ -1,11 +1,19 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 cmake_policy(SET CMP0091 NEW)
 
-# === options ==================================================================
+#+-+-+-+-+-+-+-+
+#|l|i|b|r|a|r|y|
+#+-+-+-+-+-+-+-+
+
+# === shared libraries
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+# === runtime
+include(cmake/runtime.cmake)
 option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
+# === sanitizer
+include(cmake/sanitizer-targets.cmake)
 option(SANITIZE_ADDRESS "Enable Address sanitizer" ON)
-option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
+option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" ON)
 option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 
@@ -20,7 +28,7 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.16
+    VERSION 0.0.17
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
@@ -28,56 +36,6 @@ project(
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(FATAL_ERROR "In-source builds not allowed.
         Please make a new directory (called a Build directory) and run CMake from there.")
-endif()
-
-# ==============================================================================
-# Static runtime
-# ==============================================================================
-if(USE_STATIC_RUNTIME)
-    if(MSVC)
-        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-    else()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
-    endif()
-    
-    if(UNIX)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -pthread")
-    endif()
-endif()
-
-# ==============================================================================
-# Sanitizers
-# ==============================================================================
-message (status, CMAKE_CXX_COMPILER_ID=${CMAKE_CXX_COMPILER_ID})
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    if(SANITIZE_ADDRESS)
-        add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
-        add_link_options(-fsanitize=address)
-        set(ENV{ASAN_OPTIONS} "detect_leaks=1:strict_string_checks=1")
-    endif()
-    
-    if(SANITIZE_UNDEFINED)
-        add_compile_options(-fsanitize=undefined)
-        add_link_options(-fsanitize=undefined)
-    endif()
-    
-    if(SANITIZE_THREAD)
-        if(SANITIZE_ADDRESS)
-            message(FATAL_ERROR "Thread sanitizer is not compatible with Address sanitizer")
-        endif()
-        add_compile_options(-fsanitize=thread)
-        add_link_options(-fsanitize=thread)
-    endif()
-    
-    if(SANITIZE_MEMORY)
-        if(SANITIZE_ADDRESS OR SANITIZE_THREAD)
-            message(FATAL_ERROR "Memory sanitizer is not compatible with Address or Thread sanitizer")
-        endif()
-        add_compile_options(-fsanitize=memory)
-        add_link_options(-fsanitize=memory)
-    endif()
-else()
-    message(WARNING "Sanitizers are only supported for GCC and Clang")
 endif()
 
 # ==============================================================================
@@ -126,6 +84,8 @@ file(
 add_library(${LIBRARY_NAME})
 target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
+apply_sanitizers(${LIBRARY_NAME})
+
 # ==============================================================================
 # Set headers
 # ==============================================================================
@@ -153,8 +113,8 @@ target_compile_options(
 # ==============================================================================
 # Set compile features
 # ==============================================================================
-target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_14)
-set(CMAKE_CXX_STANDARD 14)
+target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_11)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
