@@ -4,9 +4,6 @@
 #include <iostream>
 #include <memory>
 
-// You may set sanitizer flags in CMakeLists.txt
-const bool TEST_SANITIZER = true;
-
 namespace standalone
 {
   void saySomething()
@@ -15,16 +12,16 @@ namespace standalone
   }
 }
 
+// You may set sanitizer flags in CMakeLists.txt - default is enabled
 namespace sanitizer
 {
-  // You may set sanitizer flags in CMakeLists.txt
   void scream()
   {
     char checkSanitizer[2];
     checkSanitizer[3] = 'a';
     int* checkSanitizerArr = new int[10];
     delete[] checkSanitizerArr;
-    checkSanitizerArr[0] = 0;
+    checkSanitizerArr[22] = 0;
   }
 }
 
@@ -36,7 +33,7 @@ int main()
   // c++11
   std::unique_ptr<library::VCMLib> lib(new library::VCMLib());
 
-  sanitizer::scream();
+  // sanitizer::scream();
   standalone::saySomething();
 
   return 0;
