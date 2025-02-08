@@ -6,10 +6,16 @@
 #include <memory>
 #include <thread>
 
+namespace Standalone
+{} // namespace Standalone
+
 int main()
 {
-  std::unique_ptr<VCMLib> lib = std::make_unique<VCMLib>(); // cpp14 +
-  // std::unique_ptr<VCMLib> lib(new VCMLib()); // cpp11 -
+  // c++14+ way to create a unique pointer
+  std::unique_ptr<library::VCMLib> lib = std::make_unique<library::VCMLib>();
+
+  // c++11 way to create a unique pointer
+  // std::unique_ptr<library::VCMLib> lib(new library::VCMLib());
 
   // is-is-only-for-testing-purposes ------------👇🏻
   {
