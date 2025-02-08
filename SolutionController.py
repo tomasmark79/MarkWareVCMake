@@ -85,7 +85,7 @@ def get_version_and_names():
 
 ### Log to file, revision 1
 def log2file(message):
-    with open(os.path.join(workSpaceDir, "SolutionController.log"), "a") as f:
+    with open(os.path.join(workSpaceDir, "Solution.log"), "a") as f:
         f.write(message + "\n")
 
 ### Execute command, revision 1
