@@ -16,6 +16,9 @@ option(SANITIZE_ADDRESS "Enable Address sanitizer" ON)
 option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" ON)
 option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
+# === hardening
+include(cmake/hardening.cmake)
+option(ENABLE_HARDENING "Enable security hardening options" ON)
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -84,6 +87,7 @@ file(
 add_library(${LIBRARY_NAME})
 target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
+apply_hardening(${LIBRARY_NAME})
 apply_sanitizers(${LIBRARY_NAME})
 
 # ==============================================================================

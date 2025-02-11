@@ -127,6 +127,7 @@ code .
   - Shared/static libraries
   - Static runtime linking
   - Various sanitizer options
+  - Hardening compiler options
 
 ### Cross-Compilation Support
 
