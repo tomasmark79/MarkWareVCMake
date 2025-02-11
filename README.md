@@ -126,6 +126,7 @@ code .
 - Configurable CMake options for:  
   - Shared/static libraries  
   - Static runtime linking  
+  - CCache options  
   - Various sanitizer options  
   - Hardening compiler options  
 
