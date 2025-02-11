@@ -19,6 +19,9 @@ option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
 include(cmake/hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" ON)
+# === ccache
+include(cmake/ccache.cmake)
+option(ENABLE_CCACHE "Enable ccache" ON)
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -53,7 +56,7 @@ find_package(nlohmann_json REQUIRED)
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
 # ==============================================================================
-include(cmake/tools.cmake)
+include(cmake/ccache.cmake)
 include(cmake/CPM.cmake)
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.12.0")
 CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
@@ -87,6 +90,7 @@ file(
 add_library(${LIBRARY_NAME})
 target_sources(${LIBRARY_NAME} PRIVATE ${headers} ${sources})
 
+apply_ccache(${LIBRARY_NAME})
 apply_hardening(${LIBRARY_NAME})
 apply_sanitizers(${LIBRARY_NAME})
 

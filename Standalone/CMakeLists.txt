@@ -19,6 +19,9 @@ option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
 include(../cmake/hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" ON)
+# === ccache
+include(../cmake/ccache.cmake)
+option(ENABLE_CCACHE "Enable ccache" ON)
 
 # Linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -49,7 +52,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
 # ==============================================================================
-include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 cpm_licenses_create_disclaimer_target(
@@ -81,6 +83,7 @@ file(
 # ==============================================================================
 add_executable(${STANDALONE_NAME} ${sources})
 
+apply_ccache(${STANDALONE_NAME})
 apply_hardening(${STANDALONE_NAME})
 apply_sanitizers(${STANDALONE_NAME})
 
