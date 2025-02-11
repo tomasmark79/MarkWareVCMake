@@ -153,6 +153,7 @@ The `user-friendly Task Menu` includes the following automation commands:
 - 📜 License collection with CPM for CPM  
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  
+- 🛸 Run CPack
 - 📊 Conan 2 graph.html  
 - 🔍 Diagnostic tools with lint  
 - 📐📏 Code formatting 
