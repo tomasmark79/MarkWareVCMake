@@ -19,6 +19,9 @@ option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
 include(../cmake/hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" ON)
+# === ipo
+include(../cmake/ipo.cmake)
+option(ENABLE_IPO "Enable Interprocedural Optimization" ON)
 # === ccache
 include(../cmake/ccache.cmake)
 option(ENABLE_CCACHE "Enable ccache" ON)
