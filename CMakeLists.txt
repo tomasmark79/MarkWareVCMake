@@ -37,7 +37,7 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.17
+    VERSION 0.0.18.1
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
@@ -143,20 +143,42 @@ target_link_libraries(
 # set packageProject arttributes
 # ==============================================================================
 packageProject(
+    # the name of the target to export
     NAME ${LIBRARY_NAME}
+    # the version of the target to export
     VERSION ${PROJECT_VERSION}
+    # a temporary directory to create the config files
     BINARY_DIR ${PROJECT_BINARY_DIR}
+    # location of the target's public headers
     INCLUDE_DIR "/include"
+    # should match the target's INSTALL_INTERFACE include directory
     INCLUDE_DESTINATION include/${LIBRARY_NAME_LOWER}-${PROJECT_VERSION}
+    # (optional) option to install only header files with matching pattern
     INCLUDE_HEADER_PATTERN "*.h;*.hpp;*.hh;*.hxx"
+    # semicolon separated list of the project's dependencies
     DEPENDENCIES "zlib#1.2.11;fmt#11.1.1;CPMLicenses.cmake@0.0.7;nlohmann_json#3.11.2"
+    # (optional) create a header containing the version info
+    # Note: that the path to headers should be lowercase
     VERSION_HEADER "${LIBRARY_NAME_LOWER}/version.h"
+    # (optional) create an export header using GenerateExportHeader module
     EXPORT_HEADER "${LIBRARY_NAME_LOWER}/export.h"
+    # (optional) install your library with a namespace (Note: do NOT add extra '::')
     NAMESPACE ${LIBRARY_NAMESPACE}
+    # (optional) define the project's version compatibility, defaults to `AnyNewerVersion`
+    # supported values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|ExactVersion`
     COMPATIBILITY AnyNewerVersion
+    # (optional) option to disable the versioning of install destinations
     DISABLE_VERSION_SUFFIX YES
+    # (optional) option to ignore target architecture for package resolution
+    # defaults to YES for header only (i.e. INTERFACE) libraries
     ARCH_INDEPENDENT YES
-    CPACK YES)
+    # (optional) option to generate CPack variables
+    CPACK YES
+    # (optional) relative install directory for runtimes: bins, libs, archives 
+    # by default libs will be installed to <...>/lib/<packagename-version>/
+    # / - means relative to <...>/lib, i.e. install libs to <...>/lib/, bins to <...>/bin/, etc
+    RUNTIME_DESTINATION /
+    )
 
 # ==============================================================================
 # Set installation directory
