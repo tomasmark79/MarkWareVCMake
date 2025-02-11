@@ -18,8 +18,8 @@ LIGHTBLUE = "\033[1;34m"
 pythonVersion = sys.version.split()[0]
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 nameOfScript = os.path.basename(__file__) + f" is using Python runtime version: {pythonVersion}\n"
-scriptAuthor = "(c) Tomáš Mark 2024"
-scriptVersion = "0.0.2"
+scriptAuthor = "(c) Tomáš Mark 2024-2025"
+scriptVersion = "0.0.3"
 
 taskName = sys.argv[1] if len(sys.argv) > 1 else None
 buildArch = sys.argv[2] if len(sys.argv) > 2 else None
@@ -291,7 +291,13 @@ def artefacts_spltr(lib, st):
                 create_archive(source_dir, out_path)
             else:
                 print(f"No content found in {source_dir} for standalone.")
-                
+
+def run_cpack(lib, st):
+    if lib:
+        cmake_build(get_build_dir("Library"), target="package")
+    if st:
+        cmake_build(get_build_dir("Standalone"), target="package")
+
 def lint_c():
     # build dirs for json compilation database is required
     bdir_lib = get_build_dir("Library")
@@ -388,6 +394,9 @@ task_map = {
     "📦 Release Tarballs [sl]": lambda: (artefacts_spltr(True, True), exit_ok("")),
     "📦 Release Tarballs [l]": lambda: (artefacts_spltr(True, False), exit_ok("")),
     "📦 Release Tarballs [s]": lambda: (artefacts_spltr(False, True), exit_ok("")),
+    "🛸 Run CPack [sl]": lambda: (run_cpack(True, True), exit_ok("")),
+    "🛸 Run CPack [l]": lambda: (run_cpack(True, False), exit_ok("")),
+    "🛸 Run CPack [s]": lambda: (run_cpack(False, True), exit_ok("")),
     "Permutate scenarios ☕": lambda: (permutate_all_tasks(), exit_ok("")),
     "⚔️ conan graph.html": lambda: (conan_graph(), exit_ok("")),
     "🔍 lint": lambda: (lint_c(), exit_ok("")),
