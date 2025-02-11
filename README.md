@@ -112,28 +112,28 @@ code .
 ### Keyboard Shortcuts
 
 - `Shift+F7`: show user-friendly `Task Menu`  
-- `F7`: 🔨 Quick build Standalone
-- `F5`: 🪲 Quick debug Standalone
+- `F7`: 🔨 Quick build Standalone  
+- `F5`: 🪲 Quick debug Standalone  
 - `Ctrl+Alt+R`: Launch Standalone  
 - `Ctrl+Alt+F`: 📐 clang-format  
-- `Ctrl+Alt+M`: 📏 cmake-format
+- `Ctrl+Alt+M`: 📏 cmake-format  
 - `Ctrl+Alt+L`: 🔍 lint  
 - `Ctrl+Alt+S`: show user-friendly `Special Menu`  
 
 ### Build Configuration
 
-- Supports multiple build types: Debug, Release, RelWithDebInfo, MinSizeRel
-- Configurable CMake options for:
-  - Shared/static libraries
-  - Static runtime linking
-  - Various sanitizer options
-  - Hardening compiler options
+- Supports multiple build types: Debug, Release, RelWithDebInfo, MinSizeRel  
+- Configurable CMake options for:  
+  - Shared/static libraries  
+  - Static runtime linking  
+  - Various sanitizer options  
+  - Hardening compiler options  
 
 ### Cross-Compilation Support
 
-The template includes preconfigured menu items for:
-- x86_64-clang-linux-gnu
-- x86_64-w64-mingw32
+The template includes preconfigured menu items for:  
+- x86_64-clang-linux-gnu  
+- x86_64-w64-mingw32  
 - aarch64-linux-gnu  
 
 May be `added/edited` in `tasks.json` and `SolutionController.py` files.
