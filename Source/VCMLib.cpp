@@ -2,18 +2,15 @@
 #include <iostream>
 #include <vcmlib/version.h>
 
-namespace library
-{
+namespace library {
 
-  VCMLib::VCMLib()
-  {
+  VCMLib::VCMLib() {
     std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
               << std::endl;
   }
 
-  VCMLib::~VCMLib()
-  {
+  VCMLib::~VCMLib() {
     std::cout << "--- VCMLib uninstantiated ---" << std::endl;
   }
 
-} // namespace library
+}  // namespace library

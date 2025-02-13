@@ -1,11 +1,9 @@
 #ifndef __VCMLIB_H__
 #define __VCMLIB_H__
 
-namespace library
-{
+namespace library {
 
-  class VCMLib
-  {
+  class VCMLib {
   public:
     VCMLib();
     ~VCMLib();
@@ -13,6 +11,6 @@ namespace library
   private:
   };
 
-} // namespace library
+}  // namespace library
 
-#endif // __VCMLIB_H__
+#endif  // __VCMLIB_H__
