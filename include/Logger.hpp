@@ -129,3 +129,6 @@ private:
 };
 
 #endif  // LOGGER_H
+
+// Define LOG macro for easy access
+#define LOG Logger::getInstance()

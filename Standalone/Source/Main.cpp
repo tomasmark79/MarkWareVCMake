@@ -8,7 +8,7 @@ namespace standalone {
   constexpr const char* something = "Something!";
   void saySomething() { std::cout << something << std::endl; }
   void logSomething() {
-    Logger::getInstance().log(Logger::Level::INFO, something);
+    LOG.info(something);
   }
 }  // namespace standalone
 
@@ -24,11 +24,13 @@ namespace sanitizer {
 }  // namespace sanitizer
 
 int main() {
-  // c++14+
-  // std::unique_ptr<library::VCMLib> lib = std::make_unique<library::VCMLib>();
-
+ 
+  
   // c++11
   std::unique_ptr<library::VCMLib> lib(new library::VCMLib());
+
+  // c++14+
+  // std::unique_ptr<library::VCMLib> lib = std::make_unique<library::VCMLib>();
 
   // sanitizer::scream();
   standalone::saySomething();
