@@ -14,6 +14,10 @@
   #include <unistd.h>
 #endif
 
+// implementation example
+// Logger::getInstance().log(Logger::Level::INFO, something);
+// Logger::getInstance().info(something);
+
 class Logger {
 public:
   enum class Level { DEBUG, INFO, WARNING, ERROR };
