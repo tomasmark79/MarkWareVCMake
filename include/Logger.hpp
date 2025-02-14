@@ -14,7 +14,7 @@
 
 class Logger {
 public:
-  enum class Level { DEBUG, INFO, WARNING, ERROR };
+  enum class Level { LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR };
 
   // C++11 Singleton
   static Logger& getInstance() {
@@ -23,9 +23,7 @@ public:
   }
 
   Logger(const Logger&) = delete;
-  // Logger& operator=(const Logger&) = delete;
-  void operator=(const Logger&) =
-      delete;  // Visual Studio prefers void return type for deleted assignment operators.
+  Logger& operator=(const Logger&) = delete;
 
   void log(Level level, const std::string& message) {
     std::lock_guard<std::mutex> lock(logMutex);
@@ -45,10 +43,10 @@ public:
     std::cout << std::endl;
   }
 
-  void debug(const std::string& message) { log(Level::DEBUG, message); }
-  void info(const std::string& message) { log(Level::INFO, message); }
-  void warning(const std::string& message) { log(Level::WARNING, message); }
-  void error(const std::string& message) { log(Level::ERROR, message); }
+  void debug(const std::string& message) { log(Level::LOG_DEBUG, message); }
+  void info(const std::string& message) { log(Level::LOG_INFO, message); }
+  void warning(const std::string& message) { log(Level::LOG_WARNING, message); }
+  void error(const std::string& message) { log(Level::LOG_ERROR, message); }
 
 private:
   std::string name =
@@ -60,10 +58,10 @@ private:
 
   std::string levelToString(Level level) const {
     switch (level) {
-      case Level::DEBUG: return "DEBUG";
-      case Level::INFO: return "INFO";
-      case Level::WARNING: return "WARNING";
-      case Level::ERROR: return "ERROR";
+      case Level::LOG_DEBUG: return "DEBUG";
+      case Level::LOG_INFO: return "INFO";
+      case Level::LOG_WARNING: return "WARNING";
+      case Level::LOG_ERROR: return "ERROR";
       default: return "UNKNOWN";
     }
   }
@@ -72,19 +70,19 @@ private:
 #ifdef _WIN32
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     switch (level) {
-      case Level::DEBUG:
+      case Level::LOG_DEBUG:
         SetConsoleTextAttribute(hConsole,
             FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
         break;
-      case Level::INFO:
+      case Level::LOG_INFO:
         SetConsoleTextAttribute(
             hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
         break;
-      case Level::WARNING:
+      case Level::LOG_WARNING:
         SetConsoleTextAttribute(
             hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
         break;
-      case Level::ERROR:
+      case Level::LOG_ERROR:
         SetConsoleTextAttribute(
             hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
         break;
@@ -95,16 +93,16 @@ private:
     }
 #else
     switch (level) {
-      case Level::DEBUG:
+      case Level::LOG_DEBUG:
         std::cout << "\033[34m";  // Blue
         break;
-      case Level::INFO:
+      case Level::LOG_INFO:
         std::cout << "\033[32m";  // Green
         break;
-      case Level::WARNING:
+      case Level::LOG_WARNING:
         std::cout << "\033[33m";  // Yellow
         break;
-      case Level::ERROR:
+      case Level::LOG_ERROR:
         std::cout << "\033[31m";  // Red
         break;
       default:
