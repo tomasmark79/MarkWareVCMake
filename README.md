@@ -39,10 +39,11 @@ https://github.com/user-attachments/assets/f02a2304-37d3-4214-9019-4119619f4fa2
 
 ### Integrated Technologies
 
-- CPM.cmake for lightweight dependency management
-- CPM.license for license management
-- ModernCppStarter structure fragment ideas
 - GitHub Actions workflows for continuous integration
+- Modern CMake Library/Standalone CMakeLists.txt configuration
+- ModernCppStarter ideas with CPM.cmake for lightweight dependency management
+- CPM.license for license management
+- Simple logger class
 
 ## Getting Started
 
