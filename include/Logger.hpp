@@ -10,13 +10,7 @@
 
 #ifdef _WIN32
   #include <windows.h>
-#else
-  #include <unistd.h>
 #endif
-
-// implementation example
-// Logger::getInstance().log(Logger::Level::INFO, something);
-// Logger::getInstance().info(something);
 
 class Logger {
 public:
@@ -29,8 +23,9 @@ public:
   }
 
   Logger(const Logger&) = delete;
-  Logger& operator=(const Logger&) = delete;
-  ~Logger() = default;
+  // Logger& operator=(const Logger&) = delete;
+  void operator=(const Logger&) =
+      delete;  // Visual Studio prefers void return type for deleted assignment operators.
 
   void log(Level level, const std::string& message) {
     std::lock_guard<std::mutex> lock(logMutex);
@@ -61,6 +56,7 @@ private:
   std::mutex logMutex;
 
   Logger() = default;
+  ~Logger() = default;
 
   std::string levelToString(Level level) const {
     switch (level) {
@@ -128,7 +124,13 @@ private:
   }
 };
 
+
 // Define LOG macro for easy access
 #define LOG Logger::getInstance()
+
+// implementation examples
+// Logger::getInstance().log(Logger::Level::INFO, something);
+// Logger::getInstance().info(something);
+// LOG.info(something);
 
 #endif  // LOGGER_H

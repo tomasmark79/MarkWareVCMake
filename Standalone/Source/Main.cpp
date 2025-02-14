@@ -7,9 +7,7 @@
 namespace standalone {
   constexpr const char* something = "Something!";
   void saySomething() { std::cout << something << std::endl; }
-  void logSomething() {
-    LOG.info(something);
-  }
+  void logSomething() { LOG.info(something); }
 }  // namespace standalone
 
 // You may set sanitizer flags in CMakeLists.txt - default is enabled
@@ -24,8 +22,7 @@ namespace sanitizer {
 }  // namespace sanitizer
 
 int main() {
- 
-  
+
   // c++11
   std::unique_ptr<library::VCMLib> lib(new library::VCMLib());
 
