@@ -22,6 +22,7 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
         "CMakeLists.txt",
         f"include/{old_lib_name}/{old_lib_name}.hpp",
         f"Source/{old_lib_name}.cpp",
+        "Source/Logger.hpp",
         "Standalone/CMakeLists.txt",
         "Standalone/Source/Main.cpp",
         # Add more files as needed

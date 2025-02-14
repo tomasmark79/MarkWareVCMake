@@ -1,10 +1,15 @@
 #include <VCMLib/VCMLib.hpp>
 #include <vcmlib/version.h>
+#include <Logger.hpp>
 #include <iostream>
 #include <memory>
 
 namespace standalone {
-  void saySomething() { std::cout << "Something!" << std::endl; }
+  constexpr const char* something = "Something!";
+  void saySomething() { std::cout << something << std::endl; }
+  void logSomething() {
+    Logger::getInstance().log(Logger::Level::INFO, something);
+  }
 }  // namespace standalone
 
 // You may set sanitizer flags in CMakeLists.txt - default is enabled
@@ -27,6 +32,7 @@ int main() {
 
   // sanitizer::scream();
   standalone::saySomething();
+  standalone::logSomething();
 
   return 0;
 }
