@@ -58,40 +58,44 @@ https://www.youtube.com/watch?v=navvW4vSeaw
 ```bash
 # Update system packages
 sudo apt update && sudo apt upgrade -y
-sudo apt install cmake python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
+sudo apt install python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
-# Configure Pyenv
+# Install CMake latest
+# go to https://cmake.org/download/ and download sh installer
+chmod +x cmake-3.31.5-linux-x86_64.sh
+sudo ./cmake-3.31.5-linux-x86_64.sh --prefix=/usr/local
+
+# Install PyEnv & Install Conan
 curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv virtualenv 3.9.2 env392
+pyenv global 3.9.2
 pip install --upgrade pip
-
-# Install Conan
 pip install conan
-conan profile detect --force
 ```
 
 #### Windows Setup
 
 Native Windows:
 ```powershell
-# Install Pyenv
+# Install PyEnv & Install Conan
 [Follow Pyenv-win installation guide]
 pyenv install 3.9.2
 pyenv global 3.9.2
-pyenv local 3.9.2
 pip install --upgrade pip
-
-# Install Conan
 pip install conan
-conan profile detect --force
 ```
 
-WSL Setup:
+WSL Setup (optional):
 ```powershell
 wsl --install
 wsl --install Debian
 wsl --set-default-version 2
+```
+
+# Create Conan profile (All OS)
+```bash
+conan profile detect --force
 ```
 
 ### Project Setup
