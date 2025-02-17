@@ -10,7 +10,8 @@ MarkWare VCMake is a comprehensive, modern C/C++ project template designed for c
 
 To safely use this template, you need to have at least intermediate knowledge in software development and be familiar with the technologies that the template uses.
 
-Uvedení multiplatformní projektové šablony pro moderní vývoj v C++ přímo od autora v češtině.  
+Introducing a multiplatform project template for modern development in C++ directly from the author in Czech with English subtitles (YouTube transcrypt).  
+Uvedení multiplatformní projektové šablony pro moderní vývoj v C++ přímo od autora v češtině.
 https://www.youtube.com/watch?v=navvW4vSeaw
 
 ### Key Features
