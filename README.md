@@ -14,7 +14,7 @@ To safely use this template, you need to have at least intermediate knowledge in
 Introducing a multiplatform project template for modern development in C++ directly from the author.  
 Very intensive Audio Language Czech.  
 English subtitles via YouTube transcript.
-https://www.youtube.com/watch?v=navvW4vSeaw  
+https://www.youtube.com/watch?v=6IOuiS095dQ  
   
 ### Key Features
 
