@@ -3,6 +3,8 @@ import sys
 import shutil
 import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
 
+# Don't use Standalone name Standalone as it is a reserved keyword
+
 def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name):
     # Convert to lowercase and uppercase
     old_lib_name_lower = old_lib_name.lower()
@@ -18,6 +20,7 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
     # List of files where the project names should be changed
     files = [
         ".vscode/launch.json",
+        ".vscode/tasks.json",
         "LICENSE",
         "CMakeLists.txt",
         f"include/{old_lib_name}/{old_lib_name}.hpp",
