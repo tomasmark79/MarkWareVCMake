@@ -2,10 +2,37 @@ import os
 import sys
 import shutil
 import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
+import re 
 
-# Don't use Standalone name Standalone as it is a reserved keyword
+# forbidden words that cannot be used in the project name
+FORBIDDEN_WORDS = [
+    'build', 'standalone', 'library', 'default', 'debug', 'release', 'relwithdebinfo',
+    'minsizerel'
+]
+
+def check_forbidden_words(name):
+    """
+    Check if the name contains any forbidden words (case-insensitive).
+    Only matches whole words, not partial matches.
+    Returns False if a forbidden word is found, True otherwise.
+    """
+    name_lower = name.lower()
+    for word in FORBIDDEN_WORDS:
+        # Create pattern that matches word boundaries
+        pattern = r'\b' + re.escape(word.lower()) + r'\b'
+        if re.search(pattern, name_lower):
+            print(f"Error: The name '{name}' contains forbidden word '{word}'")
+            return False
+    return True
+
 
 def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name):
+    # Add validation at the start of the function
+    if not check_forbidden_words(new_lib_name):
+        sys.exit(1)
+    if not check_forbidden_words(new_standalone_name):
+        sys.exit(1)
+
     # Convert to lowercase and uppercase
     old_lib_name_lower = old_lib_name.lower()
     new_lib_name_lower = new_lib_name.lower()
@@ -23,9 +50,9 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
         ".vscode/tasks.json",
         "LICENSE",
         "CMakeLists.txt",
+        "include/Logger.hpp",
         f"include/{old_lib_name}/{old_lib_name}.hpp",
         f"Source/{old_lib_name}.cpp",
-        "Source/Logger.hpp",
         "Standalone/CMakeLists.txt",
         "Standalone/Source/Main.cpp",
         # Add more files as needed
