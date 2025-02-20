@@ -198,6 +198,15 @@ The `user-friendly Task Menu` includes the following automation commands:
 - Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
 - Comprehensive logging system `Solution.log`  
 
+### Resources
+  VSCode - https://code.visualstudio.com/download  
+  Conan hub - https://conan.io/center  
+  CMake - https://cmake.org/download/  
+  clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
+  clang-format - https://clang.llvm.org/docs/ClangFormat.html  
+  clang-format - https://clang-format-configurator.site  
+  cmake-format - https://cmake-format.readthedocs.io/en/latest/
+
 ### Thanks
 
 To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!
