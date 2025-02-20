@@ -173,12 +173,12 @@ packageProject(
     # defaults to YES for header only (i.e. INTERFACE) libraries
     ARCH_INDEPENDENT YES
     # (optional) option to generate CPack variables
-    CPACK YES
-    # (optional) relative install directory for runtimes: bins, libs, archives 
-    # by default libs will be installed to <...>/lib/<packagename-version>/
-    # / - means relative to <...>/lib, i.e. install libs to <...>/lib/, bins to <...>/bin/, etc
-    RUNTIME_DESTINATION /
-    )
+    CPACK
+        YES
+        # (optional) relative install directory for runtimes: bins, libs, archives
+        # by default libs will be installed to <...>/lib/<packagename-version>/
+        # / - means relative to <...>/lib, i.e. install libs to <...>/lib/, bins to <...>/bin/, etc
+        RUNTIME_DESTINATION /)
 
 # ==============================================================================
 # Set installation directory
