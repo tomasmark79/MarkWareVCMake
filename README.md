@@ -18,14 +18,14 @@ https://www.youtube.com/watch?v=6IOuiS095dQ
   
 ### Key Features
 
-- Cross-platform compatibility (Linux, macOS, Windows)
+- Cross-platform usibility (Linux, macOS, Windows)
+- Cross-compile compatibility
+- Conan compatibility 
 - Integrated build system with CMake
+- Automated VSCode tasks
 - Advanced debugging capabilities
-- Sanitizer support through CMake options
-- Conan package management integration
-- Cross-compilation support
+- Sanitizer, Analyzing and Hardening support
 - SSH and WSL compatibility
-- Automated workflow through Visual Studio Code tasks
 
 ## System Requirements
 
@@ -160,22 +160,21 @@ code .
 - `Shift+F7`: show user-friendly `Task Menu`  
 - `F7`: 🔨 Quick build Standalone  
 - `F5`: 🪲 Quick debug Standalone  
-- `Ctrl+Alt+R`: Launch Standalone  
+- `Ctrl+Alt+R`: just Launch Standalone binary  
+- `Ctrl+Alt+L`: 🔍 clang-tidy
 - `Ctrl+Alt+F`: 📐 clang-format  
 - `Ctrl+Alt+M`: 📏 cmake-format  
-- `Ctrl+Alt+L`: 🔍 lint  
 - `Ctrl+Alt+S`: show user-friendly `Special Menu`  
 
 ### Build Configuration
 
 - Supports multiple build types: Debug, Release, RelWithDebInfo, MinSizeRel  
 - Configurable CMake options for:  
+  - Various sanitizer, IPO, Hardening compiler options   
   - Shared/static libraries  
   - Static runtime linking  
   - CCache options  
-  - Various sanitizer options  
-  - Hardening compiler options  
-
+  
 ### Cross-Compilation Support
 
 The template includes preconfigured menu items for:  
@@ -193,22 +192,23 @@ The `user-friendly Task Menu` includes the following automation commands:
 
 - 🧹 Clean build directories  
 - 🗡️ Dependency installation with Conan 2  
-- 🔧 CMake configuration  
+- 🔧 CMake configuration (F5)
 - 🪲 CMake configuration with CMake 🦉 debugger  
-- 🔨 Build management  
+- 🔨 Build (Re-Build F7)  
 - 📜 License collection with CPM for CPM  
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  
-- 🛸 Run CPack
-- 📊 Conan 2 graph.html  
-- 🔍 Diagnostic tools with lint  
-- 📐📏 Code formatting 
+- 🛸 Run CPack  
+- 📊 Conan dependencies in graph.html  
+- 🔍 clang-tidy  
+- 📐📏 formatting   
 
 ### Project Maintenance
 
 - Solution renaming utility with python script `SolutionRenamer.py`  
 - Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
 - Comprehensive logging system `Solution.log`  
+- Solution controller is a driver that connects the functioning of tasks, invoking tools like conan, cmake, and some others. `SolutionController.py` runs automatically through tasks in VSCode.
 
 ### Resources
   VSCode - https://code.visualstudio.com/download  
