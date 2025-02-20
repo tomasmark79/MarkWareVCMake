@@ -311,6 +311,7 @@ def clang_tidy():
             for file in files:
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
                     full_path = os.path.join(root, file)
+                    # clang-tidy alias is required
                     cmd = f'clang-tidy -p "{bdir}" "{full_path}"'
                     print(f"Analyzing: {full_path}")
                     execute_command(cmd)
@@ -326,6 +327,7 @@ def format_clang():
         for file in files:
             if file.endswith((".c", ".cpp", ".h", ".hpp")):
                 full_path = os.path.join(root, file)
+                # clang-format alias is required
                 cmd = f'clang-format -i "{full_path}"'
                 print(f"Processing: {full_path}")
                 execute_command(cmd)
