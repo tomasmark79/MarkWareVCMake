@@ -53,37 +53,67 @@ https://www.youtube.com/watch?v=6IOuiS095dQ
 
 ### Installation Steps
 
-#### Linux and MacOS
+#### Debian based Linux setup
 
 ```bash
+
 # Update system packages
 sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip curl git libssl-dev libbz2-dev libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev liblzma-dev libreadline-dev libtk-img-dev
 
-# Install CMake latest
-# go to https://cmake.org/download/ and download sh installer
-chmod +x cmake-3.31.5-linux-x86_64.sh
-sudo ./cmake-3.31.5-linux-x86_64.sh --prefix=/usr/local
+# Install essentials packages for development
+sudo apt install python3-pip curl git libssl-dev libbz2-dev \
+libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev \
+liblzma-dev libreadline-dev libtk-img-dev
 
-# Install PyEnv & Install Conan
+# Install CMake
+wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.sh && chmod +x cmake-3.31.5-linux-x86_64.sh && sudo ./cmake-3.31.5-linux-x86_64.sh --prefix=/usr/local
+
+# Install PyEnv
 curl https://pyenv.run | bash
 pyenv install 3.9.2
 pyenv virtualenv 3.9.2 env392
 pyenv global 3.9.2
 pip install --upgrade pip
+
+# Install Conan packaging system
 pip install conan
+
+# Create default conan profile
+conan profile detect --force
+
+# Install cmake-format for cmake code formatting
+pip install cmake-format
+
+# Install clang-format for code formatting
+sudo apt install clang-format-[version]
+  - Note: You need to edit `SolutionController.py` with the correct launcher name.
+
+# Install clang-tidy to lint C++ code feature to be available
+sudo apt install clang-tidy-[version]
+  - Note: You need to edit `SolutionController.py` with the correct launcher name.
+
 ```
+
+#### MacOS setup
+
+Essentially, it uses the same steps as those used for Linux.
 
 #### Windows Setup
 
 Native Windows:
+
 ```powershell
-# Install PyEnv & Install Conan
+# Install PyEnv
 [Follow Pyenv-win installation guide]
 pyenv install 3.9.2
 pyenv global 3.9.2
 pip install --upgrade pip
+
+# Install Conan packaging system
 pip install conan
+
+# Create default conan profile
+conan profile detect --force
 ```
 
 WSL Setup (optional):
@@ -91,11 +121,6 @@ WSL Setup (optional):
 wsl --install
 wsl --install Debian
 wsl --set-default-version 2
-```
-
-### Create Conan profile (All OS)
-```bash
-conan profile detect --force
 ```
 
 ### Project Setup
