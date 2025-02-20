@@ -311,7 +311,7 @@ def clang_tidy():
             for file in files:
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
                     full_path = os.path.join(root, file)
-                    cmd = f'clang-tidy-19 -p "{bdir}" "{full_path}"'
+                    cmd = f'clang-tidy -p "{bdir}" "{full_path}"'
                     print(f"Analyzing: {full_path}")
                     execute_command(cmd)
                     print(f"Done: {full_path}")

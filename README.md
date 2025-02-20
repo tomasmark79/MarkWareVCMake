@@ -86,11 +86,23 @@ pip install cmake-format
 
 # Install clang-format for code formatting
 sudo apt install clang-format-[version]
-  - Note: You need to edit `SolutionController.py` with the correct launcher name.
+# Run this script to create environmental alias clang-format
+echo 'for version in 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01; do
+if command -v clang-format-$version &> /dev/null; then
+  alias clang-format="clang-format-$version"
+  break
+fi
+done' >> ~/.bashrc
 
-# Install clang-tidy to lint C++ code feature to be available
+# Install clang-tidy to analyze C++ code feature to be available
 sudo apt install clang-tidy-[version]
-  - Note: You need to edit `SolutionController.py` with the correct launcher name.
+# Run this script to create environmental alias clang-tidy
+echo 'for version in 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01; do
+if command -v clang-tidy-$version &> /dev/null; then
+  alias clang-tidy="clang-tidy-$version"
+  break
+fi
+done' >> ~/.bashrc
 
 ```
 
