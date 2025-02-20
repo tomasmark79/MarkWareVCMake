@@ -26,13 +26,14 @@ buildArch = sys.argv[2] if len(sys.argv) > 2 else None
 buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
 isCrossCompilation = False
 
-
 # generate uuid for cmake debugger pipe
 unique_id = str(uuid.uuid4())
 
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
+
+# independent_parameter value is used to supress the buildArch and buildType
 valid_archs = ["default", \
     "x86_64-clang-linux-gnu", \
     "x86_64-w64-mingw32", \

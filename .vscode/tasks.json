@@ -182,15 +182,14 @@
             "problemMatcher": []
         },
         {
-            /* DIRECT CLANG-FORMAT ( SHORT MENU ) */
+            /* DIRECT CLANG-FORMAT ( NO MENU ) */
             "label": "clang-format",
             "type": "shell",
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "📐 clang-format",
-                "${input:buildArch}",
-                "${input:buildType}"
+                "independent_parameter"
             ],
             "group": {
                 "kind": "build",
@@ -200,15 +199,14 @@
             "problemMatcher": []
         },
         {
-            /* DIRECT CMAKE-FORMAT ( SHORT MENU ) */
+            /* DIRECT CMAKE-FORMAT ( NO MENU ) */
             "label": "cmake-format",
             "type": "shell",
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "📏 cmake-format",
-                "${input:buildArch}",
-                "${input:buildType}"
+                "independent_parameter"
             ],
             "group": {
                 "kind": "build",
