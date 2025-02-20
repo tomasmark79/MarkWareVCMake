@@ -122,7 +122,6 @@ private:
   }
 };
 
-
 // Define LOG macro for easy access
 #define LOG Logger::getInstance()
 
