@@ -55,7 +55,7 @@
                 "🛸 Run CPack [sl]",
                 "",
                 "⚔️ conan graph.html",
-                "🔍 lint",
+                "🔍 clang-tidy",
                 "📐 clang-format",
                 "📏 cmake-format"
             ],
@@ -164,13 +164,13 @@
             "problemMatcher": []
         },
         {
-            /* DIRECT LINT C/C++ ( SHORT MENU )  */
-            "label": "lintC",
+            /* DIRECT CLANG-TIDY C/C++ ( NEED MENU )  */
+            "label": "clang-tidy",
             "type": "shell",
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
-                "🔍 lint",
+                "🔍 clang-tidy",
                 "${input:buildArch}",
                 "${input:buildType}"
             ],
@@ -178,7 +178,7 @@
                 "kind": "build",
                 "isDefault": false
             },
-            "detail": "lintC",
+            "detail": "clang-tidy",
             "problemMatcher": []
         },
         {

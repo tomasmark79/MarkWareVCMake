@@ -299,7 +299,7 @@ def run_cpack(lib, st):
     if st:
         cmake_build(get_build_dir("Standalone"), target="package")
 
-def lint_c():
+def clang_tidy():
     # build dirs for json compilation database is required
     bdir_lib = get_build_dir("Library")
     # bdir_st = get_build_dir("Standalone")
@@ -312,7 +312,7 @@ def lint_c():
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
                     full_path = os.path.join(root, file)
                     cmd = f'clang-tidy-19 -p "{bdir}" "{full_path}"'
-                    print(f"Linting: {full_path}")
+                    print(f"Analyzing: {full_path}")
                     execute_command(cmd)
                     print(f"Done: {full_path}")
 
@@ -400,7 +400,7 @@ task_map = {
     "🛸 Run CPack [s]": lambda: (run_cpack(False, True), exit_ok("")),
     "Permutate scenarios ☕": lambda: (permutate_all_tasks(), exit_ok("")),
     "⚔️ conan graph.html": lambda: (conan_graph(), exit_ok("")),
-    "🔍 lint": lambda: (lint_c(), exit_ok("")),
+    "🔍 clang-tidy": lambda: (clang_tidy(), exit_ok("")),
     "📐 clang-format": lambda: (format_clang(), exit_ok("")),
     "📏 cmake-format": lambda: (format_cmake(), exit_ok("")),
     "": lambda: exit_ok("")

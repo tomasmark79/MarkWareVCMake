@@ -41,7 +41,7 @@
     {
         "key": "ctrl+alt+l",
         "command": "workbench.action.tasks.runTask",
-        "args": "lint"
+        "args": "clang-tidy"
     },
     {
         "key": "ctrl+alt+shift+b",
