@@ -34,12 +34,12 @@ https://www.youtube.com/watch?v=6IOuiS095dQ
 - **Visual Studio Code** with C++ extension
 - **Python 3** (managed via Pyenv)
 - **Conan 2** for dependency management
-- **CMake** (latest version recommended)
+- **CMake** (latest version 3 recommended)
 - **Code Formatters**:
   - Clang Format
   - CMake Format
-- **Syntaxe tools**:
-  - lint
+- **Code analyzing**:
+  - Clang Tidy
 
 ### Integrated Technologies
 
