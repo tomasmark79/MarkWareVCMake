@@ -150,7 +150,8 @@
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
-                "📐 clang-format"
+                "📐 clang-format",
+                "noNeedArch"
             ],
             "group": {
                 "kind": "build",
@@ -167,7 +168,8 @@
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
-                "📏 cmake-format"
+                "📏 cmake-format",
+                 "noNeedArch"
             ],
             "group": {
                 "kind": "build",

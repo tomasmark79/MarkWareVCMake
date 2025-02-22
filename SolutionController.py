@@ -110,13 +110,15 @@ print(f"Install to\t: {installOutputDir}{NC}")
 print(f"Artefacts to\t: {artefactsOutputDir}{NC}")
 
 isCrossCompilation = False
-if buildArch in valid_archs:
-    isCrossCompilation = (buildArch != "default")
-else:
-    if "darwin" in platform.system().lower():
-        isCrossCompilation = False
+
+if not buildArch == "noNeedArch":
+    if buildArch in valid_archs:
+        isCrossCompilation = (buildArch != "default")
     else:
-        exit_with_error("Undefined build architecture. Exiting.")
+        if "darwin" in platform.system().lower():
+            isCrossCompilation = False
+        else:
+            exit_with_error("Undefined build architecture. Exiting.")
 
 print(f"{YELLOW}Cross\t\t: {isCrossCompilation}{NC}")
 
