@@ -161,14 +161,13 @@ code .
 
 ### Keyboard Shortcuts
 
-- `Shift+F7`: show user-friendly `Task Menu`  
+- `Shift+F7`: TASK MENU
 - `F7`: 🔨 Quick build Standalone  
 - `F5`: 🪲 Quick debug Standalone  
 - `Ctrl+Alt+R`: just Launch Standalone binary  
 - `Ctrl+Alt+L`: 🔍 clang-tidy
 - `Ctrl+Alt+F`: 📐 clang-format  
 - `Ctrl+Alt+M`: 📏 cmake-format  
-- `Ctrl+Alt+S`: show user-friendly `Special Menu`  
 
 ### Build Configuration
 
@@ -216,12 +215,14 @@ The `user-friendly Task Menu` includes the following automation commands:
 
 ### Resources
   VSCode - https://code.visualstudio.com/download  
+  pyenv - https://github.com/pyenv/pyenv
   Conan hub - https://conan.io/center  
   CMake - https://cmake.org/download/  
   clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
   clang-format - https://clang.llvm.org/docs/ClangFormat.html  
   clang-format - https://clang-format-configurator.site  
-  cmake-format - https://cmake-format.readthedocs.io/en/latest/
+  cmake-format - https://cmake-format.readthedocs.io/en/latest/  
+
 
 ### Thanks
 
