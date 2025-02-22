@@ -41,12 +41,13 @@ https://www.youtube.com/watch?v=6IOuiS095dQ
 
 ### Integrated Technologies
 
+- C++ Main Standalone project
+- C++ Class like library entry point project
+- C++ simple singleton logger class
+- CPM.cmake, CPM.PackageProject and CPM.license
 - GitHub Actions workflows for continuous integration
-- Modern CMake Library/Standalone CMakeLists.txt configuration
-- ModernCppStarter ideas with CPM.cmake for lightweight dependency management
-- CPM.license for license management
-- Simple logger class
-
+- ModernCppStarter ideas
+  
 ## Getting Started
 
 ### Installation Steps
@@ -206,14 +207,14 @@ The template includes preconfigured menu items. The default Conan profile repres
 
 ## FAQ
 
-`Q:` **build** task error  
+`Q:` **Build task error**  
 Error: /home/.../Build/Standalone/default/Debug is not a directory  
 Error: /home/.../Build/Library/default/Debug is not a directory  
-`A:` You must first create the configurations for product and only then can you compile separately with build task. Zero to ... will help you fix the issue.
+`A:` There is nothing to build. You must first create the configurations for the product, and only then can you compile separately with the build task. The "Zero to Build," "Zero to Hero," or CMake configuration tasks will help you create the configuration, which can then be compiled.
 
-`Q:` **cmake-tidy** error  
+`Q:` **CMake-tidy error**  
 Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
-`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
+`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
 
 ## Resources
 
