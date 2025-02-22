@@ -161,7 +161,7 @@ code .
 
 ### Keyboard Shortcuts
 
-- `Shift+F7`: TASK MENU
+- `Shift+F7`: TASK MENU (standalone, library, both)  
 - `F7`: 🔨 Quick build Standalone  
 - `F5`: 🪲 Quick debug Standalone  
 - `Ctrl+Alt+R`: just Launch Standalone binary  
@@ -191,11 +191,13 @@ May be `added/edited` in `tasks.json` and `SolutionController.py` files.
 
 ### Automatic Tasks
 
-The `user-friendly Task Menu` includes the following automation commands:
+The `user-friendly Task Menu` includes the following automation commands:  
 
+- 🚀 Zero to Build means 🧹 🗡️ 🔧 🔨
+- 🦸 Zero to Hero means  🧹 🗡️ 🔧 🔨 📌 🗜️
 - 🧹 Clean build directories  
 - 🗡️ Dependency installation with Conan 2  
-- 🔧 CMake configuration (F5)
+- 🔧 CMake configuration  
 - 🪲 CMake configuration with CMake 🦉 debugger  
 - 🔨 Build (Re-Build F7)  
 - 📜 License collection with CPM for CPM  
@@ -211,11 +213,11 @@ The `user-friendly Task Menu` includes the following automation commands:
 - Solution renaming utility with python script `SolutionRenamer.py`  
 - Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
 - Comprehensive logging system `Solution.log`  
-- Solution controller is a driver that connects the functioning of tasks, invoking tools like conan, cmake, and some others. `SolutionController.py` runs automatically through tasks in VSCode.
+- Solution controller is a driver that connects the functioning of tasks, invoking tools like conan, cmake, and some others. `SolutionController.py` runs automatically through tasks in VSCode.  
 
 ### Resources
   VSCode - https://code.visualstudio.com/download  
-  pyenv - https://github.com/pyenv/pyenv
+  pyenv - https://github.com/pyenv/pyenv  
   Conan hub - https://conan.io/center  
   CMake - https://cmake.org/download/  
   clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
@@ -226,8 +228,8 @@ The `user-friendly Task Menu` includes the following automation commands:
 
 ### Thanks
 
-To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!
+To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!  
 
 ## License
 
-This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me via the contacts listed on the digitalspace.name website.
+This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me via the contacts listed on the digitalspace.name website.  
