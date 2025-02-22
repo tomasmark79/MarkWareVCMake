@@ -206,11 +206,17 @@ The template includes preconfigured menu items. The default Conan profile repres
 
 ## FAQ
 
-### cmake-tidy Issues
-`Q:` Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
-`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON`.
+`Q:` **build** task error  
+Error: /home/.../Build/Standalone/default/Debug is not a directory  
+Error: /home/.../Build/Library/default/Debug is not a directory  
+`A:` You must first create the configurations for product and only then can you compile separately with build task. Zero to ... will help you fix the issue.
+
+`Q:` **cmake-tidy** error  
+Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
+`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
 
 ## Resources
+
 VSCode - https://code.visualstudio.com/download  
 pyenv - https://github.com/pyenv/pyenv  
 Conan hub - https://conan.io/center  
