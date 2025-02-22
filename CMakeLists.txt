@@ -21,7 +21,7 @@ include(cmake/hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" OFF)
 # === ipo
 include(cmake/ipo.cmake)
-option(ENABLE_IPO "Enable Interprocedural Optimization" ON)
+option(ENABLE_IPO "Enable Interprocedural Optimization" OFF)
 # === ccache
 include(cmake/ccache.cmake)
 option(ENABLE_CCACHE "Enable ccache" ON)
@@ -37,7 +37,7 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.18.3
+    VERSION 0.0.18
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
