@@ -145,7 +145,7 @@ code .
 #### Architectures declaration
 
 - The default Conan profile represents the default value in the buildArch definition.
-- Other profiles can be edited and supplemented according to your existing profiles.
+- Other profiles can be edited and supplemented according to your existing Conan profiles.
 
 ```json
 {
