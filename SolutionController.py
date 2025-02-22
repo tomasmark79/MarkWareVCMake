@@ -34,22 +34,23 @@ buildProduct = sys.argv[1] if len(sys.argv) > 1 else None
 taskName = sys.argv[2] if len(sys.argv) > 2 else None
 buildArch = sys.argv[3] if len(sys.argv) > 3 else None
 buildType = sys.argv[4] if len(sys.argv) > 4 else "Not Defined"
+
+# Calculate the flags for library and standalone
+lib_flag = buildProduct in ["both", "library"]
+st_flag = buildProduct in ["both", "standalone"]
+
 isCrossCompilation = False
 
-# generate uuid for cmake debugger pipe
 unique_id = str(uuid.uuid4())
-
 buildFolderName = "Build"
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
 
 # independent_parameter value is used to supress the buildArch and buildType
-valid_archs = ["default", \
-    "x86_64-clang-linux-gnu", \
-    "x86_64-w64-mingw32", \
-    "aarch64-rpi4-linux-gnu", \
-    "independent_parameter"]
-valid_build_types = ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
+valid_archs = \
+  ["default", "x86_64-clang-linux-gnu", "x86_64-w64-mingw32", "aarch64-rpi4-linux-gnu", "independent_parameter"]
+valid_build_types = \
+  ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
 
 def exit_ok(msg):
     print(f"{GREEN}{msg}{NC}")
@@ -92,7 +93,6 @@ def get_version_and_names():
     lib_name = re.search(r'set\(LIBRARY_NAME\s+(\w+)', cmake_content).group(1)
     st_name = re.search(r'set\(STANDALONE_NAME\s+(\w+)', standalone_content).group(1)
     return lib_ver, lib_name, st_name
-
 
 ### Log to file, revision 1
 def log2file(message):
@@ -393,33 +393,40 @@ def conan_graph():
     cmd = f'conan graph info "{workSpaceDir}" --format=html > graph.html'
     execute_command(cmd)
 
+# ------ help functions for task map --------------------------
+
+def zero_to_build():
+    clean_spltr(lib_flag, st_flag)
+    conan_spltr(lib_flag, st_flag)
+    configure_spltr(lib_flag, st_flag)
+    build_spltr(lib_flag, st_flag)
+
+def zero_to_hero():
+    zero_to_build()
+    install_spltr(lib_flag, st_flag)
+    artefacts_spltr(lib_flag, st_flag)
+
+# ------ task map ---------------------------------------------
+
 task_map = {
-    "🚀 Zero to Build": lambda: (clean_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"])),
-    "🦸 Zero to Hero": lambda: (clean_spltr(buildProduct  in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                  (),               install_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-                                 artefacts_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"])),
-    "🧹 Clean folder": lambda: clean_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🗡️ Conan install": lambda: conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🔧 CMake configure": lambda: configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🪲 CMake configure with debugger": lambda: configure_spltr_cmake_debugger(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🔨 Build": lambda: build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "📜 Collect Licenses": lambda: license_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "📌 Install Artefacts": lambda: install_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "📦 Release Tarballs": lambda: artefacts_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🛸 Run CPack": lambda: run_cpack(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "🔍 clang-tidy": lambda: clang_tidy_spltr(buildProduct  in ["both", "library"], buildProduct in ["both", "standalone"]),
-    "📐 clang-format": lambda: clang_format(),
-    "📏 cmake-format": lambda: cmake_format(),
-    "Permutate scenarios ☕": lambda: permutate_all_tasks(),
-    "⚔️ conan graph.html": lambda: conan_graph(),
-    "": lambda: exit_ok("")    
-    }
+    "🚀 Zero to Build": zero_to_build,
+    "🦸 Zero to Hero": zero_to_hero,
+    "🧹 Clean folder": lambda: clean_spltr(lib_flag, st_flag),
+    "🗡️ Conan install": lambda: conan_spltr(lib_flag, st_flag),
+    "🔧 CMake configure": lambda: configure_spltr(lib_flag, st_flag),
+    "🪲 CMake configure with debugger": lambda: configure_spltr_cmake_debugger(lib_flag, st_flag),
+    "🔨 Build": lambda: build_spltr(lib_flag, st_flag),
+    "📜 Collect Licenses": lambda: license_spltr(lib_flag, st_flag),
+    "📌 Install Artefacts": lambda: install_spltr(lib_flag, st_flag),
+    "📦 Release Tarballs": lambda: artefacts_spltr(lib_flag, st_flag),
+    "🛸 Run CPack": lambda: run_cpack(lib_flag, st_flag),
+    "🔍 clang-tidy": lambda: clang_tidy_spltr(lib_flag, st_flag),
+    "📐 clang-format": clang_format,
+    "📏 cmake-format": cmake_format,
+    "Permutate scenarios ☕": permutate_all_tasks,
+    "⚔️ conan graph.html": conan_graph,
+    "": lambda: exit_ok(""),
+}
 
 if taskName in task_map:
     task_map[taskName]()

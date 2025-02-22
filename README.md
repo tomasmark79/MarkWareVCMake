@@ -88,7 +88,6 @@ pip install conan
 # Install cmake-format
 pip install cmake-format
 
-
 # Create default conan profile
 conan profile detect --force
 
