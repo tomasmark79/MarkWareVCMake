@@ -204,6 +204,12 @@ The template includes preconfigured menu items. The default Conan profile repres
 - `SolutionController.py` is a driver that connects the functioning of tasks, invoking tools like Conan, CMake, and some others.  
 - Comprehensive logging system `Solution.log`  
 
+## FAQ
+
+### cmake-tidy Issues
+`Q:` Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
+`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON`.
+
 ## Resources
 VSCode - https://code.visualstudio.com/download  
 pyenv - https://github.com/pyenv/pyenv  
