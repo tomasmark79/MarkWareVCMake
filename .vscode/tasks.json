@@ -140,7 +140,8 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
-                "🔨 Build [s]",
+                "standalone",
+                "🔨 Build",
                 "default",
                 "Debug"
             ],
@@ -158,6 +159,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
+                "${input:buildProduct}",
                 "🔍 clang-tidy",
                 "${input:buildArch}",
                 "${input:buildType}"
@@ -176,6 +178,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
+                "both",
                 "📐 clang-format",
                 "independent_parameter"
             ],
@@ -193,6 +196,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
+                "both",
                 "📏 cmake-format",
                 "independent_parameter"
             ],
