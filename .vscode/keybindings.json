@@ -19,11 +19,6 @@
         "args": "MarkWare Tasks"
     },
     {
-        "key": "ctrl+alt+s",
-        "command": "workbench.action.tasks.runTask",
-        "args": "MarkWare Special Tasks"
-    },
-    {
         "key": "ctrl+alt+c",
         "command": "workbench.action.tasks.runTask",
         "args": "MarkWare Tasks"
@@ -42,10 +37,5 @@
         "key": "ctrl+alt+l",
         "command": "workbench.action.tasks.runTask",
         "args": "clang-tidy"
-    },
-    {
-        "key": "ctrl+alt+shift+b",
-        "command": "workbench.action.tasks.runTask",
-        "args": "shellcheck project bash scripts"
     }
 ]

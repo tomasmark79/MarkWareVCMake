@@ -3,16 +3,6 @@
     "version": "2.0.0",
     "inputs": [
         {
-            /* SPECIAL MENU ITEMS */
-            "id": "specialTaskName",
-            "type": "pickString",
-            "description": "Select MarkWare Special Task",
-            "options": [
-                "Permutate scenarios ☕"
-            ],
-            "default": "Permutate scenarios ☕"
-        },
-        {
             /* MENU ITEMS */
             "id": "taskName",
             "type": "pickString",
@@ -30,10 +20,11 @@
                 "📦 Release Tarballs",
                 "🛸 Run CPack",
                 "",
-                "⚔️ conan graph.html",
                 "🔍 clang-tidy",
                 "📐 clang-format",
-                "📏 cmake-format"
+                "📏 cmake-format",
+                "",
+                "⚔️ conan graph.html",
             ],
             "default": "🔨 Build"
         },
@@ -55,7 +46,7 @@
             "type": "pickString",
             "description": "Select target architecture",
             "options": [
-                "default", /* this is system default compiler */
+                "default",
                 "x86_64-clang-linux-gnu",
                 "x86_64-w64-mingw32",
                 "aarch64-rpi4-linux-gnu"
@@ -86,26 +77,6 @@
                 "isDefault": true
             },
             "detail": "Launch Standalone",
-            "problemMatcher": [],
-            "dependsOn": [
-                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
-            ]
-        },
-        {
-            /* SPECIAL TASKS RUN */
-            "label": "MarkWare Special Tasks",
-            "type": "shell",
-            "command": "python3",
-            "args": [
-                "${workspaceFolder}/SolutionController.py",
-                "${input:specialTaskName}",
-                "independent_parameter"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "MarkWare Special Tasks",
             "problemMatcher": [],
             "dependsOn": [
                 /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
@@ -172,15 +143,14 @@
             "problemMatcher": []
         },
         {
-            /* DIRECT CLANG-FORMAT ( NO MENU ) */
+            /* DIRECT CLANG-FORMAT */
             "label": "clang-format",
             "type": "shell",
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
-                "📐 clang-format",
-                "independent_parameter"
+                "📐 clang-format"
             ],
             "group": {
                 "kind": "build",
@@ -190,15 +160,14 @@
             "problemMatcher": []
         },
         {
-            /* DIRECT CMAKE-FORMAT ( NO MENU ) */
+            /* DIRECT CMAKE-FORMAT */
             "label": "cmake-format",
             "type": "shell",
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
-                "📏 cmake-format",
-                "independent_parameter"
+                "📏 cmake-format"
             ],
             "group": {
                 "kind": "build",
@@ -207,7 +176,7 @@
             "detail": "cmake-format",
             "problemMatcher": []
         },
-        { /* clear terminal */
+        { /* CLEAR TERMINAL */
             "label": "clear terminal",
             "type": "shell",
             "command": "clear",

@@ -140,6 +140,29 @@ python SolutionRenamer.py VCMLib MyLibrary VCMStandalone MyStandalone
 code .
 ```
 
+### Advanced Project Setup
+
+#### Architectures declaration
+
+- The default Conan profile represents the default value in the buildArch definition.
+- Other profiles can be edited and supplemented according to your existing profiles.
+
+```json
+{
+            /* ARCH ITEMS */
+            "id": "buildArch",
+            "type": "pickString",
+            "description": "Select target architecture",
+            "options": [
+                "default", 
+                "x86_64-clang-linux-gnu",
+                "x86_64-w64-mingw32",
+                "aarch64-rpi4-linux-gnu"
+            ],
+            "default": "default"
+        },
+```
+
 ## Development Workflow
 
 ### Keyboard Shortcuts

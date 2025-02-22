@@ -9,25 +9,32 @@ import tarfile
 import uuid
 import json
 
+# Get the Python version
+pythonVersion = sys.version.split()[0]
+
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
 RED = "\033[0;31m"
 NC = "\033[0m"
 LIGHTBLUE = "\033[1;34m"
 
-            # "args": [
-            #     "${workspaceFolder}/SolutionController.py",
-            #     "${input:buildProduct}",
-            #     "${input:taskName}",
-            #     "${input:buildArch}",
-            #     "${input:buildType}"
-            # ],
+def exit_ok(msg):
+    print(f"{GREEN}{msg}{NC}")
+    sys.exit(0)
 
-pythonVersion = sys.version.split()[0]
+def exit_with_error(msg):
+    print(f"{RED}{msg}{NC}")
+    sys.exit(1)
+
+# Get the directory of the script
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
-nameOfScript = os.path.basename(__file__) + f" is using Python runtime version: {pythonVersion}\n"
-scriptAuthor = "(c) Tomáš Mark 2024-2025"
+
+# Script version and author
 scriptVersion = "0.0.4"
+scriptAuthor = "(c) Tomáš Mark 2024-2025"
+nameOfScript = "MarkWare " + os.path.basename(__file__) + \
+    " " + scriptAuthor + f"\nv {scriptVersion}" + \
+    f" is using Python runtime version: {pythonVersion}\n"
 
 # Get the task name and other parameters from the command line
 buildProduct = sys.argv[1] if len(sys.argv) > 1 else None
@@ -39,32 +46,62 @@ buildType = sys.argv[4] if len(sys.argv) > 4 else "Not Defined"
 lib_flag = buildProduct in ["both", "library"]
 st_flag = buildProduct in ["both", "standalone"]
 
+# Cross compilation flag
 isCrossCompilation = False
 
+# Unique ID for debugging CMake
 unique_id = str(uuid.uuid4())
+
+# Build folder name 
 buildFolderName = "Build"
+
+# Output directories
 installOutputDir = os.path.join(workSpaceDir, buildFolderName, "Install")
 artefactsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Artefacts")
 
-# independent_parameter value is used to supress the buildArch and buildType
-valid_archs = \
-  ["default", "x86_64-clang-linux-gnu", "x86_64-w64-mingw32", "aarch64-rpi4-linux-gnu", "independent_parameter"]
-valid_build_types = \
-  ["Debug", "Release", "RelWithDebInfo", "MinSizeRel"]
-
-def exit_ok(msg):
-    print(f"{GREEN}{msg}{NC}")
-    sys.exit(0)
-
-def exit_with_error(msg):
-    print(f"{RED}{msg}{NC}")
-    sys.exit(1)
-
+# Check if the task name is not empty
 if not taskName:
     exit_with_error("Task name is missing. Exiting.")
 
+# remove comments with important not correctly trailing commas
+def remove_comments(json_str):
+    import re
+    # Odstraní // komentáře
+    json_str = re.sub(r'//.*', '', json_str)
+    # Odstraní /* ... */ bloky
+    json_str = re.sub(r'/\*.*?\*/', '', json_str, flags=re.DOTALL)
+    # Odstraní závěrečné čárky v objektech a seznamech
+    json_str = re.sub(r',\s*([}\]])', r'\1', json_str)
+    return json_str
+
+# Load tasks.json and get the valid archs and build types
+tasks_path = os.path.join(workSpaceDir, ".vscode", "tasks.json")
+if os.path.isfile(tasks_path):
+    with open(tasks_path, "r", encoding="utf-8") as f:
+        raw_content = f.read()
+    # Remove comments and trailing commas from JSON
+    clean_content = remove_comments(raw_content)
+    tasks_config = json.loads(clean_content)
+    valid_archs = []
+    valid_build_types = []
+    for inp in tasks_config.get("inputs", []):
+        if inp.get("id") == "buildArch":
+            valid_archs = inp.get("options", [])
+        if inp.get("id") == "buildType":
+            valid_build_types = inp.get("options", [])
+    if not valid_archs:
+        exit_with_error("Architecture definitions (buildArch) are missing in tasks.json")
+    if not valid_build_types:
+        exit_with_error("Build type definitions (buildType) are missing in tasks.json")
+else:
+    exit_with_error(f"File tasks.json not found: {tasks_path}")
+
+# debug print all available tasks
+# print(f"{YELLOW}Available archs: {valid_archs}{NC}")
+# print(f"{YELLOW}Available build types: {valid_build_types}{NC}")    
+
 # Print out the welcom and configuration
-print(f"{YELLOW}{nameOfScript}{scriptAuthor} v {scriptVersion} {NC}")
+print(f"{YELLOW}{nameOfScript}{NC}")
 print(f"{LIGHTBLUE}taskName\t: {taskName}{NC}")
 print(f"{GREEN}Build Arch\t: {buildArch}")
 print(f"Build Type\t: {buildType}")
@@ -372,23 +409,6 @@ def cmake_format():
                 execute_command(cmd)
                 print(f"Done: {full_path}")
 
-def permutate_all_tasks():
-    shutil.rmtree("Build", ignore_errors=True)
-    for arch in valid_archs:
-        if arch == "independent_parameter":
-            continue
-        for t in valid_build_types:
-            global buildArch, buildType
-            buildArch = arch
-            buildType = t
-            clean_spltr(True, True)
-            conan_spltr(True, True)
-            configure_spltr(True, True)
-            build_spltr(True, True)
-            license_spltr(True, True)
-            install_spltr(True, True)
-            artefacts_spltr(True, True)
-
 def conan_graph():
     cmd = f'conan graph info "{workSpaceDir}" --format=html > graph.html'
     execute_command(cmd)
@@ -423,7 +443,6 @@ task_map = {
     "🔍 clang-tidy": lambda: clang_tidy_spltr(lib_flag, st_flag),
     "📐 clang-format": clang_format,
     "📏 cmake-format": cmake_format,
-    "Permutate scenarios ☕": permutate_all_tasks,
     "⚔️ conan graph.html": conan_graph,
     "": lambda: exit_ok(""),
 }
