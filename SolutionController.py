@@ -15,15 +15,25 @@ RED = "\033[0;31m"
 NC = "\033[0m"
 LIGHTBLUE = "\033[1;34m"
 
+            # "args": [
+            #     "${workspaceFolder}/SolutionController.py",
+            #     "${input:buildProduct}",
+            #     "${input:taskName}",
+            #     "${input:buildArch}",
+            #     "${input:buildType}"
+            # ],
+
 pythonVersion = sys.version.split()[0]
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 nameOfScript = os.path.basename(__file__) + f" is using Python runtime version: {pythonVersion}\n"
 scriptAuthor = "(c) Tomáš Mark 2024-2025"
-scriptVersion = "0.0.3"
+scriptVersion = "0.0.4"
 
-taskName = sys.argv[1] if len(sys.argv) > 1 else None
-buildArch = sys.argv[2] if len(sys.argv) > 2 else None
-buildType = sys.argv[3] if len(sys.argv) > 3 else "Not Defined"
+# Get the task name and other parameters from the command line
+buildProduct = sys.argv[1] if len(sys.argv) > 1 else None
+taskName = sys.argv[2] if len(sys.argv) > 2 else None
+buildArch = sys.argv[3] if len(sys.argv) > 3 else None
+buildType = sys.argv[4] if len(sys.argv) > 4 else "Not Defined"
 isCrossCompilation = False
 
 # generate uuid for cmake debugger pipe
@@ -299,11 +309,16 @@ def run_cpack(lib, st):
     if st:
         cmake_build(get_build_dir("Standalone"), target="package")
 
-def clang_tidy():
-    # build dirs for json compilation database is required
-    bdir_lib = get_build_dir("Library")
-    # bdir_st = get_build_dir("Standalone")
+def find_clang_tidy():
+    for version in range(20, 0, -1):
+        clang_tidy_cmd = f"clang-tidy-{version}"
+        if shutil.which(clang_tidy_cmd):
+            return clang_tidy_cmd
+    return "clang-tidy"  # Fallback to default clang-tidy if no versioned one is found
 
+def clang_tidy_spltr(lib, st):
+    clang_tidy_cmd = find_clang_tidy()
+    
     def run_clang_tidy(bdir):
         for root, _, files in os.walk(workSpaceDir):
             if "Build" in root:
@@ -311,29 +326,41 @@ def clang_tidy():
             for file in files:
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
                     full_path = os.path.join(root, file)
-                    # clang-tidy alias is required
-                    cmd = f'clang-tidy -p "{bdir}" "{full_path}"'
+                    cmd = f'{clang_tidy_cmd} -p "{bdir}" "{full_path}"'
                     print(f"Analyzing: {full_path}")
                     execute_command(cmd)
                     print(f"Done: {full_path}")
-
-    # library contain also standalone
-    run_clang_tidy(bdir_lib)
     
-def format_clang():
+    if lib:
+        bdir = get_build_dir("Library")
+        run_clang_tidy(bdir)
+    if st:
+        bdir = get_build_dir("Standalone")
+        run_clang_tidy(bdir)
+
+
+def find_clang_format():
+    for version in range(20, 0, -1):
+        clang_format_cmd = f"clang-format-{version}"
+        if shutil.which(clang_format_cmd):
+            return clang_format_cmd
+    return "clang-format"  # Fallback to default clang-format if no versioned one is found
+
+def clang_format():
+    clang_format_cmd = find_clang_format()
+    
     for root, _, files in os.walk(workSpaceDir):
         if "Build" in root:
             continue
         for file in files:
             if file.endswith((".c", ".cpp", ".h", ".hpp")):
                 full_path = os.path.join(root, file)
-                # clang-format alias is required
-                cmd = f'clang-format -i "{full_path}"'
+                cmd = f'{clang_format_cmd} -i "{full_path}"'
                 print(f"Processing: {full_path}")
                 execute_command(cmd)
                 print(f"Done: {full_path}")
 
-def format_cmake():
+def cmake_format():
     for root, _, files in os.walk(workSpaceDir):
         if "Build" in root or "cmake" in root or "Utilities" in root:
             continue
@@ -367,46 +394,32 @@ def conan_graph():
     execute_command(cmd)
 
 task_map = {
-    "🚀 Zero to Build [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), exit_ok("")),
-    "🚀 Zero to Build [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), exit_ok("")),
-    "🚀 Zero to Build [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), exit_ok("")),
-    "🦸 Zero to Hero [sl]": lambda: (clean_spltr(True, True), conan_spltr(True, True), configure_spltr(True, True), build_spltr(True, True), install_spltr(True, True), artefacts_spltr(True, True),exit_ok("")),
-    "🦸 Zero to Hero [l]": lambda: (clean_spltr(True, False), conan_spltr(True, False), configure_spltr(True, False), build_spltr(True, False), install_spltr(True, False), artefacts_spltr(True, False),exit_ok("")),
-    "🦸 Zero to Hero [s]": lambda: (clean_spltr(False, True), conan_spltr(False, True), configure_spltr(False, True), build_spltr(False, True), install_spltr(False, True), artefacts_spltr(False, True),exit_ok("")),
-    "🧹 Clean folder [sl]": lambda: (clean_spltr(True, True), exit_ok("")),
-    "🧹 Clean folder [l]": lambda: (clean_spltr(True, False), exit_ok("")), 
-    "🧹 Clean folder [s]": lambda: (clean_spltr(False, True), exit_ok("")),
-    "🗡️ Conan install [sl]": lambda: (conan_spltr(True, True), exit_ok("")),
-    "🗡️ Conan install [l]": lambda: (conan_spltr(True, False), exit_ok("")),
-    "🗡️ Conan install [s]": lambda: (conan_spltr(False, True), exit_ok("")),
-    "🔧 CMake configure [sl]": lambda: (configure_spltr(True, True), exit_ok("")),
-    "🔧 CMake configure [l]": lambda: (configure_spltr(True, False), exit_ok("")),
-    "🔧 CMake configure [s]": lambda: (configure_spltr(False, True), exit_ok("")),
-    "🪲 CMake configure with debugger [sl]": lambda: (configure_spltr_cmake_debugger(True, True), exit_ok("")),
-    "🪲 CMake configure with debugger [l]": lambda: (configure_spltr_cmake_debugger(True, False), exit_ok("")),
-    "🪲 CMake configure with debugger [s]": lambda: (configure_spltr_cmake_debugger(False, True), exit_ok("")),
-    "🔨 Build [sl]": lambda: (build_spltr(True, True), exit_ok("")),
-    "🔨 Build [l]": lambda: (build_spltr(True, False), exit_ok("")),
-    "🔨 Build [s]": lambda: (build_spltr(False, True), exit_ok("")),
-    "📜 Collect Licenses [sl]": lambda: (license_spltr(True, True), exit_ok("")),
-    "📜 Collect Licenses [l]": lambda: (license_spltr(True, False), exit_ok("")),
-    "📜 Collect Licenses [s]": lambda: (license_spltr(False, True), exit_ok("")),
-    "📌 Install Artefacts [sl]": lambda: (install_spltr(True, True), exit_ok("")),
-    "📌 Install Artefacts [l]": lambda: (install_spltr(True, False), exit_ok("")),
-    "📌 Install Artefacts [s]": lambda: (install_spltr(False, True), exit_ok("")),
-    "📦 Release Tarballs [sl]": lambda: (artefacts_spltr(True, True), exit_ok("")),
-    "📦 Release Tarballs [l]": lambda: (artefacts_spltr(True, False), exit_ok("")),
-    "📦 Release Tarballs [s]": lambda: (artefacts_spltr(False, True), exit_ok("")),
-    "🛸 Run CPack [sl]": lambda: (run_cpack(True, True), exit_ok("")),
-    "🛸 Run CPack [l]": lambda: (run_cpack(True, False), exit_ok("")),
-    "🛸 Run CPack [s]": lambda: (run_cpack(False, True), exit_ok("")),
-    "Permutate scenarios ☕": lambda: (permutate_all_tasks(), exit_ok("")),
-    "⚔️ conan graph.html": lambda: (conan_graph(), exit_ok("")),
-    "🔍 clang-tidy": lambda: (clang_tidy(), exit_ok("")),
-    "📐 clang-format": lambda: (format_clang(), exit_ok("")),
-    "📏 cmake-format": lambda: (format_cmake(), exit_ok("")),
-    "": lambda: exit_ok("")
-}
+    "🚀 Zero to Build": lambda: (clean_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"])),
+    "🦸 Zero to Hero": lambda: (clean_spltr(buildProduct  in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                  (),               install_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+                                 artefacts_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"])),
+    "🧹 Clean folder": lambda: clean_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🗡️ Conan install": lambda: conan_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🔧 CMake configure": lambda: configure_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🪲 CMake configure with debugger": lambda: configure_spltr_cmake_debugger(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🔨 Build": lambda: build_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "📜 Collect Licenses": lambda: license_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "📌 Install Artefacts": lambda: install_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "📦 Release Tarballs": lambda: artefacts_spltr(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🛸 Run CPack": lambda: run_cpack(buildProduct in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "🔍 clang-tidy": lambda: clang_tidy_spltr(buildProduct  in ["both", "library"], buildProduct in ["both", "standalone"]),
+    "📐 clang-format": lambda: clang_format(),
+    "📏 cmake-format": lambda: cmake_format(),
+    "Permutate scenarios ☕": lambda: permutate_all_tasks(),
+    "⚔️ conan graph.html": lambda: conan_graph(),
+    "": lambda: exit_ok("")    
+    }
 
 if taskName in task_map:
     task_map[taskName]()

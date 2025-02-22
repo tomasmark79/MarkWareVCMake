@@ -18,48 +18,36 @@
             "type": "pickString",
             "description": "Select MarkWare Task",
             "options": [
-                "🚀 Zero to Build [s]",
-                "🦸 Zero to Hero [s]",
-                "🧹 Clean folder [s]",
-                "🗡️ Conan install [s]",
-                "🔧 CMake configure [s]",
-                "🪲 CMake configure with debugger [s]",
-                "🔨 Build [s]",
-                "📜 Collect Licenses [s]",
-                "📌 Install Artefacts [s]",
-                "📦 Release Tarballs [s]",
-                "🛸 Run CPack [s]",
-                "",
-                "🚀 Zero to Build [l]",
-                "🦸 Zero to Hero [l]",
-                "🧹 Clean folder [l]",
-                "🗡️ Conan install [l]",
-                "🔧 CMake configure [l]",
-                "🪲 CMake configure with debugger [l]",
-                "🔨 Build [l]",
-                "📜 Collect Licenses [l]",
-                "📌 Install Artefacts [l]",
-                "📦 Release Tarballs [l]",
-                "🛸 Run CPack [l]",
-                "",
-                "🚀 Zero to Build [sl]",
-                "🦸 Zero to Hero [sl]",
-                "🧹 Clean folder [sl]",
-                "🗡️ Conan install [sl]",
-                "🔧 CMake configure [sl]",
-                "🪲 CMake configure with debugger [sl]",
-                "🔨 Build [sl]",
-                "📜 Collect Licenses [sl]",
-                "📌 Install Artefacts [sl]",
-                "📦 Release Tarballs [sl]",
-                "🛸 Run CPack [sl]",
+                "🚀 Zero to Build",
+                "🦸 Zero to Hero",
+                "🧹 Clean folder",
+                "🗡️ Conan install",
+                "🔧 CMake configure",
+                "🪲 CMake configure with debugger",
+                "🔨 Build",
+                "📜 Collect Licenses",
+                "📌 Install Artefacts",
+                "📦 Release Tarballs",
+                "🛸 Run CPack",
                 "",
                 "⚔️ conan graph.html",
                 "🔍 clang-tidy",
                 "📐 clang-format",
                 "📏 cmake-format"
             ],
-            "default": "🔨 Build [s]"
+            "default": "🔨 Build"
+        },
+        {
+            /* PRODUCT ITEMS */
+            "id": "buildProduct",
+            "type": "pickString",
+            "description": "Select target product",
+            "options": [
+                "standalone",
+                "library",
+                "both"
+            ],
+            "default": "standalone"
         },
         {
             /* ARCH ITEMS */
@@ -102,7 +90,6 @@
             "dependsOn": [
                 /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
             ]
-
         },
         {
             /* SPECIAL TASKS RUN */
@@ -131,6 +118,7 @@
             "command": "python3",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
+                "${input:buildProduct}",
                 "${input:taskName}",
                 "${input:buildArch}",
                 "${input:buildType}"

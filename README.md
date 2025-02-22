@@ -66,6 +66,12 @@ sudo apt install python3-pip curl git libssl-dev libbz2-dev \
 libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev \
 liblzma-dev libreadline-dev libtk-img-dev
 
+# Install clang-format
+sudo apt install clang-format-[version]
+
+# Install clang-tidy
+sudo apt install clang-tidy-[version]
+
 # Install CMake
 wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.sh && chmod +x cmake-3.31.5-linux-x86_64.sh && sudo ./cmake-3.31.5-linux-x86_64.sh --prefix=/usr/local
 
@@ -76,34 +82,15 @@ pyenv virtualenv 3.9.2 env392
 pyenv global 3.9.2
 pip install --upgrade pip
 
-# Install Conan packaging system
+# Install Conan
 pip install conan
+
+# Install cmake-format
+pip install cmake-format
+
 
 # Create default conan profile
 conan profile detect --force
-
-# Install cmake-format for cmake code formatting
-pip install cmake-format
-
-# Install clang-format for code formatting
-sudo apt install clang-format-[version]
-# Run this script to create environmental alias clang-format
-echo 'for version in 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01; do
-if command -v clang-format-$version &> /dev/null; then
-  alias clang-format="clang-format-$version"
-  break
-fi
-done' >> ~/.bashrc
-
-# Install clang-tidy to analyze C++ code feature to be available
-sudo apt install clang-tidy-[version]
-# Run this script to create environmental alias clang-tidy
-echo 'for version in 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01; do
-if command -v clang-tidy-$version &> /dev/null; then
-  alias clang-tidy="clang-tidy-$version"
-  break
-fi
-done' >> ~/.bashrc
 
 ```
 
