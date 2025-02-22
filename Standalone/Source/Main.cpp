@@ -1,37 +1,29 @@
 #include <VCMLib/VCMLib.hpp>
 #include <vcmlib/version.h>
 #include <Logger.hpp>
-#include <iostream>
 #include <memory>
 
-namespace standalone {
-  constexpr const char* something = "Something!";
-  void saySomething() { std::cout << something << std::endl; }
-  void logSomething() { LOG.info(something); }
-}  // namespace standalone
-
-// You may set sanitizer flags in CMakeLists.txt - default is enabled
-namespace sanitizer {
+namespace san {
   void scream() {
-    char checkSanitizer[2];
-    checkSanitizer[3] = 'a';
-    int* checkSanitizerArr = new int[10];
-    delete[] checkSanitizerArr;
-    checkSanitizerArr[22] = 0;
+    char cS[2];
+    cS[3] = 'a';
+    int* cSA = new int[3];
+    delete[] cSA;
+    cSA[22] = 0;
   }
-}  // namespace sanitizer
+}  // namespace san
 
 int main() {
-
-  // c++11
-  std::unique_ptr<library::VCMLib> lib(new library::VCMLib());
-
-  // c++14+
-  // std::unique_ptr<library::VCMLib> lib = std::make_unique<library::VCMLib>();
-
-  // sanitizer::scream();
-  standalone::saySomething();
-  standalone::logSomething();
-
+  char hw[] = "Hello, World!";
+  std::unique_ptr<library::VCMLib> lib;
+  try {
+    // lib.reset(new library::VCMLib()); // c++11
+    lib = std::make_unique<library::VCMLib>();  // c++14
+    //san::scream();
+    { LOG.info(hw); }
+    { LOG.debug(hw); }
+    { LOG.warning(hw); }
+    { LOG.error(hw); }
+  } catch (std::exception& e) { LOG.error(e.what()); }
   return 0;
-}
+}  // main

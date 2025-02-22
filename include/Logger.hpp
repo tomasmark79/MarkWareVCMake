@@ -120,7 +120,7 @@ private:
     std::cout << "\033[0m";  // Reset
 #endif
   }
-};
+};  // class Logger
 
 // Define LOG macro for easy access
 #define LOG Logger::getInstance()
