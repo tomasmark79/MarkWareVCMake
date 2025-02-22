@@ -15,15 +15,27 @@ MarkWare VCMake is a comprehensive, modern C++ project template designed for cro
 English subtitles via YouTube transcription.  
 https://www.youtube.com/watch?v=6IOuiS095dQ  
   
-### Key Features
-- ✅ Seamless cross-platform compatibility (Linux, macOS, Windows)
-- ✅ Cross-compilation support for various architectures
-- ✅ Dependency management with Conan
-- ✅ Integrated build system using modern CMake
-- ✅ Automated tasks and shortcuts in Visual Studio Code
-- ✅ Advanced debugging and profiling capabilities
-- ✅ Support for sanitizers, static analysis, and hardening
-- ✅ Compatibility with SSH and Windows Subsystem for Linux (WSL)
+### Key Features 🎈
+
+- Seamless cross-platform compatibility (Linux, macOS, Windows)
+- **Cross-compilation support** for various architectures
+- ModernCppStarter ideas
+- Modern dependency management with Conan and CPM
+- Advanced debugging and profiling capabilities
+- Support for sanitizers, static analysis, and hardening
+- Compatibility with SSH and Windows Subsystem for Linux (WSL)
+
+### Integrated Technologies 🎈
+
+- Solution Renamer and Upgrader
+- Build system using modern CMake
+- Automated tasks and shortcuts in VSCode
+- C++ Main Standalone project configuration
+- C++ Class like library project configuration
+- C++ simple singleton logger class
+- Conanfile.py dependency template
+- CPM.cmake, CPM.PackageProject and CPM.license
+- GitHub Actions workflows for continuous integration
 
 ## System Requirements
 
@@ -39,15 +51,6 @@ https://www.youtube.com/watch?v=6IOuiS095dQ
 - **Code analyzing**:
   - Clang Tidy
 
-### Integrated Technologies
-
-- C++ Main Standalone project
-- C++ Class like library entry point project
-- C++ simple singleton logger class
-- CPM.cmake, CPM.PackageProject and CPM.license
-- GitHub Actions workflows for continuous integration
-- ModernCppStarter ideas
-  
 ## Getting Started
 
 ### Installation Steps
@@ -124,7 +127,7 @@ cd MarkWareVCMake/
 
 2. Optional: Customize project names:
 ```bash
-python SolutionRenamer.py VCMLib MyLibrary VCMStandalone MyStandalone
+python SolutionRenamer.py VCMLib NewLibraryName VCMStandalone NewStandaloneName
 ```
 
 3. Launch VSCode and configure shortcuts:
@@ -172,9 +175,7 @@ By `Shift+F7` invoked **TASK MENU** includes the following automation commands:
 
 - Configurable CMake options for:  
   
-  ```cmake
-  BUILD_SHARED_LIBS, USE_STATIC_RUNTIME, SANITIZE_ADDRESS, SANITIZE_UNDEFINED, SANITIZE_THREAD, SANITIZE_MEMORY, ENABLE_HARDENING, ENABLE_IPO, ENABLE_CCACHE
-  ```
+  `BUILD_SHARED_LIBS`, `USE_STATIC_RUNTIME`, `SANITIZE_ADDRESS`, `SANITIZE_UNDEFINED`, `SANITIZE_THREAD`, `SANITIZE_MEMORY`, `ENABLE_HARDENING`, `ENABLE_IPO`, `ENABLE_CCACHE`
 
 ## Additional Features
 
