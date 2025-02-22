@@ -12,13 +12,13 @@ include(../cmake/runtime.cmake)
 option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
 # === sanitizer
 include(../cmake/sanitizer-targets.cmake)
-option(SANITIZE_ADDRESS "Enable Address sanitizer" ON)
-option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" ON)
+option(SANITIZE_ADDRESS "Enable Address sanitizer" OFF)
+option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
 option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
 include(../cmake/hardening.cmake)
-option(ENABLE_HARDENING "Enable security hardening options" ON)
+option(ENABLE_HARDENING "Enable security hardening options" OFF)
 # === ipo
 include(../cmake/ipo.cmake)
 option(ENABLE_IPO "Enable Interprocedural Optimization" ON)
