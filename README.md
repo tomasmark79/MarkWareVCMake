@@ -64,13 +64,7 @@ sudo apt update && sudo apt upgrade -y
 # Install essentials packages for development
 sudo apt install python3-pip curl git libssl-dev libbz2-dev \
 libcurses-ocaml-dev build-essential gdb libffi-dev libsqlite3-dev \
-liblzma-dev libreadline-dev libtk-img-dev
-
-# Install clang-format
-sudo apt install clang-format-[version]
-
-# Install clang-tidy
-sudo apt install clang-tidy-[version]
+liblzma-dev libreadline-dev libtk-img-dev clang-format clang-tidy
 
 # Install CMake
 wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.sh && chmod +x cmake-3.31.5-linux-x86_64.sh && sudo ./cmake-3.31.5-linux-x86_64.sh --prefix=/usr/local
