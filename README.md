@@ -1,4 +1,4 @@
-# MarkWare VCMake
+# MarkWare VCMake C++ project template
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
@@ -8,25 +8,22 @@
 
 MarkWare VCMake is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
 
-To safely use this template, you need to have at least intermediate knowledge in software development and be familiar with the technologies that the template uses.
+"To safely use this template, you need to have at least intermediate knowledge in software development and be familiar with the technologies that the template uses."
 
-### Video Tutorial
-Introducing a multiplatform project template for modern development in C++ directly from the author.  
-Very intensive Audio Language Czech.  
+### Video Tutorial in native Czech Language  
 
-English subtitles via YouTube transcript.
+English subtitles via YouTube transcription.  
 https://www.youtube.com/watch?v=6IOuiS095dQ  
   
 ### Key Features
-
-- Cross-platform usibility (Linux, macOS, Windows)
-- Cross-compile compatibility
-- Conan compatibility 
-- Integrated build system with CMake
-- Automated VSCode tasks
-- Advanced debugging capabilities
-- Sanitizer, Analyzing and Hardening support
-- SSH and WSL compatibility
+- ✅ Seamless cross-platform compatibility (Linux, macOS, Windows)
+- ✅ Cross-compilation support for various architectures
+- ✅ Dependency management with Conan
+- ✅ Integrated build system using modern CMake
+- ✅ Automated tasks and shortcuts in Visual Studio Code
+- ✅ Advanced debugging and profiling capabilities
+- ✅ Support for sanitizers, static analysis, and hardening
+- ✅ Compatibility with SSH and Windows Subsystem for Linux (WSL)
 
 ## System Requirements
 
@@ -134,29 +131,6 @@ python SolutionRenamer.py VCMLib MyLibrary VCMStandalone MyStandalone
 code .
 ```
 
-### Advanced Project Setup
-
-#### Architectures declaration
-
-- The default Conan profile represents the default value in the buildArch definition.
-- Other profiles can be edited and supplemented according to your existing Conan profiles.
-
-```json
-{
-            /* ARCH ITEMS */
-            "id": "buildArch",
-            "type": "pickString",
-            "description": "Select target architecture",
-            "options": [
-                "default", 
-                "x86_64-clang-linux-gnu",
-                "x86_64-w64-mingw32",
-                "aarch64-rpi4-linux-gnu"
-            ],
-            "default": "default"
-        },
-```
-
 ## Development Workflow
 
 ### Keyboard Shortcuts
@@ -167,31 +141,11 @@ code .
 - `Ctrl+Alt+R`: just Launch Standalone binary  
 - `Ctrl+Alt+L`: 🔍 clang-tidy
 - `Ctrl+Alt+F`: 📐 clang-format  
-- `Ctrl+Alt+M`: 📏 cmake-format  
-
-### Build Configuration
-
-- Supports multiple build types: Debug, Release, RelWithDebInfo, MinSizeRel  
-- Configurable CMake options for:  
-  - Various sanitizer, IPO, Hardening compiler options   
-  - Shared/static libraries  
-  - Static runtime linking  
-  - CCache options  
-  
-### Cross-Compilation Support
-
-The template includes preconfigured menu items for:  
-- x86_64-clang-linux-gnu  
-- x86_64-w64-mingw32  
-- aarch64-linux-gnu  
-
-May be `added/edited` in `tasks.json` and `SolutionController.py` files.
-
-## Additional Features
+- `Ctrl+Alt+M`: 📏 cmake-format 
 
 ### Automatic Tasks
 
-The `user-friendly Task Menu` includes the following automation commands:  
+By `Shift+F7` invoked **TASK MENU** includes the following automation commands:  
 
 - 🚀 Zero to Build means 🧹 🗡️ 🔧 🔨
 - 🦸 Zero to Hero means  🧹 🗡️ 🔧 🔨 📌 🗜️
@@ -206,27 +160,61 @@ The `user-friendly Task Menu` includes the following automation commands:
 - 🛸 Run CPack  
 - 📊 Conan dependencies in graph.html  
 - 🔍 clang-tidy  
-- 📐📏 formatting   
+- 📐📏 formatting  
+  
+### Build Configuration
+
+- Supports multiple build types hardcoded in `tasks.json`:
+  ```txt
+  Debug, Release, RelWithDebInfo, MinSizeRel
+  ```
+
+- Configurable CMake options for:  
+  
+  ```cmake
+  BUILD_SHARED_LIBS, USE_STATIC_RUNTIME, SANITIZE_ADDRESS, SANITIZE_UNDEFINED, SANITIZE_THREAD, SANITIZE_MEMORY, ENABLE_HARDENING, ENABLE_IPO, ENABLE_CCACHE
+  ```
+
+## Additional Features
+
+### Cross-Compilation Support
+
+The template includes preconfigured menu items. The default Conan profile represents the default value in the buildArch definition. Other profiles can be edited and supplemented according to your existing Conan profiles.
+
+```json
+{
+    /* ARCH ITEMS */
+    "id": "buildArch",
+    "type": "pickString",
+    "description": "Select target architecture",
+    "options": [
+        "default", 
+        "x86_64-clang-linux-gnu",
+        "x86_64-w64-mingw32",
+        "aarch64-rpi4-linux-gnu"
+    ],
+    "default": "default"
+}
+```
 
 ### Project Maintenance
 
 - Solution renaming utility with python script `SolutionRenamer.py`  
 - Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
+- `SolutionController.py` is a driver that connects the functioning of tasks, invoking tools like Conan, CMake, and some others.  
 - Comprehensive logging system `Solution.log`  
-- Solution controller is a driver that connects the functioning of tasks, invoking tools like conan, cmake, and some others. `SolutionController.py` runs automatically through tasks in VSCode.  
 
-### Resources
-  VSCode - https://code.visualstudio.com/download  
-  pyenv - https://github.com/pyenv/pyenv  
-  Conan hub - https://conan.io/center  
-  CMake - https://cmake.org/download/  
-  clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
-  clang-format - https://clang.llvm.org/docs/ClangFormat.html  
-  clang-format - https://clang-format-configurator.site  
-  cmake-format - https://cmake-format.readthedocs.io/en/latest/  
+## Resources
+VSCode - https://code.visualstudio.com/download  
+pyenv - https://github.com/pyenv/pyenv  
+Conan hub - https://conan.io/center  
+CMake - https://cmake.org/download/  
+clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
+clang-format - https://clang.llvm.org/docs/ClangFormat.html  
+clang-format - https://clang-format-configurator.site  
+cmake-format - https://cmake-format.readthedocs.io/en/latest/  
 
-
-### Thanks
+## Thanks
 
 To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!  
 
