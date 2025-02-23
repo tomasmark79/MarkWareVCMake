@@ -8,19 +8,19 @@ cmake_policy(SET CMP0091 NEW)
 # === shared libraries
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 # === runtime
-include(cmake/runtime.cmake)
+include(cmake/mw-runtime.cmake)
 option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
 # === sanitizer
-include(cmake/sanitizer-targets.cmake)
+include(cmake/mw-sanitizer.cmake)
 option(SANITIZE_ADDRESS "Enable Address sanitizer" OFF)
 option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
 option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
-include(cmake/hardening.cmake)
+include(cmake/mw-hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" OFF)
 # === ipo
-include(cmake/ipo.cmake)
+include(cmake/mw-ipo.cmake)
 option(ENABLE_IPO "Enable Interprocedural Optimization" OFF)
 # === ccache
 include(cmake/ccache.cmake)
@@ -30,7 +30,7 @@ option(ENABLE_CCACHE "Enable ccache" ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ==============================================================================
-# Project attributes
+# Project attributes - case size will reflect resource files case size
 # ==============================================================================
 set(LIBRARY_NAME VCMLib)
 string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
@@ -50,7 +50,7 @@ endif()
 # ==============================================================================
 # System / Conan dependencies
 # ==============================================================================
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 find_package(ZLIB REQUIRED)
 find_package(fmt REQUIRED)
@@ -82,10 +82,10 @@ file(
     GLOB_RECURSE
     sources
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cxx)
 
 # ==============================================================================
 # Create target
@@ -106,7 +106,7 @@ apply_sanitizers(${LIBRARY_NAME})
 target_include_directories(
     ${LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Source> # for exceptions 😎
+    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source> # for exceptions 😎
            $<INSTALL_INTERFACE:include/${LIBRARY_NAME}-${PROJECT_VERSION}>)
 
 # ==============================================================================
@@ -158,14 +158,14 @@ packageProject(
     # semicolon separated list of the project's dependencies
     DEPENDENCIES "zlib#1.2.11;fmt#11.1.1;CPMLicenses.cmake@0.0.7;nlohmann_json#3.11.2"
     # (optional) create a header containing the version info
-    # Note: that the path to headers should be lowercase
-    VERSION_HEADER "${LIBRARY_NAME_LOWER}/version.h"
+    # Note: that the path to headers should be lowercase, but is not enforced
+    VERSION_HEADER "${LIBRARY_NAME}/version.h"
     # (optional) create an export header using GenerateExportHeader module
-    EXPORT_HEADER "${LIBRARY_NAME_LOWER}/export.h"
+    EXPORT_HEADER "${LIBRARY_NAME}/export.h"
     # (optional) install your library with a namespace (Note: do NOT add extra '::')
     NAMESPACE ${LIBRARY_NAMESPACE}
     # (optional) define the project's version compatibility, defaults to `AnyNewerVersion`
-    # supported values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|ExactVersion`
+    # supported values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|VCMStandalonetVersion`
     COMPATIBILITY AnyNewerVersion
     # (optional) option to disable the versioning of install destinations
     DISABLE_VERSION_SUFFIX YES
@@ -181,6 +181,6 @@ packageProject(
         RUNTIME_DESTINATION /)
 
 # ==============================================================================
-# Set installation directory
+# Add missing installation exports
 # ==============================================================================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${LIBRARY_NAME} DESTINATION include/)

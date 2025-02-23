@@ -4,6 +4,13 @@ import shutil
 import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
 import re 
 
+# (c) 2024-2025 Tomáš Mark
+# This script is licensed under the MIT license
+
+source_dir = "source"
+include_dir = "include"
+standalone_dir = "standalone"
+
 # forbidden words that cannot be used in the project name
 FORBIDDEN_WORDS = [
     'build', 'standalone', 'library', 'default', 'debug', 'release', 'relwithdebinfo',
@@ -25,7 +32,6 @@ def check_forbidden_words(name):
             return False
     return True
 
-
 def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name):
     # Add validation at the start of the function
     if not check_forbidden_words(new_lib_name):
@@ -39,22 +45,22 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
     old_lib_name_upper = old_lib_name.upper()
     new_lib_name_upper = new_lib_name.upper()
 
-    # new_lib_name and new_standalone_name must not be the same
+    # Library can't have the same name as the standalone project
     if new_lib_name == new_standalone_name:
         print("Error: new_lib_name and new_standalone_name must be different")
         sys.exit(1)
 
     # List of files where the project names should be changed
     files = [
+        "CMakeLists.txt",
+        f"{standalone_dir}/CMakeLists.txt",
+        f"{include_dir}/{old_lib_name}/{old_lib_name}.hpp",
+        f"{source_dir}/{old_lib_name}.cpp",
+        f"{standalone_dir}/{source_dir}/Main.cpp",
+        f"{include_dir}/Logger.hpp",
         ".vscode/launch.json",
         ".vscode/tasks.json",
         "LICENSE",
-        "CMakeLists.txt",
-        "include/Logger.hpp",
-        f"include/{old_lib_name}/{old_lib_name}.hpp",
-        f"Source/{old_lib_name}.cpp",
-        "Standalone/CMakeLists.txt",
-        "Standalone/Source/Main.cpp",
         # Add more files as needed
     ]
 
@@ -74,24 +80,24 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
             print(f"File {file} does not exist!")
 
     # Rename files
-    if os.path.isfile(f"Source/{old_lib_name}.cpp"):
-        os.rename(f"Source/{old_lib_name}.cpp", f"Source/{new_lib_name}.cpp")
-        print(f"Renamed file: Source/{old_lib_name}.cpp to Source/{new_lib_name}.cpp")
+    if os.path.isfile(f"{source_dir}/{old_lib_name}.cpp"):
+        os.rename(f"{source_dir}/{old_lib_name}.cpp", f"{source_dir}/{new_lib_name}.cpp")
+        print(f"Renamed file: {source_dir}/{old_lib_name}.cpp to {source_dir}/{new_lib_name}.cpp")
 
-    if os.path.isfile(f"include/{old_lib_name}/{old_lib_name}.hpp"):
-        os.rename(f"include/{old_lib_name}/{old_lib_name}.hpp", f"include/{old_lib_name}/{new_lib_name}.hpp")
-        print(f"Renamed file: include/{old_lib_name}/{old_lib_name}.hpp to include/{old_lib_name}/{new_lib_name}.hpp")
+    if os.path.isfile(f"{include_dir}/{old_lib_name}/{old_lib_name}.hpp"):
+        os.rename(f"{include_dir}/{old_lib_name}/{old_lib_name}.hpp", f"{include_dir}/{old_lib_name}/{new_lib_name}.hpp")
+        print(f"Renamed file: {include_dir}/{old_lib_name}/{old_lib_name}.hpp to {include_dir}/{old_lib_name}/{new_lib_name}.hpp")
 
     # Rename directories
-    if os.path.isdir(f"include/{old_lib_name}"):
-        os.rename(f"include/{old_lib_name}", f"include/{new_lib_name}")
-        print(f"Renamed directory: include/{old_lib_name} to include/{new_lib_name}")
+    if os.path.isdir(f"{include_dir}/{old_lib_name}"):
+        os.rename(f"{include_dir}/{old_lib_name}", f"{include_dir}/{new_lib_name}")
+        print(f"Renamed directory: {include_dir}/{old_lib_name} to {include_dir}/{new_lib_name}")
 
-    print("Project renaming completed.")
+    print("\033[92mProject renaming completed.\033[0m")
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python3 SolutionRenamer.py <old_lib_name> <new_lib_name> <old_standalone_name> <new_standalone_name>")
+        print("Usage: python3 SolutionRenamer.py <OldLibName> <NewLibName> <OldStandaloneName> <NewStandAloneName>")
         sys.exit(1)
 
     old_lib_name = sys.argv[1]
@@ -101,4 +107,3 @@ if __name__ == "__main__":
 
     rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalone_name)
     
-# Copyright (c) 2024 Tomáš Mark

@@ -1,5 +1,4 @@
 /Build*
+/build*
 CMakeUserPresets.json
 Solution.log
-SolutionController.log
-todo

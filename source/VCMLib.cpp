@@ -1,6 +1,6 @@
-#include "VCMLib/VCMLib.hpp"
+#include <VCMLib/version.h>
+#include <VCMLib/VCMLib.hpp>
 #include <iostream>
-#include <vcmlib/version.h>
 
 namespace library {
 

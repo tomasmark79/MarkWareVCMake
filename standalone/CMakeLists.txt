@@ -8,19 +8,19 @@ cmake_policy(SET CMP0091 NEW)
 # === shared libraries
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 # === runtime
-include(../cmake/runtime.cmake)
+include(../cmake/mw-runtime.cmake)
 option(USE_STATIC_RUNTIME "Link against static runtime libraries" OFF)
 # === sanitizer
-include(../cmake/sanitizer-targets.cmake)
+include(../cmake/mw-sanitizer.cmake)
 option(SANITIZE_ADDRESS "Enable Address sanitizer" OFF)
 option(SANITIZE_UNDEFINED "Enable Undefined Behavior sanitizer" OFF)
 option(SANITIZE_THREAD "Enable Thread sanitizer" OFF)
 option(SANITIZE_MEMORY "Enable Memory sanitizer" OFF)
 # === hardening
-include(../cmake/hardening.cmake)
+include(../cmake/mw-hardening.cmake)
 option(ENABLE_HARDENING "Enable security hardening options" OFF)
 # === ipo
-include(../cmake/ipo.cmake)
+include(../cmake/mw-ipo.cmake)
 option(ENABLE_IPO "Enable Interprocedural Optimization" OFF)
 # === ccache
 include(../cmake/ccache.cmake)
@@ -50,7 +50,7 @@ endif()
 # ==============================================================================
 # System / Conan dependencies
 # ==============================================================================
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
@@ -76,10 +76,10 @@ file(
     GLOB_RECURSE
     sources
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cxx)
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cxx)
 
 # ==============================================================================
 # Create target
@@ -101,6 +101,6 @@ set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NA
 target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
 
 # ==============================================================================
-# Set installation directory
+# Add missing installation exports
 # ==============================================================================
 install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)

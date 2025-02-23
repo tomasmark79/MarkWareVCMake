@@ -127,7 +127,7 @@ cd MarkWareVCMake/
 
 2. Optional: Customize project names:
 ```bash
-python SolutionRenamer.py VCMLib NewLibraryName VCMStandalone NewStandaloneName
+python SolutionRenamer.py <OldLibName> <NewLibName> <OldStandaloneName> <NewStandAloneName>
 ```
 
 3. Launch VSCode and configure shortcuts:
@@ -216,6 +216,14 @@ Error: /home/.../Build/Library/default/Debug is not a directory
 `Q:` **CMake-tidy error**  
 Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
 `A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
+
+## Naming conventions
+
+To avoid future issues with folder and file names, I have set these rules.
+
+ - **All standard template folders**, including those generated later, **use lowercase letters only**.
+ - User-defined folders can contain any combination of uppercase and lowercase letters.
+ - All **C** and **C++** files provided in the template will use **CamelCase convention**, including an **uppercase letter at the beginning**.
 
 ## Resources
 

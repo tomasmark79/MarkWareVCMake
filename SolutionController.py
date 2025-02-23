@@ -16,11 +16,11 @@ baseName = os.path.basename(__file__)
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 
 # Build folder name 
-buildFolderName = "Build"
+buildFolderName = "build"
 
 # Output directories 
-installationOutputDir = os.path.join(workSpaceDir, buildFolderName, "Installation")
-tarrballsOutputDir = os.path.join(workSpaceDir, buildFolderName, "Tarballs")
+installationOutputDir = os.path.join(workSpaceDir, buildFolderName, "installation")
+tarrballsOutputDir = os.path.join(workSpaceDir, buildFolderName, "tarballs")
 
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
@@ -43,7 +43,7 @@ def exit_with_error(msg):
 buildProduct = sys.argv[1] if len(sys.argv) > 1 else None
 taskName = sys.argv[2] if len(sys.argv) > 2 else None
 buildArch = sys.argv[3] if len(sys.argv) > 3 else None
-buildType = sys.argv[4] if len(sys.argv) > 4 else "Not Defined"
+buildType = sys.argv[4] if len(sys.argv) > 4 else "not defined"
 
 # Calculate the flags for library and standalone
 lib_flag = buildProduct in ["both", "library"]
@@ -100,7 +100,7 @@ valid_archs, valid_build_types = get_tasks_config()
 
 # debug print all available tasks
 # print(f"{YELLOW}Available archs: {valid_archs}{NC}")
-# print(f"{YELLOW}Available build types: {valid_build_types}{NC}")    
+print(f"{YELLOW}Available build types: {valid_build_types}{NC}")    
 
 # Formatting tasks don't need to set the build architecture
 isCrossCompilation = False
@@ -130,7 +130,7 @@ print_header()
 def get_version_and_names_from_cmake_lists():
     with open('CMakeLists.txt', 'r') as file:
         cmake_content = file.read()
-    with open('Standalone/CMakeLists.txt', 'r') as file:
+    with open('standalone/CMakeLists.txt', 'r') as file:
         standalone_content = file.read()
     lib_ver = re.search(r'VERSION\s+(\d+\.\d+\.\d+)', cmake_content).group(1)
     lib_name = re.search(r'set\(LIBRARY_NAME\s+(\w+)', cmake_content).group(1)
@@ -162,7 +162,7 @@ def execute_subprocess(cmd, executable):
         exit_with_error(f"Command failed: {cmd}")
 
 def get_build_dir(kind):
-    return os.path.join(buildFolderName, kind, buildArch, buildType)
+    return os.path.join(buildFolderName, kind, buildArch, buildType.lower())
 
 ### Conan install, revision 2
 def conan_install(bdir):
@@ -191,7 +191,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
 
             
             if (not isCMakeDebugger):
-                bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType)}"'
+                bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
             else:
                 
                 print (f"uuid: {unique_id}")
@@ -212,7 +212,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
                     print(f"Error decoding JSON: {e}")
                     exit(1) 
                 print("If you want to debug CMake, please put a breakpoint in your CMakeLists.txt and start debugging in Visual Studio Code.")
-                bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType)}" --debugger --debugger-pipe /tmp/cmake-debugger-pipe-{unique_id}'
+                bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}" --debugger --debugger-pipe /tmp/cmake-debugger-pipe-{unique_id}'
 
             # Execute comfigure bash command
             execute_subprocess(bashCmd, "/bin/bash")
@@ -220,7 +220,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
         if platform.system().lower() == "windows":
             # CMake configuration for Windows x64 with Conan toolchain    
             conan_build_bat_file = os.path.join(workSpaceDir, bdir, "conanbuild.bat")
-            winCmd = f'call "{conan_build_bat_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType)}"'
+            winCmd = f'call "{conan_build_bat_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
             execute_subprocess(winCmd, "cmd.exe")
 
     # CMake solo
@@ -237,7 +237,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
             # CMake native
             DCMAKE_TOOLCHAIN_FILE_CMD = ""   
         # CMake solo command
-        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir,buildArch,buildType)}"'
+        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir,buildArch,buildType.lower())}"'
         execute_command(cmd)
 
 ### CMake build, revision 3
@@ -265,92 +265,87 @@ def clean_build_folder(bdir):
 
 def build_spltr(lib, st):
     if lib:
-        cmake_build(get_build_dir("Library"))
+        cmake_build(get_build_dir("library"))
     if st:
-        cmake_build(get_build_dir("Standalone"))
+        cmake_build(get_build_dir("standalone"))
 
 def configure_spltr(lib, st):
     if lib:
-        cmake_configure(".", get_build_dir("Library"), False)
+        cmake_configure(".", get_build_dir("library"), False)
     if st:
-        cmake_configure("./Standalone", get_build_dir("Standalone"), False)
+        cmake_configure("./standalone", get_build_dir("standalone"), False)
         
 def configure_spltr_cmake_debugger(lib, st):
     if lib:
-        cmake_configure(".", get_build_dir("Library"), True)
+        cmake_configure(".", get_build_dir("library"), True)
     if st:
-        cmake_configure("./Standalone", get_build_dir("Standalone"), True)
+        cmake_configure("./standalone", get_build_dir("standalone"), True)
 
 def cmake_install(bdir):
     cmake_build(bdir, target="install")        
 
 def conan_spltr(lib, st):
     if lib:
-        conan_install(get_build_dir("Library"))
+        conan_install(get_build_dir("library"))
     if st:
-        conan_install(get_build_dir("Standalone"))
+        conan_install(get_build_dir("standalone"))
 
 def clean_spltr(lib, st):
     if lib:
-        clean_build_folder(get_build_dir("Library"))
+        clean_build_folder(get_build_dir("library"))
     if st:
-        clean_build_folder(get_build_dir("Standalone"))
+        clean_build_folder(get_build_dir("standalone"))
 
 def installation_spltr(lib, st):
     if lib:
-        cmake_install(get_build_dir("Library"))
+        cmake_install(get_build_dir("library"))
     if st:
-        cmake_install(get_build_dir("Standalone"))
+        cmake_install(get_build_dir("standalone"))
 
 def license_spltr(lib, st):
     lib_ver, lib_name, st_name = get_version_and_names_from_cmake_lists()
     if lib:
-        cmake_build(get_build_dir("Library"), f"write-licenses-{lib_name}")
+        cmake_build(get_build_dir("library"), f"write-licenses-{lib_name}")
     if st:
-        cmake_build(get_build_dir("Standalone"), f"write-licenses-{st_name}")
-
-def create_archive(source_dir, out_path):
-    with tarfile.open(out_path, "w:gz") as tar:
-        tar.add(source_dir, arcname=".")
-    print(f"Created archive: {out_path}")
+        cmake_build(get_build_dir("standalone"), f"write-licenses-{st_name}")
 
 def release_tarballs_spltr(lib, st):
     os.makedirs(tarrballsOutputDir, exist_ok=True)
     lib_ver, lib_name, st_name = get_version_and_names_from_cmake_lists()
-    
-    print(f"buildArch: {buildArch}")
-    print(f"buildType: {buildType}")
-    print(f"tarrballsOutputDir: {tarrballsOutputDir}")
-    print(f"valid_archs: {valid_archs}")
-    
+
     if buildArch in valid_archs:
         if lib:
-            archive_name = f"{lib_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
-            source_dir = os.path.join(installationOutputDir, buildArch, buildType)
-            
+            archive_name = f"{lib_name}-{lib_ver}-{buildArch}-{buildType.lower()}.tar.gz"
+            source_dir = os.path.join(installationOutputDir, buildArch, buildType.lower())
             if os.listdir(source_dir):
-                print(f"Creating archive for library from: {source_dir}")
+                print(f"Creating library tarball from: {source_dir}")
                 out_path = os.path.join(tarrballsOutputDir, archive_name)
-                create_archive(source_dir, out_path)
+                with tarfile.open(out_path, "w:gz") as tar:
+                    # exclude bin folder from library tarball
+                    tar.add(source_dir, arcname=".", filter=lambda x: None if "bin" in x.name else x)
+                print(f"Created tarball: {out_path}")
             else:
                 print(f"No content found in {source_dir} for library.")
-            
+
         if st:
-            st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType}.tar.gz"
-            source_dir = os.path.join(installationOutputDir, buildArch, buildType)
+            st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType.lower()}.tar.gz"
+            source_dir = os.path.join(installationOutputDir, buildArch, buildType.lower())
             
             if os.listdir(source_dir):
-                print(f"Creating archive for standalone from: {source_dir}")
+                print(f"Creating standalone tarball from: {source_dir}")
                 out_path = os.path.join(tarrballsOutputDir, st_archive_name)
-                create_archive(source_dir, out_path)
+                with tarfile.open(out_path, "w:gz") as tar:
+                    tar.add(source_dir, arcname=".")
+                print(f"Created tarball: {out_path}")
+
             else:
                 print(f"No content found in {source_dir} for standalone.")
 
 def run_cpack(lib, st):
     if lib:
-        cmake_build(get_build_dir("Library"), target="package")
+        cmake_build(get_build_dir("library"), target="package")
     if st:
-        cmake_build(get_build_dir("Standalone"), target="package")
+        cmake_build(get_build_dir("standalone"), target="package")
 
 def find_clang_tidy():
     for version in range(20, 0, -1):
@@ -364,7 +359,7 @@ def clang_tidy_spltr(lib, st):
     
     def run_clang_tidy(bdir):
         for root, _, files in os.walk(workSpaceDir):
-            if "Build" in root:
+            if buildFolderName in root:
                 continue
             for file in files:
                 if file.endswith((".c", ".cpp", ".h", ".hpp")):
@@ -375,12 +370,11 @@ def clang_tidy_spltr(lib, st):
                     print(f"Done: {full_path}")
     
     if lib:
-        bdir = get_build_dir("Library")
+        bdir = get_build_dir("library")
         run_clang_tidy(bdir)
     if st:
-        bdir = get_build_dir("Standalone")
+        bdir = get_build_dir("standalone")
         run_clang_tidy(bdir)
-
 
 def find_clang_format():
     for version in range(20, 0, -1):
@@ -393,7 +387,7 @@ def clang_format():
     clang_format_cmd = find_clang_format()
     
     for root, _, files in os.walk(workSpaceDir):
-        if "Build" in root:
+        if buildFolderName in root:
             continue
         for file in files:
             if file.endswith((".c", ".cpp", ".h", ".hpp")):
@@ -405,10 +399,10 @@ def clang_format():
 
 def cmake_format():
     for root, _, files in os.walk(workSpaceDir):
-        if "Build" in root or "cmake" in root or "Utilities" in root:
+        if buildFolderName in root or "cmake" in root:
             continue
         for file in files:
-            if file == "CMakeLists.txt" or file.endswith(".cmake"):
+            if file == "CMakeLists.txt":
                 full_path = os.path.join(root, file)
                 cmd = f'cmake-format --enable-markup -i "{full_path}"'
                 print(f"Processing: {full_path}")

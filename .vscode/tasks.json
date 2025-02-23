@@ -71,7 +71,7 @@
         {
             "label": "Launch Standalone",
             "type": "shell",
-            "command": "${workspaceFolder}/Build/Standalone/default/Debug/VCMStandalone",
+            "command": "${workspaceFolder}/build/standalone/default/debug/VCMStandalone",
             "group": {
                 "kind": "build",
                 "isDefault": true
