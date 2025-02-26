@@ -1,8 +1,13 @@
 from conan import ConanFile
+#from conan.tools.system import package_manager
 
 class MarkWareVCMake(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
+
+    #def system_requirements(self):
+    #    apt = package_manager.Apt(self)
+    #    apt.install(["libsdl2-dev"])
 
     def configure(self):
         self.options["*"].shared = False # this replaced shared flag from SolutionController and works
