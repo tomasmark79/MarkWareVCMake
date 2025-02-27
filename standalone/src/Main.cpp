@@ -2,6 +2,9 @@
 #include <Logger/Logger.hpp>
 #include <memory>
 
+// MIT License
+// Copyright (c) 2024-2025 Tomáš Mark
+
 namespace san {
   void scream() {
     char cS[2];

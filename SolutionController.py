@@ -9,6 +9,9 @@ import tarfile
 import uuid
 import json
 
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
+
 scriptVersion = "v20250222"
 
 pythonVersion = sys.version.split()[0]

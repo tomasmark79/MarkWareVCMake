@@ -1,3 +1,6 @@
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
+
 include(CheckCXXCompilerFlag)
 
 function(apply_hardening target)

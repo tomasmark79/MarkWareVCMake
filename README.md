@@ -267,4 +267,7 @@ To everyone who supported me in creating this template. These are various people
 
 ## License
 
+MIT License
+Copyright (c) 2024-2025 Tomáš Mark
+
 This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me via the contacts listed on the digitalspace.name website.  

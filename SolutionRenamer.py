@@ -3,8 +3,8 @@ import sys
 import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
 import re 
 
-# (c) 2024-2025 Tomáš Mark
-# This script is licensed under the MIT license
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
 
 source_dir = "src"
 include_dir = "include"

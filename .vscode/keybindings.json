@@ -1,5 +1,9 @@
 [
+    /* MIT License
+       Copyright (c) 2024-2025 Tomáš Mark */
+
     /* Keybindings.json doesn't work within code project folder!            */
+
     /* You need to add those keybindings declaration to your user settings. */
     /* File -> Preferences -> Keyboard Shortcuts -> Open Keyboard Shortcuts */
     /* or via filesystem in `~/.config/Code/${user}/keybindings.json`       */

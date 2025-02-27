@@ -1,3 +1,6 @@
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
+
 cmake_minimum_required(VERSION 3.9)
 include(CheckIPOSupported) # require CMake 3.9
 function(apply_ipo target)

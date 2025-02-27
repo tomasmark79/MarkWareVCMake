@@ -7,6 +7,9 @@ import subprocess
 import tempfile
 import logging
 
+# MIT License
+# Copyright (c) 2024-2025 Tomáš Mark
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
