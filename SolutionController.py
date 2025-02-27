@@ -3,7 +3,6 @@ import sys
 import subprocess
 import shutil
 import platform
-import glob
 import re
 import tarfile
 import uuid
@@ -18,10 +17,10 @@ pythonVersion = sys.version.split()[0]
 baseName = os.path.basename(__file__)
 workSpaceDir = os.path.dirname(os.path.abspath(__file__))
 
-# Build folder name 
+# Build folder name
 buildFolderName = "build"
 
-# Output directories 
+# Output directories
 installationOutputDir = os.path.join(workSpaceDir, buildFolderName, "installation")
 tarrballsOutputDir = os.path.join(workSpaceDir, buildFolderName, "tarballs")
 
@@ -30,7 +29,7 @@ YELLOW = "\033[0;33m"
 RED = "\033[0;31m"
 LIGHTBLUE = "\033[1;34m"
 LIGHTGREEN = "\033[1;32m"
-LIGHTRED = "\033[1;31m" 
+LIGHTRED = "\033[1;31m"
 GREY = "\033[1;30m"
 NC = "\033[0m"
 
@@ -103,7 +102,7 @@ valid_archs, valid_build_types = get_tasks_config()
 
 # debug print all available tasks
 # print(f"{YELLOW}Available archs: {valid_archs}{NC}")
-print(f"{YELLOW}Available build types: {valid_build_types}{NC}")    
+print(f"{YELLOW}Available build types: {valid_build_types}{NC}")
 
 # Formatting tasks don't need to set the build architecture
 isCrossCompilation = False
@@ -173,14 +172,14 @@ def conan_install(bdir):
         cmake_content = f.read()
     profile = "default" if not isCrossCompilation else buildArch
     exeCmd = f'conan install "{workSpaceDir}" --output-folder="{os.path.join(workSpaceDir, bdir)}" --deployer=full_deploy --build=missing --profile {profile} --settings build_type={buildType}'
-    
+
     execute_command(exeCmd)
 
 ### CMake configuration, revision 2
 def cmake_configure(src, bdir, isCMakeDebugger=False):
-    
+
     conan_toolchain_file_path = os.path.join(workSpaceDir, bdir, "conan_toolchain.cmake")
-    
+
     # Conan
     # ---------------------------------------------------------------------------------
     if os.path.isfile(conan_toolchain_file_path):
@@ -188,40 +187,40 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
         print(f"{LIGHTBLUE} using file:", conan_toolchain_file_path, NC)
         DCMAKE_TOOLCHAIN_FILE_CMD = f'-DCMAKE_TOOLCHAIN_FILE="{conan_toolchain_file_path}"'
 
-        if platform.system().lower() in ["linux", "darwin"]: 
+        if platform.system().lower() in ["linux", "darwin"]:
             # CMake configuration for Linux and MacOS with Conan toolchain
             conan_build_sh_file = os.path.join(workSpaceDir, bdir, "conanbuild.sh")
 
-            
+
             if (not isCMakeDebugger):
                 bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
             else:
-                
+
                 print (f"uuid: {unique_id}")
-                
+
                 launch_json_path = os.path.join(workSpaceDir, ".vscode", "launch.json")
-                
+
                 try:
                     with open(launch_json_path, 'r') as file:
                         launch_data = json.load(file)
-                    
+
                     for config in launch_data.get("configurations", []):
                         if "pipeName" in config:
                             config["pipeName"] = f"/tmp/cmake-debugger-pipe-{unique_id}"
-                    
+
                     with open(launch_json_path, 'w') as file:
                         json.dump(launch_data, file, indent=4)
                 except json.JSONDecodeError as e:
                     print(f"Error decoding JSON: {e}")
-                    exit(1) 
+                    exit(1)
                 print("If you want to debug CMake, please put a breakpoint in your CMakeLists.txt and start debugging in Visual Studio Code.")
                 bashCmd = f'source "{conan_build_sh_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}" --debugger --debugger-pipe /tmp/cmake-debugger-pipe-{unique_id}'
 
             # Execute comfigure bash command
             execute_subprocess(bashCmd, "/bin/bash")
-        
+
         if platform.system().lower() == "windows":
-            # CMake configuration for Windows x64 with Conan toolchain    
+            # CMake configuration for Windows x64 with Conan toolchain
             conan_build_bat_file = os.path.join(workSpaceDir, bdir, "conanbuild.bat")
             winCmd = f'call "{conan_build_bat_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
             execute_subprocess(winCmd, "cmd.exe")
@@ -238,20 +237,20 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
             print(f"{LIGHTBLUE} using file:", cmake_toolchain_file, NC)
         else:
             # CMake native
-            DCMAKE_TOOLCHAIN_FILE_CMD = ""   
+            DCMAKE_TOOLCHAIN_FILE_CMD = ""
         # CMake solo command
         cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir,buildArch,buildType.lower())}"'
         execute_command(cmd)
 
 ### CMake build, revision 3
 def cmake_build(bdir, target=None):
-    
+
     # --target is optional
     if target is None:
         target = ""
     else:
-        target = f"--target {target}"    
-        
+        target = f"--target {target}"
+
     conan_build_sh_file = os.path.join(workSpaceDir, bdir, 'conanbuild.sh')
     if os.path.exists(conan_build_sh_file):
         bashCmd = f'source "{conan_build_sh_file}" && cmake --build "{os.path.abspath(bdir)}" {target} -j {os.cpu_count()}'
@@ -259,7 +258,7 @@ def cmake_build(bdir, target=None):
         bashCmd = f'cmake --build "{os.path.abspath(bdir)}" {target} -j {os.cpu_count()}'
     execute_subprocess(bashCmd, "/bin/bash")
 
-### Clean build folder, revision 1   
+### Clean build folder, revision 1
 def clean_build_folder(bdir):
     print(f"{LIGHTBLUE}> Removing build directory: {bdir}{NC}")
     log2file(f"Remove: {bdir}")
@@ -277,7 +276,7 @@ def configure_spltr(lib, st):
         cmake_configure(".", get_build_dir("library"), False)
     if st:
         cmake_configure("./standalone", get_build_dir("standalone"), False)
-        
+
 def configure_spltr_cmake_debugger(lib, st):
     if lib:
         cmake_configure(".", get_build_dir("library"), True)
@@ -285,7 +284,7 @@ def configure_spltr_cmake_debugger(lib, st):
         cmake_configure("./standalone", get_build_dir("standalone"), True)
 
 def cmake_install(bdir):
-    cmake_build(bdir, target="install")        
+    cmake_build(bdir, target="install")
 
 def conan_spltr(lib, st):
     if lib:
@@ -333,7 +332,7 @@ def release_tarballs_spltr(lib, st):
         if st:
             st_archive_name = f"{st_name}-{lib_ver}-{buildArch}-{buildType.lower()}.tar.gz"
             source_dir = os.path.join(installationOutputDir, buildArch, buildType.lower())
-            
+
             if os.listdir(source_dir):
                 print(f"Creating standalone tarball from: {source_dir}")
                 out_path = os.path.join(tarrballsOutputDir, st_archive_name)
@@ -359,7 +358,7 @@ def find_clang_tidy():
 
 def clang_tidy_spltr(lib, st):
     clang_tidy_cmd = find_clang_tidy()
-    
+
     def run_clang_tidy(bdir):
         for root, _, files in os.walk(workSpaceDir):
             if buildFolderName in root:
@@ -371,7 +370,7 @@ def clang_tidy_spltr(lib, st):
                     print(f"Analyzing: {full_path}")
                     execute_command(cmd)
                     print(f"Done: {full_path}")
-    
+
     if lib:
         bdir = get_build_dir("library")
         run_clang_tidy(bdir)
@@ -388,7 +387,7 @@ def find_clang_format():
 
 def clang_format():
     clang_format_cmd = find_clang_format()
-    
+
     for root, _, files in os.walk(workSpaceDir):
         if buildFolderName in root:
             continue
