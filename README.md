@@ -231,17 +231,6 @@ MarkWareVCMake/
 ```
 Contains source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
 
-## FAQ
-
-`Q:` **Build task error**  
-Error: /home/.../Build/Standalone/default/Debug is not a directory  
-Error: /home/.../Build/Library/default/Debug is not a directory  
-`A:` There is nothing to build. You must first create the configurations for the product, and only then can you compile separately with the build task. The "Zero to Build," "Zero to Hero," or CMake configuration tasks will help you create the configuration, which can then be compiled.
-
-`Q:` **CMake-tidy error**  
-Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
-`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
-
 ## Conventions
 
 To avoid future issues with folder and file names, I have set these rules.
@@ -266,6 +255,17 @@ clang-format - https://clang.llvm.org/docs/ClangFormat.html
 clang-format - https://clang-format-configurator.site  
 cmake-format - https://cmake-format.readthedocs.io/en/latest/  
 
+## FAQ
+
+`Q:` **Build task error**  
+Error: /home/.../Build/Standalone/default/Debug is not a directory  
+Error: /home/.../Build/Library/default/Debug is not a directory  
+`A:` There is nothing to build. You must first create the configurations for the product, and only then can you compile separately with the build task. The "Zero to Build," "Zero to Hero," or CMake configuration tasks will help you create the configuration, which can then be compiled.
+
+`Q:` **CMake-tidy error**  
+Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
+`A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
+
 ## Thanks
 
 To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!  
@@ -275,4 +275,4 @@ To everyone who supported me in creating this template. These are various people
 MIT License
 Copyright (c) 2024-2025 Tomáš Mark
 
-This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me via the contacts listed on the digitalspace.name website.  
+This project is licensed under the MIT License. No warranty of functionality or liability is provided. If you use this project, please mention my credentials. If you need software and technical support, you can contact me.
