@@ -173,10 +173,10 @@ By `Shift+F7` invoked **TASK MENU** includes the following automation commands:
 - 📌 Install artefacts  
 - 🗜️ Release tarballs  
 - 🛸 Run CPack  
-- ⚔️ conan create library recipe
+- ⚔️ Conan create library recipe
 - 📊 Conan dependencies in graph.html  
-- 🔍 clang-tidy  
-- 📐📏 formatting  
+- 🔍 CLang-tidy  
+- 📐📏 CLang & CMake formatting  
   
 ### Build Configuration
 
