@@ -1,5 +1,5 @@
 from conan import ConanFile
-#from conan.tools.system import package_manager
+from conan.tools.system import package_manager
 
 class MarkWareVCMake(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
@@ -17,12 +17,8 @@ class MarkWareVCMake(ConanFile):
         self.requires("fmt/11.1.1") # required by cpm package
         self.requires("nlohmann_json/3.11.2") # is modern to have json support
 
-    # don't use this definition, it will break the build
-    # ---------------------------------------- --
-    # def layout(self):                        --
-        # cmake_layout(self)                   --
-    # ---------------------------------------- --
-
-       
-
-        
+    # --------------------------------------------------
+    # Do not use! Solved in SolutionController.py     --
+    # def layout(self):                               --
+    #     cmake_layout(self)                          --
+    # --------------------------------------------------
