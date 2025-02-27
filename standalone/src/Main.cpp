@@ -16,6 +16,13 @@ namespace san {
 }  // namespace san
 
 int main() {
+  
+  #ifdef NDEBUG
+  LOG.info("Release configuration!");
+  #else
+  LOG.info("Debug configuration!");
+  #endif
+
   char hw[] = "Hello, World!";
   std::unique_ptr<library::VCMLib> lib;
   try {
