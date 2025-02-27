@@ -4,6 +4,8 @@
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
 
+// Public API
+
 namespace library {
 
   class VCMLib {
