@@ -40,14 +40,16 @@ string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(
     ${LIBRARY_NAME}
-    VERSION 0.0.18
+    VERSION 0.0.19
     LANGUAGES C CXX
     DESCRIPTION "template Copyright (c) 2024 TomasMark [at] digitalspace.name"
     HOMEPAGE_URL "https://github.com/tomasmark79")
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(FATAL_ERROR "In-source builds not allowed.
-        Please make a new directory (called a Build directory) and run CMake from there.")
+    message(
+        WARNING
+            "In-source builds. Please make a new directory (called a Build directory) and run CMake from there."
+    )
 endif()
 
 # ==============================================================================
