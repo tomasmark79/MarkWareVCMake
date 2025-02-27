@@ -1,5 +1,5 @@
 #include <VCMLib/VCMLib.hpp>
-#include <Logger.hpp>
+#include <Logger/Logger.hpp>
 #include <memory>
 
 namespace san {

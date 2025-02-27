@@ -217,6 +217,20 @@ The template includes preconfigured menu items. The default Conan profile repres
 - `SolutionController.py` is a driver that connects the functioning of tasks, invoking tools like Conan, CMake, and some others.  
 - Comprehensive logging system `Solution.log`  
 
+### Project Structure
+
+```txt
+MarkWareVCMake/
+├── include/
+```
+Contains public header files (.hpp) intended for use in other projects or modules.
+
+```txt
+MarkWareVCMake/
+├── src/
+```
+Contains source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
+
 ## FAQ
 
 `Q:` **Build task error**  

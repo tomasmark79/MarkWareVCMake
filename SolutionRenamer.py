@@ -1,13 +1,12 @@
 import os
 import sys
-import shutil
 import codecs # For reading and writing files with utf-8 specific encoding (required for Windows)
 import re 
 
 # (c) 2024-2025 Tomáš Mark
 # This script is licensed under the MIT license
 
-source_dir = "source"
+source_dir = "src"
 include_dir = "include"
 standalone_dir = "standalone"
 
@@ -57,7 +56,7 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
         f"{include_dir}/{old_lib_name}/{old_lib_name}.hpp",
         f"{source_dir}/{old_lib_name}.cpp",
         f"{standalone_dir}/{source_dir}/Main.cpp",
-        f"{include_dir}/Logger.hpp",
+        f"{source_dir}/Logger/Logger.hpp",
         ".vscode/launch.json",
         ".vscode/tasks.json",
         "LICENSE",

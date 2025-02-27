@@ -62,24 +62,20 @@ cpm_licenses_create_disclaimer_target(
     "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
 
 # ==============================================================================
-# Source and header files Glob not recommended, but the simplest way for this template
+# src/ for source files and `internal` header files that are not intended for public use
 # ==============================================================================
-file(
-    GLOB_RECURSE
-    headers
-    CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
 file(
     GLOB_RECURSE
     sources
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cxx)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
 
 # ==============================================================================
 # Create target

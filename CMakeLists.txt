@@ -68,7 +68,7 @@ cpm_licenses_create_disclaimer_target(
     "${CPM_PACKAGES}")
 
 # ==============================================================================
-# Source and header files Glob not recommended, but the simplest way for this template
+# include/ for public header files intended for use in other projects or modules.
 # ==============================================================================
 file(
     GLOB_RECURSE
@@ -78,14 +78,22 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hh
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hxx)
+
+# ==============================================================================
+# src/ for source files and `internal` header files that are not intended for public use
+# ==============================================================================
 file(
     GLOB_RECURSE
     sources
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cxx)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
 
 # ==============================================================================
 # Create target
@@ -106,7 +114,7 @@ apply_sanitizers(${LIBRARY_NAME})
 target_include_directories(
     ${LIBRARY_NAME}
     PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source> # for exceptions 😎
+    PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
            $<INSTALL_INTERFACE:include/${LIBRARY_NAME}-${PROJECT_VERSION}>)
 
 # ==============================================================================
