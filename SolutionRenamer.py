@@ -6,6 +6,8 @@ import re
 # MIT License
 # Copyright (c) 2024-2025 Tomáš Mark
 
+# Renamer is respecting existing Uper and Lower letters and keep them in the new name
+
 source_dir = "src"
 include_dir = "include"
 standalone_dir = "standalone"
@@ -52,6 +54,7 @@ def rename_project(old_lib_name, new_lib_name, old_standalone_name, new_standalo
     # List of files where the project names should be changed
     files = [
         "CMakeLists.txt",
+        "conanfile.py",
         f"{standalone_dir}/CMakeLists.txt",
         f"{include_dir}/{old_lib_name}/{old_lib_name}.hpp",
         f"{source_dir}/{old_lib_name}.cpp",

@@ -411,6 +411,10 @@ def cmake_format():
                 execute_command(cmd)
                 print(f"Done: {full_path}")
 
+def conan_create():
+    cmd = f'conan create "{workSpaceDir}"'
+    execute_command(cmd)
+    
 def conan_graph():
     cmd = f'conan graph info "{workSpaceDir}" --format=html > graph.html'
     execute_command(cmd)
@@ -445,7 +449,8 @@ task_map = {
     "🔍 clang-tidy": lambda: clang_tidy_spltr(lib_flag, st_flag),
     "📐 clang-format": clang_format,
     "📏 cmake-format": cmake_format,
-    "⚔️ conan graph.html": conan_graph,
+    "⚔️ conan create library recipe" : conan_create,
+    "📊 conan graph.html": conan_graph,
     "": lambda: exit_ok(""),
 }
 

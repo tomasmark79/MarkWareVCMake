@@ -25,7 +25,8 @@
                 "📐 clang-format",
                 "📏 cmake-format",
                 "",
-                "⚔️ conan graph.html",
+                "⚔️ conan create library recipe",
+                "📊 conan graph.html",
             ],
             "default": "🔨 Build"
         },
