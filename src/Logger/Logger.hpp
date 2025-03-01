@@ -16,7 +16,7 @@
   #ifndef NOMINMAX
     #define NOMINMAX
     // Disable min/max macros in windows.h to avoid conflicts with std::min/max
-    // cxxopts.hpp uses std::min/max  
+    // cxxopts.hpp uses std::min/max
   #endif
   #include <windows.h>
 #endif
@@ -58,9 +58,8 @@ public:
     std::cout << std::endl;
   }
 
-  // Stream support for different log levels
   Logger& operator<<(Level level) {
-    currentLevel = level;
+    m_currentLevel = level;
     return *this;
   }
 
@@ -68,15 +67,15 @@ public:
   Logger& operator<<(const T& message) {
     std::lock_guard<std::mutex> lock(logMutex);
 
-    if (!messageStream.str().empty()) { messageStream << " "; }
-    messageStream << message;
+    if (!m_messageStream.str().empty()) { m_messageStream << " "; }
+    m_messageStream << message;
     return *this;
   }
 
-  Logger& operator<<(std::ostream& (*os)(std::ostream&)) {
-    log(currentLevel, messageStream.str());
-    messageStream.str("");  // Clear the stream
-    messageStream.clear();  // Clear any error flags
+  Logger& operator<<(std::ostream& (*)(std::ostream&)) {
+    log(m_currentLevel, m_messageStream.str());
+    m_messageStream.str("");
+    m_messageStream.clear();
     return *this;
   }
 
@@ -93,8 +92,8 @@ private:
       "VCMLib";  // string name may be affected by SolutionRenamer.py
   std::mutex logMutex;
 
-  Level currentLevel = Level::LOG_INFO;  // Default log level
-  std::ostringstream messageStream;
+  Level m_currentLevel = Level::LOG_INFO;  // Default log level
+  std::ostringstream m_messageStream;
 
   Logger() = default;
   ~Logger() = default;
@@ -180,6 +179,6 @@ private:
 // Logger::getInstance().log(Logger::Level::INFO, something);
 // Logger::getInstance().info(something);
 // LOG.info(something);
-// LOG << Logger::Level::LOG_INFO << "Loading library ommited" << std::endl;
+// LOG << Logger::Level::LOG_INFO << "Info" << std::endl;
 
 #endif  // LOGGER_H

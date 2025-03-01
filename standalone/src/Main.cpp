@@ -1,7 +1,6 @@
 #include <VCMLib/VCMLib.hpp>
 #include <Logger/Logger.hpp>
 #include <cxxopts.hpp>
-#include "SanitizerTest.hpp"
 #include <iostream>
 #include <memory>
 
@@ -35,8 +34,7 @@ int main(int argc, const char* argv[]) {
       .allow_unrecognised_options()
       .add_options()
       ("h,help", "Show help")
-      ("o,ommit", "Ommit library loading", cxxopts::value<bool>()->default_value("false"))
-      ("s,sanitizer", "Test sanitizer", cxxopts::value<bool>()->default_value("false"));
+      ("o,ommit", "Ommit library loading", cxxopts::value<bool>()->default_value("false"));
 
     // clang-format on
 
@@ -53,11 +51,6 @@ int main(int argc, const char* argv[]) {
     } else {
       LOG << Logger::Level::LOG_WARNING << "Loading library ommited [-o]"
           << std::endl;
-    }
-
-    if (result.count("sanitizer")) {
-      LOG << Logger::Level::LOG_WARNING << "Testing sanitizer" << std::endl;
-      sanitizerTest::scream();
     }
 
   } catch (const cxxopts::exceptions::exception& e) {
