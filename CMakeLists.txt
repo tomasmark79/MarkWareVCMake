@@ -143,7 +143,7 @@ target_compile_options(
 # Set compile features
 # ==============================================================================
 target_compile_features(${LIBRARY_NAME} PUBLIC cxx_std_11)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
