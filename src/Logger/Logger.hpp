@@ -9,6 +9,9 @@
 #include <memory>
 #include <mutex>
 
+// MIT License
+// Copyright (c) 2024-2025 Tomáš Mark
+
 #ifdef _WIN32
   #include <windows.h>
 #endif
