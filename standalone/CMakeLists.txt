@@ -68,7 +68,7 @@ cpm_licenses_create_disclaimer_target(
 CPMAddPackage(
     GITHUB_REPOSITORY jarro2783/cxxopts
     VERSION 3.2.0
-    OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES")
+    OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL NO")
 # ==============================================================================
 # src/ for source files and `internal` header files that are not intended for public use
 # ==============================================================================
