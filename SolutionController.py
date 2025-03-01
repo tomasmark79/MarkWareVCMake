@@ -155,9 +155,11 @@ def execute_command(cmd):
     if result.returncode != 0:
         exit_with_error(f"Command failed: {cmd}")
 
-### Execute subprocess with shell, revision 1
+### Execute subprocess with shell, revision 2
 def execute_subprocess(cmd, executable):
     print(f"{LIGHTBLUE}> Executed: {cmd}{NC}")
+    if platform.system().lower() == "windows":
+        executable = "C:\\Windows\\System32\\cmd.exe"
     log2file(cmd)
     result = subprocess.run(cmd, shell=True, executable=executable)
     if result.returncode != 0:
