@@ -27,7 +27,7 @@ Czech audio. English subtitles by transcription available.
 - Modern **CMake** with **targets design**
 - Modern projects design **Standalone** & **Library** 
 - **Conan 2** by conanfile.py
-- [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake), [**CxxOpt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1)
+- [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake), [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxoptwiki](https://github.com/jarro2783/cxxopts/wiki))
 - **Sanitizers**, **Static Analysis**, and **Hardening**
 - Template **Renamer**
 - Template **Upgrader**
