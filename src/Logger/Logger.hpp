@@ -13,6 +13,11 @@
 // Copyright (c) 2024-2025 Tomáš Mark
 
 #ifdef _WIN32
+  #ifndef NOMINMAX
+    #define NOMINMAX
+    // Disable min/max macros in windows.h to avoid conflicts with std::min/max
+    // cxxopts.hpp uses std::min/max  
+  #endif
   #include <windows.h>
 #endif
 
