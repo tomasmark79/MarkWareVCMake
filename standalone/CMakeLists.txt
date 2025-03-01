@@ -99,7 +99,7 @@ set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NA
 # ==============================================================================
 # Set linking
 # ==============================================================================
-target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib)
+target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib cxxopts)
 
 # ==============================================================================
 # Add missing installation exports

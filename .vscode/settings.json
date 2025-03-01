@@ -88,6 +88,8 @@
         "expected": "cpp",
         "err.h": "c",
         "e_os.h": "c",
-        "*.in": "cpp"
+        "*.in": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp"
     }
 }

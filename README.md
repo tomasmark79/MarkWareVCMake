@@ -1,16 +1,17 @@
-# MarkWare VCMake C++ project template
+# MarkWare VCMake
 
 [![Ubuntu](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/macos.yml)
 [![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)  
 
-## Overview
 
-MarkWare VCMake is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
+## Overview  
 
-"To safely use this template, you need to have at least intermediate knowledge in software development and be familiar with the technologies that the template uses."
+MarkWare VCMake is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.  
 
-### Video Tutorial in native Czech Language  
+Just seconds away from starting 🚀 development in awesome C++ 💻✨  
+
+## YouTube HowTo
 
 1. first welcome video  
 https://youtu.be/6IOuiS095dQ
@@ -18,43 +19,48 @@ https://youtu.be/6IOuiS095dQ
 1. second welcome video  
 https://youtu.be/itUd76yTvQk
 
-English subtitles via YouTube transcription.
+Czech audio. English subtitles by transcription available.  
   
-### Key Features 🎈
+## Key Features🎈
 
-- Seamless cross-platform compatibility (Linux, macOS, Windows)
-- **Cross-compilation support** for various architectures
-- ModernCppStarter ideas
-- Modern dependency management with Conan and CPM
-- Advanced debugging and profiling capabilities
-- Support for sanitizers, static analysis, and hardening
-- Compatibility with SSH and Windows Subsystem for Linux (WSL)
+- **Linux**, **MacOS**, **Windows** compatible
+- Modern **CMake** with **targets design**
+- Modern projects design **Standalone** & **Library** 
+- **Conan 2** by conanfile.py
+- [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake), [**CxxOpt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1)
+- **Sanitizers**, **Static Analysis**, and **Hardening**
+- Template **Renamer**
+- Template **Upgrader**
+- Counts with **Cross-compilation**
+- Compatible to [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
+- Automated **Wrapper for CMake Build System** by [Tasks](https://code.visualstudio.com/docs/editor/tasks)
+- Native C++ debugging by Microsoft [C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+- [**CMake debugger**](https://devblogs.microsoft.com/cppblog/introducing-cmake-debugger-in-vs-code-debug-your-cmake-scripts-using-open-source-cmake-debugger/)
+- GitHub [Actions](https://docs.github.com/en/actions) workflows for continuous integration
 
-### Integrated Technologies 🎈
+## Projects used this template
 
-- Solution Renamer and Upgrader
-- Build system using modern CMake
-- Automated tasks and shortcuts in VSCode
-- C++ Main Standalone project configuration
-- C++ Class like library project configuration
-- C++ simple singleton logger class
-- Conanfile.py dependency template
-- CPM.cmake, CPM.PackageProject and CPM.license
-- GitHub Actions workflows for continuous integration
+[MWImGuiStarter](https://github.com/tomasmark79/MWImGuiStarter)  
+[MWwxWidgetsStarter](https://github.com/tomasmark79/MWwxWidgetsStarter)  
+[MyPersonalDiscordBot](https://github.com/tomasmark79/MyPersonalDiscordBot)  
+[snake-in-shell-cpp](https://github.com/tomasmark79/snake-in-shell-cpp)  
+[MassCode2Md](https://github.com/tomasmark79/MassCode2Md)  
+...
 
 ## System Requirements
 
 ### Essential Tools
 
-- **Visual Studio Code** with C++ extension
-- **Python 3** (managed via Pyenv)
-- **Conan 2** for dependency management
-- **CMake** (latest version 3 recommended)
+- [**Visual Studio Code**](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
+- [**Python 3**](https://www.python.org) (managed by [Pyenv](https://github.com/pyenv/pyenv ))
+- [**Conan 2**](https://conan.io/center) for dependency management
+- [**CMake**](https://cmake.org/download/) (latest version 3 recommended)
 - **Code Formatters**:
-  - Clang Format
-  - CMake Format
+  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)
+    - [CLangConfigurator](https://clang-format-configurator.site)
+  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/)
 - **Code analyzing**:
-  - Clang Tidy
+  - [Clang Tidy](https://clang.llvm.org/extra/clang-tidy/)
 
 ## Getting Started
 
@@ -178,16 +184,28 @@ By `Shift+F7` invoked **TASK MENU** includes the following automation commands:
 - 🔍 CLang-tidy  
 - 📐📏 CLang & CMake formatting  
   
-### Build Configuration
+### CMake Build Options
 
-- Supports multiple build types hardcoded in `tasks.json`:
-  ```txt
-  Debug, Release, RelWithDebInfo, MinSizeRel
-  ```
+Supports multiple build types hardcoded in `tasks.json`:
+```txt
+Debug, Release, RelWithDebInfo, MinSizeRel
+```
 
-- Configurable CMake options for:  
+Configurable CMake options for:  
   
-  `BUILD_SHARED_LIBS`, `USE_STATIC_RUNTIME`, `SANITIZE_ADDRESS`, `SANITIZE_UNDEFINED`, `SANITIZE_THREAD`, `SANITIZE_MEMORY`, `ENABLE_HARDENING`, `ENABLE_IPO`, `ENABLE_CCACHE`
+`BUILD_SHARED_LIBS`, `USE_STATIC_RUNTIME`, `SANITIZE_ADDRESS`, `SANITIZE_UNDEFINED`, `SANITIZE_THREAD`, `SANITIZE_MEMORY`, `ENABLE_HARDENING`, `ENABLE_IPO`, `ENABLE_CCACHE`
+
+### CLI Build everything at once
+
+Build standalone part will also build library if linked in CMake configuration.
+
+```bash
+conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
+source "./build/standalone/default/debug/conanbuild.sh" && cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="./build/installation/default/debug"
+source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug"  -j 16
+source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug" --target install -j 16
+
+```
 
 ## Additional Features
 
@@ -213,24 +231,38 @@ The template includes preconfigured menu items. The default Conan profile repres
 
 ### Project Maintenance
 
-- Solution renaming utility with python script `SolutionRenamer.py`  
-- Automatic upgrade functionality with pyton script `SolutionUpgrader.py`  
-- `SolutionController.py` is a driver that connects the functioning of tasks, invoking tools like Conan, CMake, and some others.  
-- Comprehensive logging system `Solution.log`  
+#### Renaming
 
-### Project Structure
+by python script `SolutionRenamer.py`  
+
+#### Upgrade custom template parts
+by pyton script `SolutionUpgrader.py`  
+
+#### Log using history
+
+in existing log file  `Solution.log`  
+
+### Structure 2in1
+
+*Template is using Two projects in One Solution.*
 
 ```txt
 MarkWareVCMake/
 ├── include/
 ```
-Contains public header files (.hpp) intended for use in other projects or modules.
+Contains **library project** public header files (.hpp) intended for use in other projects or modules.
 
 ```txt
 MarkWareVCMake/
 ├── src/
 ```
-Contains source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
+Contains **library project** source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
+
+```txt
+MarkWareVCMake/
+├── standalone/
+```
+Contains just **standalone** project.
 
 ## Conventions
 
@@ -245,17 +277,6 @@ To avoid future issues with folder and file names, I have set these rules.
 C/C++ 2 spaces  
 Python 4 spaces  
 
-## Resources
-
-VSCode - https://code.visualstudio.com/download  
-pyenv - https://github.com/pyenv/pyenv  
-Conan hub - https://conan.io/center  
-CMake - https://cmake.org/download/  
-clang-tidy - https://clang.llvm.org/extra/clang-tidy/  
-clang-format - https://clang.llvm.org/docs/ClangFormat.html  
-clang-format - https://clang-format-configurator.site  
-cmake-format - https://cmake-format.readthedocs.io/en/latest/  
-
 ## FAQ
 
 `Q:` **Build task error**  
@@ -266,6 +287,10 @@ Error: /home/.../Build/Library/default/Debug is not a directory
 `Q:` **CMake-tidy error**  
 Error while trying to load a compilation database: Could not auto-detect compilation database from directory, etc.  
 `A:` For static code analysis to work correctly, you need to have the CMake configurations prepared. Also, ensure that the `CMAKE_EXPORT_COMPILE_COMMANDS` variable is set to `ON` in CMakeLists.txt.
+
+## Tips
+
+`xxd -i file.bin > file.h`
 
 ## Thanks
 
