@@ -71,10 +71,6 @@ CPMAddPackage("gh:cpm-cmake/CPMLicenses.cmake@0.0.7")
 cpm_licenses_create_disclaimer_target(
     write-licenses-${LIBRARY_NAME} "${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME}_third_party.txt"
     "${CPM_PACKAGES}")
-CPMAddPackage(
-    GITHUB_REPOSITORY jarro2783/cxxopts
-    VERSION 3.2.1
-    OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES")
 
 # ==============================================================================
 # include/ for public header files intended for use in other projects or modules.

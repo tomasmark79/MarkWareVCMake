@@ -65,7 +65,10 @@ CPMAddPackage(NAME VCMLib SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 cpm_licenses_create_disclaimer_target(
     write-licenses-${STANDALONE_NAME}
     "${CMAKE_CURRENT_BINARY_DIR}/${STANDALONE_NAME}_third_party.txt" "${CPM_PACKAGES}")
-
+CPMAddPackage(
+    GITHUB_REPOSITORY jarro2783/cxxopts
+    VERSION 3.2.0
+    OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES")
 # ==============================================================================
 # src/ for source files and `internal` header files that are not intended for public use
 # ==============================================================================
