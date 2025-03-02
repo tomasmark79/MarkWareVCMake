@@ -47,7 +47,7 @@ conan profile detect --force
 
 # Install MarkWareVCMake template
 git clone https://github.com/tomasmark79/MarkWareVCMake
-cd MarkWareVCMake/
+cd MarkWareVCMake/ || exit
 
 # Start Visual Studio Code
 code .

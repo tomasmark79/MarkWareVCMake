@@ -58,7 +58,7 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 #### Debian/Ubuntu based Linux
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
 ```
 
 ```bash
