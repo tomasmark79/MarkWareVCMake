@@ -60,7 +60,7 @@ try {
 
   # Install pyenv-win
   Write-Status "Installing pyenv-win..."
-  $python_version = "3.12.8"
+  $python_version = "3.12.0"  # Using a version that is more likely to be supported
   
   try {
       curl -o pyenv-win.zip -L https://github.com/pyenv-win/pyenv-win/archive/master.zip
@@ -90,10 +90,15 @@ try {
       Write-Status "Setting up Python environment..."
       pyenv global $python_version
       pip install virtualenv
-      mkdir -p "$env:PYENV_ROOT\versions\$python_version\envs" -Force
-      cd "$env:PYENV_ROOT\versions\$python_version\envs"
+      
+      # Create directory for virtual environment
+      New-Item -Path "$env:PYENV_ROOT\versions\$python_version\envs" -ItemType Directory -Force
+      Set-Location -Path "$env:PYENV_ROOT\versions\$python_version\envs"
       python -m virtualenv env
-      pyenv global "$python_version/envs/env"
+      
+      # Set global Python to use the virtual environment
+      # Using backslash for Windows paths
+      pyenv global "$python_version\envs\env"
   }
   catch {
       Handle-Error "Failed to set up Python environment: $_"
