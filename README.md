@@ -53,40 +53,17 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ## Getting Started
 
-### Project Clone with git (install git)
+### Installers
 
-1. Download || clone template
-
-```bash
-git clone https://github.com/tomasmark79/MarkWareVCMake
-cd MarkWareVCMake/
-```
-
-2. Install template dependencies
+#### Debian/Ubuntu based Linux
 
 ```bash
-cd .init
-
-# On Linux and MacOS run
-./PyEnvInst.sh [3.13.2]
-./DevToolsInst.py
-
-# On Windows run
-./PyEnvInstWin.ps1
-./DevToolsInst.py
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/install.sh | bash
 ```
-3. Optional: Customize project names
 
 ```bash
 python SolutionRenamer.py <OldLibName> <NewLibName> <OldStandaloneName> <NewStandAloneName>
 ```
-
-3. Launch VSCode and configure keybindings
-
-```bash
-code .
-```
-
 ## Development Workflow
 
 ### Keyboard Shortcuts
