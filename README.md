@@ -64,7 +64,7 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.ini
 
 # Arch
 
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchBasedInstaller.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchInstaller.sh | bash
 
 # Fedora
 
