@@ -11,16 +11,6 @@ MarkWare VCMake is a comprehensive, modern C++ project template designed for cro
 
 Just seconds away from starting 🚀 development in awesome C++ 💻✨  
 
-## YouTube HowTo
-
-1. first welcome video  
-https://youtu.be/6IOuiS095dQ
-
-1. second welcome video  
-https://youtu.be/itUd76yTvQk
-
-Czech audio. English subtitles by transcription available.  
-  
 ## Key Features🎈
 
 - **Linux**, **MacOS**, **Windows** compatible
