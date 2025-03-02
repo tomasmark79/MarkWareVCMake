@@ -58,7 +58,7 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 This project provides a set of installer scripts for setting up a development environment on various Linux distributions, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development.
 
 ```bash
-# Debian / Ubuntu
+# Debian / Ubuntu / Mint / ...
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
 
@@ -73,6 +73,10 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.ini
 # OpenSUSE
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
+
+# Windows
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
+
 
 ```
 
