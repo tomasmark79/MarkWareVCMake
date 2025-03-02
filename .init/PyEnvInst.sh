@@ -52,7 +52,6 @@ if command -v pyenv &>/dev/null; then
     pyenv update &>> "$LOG_FILE" || log "pyenv update failed, continuing with existing installation"
 fi
 
-
 # Detect shell and configure appropriate RC file
 SHELL_RC=""
 if [[ -n "$ZSH_VERSION" ]]; then
