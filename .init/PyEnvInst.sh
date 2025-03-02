@@ -73,10 +73,10 @@ add_to_shell_rc() {
     fi
 }
 
-add_to_shell_rc "export PYENV_ROOT=$HOME/.pyenv"
-add_to_shell_rc "[[ -d $PYENV_ROOT/bin ]] && export PATH=$PYENV_ROOT/bin:$PATH"
-add_to_shell_rc "eval $(pyenv init --path)"
-add_to_shell_rc "eval $(pyenv virtualenv-init -)"
+add_to_shell_rc 'export PYENV_ROOT="$HOME/.pyenv"'
+add_to_shell_rc '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"'
+add_to_shell_rc 'eval "$(pyenv init --path)"'
+add_to_shell_rc 'eval "$(pyenv virtualenv-init -)"'
 
 # Load pyenv into current shell
 export PYENV_ROOT="$HOME/.pyenv"
