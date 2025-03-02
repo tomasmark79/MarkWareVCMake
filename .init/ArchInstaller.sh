@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip curl git libssl-dev \
-libbz2-dev libcurses-ocaml-dev build-essential \
-libffi-dev libsqlite3-dev liblzma-dev libreadline-dev \
-libtk-img-dev clang-format clang-tidy npm gdb mc vim -y
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm python-pip curl git openssl \
+bzip2 ocaml ctags base-devel \
+libffi sqlite xz readline tk \
+clang-format clang-tidy npm gdb mc vim
 
 # PyEnv
 curl https://pyenv.run | bash
@@ -16,8 +16,8 @@ pip install --upgrade pip
 # Download and install Visual Studio Code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update && sudo apt install -y code
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/pacman.d/vscode.list
+sudo pacman -Sy code --noconfirm
 
 # Install C++ tools
 sudo npm install -g setup-cpp

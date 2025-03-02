@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip curl git libssl-dev \
-libbz2-dev libcurses-ocaml-dev build-essential \
-libffi-dev libsqlite3-dev liblzma-dev libreadline-dev \
-libtk-img-dev clang-format clang-tidy npm gdb mc vim -y
+sudo dnf update -y
+sudo dnf install python3-pip curl git openssl-devel \
+bzip2-devel ncurses-devel make automake gcc gcc-c++ \
+libffi-devel sqlite-devel xz-devel readline-devel \
+tk-devel clang-tools-extra npm gdb mc vim -y
 
 # PyEnv
 curl https://pyenv.run | bash
@@ -14,10 +14,14 @@ pyenv global 3.12.8
 pip install --upgrade pip
 
 # Download and install Visual Studio Code
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update && sudo apt install -y code
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo "[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo
+sudo dnf install code -y
 
 # Install C++ tools
 sudo npm install -g setup-cpp

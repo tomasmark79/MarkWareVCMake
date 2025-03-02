@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip curl git libssl-dev \
-libbz2-dev libcurses-ocaml-dev build-essential \
-libffi-dev libsqlite3-dev liblzma-dev libreadline-dev \
-libtk-img-dev clang-format clang-tidy npm gdb mc vim -y
+sudo zypper refresh && sudo zypper update -y
+sudo zypper install -y python3-pip curl git libopenssl-devel \
+libbz2-devel ncurses-devel gcc-c++ make \
+libffi-devel sqlite3-devel xz-devel readline-devel \
+tk-devel clang-tools-extra npm gdb mc vim
 
 # PyEnv
 curl https://pyenv.run | bash
@@ -17,7 +17,7 @@ pip install --upgrade pip
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update && sudo apt install -y code
+sudo zypper refresh && sudo zypper install -y code
 
 # Install C++ tools
 sudo npm install -g setup-cpp

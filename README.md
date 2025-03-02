@@ -53,17 +53,29 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ## Getting Started
 
-### Installers
+### Linux Installers
 
-#### Debian/Ubuntu based Linux
+This project provides a set of installer scripts for setting up a development environment on various Linux distributions, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development.
 
 ```bash
+# Debian / Ubuntu
+
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
+
+# Arch
+
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchBasedInstaller.sh | bash
+
+# Fedora
+
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
+
+# OpenSUSE
+
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
+
 ```
 
-```bash
-python SolutionRenamer.py <OldLibName> <NewLibName> <OldStandaloneName> <NewStandAloneName>
-```
 ## Development Workflow
 
 ### Keyboard Shortcuts
