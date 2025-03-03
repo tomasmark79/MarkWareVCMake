@@ -85,7 +85,7 @@ try {
     Write-Status "Installing pipx..."
     try {
         python -m pip install --user pipx
-        pipx ensurepath
+        python -m pipx ensurepath
     }
     catch {
         Handle-Error "Failed to install pipx: $_"
