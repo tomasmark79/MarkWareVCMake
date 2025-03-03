@@ -1,5 +1,10 @@
 #Requires -Version 5.1
 
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "This script requires administrative privileges. Please run PowerShell as an administrator." -ForegroundColor Red
+    exit 1
+}
+
 # Function to display status messages
 function Write-Status($message) {
     Write-Host "[INFO] $message" -ForegroundColor Green
