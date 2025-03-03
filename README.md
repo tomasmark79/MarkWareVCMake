@@ -12,6 +12,7 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ## Key Features🎈
 
+- **Awesome OneClick Installer**
 - **Linux**, **MacOS**, **Windows** compatible
 - Modern **CMake** with **targets design**
 - Modern projects design **Standalone** & **Library** 
@@ -55,28 +56,30 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ### Linux Installers
 
-This project provides a set of installer scripts for setting up a development environment on various Linux distributions, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development.
+This project provides a set of installer scripts in `.init` folder for setting up a development environment on various Linux distributions, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows and MacOS also included.
 
 ```bash
-# Debian / Ubuntu / Mint / ...
+
+# Debian (Tested Debian Bookworm 12.9) 
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
+
+# Fedora (Tested Fedora 40)
+
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
 
 # Arch
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchInstaller.sh | bash
 
-# Fedora
-
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
-
 # OpenSUSE
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
 
-# Windows
+# Windows (script in progress)
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 
+# MacOS (script in progress)
 
 
 ```
