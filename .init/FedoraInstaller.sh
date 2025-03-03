@@ -8,6 +8,15 @@ tk-devel clang-tools-extra npm gdb mc vim -y
 
 # PyEnv
 curl https://pyenv.run | bash
+
+# Initialize pyenv in current shell
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Now pyenv commands will work
 pyenv install 3.12.8
 pyenv virtualenv 3.12.8 env3128
 pyenv global 3.12.8
