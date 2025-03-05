@@ -41,6 +41,8 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ### Essential Tools
 
+All these required tools are installed automatically if missing by the installer script.
+
 - [**Visual Studio Code**](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
 - [**Python 3**](https://www.python.org) (managed by [Pyenv](https://github.com/pyenv/pyenv ))
 - [**Conan 2**](https://conan.io/center) for dependency management
@@ -56,31 +58,30 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ### Linux Installers
 
-This project provides a set of installer scripts in `.init` folder for setting up a development environment on various Linux distributions, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows and MacOS also included.
+This project provides a set of installer scripts in the `.init` folder for setting up a development environment on various Linux distributions from scratch, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows 10/11 and MacOS are also included.
 
 ```bash
 
-# Debian (Tested Debian Bookworm 12.9) 
+# Debian based (Tested Debian Bookworm 12.9, Ubuntu 22.04)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
 
-# Fedora (Tested Fedora 40)
+# Fedora (Tested Fedora 40, 41)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
 
-# Arch
+# Arch (script in progress)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchInstaller.sh | bash
 
-# OpenSUSE
+# OpenSUSE (script in progress)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
 
-# Windows (script in progress)
+# Windows 10/11 (script in progress)
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 
 # MacOS (script in progress)
-
 
 ```
 
