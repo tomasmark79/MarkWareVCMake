@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
-cmake_policy(SET CMP0091 NEW)
+
+cmake_policy(SET CMP0048 NEW) # project() command manages VERSION variables
+cmake_policy(SET CMP0076 NEW) # target_sources() command creates usage requirements
+cmake_policy(SET CMP0091 NEW) # MSVC runtime library flags are selected by an abstraction
 
 # MIT License
 # Copyright (c) 2024-2025 Tomáš Mark
@@ -63,6 +66,8 @@ find_package(nlohmann_json REQUIRED)
 
 # ==============================================================================
 # CPM.cmake dependencies - take care conflicts
+# ==============================================================================
+# export CPM_SOURCE_CACHE=$HOME/.cache/CPM # for localy caching CPM packages
 # ==============================================================================
 include(cmake/ccache.cmake)
 include(cmake/CPM.cmake)
