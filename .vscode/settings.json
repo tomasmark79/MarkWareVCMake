@@ -1,4 +1,7 @@
 {
+    "cpp.creator.headerFileContentPreset": "#ifndef {{*CLASSNAMEUPPER*}}_HPP\n#define {{*CLASSNAMEUPPER*}}_HPP\n\nclass {{*CLASSNAME*}} {\npublic:\n    {{*CLASSNAME*}}();\n    ~{{*CLASSNAME*}}();\n\nprivate:\n};\n\n#endif",
+    "cpp.creator.headerFileNamePreset": "{{*CLASSNAME*}}.hpp",
+    "cpp.creator.sourceFileContentPreset": "#include \"{{*HEADERFILENAME*}}\"\n\n{{*CLASSNAME*}}::{{*CLASSNAME*}}() { }\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}() { }",
     "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "files.associations": {
         "cctype": "cpp",
