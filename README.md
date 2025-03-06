@@ -175,7 +175,7 @@ by pyton script `SolutionUpgrader.py`
 
 in existing log file  `Solution.log`  
 
-### Structure 2in1
+### Template Structure
 
 *Template is using Two projects in One Solution.*
 
@@ -196,6 +196,14 @@ MarkWareVCMake/
 ├── standalone/
 ```
 Contains just **standalone** project.
+
+### Standalone arguments
+
+*Template C++ is using basic [cxxopt](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation to smart manage passed arguments for Standalone*  
+
+  - `-a` omitt assets loading
+  - `-o` omitt library loading
+  - `-h` show help
 
 ## Conventions
 
