@@ -78,7 +78,7 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.ini
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
 
-# Windows 10/11 (script in progress)
+# Windows 10/11 (script dev in progress)
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 
 # MacOS (required contributor)
