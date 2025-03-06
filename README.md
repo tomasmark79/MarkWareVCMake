@@ -199,7 +199,7 @@ Contains just **standalone** project.
 
 ### Standalone arguments
 
-*Template C++ is using basic [cxxopt](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation to smart manage passed arguments for Standalone*  
+*Template C++ is using basic [cxxopt](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation to smart manage passed arguments for Standalone.*  
 
   - `-a` omitt assets loading
   - `-o` omitt library loading

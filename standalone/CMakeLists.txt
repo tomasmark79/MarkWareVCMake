@@ -107,20 +107,23 @@ set_target_properties(${STANDALONE_NAME} PROPERTIES OUTPUT_NAME "${STANDALONE_NA
 # ==============================================================================
 target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib cxxopts)
 
-
-set(ASSET_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../assets/IAmAsset.txt")
-
-# Create assets directory and copy assets during build
-add_custom_command(
-    TARGET ${STANDALONE_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ASSET_SOURCE} "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets"
-)
-
 # ==============================================================================
 # Add missing installation exports
 # ==============================================================================
 set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION bin)
+
+# ==============================================================================
+# Assets handling
+# ==============================================================================
+set(ASSET_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../assets/IAmAsset.txt")
+# Create assets directory and copy assets during build
+add_custom_command(
+    TARGET ${STANDALONE_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+            "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ASSET_SOURCE}
+            "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets")
 install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
 if(UNIX AND NOT APPLE)
     install(FILES ${ASSET_SOURCE} DESTINATION share/${STANDALONE_NAME}/assets)
@@ -129,5 +132,3 @@ elseif(APPLE)
 elseif(WIN32)
     install(FILES ${ASSET_SOURCE} DESTINATION bin/assets)
 endif()
-
-
