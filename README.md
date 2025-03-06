@@ -70,18 +70,18 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.ini
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
 
-# Arch (script in progress)
+# Arch (required contributor)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchInstaller.sh | bash
 
-# OpenSUSE (script in progress)
+# OpenSUSE (required contributor)
 
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
 
 # Windows 10/11 (script in progress)
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 
-# MacOS (script in progress)
+# MacOS (required contributor)
 
 ```
 
