@@ -1,8 +1,8 @@
-#include <VCMLib/VCMLib.hpp>
 #include <Logger/Logger.hpp>
+#include <VCMLib/VCMLib.hpp>
 #include <cxxopts.hpp>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <memory>
 
 // MIT License
@@ -10,8 +10,18 @@
 
 constexpr char standaloneName[] = "VCMStandalone";
 
+#ifndef ASSET_PATH
+  #define ASSET_PATH ""
+#endif
+#ifndef FIRST_ASSET_FILE
+  #define FIRST_ASSET_FILE ""
+#endif
+#ifndef ASSET_FILES
+  #define ASSET_FILES ""
+#endif
+
 /// @brief process command line arguments
-int parseTemplateOptions(int argc, const char* argv[]) {
+int parseTemplateOptions(int argc, const char *argv[]) {
   try {
     // clang-format off
     auto options = std::make_unique<cxxopts::Options>(argv[0], standaloneName);
@@ -36,7 +46,7 @@ int parseTemplateOptions(int argc, const char* argv[]) {
       LOG << Logger::Level::LOG_WARNING << "Loading library omitted [-o]"
           << std::endl;
     }
-  } catch (const cxxopts::exceptions::exception& e) {
+  } catch (const cxxopts::exceptions::exception &e) {
     LOG << Logger::Level::LOG_ERROR << "error parsing options: " << e.what();
     return 1;
   }
@@ -44,13 +54,26 @@ int parseTemplateOptions(int argc, const char* argv[]) {
 }
 
 /// @brief Main Standalone entry point
-int main(int argc, const char* argv[]) {
+int main(int argc, const char *argv[]) {
+
   LOG.info(standaloneName);
   LOG.info("C++ " + std::to_string(__cplusplus));
-  LOG << Logger::Level::LOG_INFO << static_cast<std::string>(ASSET_PATH)
-      << std::endl;
-  LOG << Logger::Level::LOG_INFO << static_cast<std::string>(ASSET_FILES)
-      << std::endl;
+
+  // --------------------------delete me 👇🏻
+  // asset access test
+  std::string assetFp = static_cast<std::string>(ASSET_PATH) + "/" +
+                        static_cast<std::string>(FIRST_ASSET_FILE);
+  std::ifstream file(assetFp);
+  try {
+    if (file.is_open()) {
+      LOG.info("Opened first asset file: " + assetFp);
+    } else {
+      LOG.error("No assets found: " + assetFp);
+    }
+  } catch (const std::exception &e) {
+    LOG.error("Error opening first asset file: " + assetFp);
+  }
+  // --------------------------delete me 👆🏻
 
   return parseTemplateOptions(argc, argv);
 }

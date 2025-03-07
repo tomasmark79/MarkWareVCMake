@@ -1,5 +1,5 @@
-#include <VCMLib/version.h>
 #include <VCMLib/VCMLib.hpp>
+#include <VCMLib/version.h>
 #include <iostream>
 
 // MIT License

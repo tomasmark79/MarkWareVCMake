@@ -10,23 +10,23 @@ function(copy_assets target asset_sources destination)
 endfunction()
 
 function(apply_assets_processing)
+    # Source destination
     set(ASSET_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../assets/")
-    set(ASSET_INSTALL_DIR_POSIX "share/${STANDALONE_NAME}/assets")
-    set(ASSET_INSTALL_DIR_WIN32 "assets")
-    set(ASSET_BUILD_DIR_POSIX "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../${ASSET_INSTALL_DIR_POSIX}")
-    set(ASSET_BUILD_DIR_WIN32 "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/${ASSET_INSTALL_DIR_WIN32}")
 
-    if(UNIX AND NOT APPLE)
-        set(ASSET_BUILD_DIR ${ASSET_BUILD_DIR_POSIX})
-        set(ASSET_INSTALL_DIR ${ASSET_INSTALL_DIR_POSIX})
-    elseif(APPLE)
-        set(ASSET_BUILD_DIR ${ASSET_BUILD_DIR_POSIX})
-        set(ASSET_INSTALL_DIR ${ASSET_INSTALL_DIR_POSIX})
-    elseif(WIN32)
-        set(ASSET_BUILD_DIR ${ASSET_BUILD_DIR_WIN32})
-        set(ASSET_INSTALL_DIR ${ASSET_INSTALL_DIR_WIN32})
+    # Configarion dependent asset paths by platform
+    if(WIN32)
+        set(ASSET_INSTALL_DIR "assets")
+        set(ASSET_BUILD_DIR "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/${ASSET_INSTALL_DIR}")
+        set(INSTALL_DESTINATION "bin/${ASSET_INSTALL_DIR}")
+        set(ASSET_PATH_DEFINE "${ASSET_INSTALL_DIR}")
+    else() # UNIX/APPLE
+        set(ASSET_INSTALL_DIR "share/${STANDALONE_NAME}/assets")
+        set(ASSET_BUILD_DIR "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../${ASSET_INSTALL_DIR}")
+        set(INSTALL_DESTINATION "${ASSET_INSTALL_DIR}")
+        set(ASSET_PATH_DEFINE "../${ASSET_INSTALL_DIR}")
     endif()
 
+    # Check if assets exist
     file(GLOB_RECURSE ASSET_FILES "${ASSET_SOURCE_DIR}/*")
 
     if(NOT ASSET_FILES)
@@ -35,33 +35,28 @@ function(apply_assets_processing)
         return()
     endif()
 
-    # Extract file names from paths
+    # Extract asset file names
     set(ASSET_FILE_NAMES "")
 
+    set (increment 0)
     foreach(ASSET_FILE ${ASSET_FILES})
         get_filename_component(FILE_NAME ${ASSET_FILE} NAME)
         list(APPEND ASSET_FILE_NAMES ${FILE_NAME})
+        if (increment EQUAL 0)
+            set(FIRST_ASSET_FILE ${FILE_NAME})
+            math(EXPR increment "${increment} + 1")
+        endif()
     endforeach()
 
     string(REPLACE ";" "," ASSET_FILE_NAMES_STR "${ASSET_FILE_NAMES}")
 
+    # Copy and install assets
+    copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
+    install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${INSTALL_DESTINATION})
 
-    if(UNIX AND NOT APPLE)
-        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
-        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${ASSET_INSTALL_DIR})
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="../${ASSET_INSTALL_DIR}")
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
-    elseif(APPLE)
-        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
-        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${ASSET_INSTALL_DIR})
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="../${ASSET_INSTALL_DIR}")
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
-    elseif(WIN32)
-        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
-        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION "bin/${ASSET_INSTALL_DIR}")
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="${ASSET_INSTALL_DIR}")
-        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
-    endif()
-
-
-    endfunction()
+    # Set compilation definitions for asset paths
+    target_compile_definitions(${STANDALONE_NAME} PRIVATE
+        ASSET_PATH="${ASSET_PATH_DEFINE}"
+        FIRST_ASSET_FILE="${FIRST_ASSET_FILE}"
+        ASSET_FILES="${ASSET_FILE_NAMES_STR}")
+endfunction()

@@ -1,13 +1,13 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <iostream>
-#include <sstream>
-#include <string>
 #include <chrono>
 #include <iomanip>
+#include <iostream>
 #include <memory>
 #include <mutex>
+#include <sstream>
+#include <string>
 
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
@@ -15,8 +15,8 @@
 #ifdef _WIN32
   #ifndef NOMINMAX
     #define NOMINMAX
-    // Disable min/max macros in windows.h to avoid conflicts with std::min/max
-    // cxxopts.hpp uses std::min/max
+  // Disable min/max macros in windows.h to avoid conflicts with std::min/max
+  // cxxopts.hpp uses std::min/max
   #endif
   #include <windows.h>
 #endif
@@ -32,15 +32,15 @@ public:
   };
 
   // C++11 Singleton
-  static Logger& getInstance() {
+  static Logger &getInstance() {
     static Logger instance;
     return instance;
   }
 
-  Logger(const Logger&) = delete;
-  Logger& operator=(const Logger&) = delete;
+  Logger(const Logger &) = delete;
+  Logger &operator=(const Logger &) = delete;
 
-  void log(Level level, const std::string& message) {
+  void log(Level level, const std::string &message) {
     std::lock_guard<std::mutex> lock(logMutex);
 
     auto now = std::chrono::system_clock::now();
@@ -58,13 +58,13 @@ public:
     std::cout << std::endl;
   }
 
-  Logger& operator<<(Level level) {
+  Logger &operator<<(Level level) {
     m_currentLevel = level;
     return *this;
   }
 
   template<typename T>
-  Logger& operator<<(const T& message) {
+  Logger &operator<<(const T &message) {
     std::lock_guard<std::mutex> lock(logMutex);
 
     if (!m_messageStream.str().empty()) { m_messageStream << " "; }
@@ -72,18 +72,18 @@ public:
     return *this;
   }
 
-  Logger& operator<<(std::ostream& (*)(std::ostream&)) {
+  Logger &operator<<(std::ostream &(*)(std::ostream &)) {
     log(m_currentLevel, m_messageStream.str());
     m_messageStream.str("");
     m_messageStream.clear();
     return *this;
   }
 
-  void debug(const std::string& message) { log(Level::LOG_DEBUG, message); }
-  void info(const std::string& message) { log(Level::LOG_INFO, message); }
-  void warning(const std::string& message) { log(Level::LOG_WARNING, message); }
-  void error(const std::string& message) { log(Level::LOG_ERROR, message); }
-  void critical(const std::string& message) {
+  void debug(const std::string &message) { log(Level::LOG_DEBUG, message); }
+  void info(const std::string &message) { log(Level::LOG_INFO, message); }
+  void warning(const std::string &message) { log(Level::LOG_WARNING, message); }
+  void error(const std::string &message) { log(Level::LOG_ERROR, message); }
+  void critical(const std::string &message) {
     log(Level::LOG_CRITICAL, message);
   }
 

@@ -34,7 +34,6 @@ option(ENABLE_CCACHE "Enable ccache" ON)
 # === linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-
 # ==============================================================================
 # Project attributes
 # ==============================================================================
