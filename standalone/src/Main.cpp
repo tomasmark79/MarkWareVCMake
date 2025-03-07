@@ -19,6 +19,14 @@ constexpr char build_type[] = "Release";
 constexpr char build_type[] = "Debug";
 #endif
 
+#ifdef _WIN32
+#define ASSETS_PATH "../assets/IAmAsset.txt"
+#elif defined(__unix__) || defined(__linux__) || defined(__FreeBSD__) || defined(__APPLE__)
+#define ASSETS_PATH "../share/VCMStandalone/assets/IAmAsset.txt"
+#else
+#error "Set your platform path for assets folder"
+#endif
+
 int main(int argc, const char* argv[]) {
   LOG.info(standaloneName);
   LOG.info("C++ " + std::to_string(__cplusplus));
@@ -53,24 +61,16 @@ int main(int argc, const char* argv[]) {
     }
 
     // ==============================================================================
-    // Set assets path depending on platform
+    // Show assets path
     // ==============================================================================
     if (result.count("assets")) {
       LOG << Logger::Level::LOG_WARNING << "Loading assets omitted [-a]"
           << std::endl;
     } else {
-      constexpr auto getAssetsRelativePath = []() -> std::string {
-#ifdef _WIN32
-        return "../assets/IAmAsset.txt";
-#elif defined(__unix__) || defined(__linux__) || defined(__FreeBSD__) || defined(__APPLE__)
-        return "../share/VCMStandalone/assets/IAmAsset.txt";
-#else
-        LOG.error("Set your platform path for assets folder");
-        exit(1);
-#endif
-      };
       LOG << Logger::Level::LOG_INFO
-          << "Asset file path: " << getAssetsRelativePath() << std::endl;
+          << "Asset file path: " << ASSETS_PATH << std::endl;
+          // Load assets
+          // ...
     }
 
     // ==============================================================================
