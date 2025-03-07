@@ -1,6 +1,4 @@
 {
-    /* MIT License
-       Copyright (c) 2024-2025 Tomáš Mark */
     "version": "0.2.0",
     "configurations": [
         {
@@ -8,8 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/standalone/default/debug/VCMStandalone",
-            "args": [/*"-h"*/], /* "-o" "-s"*/
-
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/standalone/default/debug/",
             "environment": [],
@@ -29,9 +26,8 @@
             "name": "Debug CMake configuration",
             "type": "cmake",
             "request": "launch",
-            "pipeName": "/tmp/cmake-debugger-pipe-c2b99b2f-8934-489a-a94c-336de1ae5194",
+            "pipeName": "/tmp/cmake-debugger-pipe-5f272f86-465c-42fe-b036-155aec382318",
             "cmakeDebugType": "external"
         }
-        
     ]
 }

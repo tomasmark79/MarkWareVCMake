@@ -31,9 +31,9 @@ option(ENABLE_IPO "Enable Interprocedural Optimization" OFF)
 # === ccache
 include(../cmake/ccache.cmake)
 option(ENABLE_CCACHE "Enable ccache" ON)
-
-# Linting C/C++ code
+# === linting C/C++ code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 
 # ==============================================================================
 # Project attributes
@@ -111,24 +111,10 @@ target_link_libraries(${STANDALONE_NAME} PRIVATE dsdotname::VCMLib cxxopts)
 # Add missing installation exports
 # ==============================================================================
 set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION bin)
+install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
 
 # ==============================================================================
-# Assets handling
+# Asset files processing
 # ==============================================================================
-set(ASSET_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../assets/IAmAsset.txt")
-# Create assets directory and copy assets during build
-add_custom_command(
-    TARGET ${STANDALONE_NAME}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-            "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ASSET_SOURCE}
-            "$<TARGET_FILE_DIR:${STANDALONE_NAME}>/../share/${STANDALONE_NAME}/assets")
-install(TARGETS ${STANDALONE_NAME} RUNTIME DESTINATION bin)
-if(UNIX AND NOT APPLE)
-    install(FILES ${ASSET_SOURCE} DESTINATION share/${STANDALONE_NAME}/assets)
-elseif(APPLE)
-    install(FILES ${ASSET_SOURCE} DESTINATION share/${STANDALONE_NAME}/assets)
-elseif(WIN32)
-    install(FILES ${ASSET_SOURCE} DESTINATION bin/assets)
-endif()
+include(../cmake/mw-assets.cmake)
+apply_assets_processing()
