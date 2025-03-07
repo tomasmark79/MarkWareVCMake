@@ -197,11 +197,17 @@ MarkWareVCMake/
 ```
 Contains just **standalone** project.
 
+```txt
+MarkWareVCMake/
+├── assets/
+```
+Contains project **assets**. All content included in this folder is accessible via file path by macro ASSET_PATH.
+
+
 ### Standalone arguments
 
 *Template C++ is using basic [cxxopt](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation to smart manage passed arguments for Standalone.*  
 
-  - `-a` omitt assets loading
   - `-o` omitt library loading
   - `-h` show help
 
