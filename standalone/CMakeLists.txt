@@ -87,6 +87,9 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx)
 
+# add stable Main.cpp
+list(APPEND sources ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
+
 # ==============================================================================
 # Create target
 # ==============================================================================
