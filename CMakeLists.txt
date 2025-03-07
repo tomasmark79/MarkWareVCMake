@@ -183,7 +183,7 @@ packageProject(
     # (optional) install your library with a namespace (Note: do NOT add extra '::')
     NAMESPACE ${LIBRARY_NAMESPACE}
     # (optional) define the project's version compatibility, defaults to `AnyNewerVersion`
-    # supported values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|VCMStandalonetVersion`
+    # supported values: `AnyNewerVersion|SameMajorVersion|SameMinorVersion|VCMStandaloneVersion`
     COMPATIBILITY AnyNewerVersion
     # (optional) option to disable the versioning of install destinations
     DISABLE_VERSION_SUFFIX YES
