@@ -33,7 +33,9 @@ int parseTemplateOptions(int argc, const char *argv[]) {
       ("h,help", "Show help")
       ("o,omit", "Omit library loading", cxxopts::value<bool>()->default_value("false"));
     // clang-format on
-    auto result = options->parse(argc, argv);
+    
+    const auto result = options->parse(argc, argv);
+    
     if (result.count("help")) {
       LOG << Logger::Level::LOG_INFO << options->help({"", "Group"})
           << std::endl;
