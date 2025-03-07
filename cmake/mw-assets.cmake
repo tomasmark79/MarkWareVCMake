@@ -28,29 +28,40 @@ function(apply_assets_processing)
     endif()
 
     file(GLOB_RECURSE ASSET_FILES "${ASSET_SOURCE_DIR}/*")
+
     if(NOT ASSET_FILES)
         message(STATUS "No asset files found in ${ASSET_SOURCE_DIR}.")
         target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="No asset files found in ${ASSET_SOURCE_DIR}.")
         return()
     endif()
-    
+
     # Extract file names from paths
     set(ASSET_FILE_NAMES "")
+
     foreach(ASSET_FILE ${ASSET_FILES})
         get_filename_component(FILE_NAME ${ASSET_FILE} NAME)
         list(APPEND ASSET_FILE_NAMES ${FILE_NAME})
     endforeach()
-    
-    string(REPLACE ";" "," ASSET_FILE_NAMES_STR "${ASSET_FILE_NAMES}")
-    
-    # Define compile-time #define variables
-    target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="${ASSET_INSTALL_DIR}")
-    target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
-    
-    # Copy to build directory
-    copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
-    
-    # Install
-    install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${ASSET_INSTALL_DIR})
 
-endfunction()
+    string(REPLACE ";" "," ASSET_FILE_NAMES_STR "${ASSET_FILE_NAMES}")
+
+
+    if(UNIX AND NOT APPLE)
+        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
+        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${ASSET_INSTALL_DIR})
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="../${ASSET_INSTALL_DIR}")
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
+    elseif(APPLE)
+        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
+        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION ${ASSET_INSTALL_DIR})
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="../${ASSET_INSTALL_DIR}")
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
+    elseif(WIN32)
+        copy_assets(${STANDALONE_NAME} "${ASSET_SOURCE_DIR}" "${ASSET_BUILD_DIR}")
+        install(DIRECTORY ${ASSET_SOURCE_DIR} DESTINATION "bin/${ASSET_INSTALL_DIR}")
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_PATH="${ASSET_INSTALL_DIR}")
+        target_compile_definitions(${STANDALONE_NAME} PRIVATE ASSET_FILES="${ASSET_FILE_NAMES_STR}")
+    endif()
+
+
+    endfunction()
