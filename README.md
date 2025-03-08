@@ -48,7 +48,7 @@ All these required tools are installed automatically if missing by the installer
 - [**Conan 2**](https://conan.io/center) for dependency management
 - [**CMake**](https://cmake.org/download/) (latest version 3 recommended)
 - **Code Formatters**:
-  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html)
+  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html) req. >= 19.1.0
     - [CLangConfigurator](https://clang-format-configurator.site)
   - [CMake Format](https://cmake-format.readthedocs.io/en/latest/)
 - **Code analyzing**:
