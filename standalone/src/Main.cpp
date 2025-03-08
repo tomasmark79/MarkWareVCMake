@@ -1,10 +1,11 @@
-#include "Logger/Logger.hpp"
-#include "VCMLib/VCMLib.hpp"
-#include "Utils.hpp"
 #include <cxxopts.hpp>
 #include <fstream>
 #include <iostream>
 #include <memory>
+
+#include "Logger/Logger.hpp"
+#include "Utils.hpp"
+#include "VCMLib/VCMLib.hpp"
 
 // MIT License
 // Copyright (c) 2024-2025 Tomáš Mark
@@ -14,18 +15,17 @@ std::string standaloneExecutablePath =
     FileSystemManager::getExecutableDirectory();
 
 #ifndef ASSET_PATH
-  #define ASSET_PATH ""
+#define ASSET_PATH ""
 #endif
 #ifndef FIRST_ASSET_FILE
-  #define FIRST_ASSET_FILE ""
+#define FIRST_ASSET_FILE ""
 #endif
 #ifndef ASSET_FILES
-  #define ASSET_FILES ""
+#define ASSET_FILES ""
 #endif
 
 /// @brief Main Standalone entry point
 int main(int argc, const char *argv[]) {
-
   // ---basic-information------is-safe-to-delete 👇🏻
   LOG.info(standaloneName);
   LOG.info("C++ " + std::to_string(__cplusplus));
@@ -49,16 +49,14 @@ int main(int argc, const char *argv[]) {
 
   // ---argument-parsing-------is-safe-to-delete 👇🏻
   try {
-    // clang-format off
     auto options = std::make_unique<cxxopts::Options>(argv[0], standaloneName);
     options->positional_help("[optional args]").show_positional_help();
     options->set_width(70)
-      .set_tab_expansion()
-      .allow_unrecognised_options()
-      .add_options()
-      ("h,help", "Show help")
-      ("o,omit", "Omit library loading", cxxopts::value<bool>()->default_value("false"));
-    // clang-format on
+        .set_tab_expansion()
+        .allow_unrecognised_options()
+        .add_options()("h,help", "Show help")(
+            "o,omit", "Omit library loading",
+            cxxopts::value<bool>()->default_value("false"));
 
     const auto result = options->parse(argc, argv);
 

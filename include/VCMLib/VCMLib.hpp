@@ -8,14 +8,14 @@
 
 namespace library {
 
-  class VCMLib {
-  public:
-    VCMLib();
-    ~VCMLib();
+class VCMLib {
+public:
+  VCMLib();
+  ~VCMLib();
 
-  private:
-  };
+private:
+};
 
-}  // namespace library
+} // namespace library
 
-#endif  // __VCMLIB_H__
+#endif // __VCMLIB_H__

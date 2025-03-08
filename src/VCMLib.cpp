@@ -1,5 +1,6 @@
-#include <VCMLib/VCMLib.hpp>
 #include <VCMLib/version.h>
+
+#include <VCMLib/VCMLib.hpp>
 #include <iostream>
 
 // MIT License
@@ -7,13 +8,11 @@
 
 namespace library {
 
-  VCMLib::VCMLib() {
-    std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
-              << std::endl;
-  }
+VCMLib::VCMLib() {
+  std::cout << "--- VCMLib v." << VCMLIB_VERSION << " instantiated ---"
+            << std::endl;
+}
 
-  VCMLib::~VCMLib() {
-    std::cout << "--- VCMLib uninstantiated ---" << std::endl;
-  }
+VCMLib::~VCMLib() { std::cout << "--- VCMLib uninstantiated ---" << std::endl; }
 
-}  // namespace library
+} // namespace library
