@@ -1,102 +1,55 @@
-#Requires -Version 5.1
-
+# Run as administrator check
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "This script requires administrative privileges. Please run PowerShell as an administrator." -ForegroundColor Red
-    exit 1
+    Write-Warning "Please run as Administrator!"
+    exit
 }
 
-# Function to display status messages
-function Write-Status($message) {
-    Write-Host "[INFO] $message" -ForegroundColor Green
+# Install Chocolatey if not installed
+if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
+    Write-Output "Installing Chocolatey..."
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    # Reload environment variables
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
-# Function to handle errors
-function Handle-Error($errorMessage) {
-    Write-Host "[ERROR] $errorMessage" -ForegroundColor Red
-    Write-Host "Installation failed. Please fix the error and try again." -ForegroundColor Red
-    exit 1
+# Install First available packages for Windows from Chocolatey
+Write-Output "Installing basic development tools..."
+choco install --upgrade git curl python vcpkg doxygen.install ccache llvm vscode -y --no-progress
+
+# Reload environment variables properly
+function Update-Environment {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
+Update-Environment
 
-try {
-    Write-Status "Enabling TLS 1.2..."
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# # Install PyEnv for Windows
+# Write-Output "Installing PyEnv for Windows..."
+# Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+# Update-Environment
 
-    # Check for Chocolatey and handle existing installation
-    $chocoPath = "C:\ProgramData\chocolatey"
-    
-    if (Test-Path $chocoPath) {
-        Write-Status "Chocolatey installation found at $chocoPath"
-        
-        # Try to ensure Chocolatey is in the PATH
-        if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-            Write-Status "Updating PATH to include Chocolatey..."
-            $env:Path = "$env:Path;$chocoPath\bin"
-            
-            # If still not working, repair installation
-            if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-                Write-Status "Repairing Chocolatey installation..."
-                Set-ExecutionPolicy Bypass -Scope Process -Force
-                [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-                try {
-                    iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-                }
-                catch {
-                    Handle-Error "Failed to repair Chocolatey: $_"
-                }
-            }
-        }
-        
-        # Upgrade Chocolatey
-        Write-Status "Upgrading Chocolatey..."
-        try {
-            choco upgrade chocolatey -y
-        } catch {
-            Write-Status "Chocolatey upgrade failed, continuing with existing version: $_"
-        }
-    }
-    else {
-        # Fresh installation
-        Write-Status "Installing Chocolatey..."
-        Set-ExecutionPolicy Bypass -Scope Process -Force
-        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-        try {
-            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-        }
-        catch {
-            Handle-Error "Failed to install Chocolatey: $_"
-        }
-    }
+# # Install Python 3.12.8 with PyEnv
+# Write-Output "Installing Python 3.12.8 via PyEnv..."
+# pyenv install 3.12.8
+# pyenv global 3.12.8
 
-    # Verify Chocolatey is working
-    if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-        Handle-Error "Unable to access Chocolatey after installation/repair attempts"
-    }
+# # Create a virtual environment
+# Write-Output "Creating a virtual environment..."
+# python -m venv .venv
+# .venv\Scripts\Activate.ps1
 
-    # Rest of the script remains unchanged
-    Write-Status "Installing required packages via Chocolatey..."
-    try {
-        choco install -y git python nodejs curl
-        if ($LASTEXITCODE -ne 0) { throw "Chocolatey installation returned error code $LASTEXITCODE" }
-    } catch {
-        Handle-Error "Failed to install packages via Chocolatey: $_"
-    }
+# Update pip
+Write-Output "Upgrading pip..."
+python -m pip install --upgrade pip
+python -m pip install --upgrade cmake ninja task conan make clang-tidy clang-format cppcheck cpplint cmake-language-server cmake-format gcovr
 
-    # Install pipx
-    Write-Status "Installing pipx..."
-    try {
-        python -m pip install --user pipx
-        python -m pipx ensurepath
-    }
-    catch {
-        Handle-Error "Failed to install pipx: $_"
-    }
-    
-    # Update PATH for current session
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-    
-    # Rest of the script continues as before...
-    # Install setup-cpp, pyenv-win, etc.
-}
-catch {
-    Handle-Error "An unexpected error occurred: $_"
-}
+# Set up conan profile
+Write-Output "Setting up Conan profile..."
+conan profile detect --force
+
+# Start Visual Studio Code
+#Write-Output "Starting Visual Studio Code..."
+#code .
+
+Write-Output "Installation completed!"
