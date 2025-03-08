@@ -17,9 +17,9 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # Now pyenv commands will work
-pyenv install 3.12.8
-pyenv virtualenv 3.12.8 env3128
-pyenv global 3.12.8
+pyenv install 3.13.1
+pyenv virtualenv 3.13.1 env3131
+pyenv global 3.13.1
 pip install --upgrade pip
 
 # Download and install Visual Studio Code

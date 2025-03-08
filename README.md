@@ -62,24 +62,16 @@ This project provides a set of installer scripts in the `.init` folder for setti
 
 ```bash
 
-# Debian based (Tested Debian Bookworm 12.9, Ubuntu 22.04)
+# Debian, [x][k]ubuntu, ...
 
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/DebianBasedInstaller.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/DebianBasedInstaller.sh | bash
 
-# Fedora (Tested Fedora 40, 41)
+# Fedora
 
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/FedoraInstaller.sh | bash
+curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/FedoraInstaller.sh | bash
 
-# Arch (required contributor)
-
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/ArchInstaller.sh | bash
-
-# OpenSUSE (required contributor)
-
-curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/OpenSUSEInstaller.sh | bash
-
-# Windows 10/11 (script dev in progress)
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
+# Windows 24H2 
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 
 # MacOS (required contributor)
 
