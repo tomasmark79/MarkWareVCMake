@@ -12,7 +12,7 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 
 ## Key Features🎈
 
-- **Awesome OneClick Installer**
+- **Awesome OneClick Installer** with [setup-cpp](https://github.com/aminya/setup-cpp)
 - **Linux**, **MacOS**, **Windows** compatible
 - Modern **CMake** with **targets design**
 - Modern projects design **Standalone** & **Library** 
