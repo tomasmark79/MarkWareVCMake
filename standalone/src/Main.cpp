@@ -1,5 +1,6 @@
-#include <Logger/Logger.hpp>
-#include <VCMLib/VCMLib.hpp>
+#include "Logger/Logger.hpp"
+#include "VCMLib/VCMLib.hpp"
+#include "Utils.hpp"
 #include <cxxopts.hpp>
 #include <fstream>
 #include <iostream>
@@ -9,6 +10,7 @@
 // Copyright (c) 2024-2025 Tomáš Mark
 
 constexpr char standaloneName[] = "VCMStandalone";
+std::string standaloneExecutablePath = getExecutableDirectory();
 
 #ifndef ASSET_PATH
   #define ASSET_PATH ""
@@ -33,9 +35,9 @@ int parseTemplateOptions(int argc, const char *argv[]) {
       ("h,help", "Show help")
       ("o,omit", "Omit library loading", cxxopts::value<bool>()->default_value("false"));
     // clang-format on
-    
+
     const auto result = options->parse(argc, argv);
-    
+
     if (result.count("help")) {
       LOG << Logger::Level::LOG_INFO << options->help({"", "Group"})
           << std::endl;
@@ -63,7 +65,8 @@ int main(int argc, const char *argv[]) {
 
   // --------------------------delete me 👇🏻
   // asset access test
-  std::string assetFp = static_cast<std::string>(ASSET_PATH) + "/" +
+  std::string assetFp = standaloneExecutablePath + "/" +
+                        static_cast<std::string>(ASSET_PATH) + "/" +
                         static_cast<std::string>(FIRST_ASSET_FILE);
   std::ifstream file(assetFp);
   try {
