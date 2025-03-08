@@ -44,13 +44,13 @@ Just seconds away from starting 🚀 development in awesome C++ 💻✨
 All these required tools are installed automatically if missing by the installer script.
 
 - [**Visual Studio Code**](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
-- [**Python 3**](https://www.python.org) (managed by [Pyenv](https://github.com/pyenv/pyenv ))
+- [**Python 3**](https://www.python.org) (recomended via [Pyenv](https://github.com/pyenv/pyenv ))
 - [**Conan 2**](https://conan.io/center) for dependency management
 - [**CMake**](https://cmake.org/download/) (latest version 3 recommended)
 - **Code Formatters**:
-  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html) req. >= 19.1.0
-    - [CLangConfigurator](https://clang-format-configurator.site)
-  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/)
+  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html) (def. LLVM, conf. req. >= 19.1.0)
+    - [CLangConfigurator](https://clang-format-configurator.site) (may help to fine tune general configuration)  
+  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
 - **Code analyzing**:
   - [Clang Tidy](https://clang.llvm.org/extra/clang-tidy/)
 
