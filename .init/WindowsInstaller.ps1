@@ -25,7 +25,9 @@ if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
 
 # Install development packages for Windows from Chocolatey
 Write-Output "Installing basic development tools..."
-choco install --yes --no-progress git curl python vcpkg doxygen.install ccache make cmake ninja llvm msys2 vscode mingw
+choco install --yes --no-progress git curl python doxygen.install ccache make cmake ninja llvm msys2 vscode mingw
+
+# vcpkg
 
 # Refresh environment variables after installation
 Update-Environment
