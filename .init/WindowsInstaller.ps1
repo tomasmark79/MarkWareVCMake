@@ -16,7 +16,7 @@ if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
 
 # Install First available packages for Windows from Chocolatey
 Write-Output "Installing basic development tools..."
-choco install --upgrade git curl python vcpkg doxygen.install ccache llvm vscode -y --no-progress
+choco install --upgrade git curl python vcpkg doxygen.install ccache make cmake ninja llvm msys2 vscode mingw -y --no-progress
 
 # Reload environment variables properly
 function Update-Environment {
@@ -24,25 +24,10 @@ function Update-Environment {
 }
 Update-Environment
 
-# # Install PyEnv for Windows
-# Write-Output "Installing PyEnv for Windows..."
-# Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-# Update-Environment
-
-# # Install Python 3.12.8 with PyEnv
-# Write-Output "Installing Python 3.12.8 via PyEnv..."
-# pyenv install 3.12.8
-# pyenv global 3.12.8
-
-# # Create a virtual environment
-# Write-Output "Creating a virtual environment..."
-# python -m venv .venv
-# .venv\Scripts\Activate.ps1
-
 # Update pip
 Write-Output "Upgrading pip..."
 python -m pip install --upgrade pip
-python -m pip install --upgrade cmake ninja task conan make clang-tidy clang-format cppcheck cpplint cmake-language-server cmake-format gcovr
+python -m pip install --upgrade conan clang-tidy clang-format cmake-format gcovr
 
 # Set up conan profile
 Write-Output "Setting up Conan profile..."
