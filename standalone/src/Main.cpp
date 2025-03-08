@@ -10,7 +10,8 @@
 // Copyright (c) 2024-2025 Tomáš Mark
 
 constexpr char standaloneName[] = "VCMStandalone";
-std::string standaloneExecutablePath = getExecutableDirectory();
+std::string standaloneExecutablePath =
+    FileSystemManager::getExecutableDirectory();
 
 #ifndef ASSET_PATH
   #define ASSET_PATH ""
