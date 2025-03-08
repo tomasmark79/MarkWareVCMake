@@ -92,7 +92,7 @@
             /* TASKS RUN */
             "label": "MarkWare Tasks",
             "type": "shell",
-            "command": "python3",
+            "command": "python",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "${input:buildProduct}",
@@ -114,7 +114,7 @@
             /* DIRECT BUILD (NO MENU) */
             "label": "Direct Build",
             "type": "shell",
-            "command": "python3",
+            "command": "python",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "standalone",
@@ -133,7 +133,7 @@
             /* DIRECT CLANG-TIDY C/C++ ( NEED MENU )  */
             "label": "clang-tidy",
             "type": "shell",
-            "command": "python3",
+            "command": "python",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "${input:buildProduct}",
@@ -152,7 +152,7 @@
             /* DIRECT CLANG-FORMAT */
             "label": "clang-format",
             "type": "shell",
-            "command": "python3",
+            "command": "python",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
@@ -170,7 +170,7 @@
             /* DIRECT CMAKE-FORMAT */
             "label": "cmake-format",
             "type": "shell",
-            "command": "python3",
+            "command": "python",
             "args": [
                 "${workspaceFolder}/SolutionController.py",
                 "both",
