@@ -22,8 +22,31 @@ std::string standaloneExecutablePath = getExecutableDirectory();
   #define ASSET_FILES ""
 #endif
 
-/// @brief process command line arguments
-int parseTemplateOptions(int argc, const char *argv[]) {
+/// @brief Main Standalone entry point
+int main(int argc, const char *argv[]) {
+
+  // ---basic-information------is-safe-to-delete 👇🏻
+  LOG.info(standaloneName);
+  LOG.info("C++ " + std::to_string(__cplusplus));
+  // ----------------------------------delete me 👆🏻
+
+  // ---assets-testing---------is-safe-to-delete 👇🏻
+  std::string assetFp = standaloneExecutablePath + "/" +
+                        static_cast<std::string>(ASSET_PATH) + "/" +
+                        static_cast<std::string>(FIRST_ASSET_FILE);
+  std::ifstream file(assetFp);
+  try {
+    if (file.is_open()) {
+      LOG.info("Opened first asset file: " + assetFp);
+    } else {
+      LOG.error("No assets found: " + assetFp);
+    }
+  } catch (const std::exception &e) {
+    LOG.error("Error opening first asset file: " + assetFp);
+  }
+  // ----------------------------------delete me 👆🏻
+
+  // ---argument-parsing-------is-safe-to-delete 👇🏻
   try {
     // clang-format off
     auto options = std::make_unique<cxxopts::Options>(argv[0], standaloneName);
@@ -54,31 +77,7 @@ int parseTemplateOptions(int argc, const char *argv[]) {
     LOG << Logger::Level::LOG_ERROR << "error parsing options: " << e.what();
     return 1;
   }
+  // ----------------------------------delete me 👆🏻
+
   return 0;
-}
-
-/// @brief Main Standalone entry point
-int main(int argc, const char *argv[]) {
-
-  LOG.info(standaloneName);
-  LOG.info("C++ " + std::to_string(__cplusplus));
-
-  // --------------------------delete me 👇🏻
-  // asset access test
-  std::string assetFp = standaloneExecutablePath + "/" +
-                        static_cast<std::string>(ASSET_PATH) + "/" +
-                        static_cast<std::string>(FIRST_ASSET_FILE);
-  std::ifstream file(assetFp);
-  try {
-    if (file.is_open()) {
-      LOG.info("Opened first asset file: " + assetFp);
-    } else {
-      LOG.error("No assets found: " + assetFp);
-    }
-  } catch (const std::exception &e) {
-    LOG.error("Error opening first asset file: " + assetFp);
-  }
-  // --------------------------delete me 👆🏻
-
-  return parseTemplateOptions(argc, argv);
 }
