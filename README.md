@@ -74,7 +74,7 @@ curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.ini
 
 #### Windows 10/11
 
-  note: CMake generator `-G "MinGW Makefiles"` is in `SolutionController.py at row 244` hardcoded. You need to change to your on demand.
+  note: CMake generator `-G "MinGW Makefiles"` is in `SolutionController.py at row 227` hardcoded. You need to change to your on demand.
 
 PowerShell installer (be patient, take a while)
 ```bash

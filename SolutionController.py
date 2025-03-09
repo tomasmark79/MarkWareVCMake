@@ -224,7 +224,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
         if platform.system().lower() == "windows":
             # CMake configuration for Windows x64 with Conan toolchain
             conan_build_bat_file = os.path.join(workSpaceDir, bdir, "conanbuild.bat")
-            winCmd = f'call "{conan_build_bat_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
+            winCmd = f'call "{conan_build_bat_file}" && cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir, buildArch, buildType.lower())}"'
             execute_subprocess(winCmd, "cmd.exe")
 
     # CMake solo
@@ -241,7 +241,7 @@ def cmake_configure(src, bdir, isCMakeDebugger=False):
             # CMake native
             DCMAKE_TOOLCHAIN_FILE_CMD = ""
         # CMake solo command
-        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir,buildArch,buildType.lower())}"'
+        cmd = f'cmake -S "{src}" -B "{os.path.join(workSpaceDir, bdir)}" {DCMAKE_TOOLCHAIN_FILE_CMD} -DCMAKE_BUILD_TYPE={buildType} -DCMAKE_INSTALL_PREFIX="{os.path.join(installationOutputDir,buildArch,buildType.lower())}"'
         execute_command(cmd)
 
 ### CMake build, revision 3
