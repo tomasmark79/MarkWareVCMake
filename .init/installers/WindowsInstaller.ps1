@@ -25,17 +25,23 @@ if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
 
 # Install development packages for Windows from Chocolatey
 Write-Output "Installing basic development tools..."
-#choco install --yes --no-progress visualstudio2022buildtools
-#choco install --yes --no-progress visualstudio2022-workload-vctools --package-parameters "--includeRecommended --includeOptional"
-choco install --yes --no-progress git curl python mingw cmake ninja make doxygen.install ccache vscode 
 
-# vcpkg - todo if neccessary
-# msys2 - todo if neccessary
+# available choco packages
+choco install --yes --no-progress git curl python cmake ninja make doxygen.install ccache vscode 
+
+# mingw
+choco install --yes --no-progress mingw
+
+# msvc
+choco install --yes --no-progress visualstudio2022-workload-vctools --package-parameters "--includeRecommended --includeOptional"
+choco install --yes --no-progress visualstudio2022buildtools
+
+# vcpkg - todo
 
 # Refresh environment variables after installation
 Update-Environment
 
-# Update pip and install Python dependencies
+# Update pip and install Python packages unavailable in Chocolatey
 Write-Output "Upgrading pip and installing Python dependencies..."
 try {
     python -m pip install --upgrade pip
