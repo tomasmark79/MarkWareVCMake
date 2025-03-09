@@ -284,7 +284,7 @@ xxd -i file.bin > file.h
 To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!  
 
 ## Credits
-m[dsdotname], littlemushroom
+tomasmark79, littlemushroom
 
 ## License
 
