@@ -32,11 +32,10 @@ choco install --yes --no-progress git curl python cmake ninja make doxygen.insta
 # mingw
 choco install --yes --no-progress mingw
 
-# msvc
-choco install --yes --no-progress visualstudio2022-workload-vctools --package-parameters "--includeRecommended --includeOptional"
-choco install --yes --no-progress visualstudio2022buildtools
-
-# vcpkg - todo
+# msvc todo
+# choco install --yes --no-progress visualstudio2022-workload-vctools --package-parameters "--includeRecommended --includeOptional"
+# choco install --yes --no-progress visualstudio2022buildtools
+# vcpkg todo
 
 # Refresh environment variables after installation
 Update-Environment
