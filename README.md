@@ -5,95 +5,111 @@
 [![Windows](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml/badge.svg)](https://github.com/tomasmark79/MarkWareVCMake/actions/workflows/windows.yml)  
 
 ## Overview  
+MarkWare VCMake is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.
 
-MarkWare VCMake is a comprehensive, modern C++ project template designed for cross-platform development in Visual Studio Code. The template provides a robust foundation for both standalone executables and libraries, incorporating industry best practices and modern build tools.  
-
-Just seconds away from starting 🚀 development in awesome C++ 💻✨  
+With automatic installers you are just seconds away from starting 🚀 development. 💻✨  
 
 ## Key Features🎈
 
-- **Awesome OneClick Installer** with [setup-cpp](https://github.com/aminya/setup-cpp)
-- **Linux**, **MacOS**, **Windows** compatible
-- Modern **CMake** with **targets design**
 - Modern projects design **Standalone** & **Library** 
-- **Conan 2** by conanfile.py
-- [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake), [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxoptwiki](https://github.com/jarro2783/cxxopts/wiki))
+- The template is universal for **Linux**, **MacOS**, **Windows**
+- Modern **CMake** with **targets object design**
+- Integrated **Conan 2** with declaration in conanfile.py
+- Target linking with [**CPM.cmake**](https://github.com/cpm-cmake/CPM.cmake), [**CPM.license**](https://github.com/cpm-cmake/CPMLicenses.cmake)
+- Extended argument parsing with [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) ([cxxoptwiki](https://github.com/jarro2783/cxxopts/wiki))
 - **Sanitizers**, **Static Analysis**, and **Hardening**
-- Template **Renamer**
-- Template **Upgrader**
-- Counts with **Cross-compilation**
-- Compatible to [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
-- Automated **Wrapper for CMake Build System** by [Tasks](https://code.visualstudio.com/docs/editor/tasks)
+- Created with an emphasis on **Cross-compilation** capabilities
+- Automated **Wrapper for CMake Build System** by [VSCode Tasks](https://code.visualstudio.com/docs/editor/tasks)
 - Native C++ debugging by Microsoft [C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [**CMake debugger**](https://devblogs.microsoft.com/cppblog/introducing-cmake-debugger-in-vs-code-debug-your-cmake-scripts-using-open-source-cmake-debugger/)
 - GitHub [Actions](https://docs.github.com/en/actions) workflows for continuous integration
+- Template **Renamer**
+- Template **Upgrader**
+- Compatible with [**SSH**](https://code.visualstudio.com/docs/remote/ssh), [**WSL**](https://code.visualstudio.com/docs/remote/wsl) remote development
 
-## Projects used this template
+## Some of My Older Projects Using MarkWare VCMake
 
-[MWImGuiStarter](https://github.com/tomasmark79/MWImGuiStarter)  
-[MWwxWidgetsStarter](https://github.com/tomasmark79/MWwxWidgetsStarter)  
-[MyPersonalDiscordBot](https://github.com/tomasmark79/MyPersonalDiscordBot)  
-[snake-in-shell-cpp](https://github.com/tomasmark79/snake-in-shell-cpp)  
-[MassCode2Md](https://github.com/tomasmark79/MassCode2Md)  
-...
-
-## System Requirements
-
-### Essential Tools
-
-All these required tools are installed automatically if missing by the installer script.
-
-- [**Visual Studio Code**](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
-- [**Python 3**](https://www.python.org) (recomended via [Pyenv](https://github.com/pyenv/pyenv ))
-- [**Conan 2**](https://conan.io/center) for dependency management
-- [**CMake**](https://cmake.org/download/) (latest version 3 recommended)
-- **Code Formatters**:
-  - [Clang Format](https://clang.llvm.org/docs/ClangFormat.html) (def. LLVM, conf. req. >= 19.1.0)
-    - [CLangConfigurator](https://clang-format-configurator.site) (may help to fine tune general configuration)  
-  - [CMake Format](https://cmake-format.readthedocs.io/en/latest/) 
-- **Code analyzing**:
-  - [Clang Tidy](https://clang.llvm.org/extra/clang-tidy/)
+[MWImGuiStarter](https://github.com/tomasmark79/MWImGuiStarter), [MWwxWidgetsStarter](https://github.com/tomasmark79/MWwxWidgetsStarter),  [MyPersonalDiscordBot](https://github.com/tomasmark79/MyPersonalDiscordBot), [snake-in-shell-cpp](https://github.com/tomasmark79/snake-in-shell-cpp), [MassCode2Md](https://github.com/tomasmark79/MassCode2Md)  
 
 ## Getting Started
 
-### Environment installers
+**Important Decision!**  
+For MarkWare VCMake to function properly, you need to have the software installed that is used either directly by the project configuration itself or by the workflow that occurs in VSCode when working with MarkWare VCMake. You have two options. You can manually add dependencies one by one, which might be the more complex but better option for already used systems, or you can use automatic installation scripts, which are most suitable for a freshly installed system, as the scripts will install everything from scratch to a functional solution.
 
-Below are the commands that will install the necessary dependencies for the listed operating systems to successfully start development using this template project.
+### Manual Installation
 
-#### Debian based
+As a developer, you will most likely already have most of the tools listed below installed on your system.
+
+Tools
+- [git](https://git-scm.com)
+- [curl](https://curl.se) (optional)
+- [make](https://www.gnu.org/software/make/) [ninja](https://ninja-build.org)
+- [cmake](https://cmake.org/download/)
+- [ccache](https://ccache.dev/download.html)
+- [vscode](https://code.visualstudio.com/download) with C++ [extension](https://marketplace.visualstudio.com/vscode)
+- [pyenv](https://github.com/pyenv/pyenv) (optional)
+  - [python 3](https://www.python.org)
+    - [pip](https://pypi.org/project/pip/) - [PipHub](https://pypi.org)
+      - [clang tidy](https://clang.llvm.org/extra/clang-tidy/)
+      - [clang format](https://clang.llvm.org/docs/ClangFormat.html) >= 19.1.0- [WebClangConfigurator](https://clang-format-configurator.site)
+      - [cmake format](https://cmake-format.readthedocs.io/en/latest/)
+    - [conan 2](https://conan.io/center) - [ConanHub](https://conan.io/center)
+- [vcpkg](https://vcpkg.io/en/) (not implemented yet)
+- [doxygen](https://www.doxygen.nl) (not implemented yet)
+- [gcovr](https://gcovr.com/en/stable/) (not implemented yet)
+
+Compilers
+- [mingw](https://www.mingw-w64.org)
+- [llvm](https://llvm.org)
+- [clang](https://clang.llvm.org)
+- [gcc](https://gcc.gnu.org)
+- [msvc](https://visualstudio.microsoft.com/vs/features/cplusplus/)
+- [intel C++ compiler](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/dpc-compiler.html)
+
+Crosstools
+- [crosstool-ng](https://crosstool-ng.github.io)
+
+### Automatic installation for fresh systems
+
+#### Debian
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/DebianBasedInstaller.sh | bash
 ```
 
-#### Fedora based
+#### Fedora
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/FedoraInstaller.sh | bash
 ```
 
-#### Windows 10/11
+#### Windows
 
-  note: CMake generator `-G "MinGW Makefiles"` is in `SolutionController.py at row 227` hardcoded. You need to change to your on demand.
-
-PowerShell installer (be patient, take a while)
-```bash
+```powershell
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
 ```
 
+*Note for Windows Users: The CMake generator argument `-G "MinGW Makefiles"` is hardcoded in the `SolutionController.py` script at line 227. If you prefer to use a different CMake generator, please modify this line accordingly.*
+
+### Cloning the Repository
+
+To clone the MarkWare VCMake repository, execute the following command:
+
 ```bash
-# MacOS (required contributor)
+git clone https://github.com/tomasmark79/MarkWareVCMake ./
 ```
 
-## Install template
+### Launching Visual Studio Code
+
+To start Visual Studio Code from the root directory of MarkWare VCMake, use the following command:
 
 ```bash
-git clone https://github.com/tomasmark79/MarkWareVCMake
-cd MarkWareVCMake/
 code .
 ```
 
 ## Development Workflow
+
+One of the first things you should do when you open VSCode is to install the necessary extensions and copy the contents of the `keybindings.json` configuration file into the system keybindings file, which is initially empty. This ensures that the keyboard shortcuts, which maximize user comfort and experience, will work correctly.
 
 ### Keyboard Shortcuts
 
@@ -127,36 +143,65 @@ By `Shift+F7` invoked **TASK MENU** includes the following automation commands:
   
 ### CMake Build Options
 
-Supports multiple build types hardcoded in `tasks.json`:
+Supports multiple build types as specified in `tasks.json`:
 ```txt
-Debug, Release, RelWithDebInfo, MinSizeRel
+- Debug
+- Release
+- RelWithDebInfo
+- MinSizeRel
 ```
 
-Configurable CMake options for:  
-  
-`BUILD_SHARED_LIBS`, `USE_STATIC_RUNTIME`, `SANITIZE_ADDRESS`, `SANITIZE_UNDEFINED`, `SANITIZE_THREAD`, `SANITIZE_MEMORY`, `ENABLE_HARDENING`, `ENABLE_IPO`, `ENABLE_CCACHE`
+### Configurable CMake Options
 
-### CLI Build everything at once
+The following CMake options can be configured to tailor the build process to your specific needs:
 
-Build standalone part will also build library if linked in CMake configuration.
+- `BUILD_SHARED_LIBS`: Build shared libraries instead of static ones.
+- `USE_STATIC_RUNTIME`: Use the static runtime library.
+- `SANITIZE_ADDRESS`: Enable address sanitizer.
+- `SANITIZE_UNDEFINED`: Enable undefined behavior sanitizer.
+- `SANITIZE_THREAD`: Enable thread sanitizer.
+- `SANITIZE_MEMORY`: Enable memory sanitizer.
+- `ENABLE_HARDENING`: Enable hardening options for increased security.
+- `ENABLE_IPO`: Enable interprocedural optimization.
+- `ENABLE_CCACHE`: Enable ccache for faster recompilation.
+
+These options provide flexibility and control over the build configuration, allowing you to optimize for performance, security, and development efficiency.
+
+### Manual Configuration and Build Options
+
+#### Linux
+
+Install Conan dependencies
 
 ```bash
 conan install "." --output-folder="./build/standalone/default/debug" --deployer=full_deploy --build=missing --profile default --settings build_type=Debug
-source "./build/standalone/default/debug/conanbuild.sh" && cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="./build/installation/default/debug"
-source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug"  -j 16
-source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug" --target install -j 16
-
 ```
 
-## Additional Features
+Configure Solution
 
-### Cross-Compilation Support
+```bash
+source "./build/standalone/default/debug/conanbuild.sh" && cmake -S "./standalone" -B "./build/standalone/default/debug" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX="./build/installation/default/debug"
+```
 
-The template includes preconfigured menu items. The default Conan profile represents the default value in the buildArch definition. Other profiles can be edited and supplemented according to your existing Conan profiles.
+Build Solution
 
+```bash
+source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug"  -j 16
+```
+
+Install Solution
+
+```bash
+source "./build/standalone/default/debug/conanbuild.sh" && cmake --build "./build/standalone/default/debug" --target install -j 16
+```
+
+## Toolchains for Cross-Compilation
+
+The solution includes a few predefined toolchain names that I actively use, so I decided to leave them in the template. **The toolchain names match the profile names used via Conan 2**. You can adjust them as needed. To start, it's good to know that `default` is the profile that Conan 2 creates first.
+
+snippet from task.json
 ```json
 {
-    /* ARCH ITEMS */
     "id": "buildArch",
     "type": "pickString",
     "description": "Select target architecture",
@@ -170,67 +215,51 @@ The template includes preconfigured menu items. The default Conan profile repres
 }
 ```
 
-### Project Maintenance
+## Maintenance
 
-#### Renaming
+### Renaming
 
-by python script `SolutionRenamer.py`  
+Renaming the executable and library, including all necessary strings and classes, is handled by the Python script `SolutionRenamer.py`.
 
-#### Upgrade custom template parts
-by pyton script `SolutionUpgrader.py`  
+### Update files of your choice from the repository
 
-#### Log using history
+Updating individual files from the remote repository with the option to back up updated components is handled by the Python script `SolutionUpgrader.py`.
 
-in existing log file  `Solution.log`  
+### Log using history
 
-### Template Structure
+Workflow activities related to the project are logged in the file `Solution.log`.
 
-*Template is using Two projects in One Solution.*
 
-```txt
-MarkWareVCMake/
-├── include/
-```
-Contains **library project** public header files (.hpp) intended for use in other projects or modules.
+## Additional Information on Template Structure
+
+### Folders
 
 ```txt
 MarkWareVCMake/
-├── src/
+├── include/ Contains **library project** public header files (.hpp) intended for use in other projects or modules.
 ```
-Contains **library project** source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
 
 ```txt
 MarkWareVCMake/
-├── standalone/
+├── src/ Contains **library project** source files (.cpp) and `internal` header files (.hpp) that are not intended for public use.
 ```
-Contains just **standalone** project.
 
 ```txt
 MarkWareVCMake/
-├── assets/
+├── standalone/ Contains just **standalone** project.
 ```
-Contains project **assets**. All content included in this folder is accessible via file path by macro ASSET_PATH.
 
+```txt
+MarkWareVCMake/
+├── assets/ Contains project **assets**. All content included in this folder is accessible via file path by macro ASSET_PATH.
+```
 
-### Standalone arguments
+## Argument Management for Standalone
 
-*Template C++ is using basic [cxxopt](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation to smart manage passed arguments for Standalone.*  
+The C++ source code uses a basic [**cxxopt**](https://github.com/jarro2783/cxxopts/tree/v3.2.1) implementation described below.
 
-  - `-o` omitt library loading
+  - `-o` omit library loading
   - `-h` show help
-
-## Conventions
-
-To avoid future issues with folder and file names, I have set these rules.
-
- - **All standard template folders**, including those generated later, **use lowercase letters only**.
- - User-defined folders can contain any combination of uppercase and lowercase letters.
- - All **C** and **C++** files provided in the template will use **CamelCase convention**, including an **uppercase letter at the beginning**.
-
-### Indentation
-
-C/C++ 2 spaces  
-Python 4 spaces  
 
 ## FAQ
 
@@ -245,15 +274,17 @@ Error while trying to load a compilation database: Could not auto-detect compila
 
 ## Tips
 
-`xxd -i file.bin > file.h`
+Transform binary file to C source code under Linux
+```bash
+xxd -i file.bin > file.h
+```
 
 ## Thanks
 
 To everyone who supported me in creating this template. These are various people and information from the web. Of course, also literature and courses that I have taken in the past. Various Discord servers and individuals who took a moment to make an indelible mark on this amazing work for me. Thank you very much!  
 
 ## Credits
-dsdotname, littlemushroom
-
+m[dsdotname], littlemushroom
 
 ## License
 
