@@ -56,9 +56,9 @@ All these required tools are installed automatically if missing by the installer
 
 ## Getting Started
 
-### Installers
+### Environment installers
 
-This project provides a set of installer scripts in the `.init/installers` folder for setting up a development environment on various Linux distributions from scratch, including Debian-based systems and Fedora Linux. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows also included. For MacOS required contributor.
+Below are the commands that will install the necessary dependencies for the listed operating systems to successfully start development using this template project.
 
 #### Debian based
 
@@ -83,6 +83,14 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/t
 
 ```bash
 # MacOS (required contributor)
+```
+
+## Install template
+
+```bash
+git clone https://github.com/tomasmark79/MarkWareVCMake
+cd MarkWareVCMake/
+code .
 ```
 
 ## Development Workflow
