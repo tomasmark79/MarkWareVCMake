@@ -2,6 +2,8 @@
 # Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process 
 #####################################################################
 
+# automatic installation on fresh Windows works for MinGW compiler only
+
 function Update-Environment {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
@@ -31,11 +33,6 @@ choco install --yes --no-progress git curl python cmake ninja make doxygen.insta
 
 # mingw
 choco install --yes --no-progress mingw
-
-# msvc todo
-# choco install --yes --no-progress visualstudio2022-workload-vctools --package-parameters "--includeRecommended --includeOptional"
-# choco install --yes --no-progress visualstudio2022buildtools
-# vcpkg todo
 
 # Refresh environment variables after installation
 Update-Environment
