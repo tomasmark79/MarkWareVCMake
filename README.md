@@ -56,25 +56,33 @@ All these required tools are installed automatically if missing by the installer
 
 ## Getting Started
 
-### Linux Installers
+### Installers
 
-This project provides a set of installer scripts in the `.init` folder for setting up a development environment on various Linux distributions from scratch, including Debian-based systems, Fedora, Arch Linux, and OpenSUSE. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows 10/11 and MacOS are also included.
+This project provides a set of installer scripts in the `.init/installers` folder for setting up a development environment on various Linux distributions from scratch, including Debian-based systems and Fedora Linux. Each script automates the installation of essential packages, tools, and configurations needed for development. Windows also included. For MacOS required contributor.
+
+#### Debian based
 
 ```bash
-
-# Debian, [x][k]ubuntu, ...
-
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/DebianBasedInstaller.sh | bash
+```
 
-# Fedora
+#### Fedora based
 
+```bash
 curl -sSL https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/FedoraInstaller.sh | bash
+```
 
-# Windows 24H2 
+#### Windows 10/11
+
+  note: CMake generator `-G "MinGW Makefiles"` is in `SolutionController.py at row 244` hardcoded. You need to change to your on demand.
+
+PowerShell installer (be patient, take a while)
+```bash
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/tomasmark79/MarkWareVCMake/main/.init/installers/WindowsInstaller.ps1' -OutFile 'WindowsInstaller.ps1'; Set-ExecutionPolicy Bypass -Scope Process -Force; .\WindowsInstaller.ps1"
+```
 
+```bash
 # MacOS (required contributor)
-
 ```
 
 ## Development Workflow
