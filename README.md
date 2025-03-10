@@ -1,6 +1,5 @@
 
-![c++temp2](https://github.com/user-attachments/assets/f5e07e6e-4c97-4376-9678-2ae8c1d1e494)
-
+![c++temp-toplogo](https://github.com/user-attachments/assets/5201de77-2df3-46a2-a59e-cfe985b33cdb)
 
 # MarkWare VCMake
 
